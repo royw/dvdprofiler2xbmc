@@ -1,0 +1,39 @@
+This script will attempt to match up media files from a set of directories
+to the collection.xml file exported from DVD Profiler.  For matches, the
+script will then create a {moviename}.nfo from the data in collections.xml
+and also copy the front cover image to {moviename}.tbn.  Both files will
+be placed in the same directory as the source media file.
+
+Then on XBMC, set the source content to none to remove the meta data from
+the library, then set the source content back to Movies to import the
+media.  This time, the data in the .nfo files will be used instead of
+scraping.
+
+Notes:
+
+1) currently you lose a few meta data fields such as Rating and Director
+using this script instead of a scraper.
+
+2) Currently only supports file based media containers, not directory
+based.
+
+3) Media filename convention is to take the media's title from DVD Profiler,
+replace any punctuation with a space character, then replace any multiple
+spaces with a single space.  Next remove any leading or trailing spaces.  
+Optionally can append " - YYYY" where YYYY is the movie's release year.  
+Naturally the extension is the media's container type.  Note, you should
+not include in the title edition info like "Widescreen" or "Special Edition"
+eventhough there are some mistakes in the DVD Profiler profiles that do
+include these in the title.
+
+Usage:
+Edit the DIRECTORIES and locations below for your system.
+Then run the script:
+  ruby dvdprofiler2xbmc.rb
+
+Prerequisites:
+  gem install xml-simple
+
+License: 
+GPL version 2 (http://www.opensource.org/licenses/gpl-2.0.php)
+
