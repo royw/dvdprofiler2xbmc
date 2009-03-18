@@ -36,6 +36,10 @@
 #
 # Prerequisites:
 #   gem install xml-simple
+#   gem install porras-imdb
+#   gem install log4r
+#   gem install commandline
+#   gem install mash
 #
 # License: 
 # GPL version 2 (http://www.opensource.org/licenses/gpl-2.0.php)
@@ -44,41 +48,97 @@ require 'rubygems'
 require 'yaml'
 require 'xmlsimple'
 require 'ftools'
+require 'imdb'
+require 'pp'
+require 'mash'
+require "log4r"
+require 'commandline/optionparser'
+include CommandLine
 
-######## EDIT THE FOLLOWING ###########
+module AppConfig
+  @config = Mash.new
+  @yaml_filespec = File.join(ENV['HOME'], '.dvdprofiler2xbmcrc')
+  
+  def self.[](k)
+    @config[k]
+  end
+  
+  def self.[]=(k,v)
+    @config[k] = v
+  end
+  
+  def self.save
+    begin
+      File.delete(@yaml_filespec) if File.exist?(yaml_filespec)
+      AppConfig[:logger].info { "saving: #{yaml_filespec}" }
+      File.open(yaml_filespec, "w") do |f|
+	YAML.dump(@config, f)
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s }
+    end
+  end
+  
+  def self.load
+    begin
+      if File.exist?(@yaml_filespec)
+	@config.merge YAML.load_file(@yaml_filespec)
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error loading config file \"#{@yaml_filespec} - " + e.to_s }
+    end
+  end
+  
+  def self.default
+    # Note, all paths and extensions are case sensitive 
 
-# Note, all paths and extensions are case sensitive 
+    # Array of paths to scan for media
+    # Note, directories underneath these will be added as genres to
+    # each .nfo file.  For example:
+    # /media/royw-gentoo/public/data/movies/Action/Bond/Goldeneye.m4v
+    # will add 'Action' and 'Bond' genres to Goldeneye.nfo
+    # Also note, that duplicate genres will be collapsed into single
+    # genres in the .nfo file.
+    @config.directories = [
+	'/media/dad-kubuntu/public/data/videos_iso',
+	'/media/dcerouter/public/data/videos_iso',
+	'/media/royw-gentoo/public/data/videos_iso',
+	'/media/royw-gentoo/public/data/movies'
+      ]
 
-# Array of paths to scan for media
-DIRECTORIES = [
-    '/media/dad-kubuntu/public/data/videos_iso',
-    '/media/dcerouter/public/data/videos_iso',
-    '/media/royw-gentoo/public/data/videos_iso',
-    '/media/royw-gentoo/public/data/movies'
-  ]
+    # Typical locations are:
+    # @config.collection_filespec = File.join(ENV['HOME'], 'DVD Profiler/Databases/Exports/Collection.xml')
+    # @config.images_dir = File.join(ENV['HOME'], 'DVD Profiler/Databases/Default/Images')
+    #
+    # My locations are:
+    @config.collection_filespec = '/home/royw/DVD Profiler/Shared/Collection.xml'
+    @config.images_dir = '/home/royw/DVD Profiler/Shared/Images'
 
-# Typical locations are:
-# COLLECTION_FILESPEC = File.join(ENV['HOME'], 'DVD Profiler/Databases/Exports/Collection.xml')
-# IMAGES_DIR = File.join(ENV['HOME'], 'DVD Profiler/Databases/Default/Images')
-#
-# My locations are:
-COLLECTION_FILESPEC = '/home/royw/DVD Profiler/Shared/Collection.xml'
-IMAGES_DIR = '/home/royw/DVD Profiler/Shared/Images'
+    # You will probably need to edit the MEDIA_EXTENSIONS to specify
+    # the containers used in your library
+    @config.media_extensions = [ 'iso', 'm4v' ]
 
-# You will probably need to edit the MEDIA_EXTENSIONS to specify
-# the containers used in your library
-MEDIA_EXTENSIONS = [ 'iso', 'm4v' ]
+    # You probably will not need to change these
+    # Source file extensions.
+    @config.image_extensions    = [ 'jpg', 'jpeg', 'png', 'gif' ]
+    @config.nfo_extensions      = [ 'nfo' ]
+    # Destination file extensions
+    @config.thumbnail_extension  = 'tbn'
+    @config.nfo_extension        = 'nfo'
+    @config.nfo_backup_extension = 'nfo~'
 
-# You probably will not need to change these
-# Source file extensions.
-IMAGE_EXTENSIONS    = [ 'jpg', 'jpeg', 'png', 'gif' ]
-NFO_EXTENSIONS      = [ 'nfo' ]
-# Destination file extensions
-THUMBNAIL_EXTENSION  = 'tbn'
-NFO_EXTENSION        = 'nfo'
-NFO_BACKUP_EXTENSION = 'nfo~'
+    # map some genre names
+    @config.genre_maps = {
+	'Science-Fiction' => 'Science Fiction',
+	'Anime'           => 'Animation',
+	'Musical'         => 'Musicals'
+      }
 
-######## EDIT THE PRECEDING ###########
+    @config.file_permissions = 0664
+    @config.dir_permissions = 0777
+    @config.imdb_query = true
+  end
+end
 
 ######################################################################
 # my extensions to Module. (taken from rake, named changed to not clash
@@ -183,19 +243,115 @@ module Kernel
   end
 end
 
+class ImdbMovie
+  def raw_title
+    document.at("h1").innerText
+  end
+  
+  def video_game?
+    raw_title =~ /\(VG\)/
+  end
+
+  def release_year
+    document.search("//h5[text()^='Release Date']/..").innerHTML[/\d{4}/]
+  end
+ 
+  # return an Array of Strings containing AKA titles
+  def also_known_as
+    el = document.search("//h5[text()^='Also Known As:']/..").at('h5')
+    aka = []
+    while(!el.nil?)
+      aka << el.to_s unless el.elem?
+      el = el.next
+    end
+    aka.collect!{|a| a.gsub(/\([^\)]*\)/, '').strip}
+    aka.uniq!
+    aka.collect!{|a| a.blank? ? nil : a}
+    aka.compact!
+    aka
+  end
+end
+
+class ImdbSearch
+  # Find the IMDB ID for the current search title
+  # The find can be helped a lot by including a years option that contains
+  # an Array of integers that are the production year (plus/minus a year) 
+  # and the release year.
+  def find_id(options={})
+    id = nil
+    found_movies = self.movies
+    unless found_movies.nil?
+      desired_movies = found_movies.select do |m|
+	aka = m.also_known_as
+	result = imdb_compare_titles(m.title, aka, @query) && !m.video_game? && !m.release_year.blank?
+	if result
+	  AppConfig[:logger].debug { m.title }
+	  AppConfig[:logger].debug { "m.release_year => #{m.release_year}" }
+	  unless options[:years].blank?
+	    result = options[:years].include?(m.release_year.to_i)
+	  end
+	end
+	result
+      end
+      ids = desired_movies.collect{|m| m.id}.uniq.compact
+      if ids.length == 1
+	id = "tt#{ids[0]}"
+      else
+	AppConfig[:logger].debug { options[:media_path] } unless options[:media_path].nil?
+	AppConfig[:logger].debug { options[:years].pretty_inspect }
+	desired_movies.collect{|m| [m.raw_title, m.id, m.title, m.url, m.release_year.blank? ? 'no release date' : m.release_year]}.uniq.compact.each do |m|
+	  AppConfig[:logger].debug { m.pretty_inspect }
+	end
+      end
+    end
+    id
+  end
+
+  protected
+
+  # compare the imdb title and the imdb title's AKAs against the media title.
+  # note, on exact match lookups, IMDB will sometimes set the title to
+  # 'trailers and videos' instead of the correct title.
+  def imdb_compare_titles(imdb_title, aka_titles, media_title)
+    result = fuzzy_compare_titles(imdb_title, media_title)
+    unless result
+      result = fuzzy_compare_titles(imdb_title, 'trailers and videos')
+      unless result
+	aka_titles.each do |aka|
+	  result = fuzzy_compare_titles(aka, media_title)
+	  break if result
+	end
+      end
+    end
+    result
+  end
+  
+  # a fuzzy compare that is case insensitive and replaces '&' with 'and'
+  # (because that is what IMDB occasionally does)
+  def fuzzy_compare_titles(title1, title2)
+    t1 = title1.downcase
+    t2 = title2.downcase
+    (t1 == t2) || 
+    (t1.gsub(/&/, 'and') == t2.gsub(/&/, 'and')) ||
+    (t1.gsub(/[-:]/, ' ') == t2.gsub(/[-:]/, ' ')) ||
+    (t1.gsub('more at imdbpro ?', '') == t2)
+  end
+end
+
 ###########################################
 
 # == Synopsis
 # Media encapsulates information about a single media file
 class Media
-  attr_reader :media_path, :nfo_files, :image_files, :year
+  attr_reader :media_path, :nfo_files, :image_files, :year, :media_subdirs
   attr_accessor :isbn
   
   def initialize(directory, media_file)
+    @media_subdirs = File.dirname(media_file)
     @media_path = File.expand_path(File.join(directory, media_file))
     Dir.chdir(File.dirname(@media_path))
-    @nfo_files = Dir.glob("*.{#{NFO_EXTENSIONS.join(',')}}")
-    @image_files = Dir.glob("*.{#{MEDIA_EXTENSIONS.join(',')}}")
+    @nfo_files = Dir.glob("*.{#{AppConfig[:nfo_extensions].join(',')}}")
+    @image_files = Dir.glob("*.{#{AppConfig[:media_extensions].join(',')}}")
     @year = $1 if File.basename(@media_path, ".*") =~ /\s\-\s(\d{4})/
   end
 
@@ -240,7 +396,7 @@ class MediaFiles
     @medias = []
     directories.each do |dir|
       Dir.chdir(dir)
-      @medias += Dir.glob("**/*.{#{MEDIA_EXTENSIONS.join(',')}}").collect do |filename| 
+      @medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename| 
 	Media.new(dir, filename)
       end
     end
@@ -251,6 +407,7 @@ class MediaFiles
       @titles[title] << media
     end
   end
+  
   
   # find duplicate titles and return them in a hash
   # where the key is the title and the value is an
@@ -272,32 +429,101 @@ class NFO
   def initialize(media, dvd_hash)
     @media = media
     @dvd_hash = dvd_hash
+    load
   end
   
   # save as a .nfo file, creating a backup if the .nfo already exists
   def save
-    nfo_filespec = @media.media_path.ext(".#{NFO_EXTENSION}")
-    nfo_backup_filespec = @media.media_path.ext(".#{NFO_BACKUP_EXTENSION}")
-    File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
-    File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
-    File.open(nfo_filespec, "w") do |file|
-      file.puts(to_nfo(@dvd_hash))
+    begin
+      nfo_filespec = @media.media_path.ext(".#{AppConfig[:nfo_extension]}")
+      nfo_backup_filespec = @media.media_path.ext(".#{AppConfig[:nfo_backup_extension]}")
+      File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
+      File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
+      File.open(nfo_filespec, "w") do |file|
+	file.puts(to_nfo(@dvd_hash))
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error saving nfo file - " + e.to_s }
+    end
+  end
+  
+  def load
+    begin
+      nfo_filespec = @media.media_path.ext(".#{AppConfig[:nfo_extension]}")
+      @movie = XmlSimple.xml_in(nfo_filespec) if File.exist? nfo_filespec
+    rescue Exception => e
+      AppConfig[:logger].error { "Error loading \"#{nfo_filespec}\" - " + e.to_s }
     end
   end
   
   # return a nfo xml String from the given dvd_hash (from Collection)
   def to_nfo(dvd_hash)
-    movie = {}
-    movie['title']         = dvd_hash[:title]
-    movie['mpaa']          = dvd_hash[:rating]
-    movie['year']          = dvd_hash[:productionyear]
-    movie['outline']       = dvd_hash[:overview]
-    movie['plot']          = dvd_hash[:overview]
-    movie['runtime']       = dvd_hash[:runningtime]
-    movie['genre']         = dvd_hash[:genres]
-    movie['actor']         = dvd_hash[:actors]
-    XmlSimple.xml_out(movie, 'NoAttr' => true, 'RootName' => 'movie')
+    @movie ||= {}
+    imdb_id = @movie['id']
+    imdb_id = imdb_lookup(dvd_hash) if AppConfig[:imdb_query] && imdb_id.blank?
+    @movie['title']         = dvd_hash[:title]
+    @movie['mpaa']          = dvd_hash[:rating]
+    @movie['year']          = dvd_hash[:productionyear]
+    @movie['outline']       = dvd_hash[:overview]
+#     @movie['plot']          = dvd_hash[:overview]
+    @movie['runtime']       = dvd_hash[:runningtime]
+    @movie['genre']         = map_genres((dvd_hash[:genres] + @media.media_subdirs.split('/')).uniq)
+    @movie['actor']         = dvd_hash[:actors]
+    @movie['id']            = imdb_id unless imdb_id.nil?
+    @movie['isbn']          = dvd_hash[:isbn]
+  
+    begin
+      XmlSimple.xml_out(@movie, 'NoAttr' => true, 'RootName' => 'movie')
+    rescue Exception => e
+      AppConfig[:logger].error { "Error creating nfo file - " + e.to_s }
+    end
   end
+  
+  protected
+  
+  def map_genres(genres)
+    new_genres = []
+    genres.each do |genre|
+      new_genres << (AppConfig[:genre_maps][genre].nil? ? genre : AppConfig[:genre_maps][genre])
+    end
+    new_genres.uniq.compact
+  end
+
+  # try to find the imdb id for the movie
+  def imdb_lookup(dvd_hash)
+    id = nil
+    AppConfig[:logger].info { "Searching IMDB for \"#{dvd_hash[:title]}\"" }
+    unless dvd_hash[:title].blank?
+      years = released_years(dvd_hash)
+      begin
+	imdb_search = ImdbSearch.new(dvd_hash[:title])
+	id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
+      rescue Exception => e
+	AppConfig[:logger].error { "Error searching IMDB - " + e.to_s }
+	AppConfig[:logger].error { e.backtrace.join("\n") }
+      end
+    end
+    AppConfig[:logger].info { "IMDB id => #{id}" } unless id.nil?
+    id
+  end
+
+  # Different databases seem to mix up released versus production years.
+  # So we combine both into a Array of integer years.
+  def released_years(dvd_hash)
+    years = []
+    unless dvd_hash[:productionyear].blank?
+      years += dvd_hash[:productionyear].collect{|y| [y.to_i - 1, y.to_i, y.to_i + 1]}.flatten
+    end
+    unless dvd_hash[:released].blank?
+      years += dvd_hash[:released].collect do |date|
+	y = nil
+	y = $1.to_i if date =~ /(\d{4})\-/
+	y
+      end
+    end
+    years.flatten.uniq.compact.sort
+  end
+  
 end
 
 # == Synopsis
@@ -350,7 +576,7 @@ class Collection
     unless @filespec.nil?
       yaml_filespec = @filespec.ext('.yaml')
       if !File.exist?(yaml_filespec) || (File.mtime(@filespec) > File.mtime(yaml_filespec))
-        puts "saving: #{yaml_filespec}"
+        AppConfig[:logger].info { "saving: #{yaml_filespec}" }
         File.open(yaml_filespec, "w") do |f|
           YAML.dump(
             {
@@ -360,10 +586,10 @@ class Collection
             }, f)
         end
       else
-        puts "not saving, yaml file is newer than xml file"
+        AppConfig[:logger].info { "not saving, yaml file is newer than xml file" }
       end
     else
-      puts "can not save, the filespec is nil"
+      AppConfig[:logger].error { "can not save, the filespec is nil" }
     end
   end
 
@@ -376,17 +602,17 @@ class Collection
     collection = {}
     yaml_filespec = @filespec.ext('.yaml')
     if File.exist?(yaml_filespec) && (File.mtime(yaml_filespec) > File.mtime(@filespec))
-      puts "Loading #{yaml_filespec}"
+      AppConfig[:logger].info { "Loading #{yaml_filespec}" }
       data = YAML.load_file(yaml_filespec)
       @title_isbn_hash = data[:title_isbn_hash]
       @isbn_dvd_hash = data[:isbn_dvd_hash]
       @isbn_title_hash = data[:isbn_title_hash]
     else
       elapsed_time = timer do
-        puts "Loading #{@filespec}"
+        AppConfig[:logger].info { "Loading #{@filespec}" }
         collection = XmlSimple.xml_in(@filespec, { 'KeyToSymbol' => true})
       end
-      puts "XmlSimple.xml_in elapse time: #{elapsed_time.elapsed_time_s}"
+      AppConfig[:logger].info { "XmlSimple.xml_in elapse time: #{elapsed_time.elapsed_time_s}" }
       collection[:dvd].each do |dvd|
         isbn = dvd[:id][0]
         original_title = dvd[:title][0]
@@ -452,7 +678,6 @@ class Collection
       TITLE_REPLACEMENTS.each do |replacement|
         replacement.each do |regex, value| 
           title.gsub!(regex, value)
-          #p [regex, value, title]
         end
       end
       title.strip!
@@ -470,21 +695,50 @@ end
 #  app.execute
 #  app.report.each {|line| puts line}
 class DvdProfiler2Xbmc
+  @interrupted = false
+
+  # A trap("INT") in the Runner calls this to indicate that a ^C has been detected.
+  # Note, once set, it is never cleared
+  def self.interrupt
+    AppConfig[:logger].error { "control-C detected, finishing current task" }
+    @interrupted = true
+  end
+
+  # Long loops should poll this method to see if they should abort
+  # Returns:: true if the application has trapped an "INT", false otherwise
+  def self.interrupted?
+    @interrupted
+  end
+
   def initialize
     @media_files = nil
     @collection = nil
   end
   
   def execute
-    @media_files = MediaFiles.new(DIRECTORIES)
+    @media_files = MediaFiles.new(AppConfig[:directories])
     
-    collection_filepath = File.expand_path(COLLECTION_FILESPEC)
+    collection_filepath = File.expand_path(AppConfig[:collection_filespec])
     @collection = Collection.new(collection_filepath)
 
-    # the following lines are order dependent
-    find_isbns
-    copy_thumbnails
-    create_nfos
+    @media_files.titles.each do |title, medias|
+      break if DvdProfiler2Xbmc.interrupted?
+      # the following lines are order dependent
+      find_isbns(title, medias)
+      copy_thumbnails(title, medias)
+      create_nfos(title, medias)
+#       set_file_permissions(title, medias)
+    end
+    
+    AppConfig[:directories].each do |dir|
+      Dir.glob(File.join(dir, '**/*')).each do |f|
+	if File.directory?(f)
+	  File.chmod(AppConfig[:dir_permissions], f) 
+	else
+	  File.chmod(AppConfig[:file_permissions], f) 
+	end
+      end
+    end
   end
 
   # generate the report.
@@ -492,16 +746,18 @@ class DvdProfiler2Xbmc
   # returns an array of lines
   def report
     buf = []
-    unless @media_files.nil?
-      duplicates = duplicates_report
-      unless duplicates.empty?
-	buf << "Duplicates:\n" 
-	buf += duplicates
-      end
-      
-      missing_isbns = missing_isbn_report
-      unless missing_isbns.empty?
-	buf += missing_isbns
+    unless DvdProfiler2Xbmc.interrupted?
+      unless @media_files.nil?
+	duplicates = duplicates_report
+	unless duplicates.empty?
+	  buf << "Duplicates:\n" 
+	  buf += duplicates
+	end
+	
+	missing_isbns = missing_isbn_report
+	unless missing_isbns.empty?
+	  buf += missing_isbns
+	end
       end
     end
     buf
@@ -510,28 +766,24 @@ class DvdProfiler2Xbmc
   protected
   
   # find ISBN for each title and assign to the media
-  def find_isbns
-    @media_files.titles.each do |title, medias|
-      title_pattern = Collection.title_pattern(title)
-      unless @collection.title_isbn_hash[title_pattern].nil?
-	medias.each do |media|
-	  media.isbn = @collection.title_isbn_hash[title_pattern]
-	end
+  def find_isbns(title, medias)
+    title_pattern = Collection.title_pattern(title)
+    unless @collection.title_isbn_hash[title_pattern].nil?
+      medias.each do |media|
+	media.isbn = @collection.title_isbn_hash[title_pattern]
       end
     end
   end
 
   # copy images from .../isbn.jpg to .../basename.jpg
-  def copy_thumbnails
-    @media_files.titles.each do |title, medias|
-      medias.each do |media|
-	unless media.isbn.nil?
-	  media.isbn.each do |isbn|
-	    src_image_filespec = File.join(IMAGES_DIR, "#{isbn}f.jpg")
-	    if File.exist?(src_image_filespec)
-	      dest_image_filespec = media.media_path.ext(".#{THUMBNAIL_EXTENSION}")
-	      File.copy(src_image_filespec, dest_image_filespec)
-	    end
+  def copy_thumbnails(title, medias)
+    medias.each do |media|
+      unless media.isbn.nil?
+	media.isbn.each do |isbn|
+	  src_image_filespec = File.join(AppConfig[:images_dir], "#{isbn}f.jpg")
+	  if File.exist?(src_image_filespec)
+	    dest_image_filespec = media.media_path.ext(".#{AppConfig[:thumbnail_extension]}")
+	    File.copy(src_image_filespec, dest_image_filespec)
 	  end
 	end
       end
@@ -539,22 +791,32 @@ class DvdProfiler2Xbmc
   end
 
   # create nfo files from collection.isbn_dvd_hash
-  def create_nfos
-    @media_files.titles.each do |title, medias|
-      medias.each do |media|
-	unless media.isbn.nil?
-	  media.isbn.each do |isbn|
-	    dvd_hash = @collection.isbn_dvd_hash[isbn]
-	    unless dvd_hash.nil?
-	      nfo = NFO.new(media, dvd_hash)
-	      nfo.save
-	    end
+  def create_nfos(title, medias)
+    medias.each do |media|
+      unless media.isbn.nil?
+	media.isbn.each do |isbn|
+	  dvd_hash = @collection.isbn_dvd_hash[isbn]
+	  unless dvd_hash.nil?
+	    nfo = NFO.new(media, dvd_hash)
+	    nfo.save
 	  end
 	end
       end
     end
   end
 
+#   # set the file permissions for the media files
+#   def set_file_permissions(title, medias)
+#     medias.each do |media|
+#       AppConfig[:file_permissions].each do |permissions, extensions|
+# 	extensions.each do |extension|
+# 	  filespec = media.media_path.ext(".#{extension}")
+# 	  File.chmod(permissions.to_i, filespec) if File.exist?(filespec)
+# 	end
+#       end
+#     end
+#   end
+  
   # duplicate media file report
   def duplicates_report
     buf = []
@@ -585,15 +847,113 @@ class DvdProfiler2Xbmc
     end
     buf
   end
+
 end
 
 # Command line interface
 if __FILE__ == $0
   
-  app = DvdProfiler2Xbmc.new
-  app.execute
-  app.report.each {|line| puts line}
+    # == Synopsis
+  # The Runner module encapsulates the command line application
+  module Runner
+
+    # == Synopsis
+    # Command line exit codes
+    class ExitCode
+      UNKNOWN = 3
+      CRITICAL = 2
+      WARNING = 1
+      OK = 0
+    end
   
+    # Run the command-line application
+    # args:: the command-line argument Array
+    # Returns:: ExitCode value
+    def self.run(args)
+      exit_code = ExitCode::OK
+      
+      # we start a STDOUT logger, but it will be switched after 
+      # the config files are read if config[:logger_output] is set
+      logger = Log4r::Logger.new('dvdprofiler2xbmc')
+      logger.outputters = Log4r::StdoutOutputter.new(:console)
+      logger.level = Log4r::DEBUG
+      
+      begin
+	# trap ^C interrupts and let the app instance cleanly exit any long loops
+	Signal.trap("INT") {DvdProfiler2Xbmc.interrupt}
+
+        
+        # parse the command line
+        options = setupParser()
+        od = options.parse(args)
+
+	unless od["--help"]
+	  # load config values
+	  AppConfig.default
+	  AppConfig[:pretend] = od["--pretend"]
+	  AppConfig[:imdb_query] = !od["--no_imdb_query"]
+	  
+	  # the first reinitialize_logger adds the command line logging options to the default config
+	  # then we load the config files
+	  # then we run reinitialize_logger again to modify the logger for any logging options from the config files
+	  
+	  reinitialize_logger(logger, od["--verbose"], od["--debug"])
+	  AppConfig.load
+	  reinitialize_logger(logger, od["--verbose"], od["--debug"])
+	  
+	  # create and execute class instance here
+	  app = DvdProfiler2Xbmc.new
+	  app.execute
+	  app.report.each {|line| puts line}
+	end
+      rescue Exception => eMsg
+        logger.error {eMsg.to_s}
+        logger.error {options.to_s}
+        logger.error {eMsg.backtrace.join("\n")}
+        exit_code = ExitCode::CRITICAL
+      end
+      exit_code
+    end
+
+  
+    # Setup the command line option parser
+    # Returns:: OptionParser instances
+    def self.setupParser()
+      options = OptionParser.new()
+      options << Option.new(:flag, :names => %w(--help), 
+                            :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}}, 
+                            :opt_description => "This usage information")
+      options << Option.new(:flag, :names => %w(--pretend -p))
+      options << Option.new(:flag, :names => %w(--no_imdb_query -n))
+      options << Option.new(:flag, :names => %w(--verbose -v))
+      options << Option.new(:flag, :names => %w(--debug -d))
+      options
+    end
+    
+    # Reinitialize the logger using the loaded config.
+    # logger:: logger for any user messages
+    # config:: is the application's config hash.
+    def self.reinitialize_logger(logger, verbose, debug)
+      # switch the logger to the one specified in the config files
+      unless AppConfig[:logfile].nil?
+        logfile_outputter = Log4r::RollingFileOutputter.new(:logfile, :filename => AppConfig[:logfile], :maxsize => 1000000 )
+        logger.add logfile_outputter
+        logfile_outputter.level = Log4r::INFO
+        Log4r::Outputter[:logfile].formatter = Log4r::PatternFormatter.new(:pattern => "[%l] %d :: %M")
+        unless AppConfig[:logfile_level].nil?
+          level_map = {'DEBUG' => Log4r::DEBUG, 'INFO' => Log4r::INFO, 'WARN' => Log4r::WARN}
+          logfile_outputter.level = level_map[AppConfig[:logfile_level]] || Log4r::INFO
+        end
+      end
+      Log4r::Outputter[:console].level = Log4r::WARN
+      Log4r::Outputter[:console].level = Log4r::INFO if verbose
+      Log4r::Outputter[:console].level = Log4r::DEBUG if debug
+      # logger.trace = true
+      AppConfig[:logger] = logger
+    end
+  end
+  
+  exit Runner.run(ARGV)
 end
 
     
