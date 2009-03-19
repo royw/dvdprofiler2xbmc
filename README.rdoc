@@ -1,0 +1,104 @@
+= dvdprofiler2xbmc
+
+* http://www.github.com/royw/dvdprofiler2xbmc
+
+== DESCRIPTION:
+
+This script will attempt to match up media files from a set of directories
+to the collection.xml file exported from DVD Profiler.  For matches, the
+script will then create a {moviename}.nfo from the data in collections.xml
+and also copy the front cover image to {moviename}.tbn.  Both files will
+be placed in the same directory as the source media file.
+
+Then on XBMC, set the source content to none to remove the meta data from
+the library, then set the source content back to Movies to import the
+media.  This time, the data in the .nfo files will be used instead of
+scraping.
+
+== NOTES:
+
+1) currently you lose a few meta data fields such as Rating and Director
+using this script instead of a scraper.
+
+2) Currently only supports file based media containers, not directory
+based.
+
+3) Media filename convention is to take the media's title from DVD Profiler,
+replace any punctuation with a space character, then replace any multiple
+spaces with a single space.  Next remove any leading or trailing spaces.  
+Optionally can append " - YYYY" where YYYY is the movie's release year.  
+Naturally the extension is the media's container type.  Note, you should
+not include in the title edition info like "Widescreen" or "Special Edition"
+eventhough there are some mistakes in the DVD Profiler profiles that do
+include these in the title.
+
+== FEATURES/PROBLEMS:
+
+Features:
+
+* Creates .nfo files from exported collection.xml from DVD Profiler
+* If .nfo does not have an <id> tag, then tries to find the IMDB ID by
+  using the title and production/release years to search IMDB.
+* Sets file permissions for files and directories
+* Media can be contained in a set of directories (they can be mount points)
+* Adds sub-directory names as genres to .nfo files
+
+Problems:
+
+* Always overwriting .nfo.  Needs to only write if there has been a change.
+* Loses any tags not directly supported.  Needs to change from overwrite
+  to merge.
+* IMDB ID scraping doesn't handle boxed sets or multiple movies per media
+  file.  I don't see how to work around this exept to eliminate from media
+  library.
+* Needs a better method to setup AppConfig defaults.
+* Needs to support selectable/multiple regex based naming conventions
+* Needs to support directory containers
+* Does not support stacking
+
+== SYNOPSIS:
+
+Edit the defaults in lib/dvdprofiler2xbmc/app_config.rb to reflect your
+system.  Then run:
+
+  bin/dvdprofiler2xbmc
+
+For help, run bin/dvdprofiler2xbmc --help
+
+== REQUIREMENTS:
+
+* ruby 1.8.x
+* rubygem
+
+== INSTALL:
+
+  sudo gem install xml-simple
+  sudo gem install porras-imdb
+  sudo gem install log4r
+  sudo gem install commandline
+  sudo gem install mash
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) 2009 Roy Wright
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

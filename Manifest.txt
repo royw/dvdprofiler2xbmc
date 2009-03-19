@@ -1,0 +1,16 @@
+History.txt
+Manifest.txt
+PostInstall.txt
+README.rdoc
+Rakefile
+bin/dvdprofiler2xbmc
+lib/dvdprofiler2xbmc.rb
+lib/dvdprofiler2xbmc/app_config.rb
+lib/dvdprofiler2xbmc/app.rb
+lib/dvdprofiler2xbmc/cli.rb
+lib/dvdprofiler2xbmc/collection.rb
+lib/dvdprofiler2xbmc/extensions.rb
+lib/dvdprofiler2xbmc/imdb_extensions.rb
+lib/dvdprofiler2xbmc/media_files.rb
+lib/dvdprofiler2xbmc/media.rb
+lib/dvdprofiler2xbmc/nfo.rb
