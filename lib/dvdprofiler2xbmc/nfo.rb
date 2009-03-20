@@ -10,8 +10,8 @@ class NFO
   # save as a .nfo file, creating a backup if the .nfo already exists
   def save
     begin
-      nfo_filespec = @media.media_path.ext(".#{AppConfig[:nfo_extension]}")
-      nfo_backup_filespec = @media.media_path.ext(".#{AppConfig[:nfo_backup_extension]}")
+      nfo_filespec = @media.path_to(:nfo_extension)
+      nfo_backup_filespec = @media.path_to(:nfo_backup_extension)
       File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
       File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
       File.open(nfo_filespec, "w") do |file|
@@ -24,7 +24,7 @@ class NFO
 
   def load
     begin
-      nfo_filespec = @media.media_path.ext(".#{AppConfig[:nfo_extension]}")
+      nfo_filespec = @media.path_to(:nfo_extension)
       @movie = XmlSimple.xml_in(nfo_filespec) if File.exist? nfo_filespec
     rescue Exception => e
       AppConfig[:logger].error { "Error loading \"#{nfo_filespec}\" - " + e.to_s }
@@ -36,7 +36,7 @@ class NFO
     @movie ||= {}
     imdb_id = @movie['id']
     if AppConfig[:imdb_query] && imdb_id.blank?
-      unless File.exist?(@media.media_path.ext(".#{AppConfig[:no_imdb_extension]}"))
+      unless File.exist?(@media.path_to(:no_imdb_extension))
         imdb_id = imdb_lookup(dvd_hash)
       end
     end
@@ -75,11 +75,11 @@ class NFO
     unless dvd_hash[:title].blank?
       years = released_years(dvd_hash)
       begin
-	imdb_search = ImdbSearch.new(dvd_hash[:title])
-	id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
+        imdb_search = ImdbSearch.new(dvd_hash[:title])
+        id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
       rescue Exception => e
-	AppConfig[:logger].error { "Error searching IMDB - " + e.to_s }
-	AppConfig[:logger].error { e.backtrace.join("\n") }
+        AppConfig[:logger].error { "Error searching IMDB - " + e.to_s }
+        AppConfig[:logger].error { e.backtrace.join("\n") }
       end
     end
     AppConfig[:logger].info { "IMDB id => #{id}" } unless id.nil?

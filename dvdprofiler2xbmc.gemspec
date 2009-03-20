@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofiler2xbmc}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
-  s.date = %q{2009-03-19}
+  s.date = %q{2009-03-20}
   s.default_executable = %q{dvdprofiler2xbmc}
   s.description = %q{This script will attempt to match up media files from a set of directories to the collection.xml file exported from DVD Profiler.  For matches, the script will then create a {moviename}.nfo from the data in collections.xml and also copy the front cover image to {moviename}.tbn.  Both files will be placed in the same directory as the source media file.  Then on XBMC, set the source content to none to remove the meta data from the library, then set the source content back to Movies to import the media.  This time, the data in the .nfo files will be used instead of scraping.}
   s.email = ["roy@wright.org"]

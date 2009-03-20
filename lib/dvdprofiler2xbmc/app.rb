@@ -25,10 +25,10 @@ class DvdProfiler2Xbmc
     @media_files = nil
     @collection = nil
   end
-  
+
   def execute
     @media_files = MediaFiles.new(AppConfig[:directories])
-    
+
     collection_filepath = File.expand_path(AppConfig[:collection_filespec])
     @collection = Collection.new(collection_filepath)
 
@@ -43,15 +43,15 @@ class DvdProfiler2Xbmc
     # set file and directory permissions
     AppConfig[:directories].each do |dir|
       Dir.glob(File.join(dir, '**/*')).each do |f|
-	begin
-	  if File.directory?(f)
-	    File.chmod(AppConfig[:dir_permissions], f) unless AppConfig[:dir_permissions].nil?
-	  else
-	    File.chmod(AppConfig[:file_permissions], f) unless AppConfig[:file_permissions].nil?
-	  end
-	rescue Exception => e
-	  AppConfig[:logger].error {e.to_s}
-	end
+        begin
+          if File.directory?(f)
+            File.chmod(AppConfig[:dir_permissions], f) unless AppConfig[:dir_permissions].nil?
+          else
+            File.chmod(AppConfig[:file_permissions], f) unless AppConfig[:file_permissions].nil?
+          end
+        rescue Exception => e
+          AppConfig[:logger].error {e.to_s}
+        end
       end
     end
   end
@@ -63,29 +63,29 @@ class DvdProfiler2Xbmc
     buf = []
     unless DvdProfiler2Xbmc.interrupted?
       unless @media_files.nil?
-	duplicates = duplicates_report
-	unless duplicates.empty?
-	  buf << "Duplicates:\n" 
-	  buf += duplicates
-	end
-	
-	missing_isbns = missing_isbn_report
-	unless missing_isbns.empty?
-	  buf += missing_isbns
-	end
+        duplicates = duplicates_report
+        unless duplicates.empty?
+          buf << "Duplicates:\n"
+          buf += duplicates
+        end
+
+        missing_isbns = missing_isbn_report
+        unless missing_isbns.empty?
+          buf += missing_isbns
+        end
       end
     end
     buf
   end
-  
+
   protected
-  
+
   # find ISBN for each title and assign to the media
   def find_isbns(title, medias)
     title_pattern = Collection.title_pattern(title)
     unless @collection.title_isbn_hash[title_pattern].nil?
       medias.each do |media|
-	media.isbn = @collection.title_isbn_hash[title_pattern]
+        media.isbn = @collection.title_isbn_hash[title_pattern]
       end
     end
   end
@@ -94,17 +94,17 @@ class DvdProfiler2Xbmc
   def copy_thumbnails(title, medias)
     medias.each do |media|
       unless media.isbn.nil?
-	media.isbn.each do |isbn|
-	  src_image_filespec = File.join(AppConfig[:images_dir], "#{isbn}f.jpg")
-	  if File.exist?(src_image_filespec)
-	    dest_image_filespec = media.media_path.ext(".#{AppConfig[:thumbnail_extension]}")
-	    begin
-	      File.copy(src_image_filespec, dest_image_filespec)
-	    rescue Exception => e
-	      AppConfig[:logger].error {e.to_s}
-	    end
-	  end
-	end
+        media.isbn.each do |isbn|
+          src_image_filespec = File.join(AppConfig[:images_dir], "#{isbn}f.jpg")
+          if File.exist?(src_image_filespec)
+            dest_image_filespec = media.path_to(:thumbnail_extension)
+            begin
+              File.copy(src_image_filespec, dest_image_filespec)
+            rescue Exception => e
+              AppConfig[:logger].error {e.to_s}
+            end
+          end
+        end
       end
     end
   end
@@ -113,13 +113,13 @@ class DvdProfiler2Xbmc
   def create_nfos(title, medias)
     medias.each do |media|
       unless media.isbn.nil?
-	media.isbn.each do |isbn|
-	  dvd_hash = @collection.isbn_dvd_hash[isbn]
-	  unless dvd_hash.nil?
-	    nfo = NFO.new(media, dvd_hash)
-	    nfo.save
-	  end
-	end
+        media.isbn.each do |isbn|
+          dvd_hash = @collection.isbn_dvd_hash[isbn]
+          unless dvd_hash.nil?
+            nfo = NFO.new(media, dvd_hash)
+            nfo.save
+          end
+        end
       end
     end
   end
@@ -130,26 +130,26 @@ class DvdProfiler2Xbmc
     duplicates = @media_files.duplicate_titles
     unless duplicates.empty?
       duplicates.each do |title, medias|
-	if medias.length > 1
-	  buf << title
-	  medias.each {|media| buf << "  #{media.media_path}"}
-	end
+        if medias.length > 1
+          buf << title
+          medias.each {|media| buf << "  #{media.media_path}"}
+        end
       end
     end
     buf
   end
-  
+
   # unable to find ISBN for these titles report
   def missing_isbn_report
     buf = []
     @media_files.titles.each do |title, medias|
       if medias.nil?
-	buf << "No media for #{title}"
+        buf << "No media for #{title}"
       else
-	if medias[0].isbn.nil?
-	  buf << "ISBN not found for #{title}"
-	  medias.each {|media| buf << "  #{media.media_path}"}
-	end
+        if medias[0].isbn.nil?
+          buf << "ISBN not found for #{title}"
+          medias.each {|media| buf << "  #{media.media_path}"}
+        end
       end
     end
     buf
@@ -157,4 +157,3 @@ class DvdProfiler2Xbmc
 
 end
 
-    
