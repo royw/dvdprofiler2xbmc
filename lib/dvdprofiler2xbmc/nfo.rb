@@ -6,7 +6,7 @@ class NFO
     @dvd_hash = dvd_hash
     load
   end
-  
+
   # save as a .nfo file, creating a backup if the .nfo already exists
   def save
     begin
@@ -21,7 +21,7 @@ class NFO
       AppConfig[:logger].error { "Error saving nfo file - " + e.to_s }
     end
   end
-  
+
   def load
     begin
       nfo_filespec = @media.media_path.ext(".#{AppConfig[:nfo_extension]}")
@@ -30,12 +30,16 @@ class NFO
       AppConfig[:logger].error { "Error loading \"#{nfo_filespec}\" - " + e.to_s }
     end
   end
-  
+
   # return a nfo xml String from the given dvd_hash (from Collection)
   def to_nfo(dvd_hash)
     @movie ||= {}
     imdb_id = @movie['id']
-    imdb_id = imdb_lookup(dvd_hash) if AppConfig[:imdb_query] && imdb_id.blank?
+    if AppConfig[:imdb_query] && imdb_id.blank?
+      unless File.exist?(@media.media_path.ext(".#{AppConfig[:no_imdb_extension]}"))
+        imdb_id = imdb_lookup(dvd_hash)
+      end
+    end
     @movie['title']         = dvd_hash[:title]
     @movie['mpaa']          = dvd_hash[:rating]
     @movie['year']          = dvd_hash[:productionyear]
@@ -46,16 +50,16 @@ class NFO
     @movie['actor']         = dvd_hash[:actors]
     @movie['id']            = imdb_id unless imdb_id.nil?
     @movie['isbn']          = dvd_hash[:isbn]
-  
+
     begin
       XmlSimple.xml_out(@movie, 'NoAttr' => true, 'RootName' => 'movie')
     rescue Exception => e
       AppConfig[:logger].error { "Error creating nfo file - " + e.to_s }
     end
   end
-  
+
   protected
-  
+
   def map_genres(genres)
     new_genres = []
     genres.each do |genre|
@@ -98,6 +102,6 @@ class NFO
     end
     years.flatten.uniq.compact.sort
   end
-  
+
 end
 

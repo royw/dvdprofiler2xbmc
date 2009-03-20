@@ -79,6 +79,7 @@ module AppConfig
     @config.thumbnail_extension  = 'tbn'
     @config.nfo_extension        = 'nfo'
     @config.nfo_backup_extension = 'nfo~'
+    @config.no_imdb_extension    = 'no_imdb_lookup'
 
     # map some genre names
     @config.genre_maps = {
