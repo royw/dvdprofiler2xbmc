@@ -22,13 +22,13 @@ module AppConfig
   
   def self.save
     begin
-      File.delete(@yaml_filespec) if File.exist?(yaml_filespec)
-      AppConfig[:logger].info { "saving: #{yaml_filespec}" }
-      File.open(yaml_filespec, "w") do |f|
+      File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
+      AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
+      File.open(@yaml_filespec, "w") do |f|
 	YAML.dump(@config, f)
       end
     rescue Exception => e
-      AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s }
+      AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s + "\n" + e.backtrace.join("\n")}
     end
   end
   

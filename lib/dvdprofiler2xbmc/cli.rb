@@ -49,20 +49,21 @@ module Dvdprofiler2xbmc
 	options = setupParser()
 	od = options.parse(arguments)
 
-	unless od["--help"]
-	  # load config values
-	  AppConfig.default
-	  AppConfig[:pretend] = od["--pretend"]
-	  AppConfig[:imdb_query] = !od["--no_imdb_query"]
+	# load config values
+	AppConfig.default
+	
+	# the first reinitialize_logger adds the command line logging options to the default config
+	# then we load the config files
+	# then we run reinitialize_logger again to modify the logger for any logging options from the config files
+	
+	reinitialize_logger(logger, od["--quiet"], od["--debug"])
+	AppConfig.load
+# 	  AppConfig[:pretend] = od["--pretend"]
+	AppConfig[:imdb_query] = !od["--no_imdb_query"]
+	AppConfig.save
+	reinitialize_logger(logger, od["--quiet"], od["--debug"])
 	  
-	  # the first reinitialize_logger adds the command line logging options to the default config
-	  # then we load the config files
-	  # then we run reinitialize_logger again to modify the logger for any logging options from the config files
-	  
-	  reinitialize_logger(logger, od["--verbose"], od["--debug"])
-	  AppConfig.load
-	  reinitialize_logger(logger, od["--verbose"], od["--debug"])
-	  
+	unless od["--help"] || od["--version"]
 	  # create and execute class instance here
 	  app = DvdProfiler2Xbmc.new
 	  app.execute
@@ -81,12 +82,15 @@ module Dvdprofiler2xbmc
     # Returns:: OptionParser instances
     def self.setupParser()
       options = OptionParser.new()
-      options << Option.new(:flag, :names => %w(--help), 
+      options << Option.new(:flag, :names => %w(--help -h), 
 			    :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}}, 
 			    :opt_description => "This usage information")
-      options << Option.new(:flag, :names => %w(--pretend -p))
+      options << Option.new(:flag, :names => %w(--version -v), 
+			    :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{"Dvdprofiler2xbmc #{Dvdprofiler2xbmc::VERSION}"}}, 
+			    :opt_description => "This version of dvdprofiler2xbmc")
+#       options << Option.new(:flag, :names => %w(--pretend -p))
       options << Option.new(:flag, :names => %w(--no_imdb_query -n))
-      options << Option.new(:flag, :names => %w(--verbose -v))
+      options << Option.new(:flag, :names => %w(--quiet -q))
       options << Option.new(:flag, :names => %w(--debug -d))
       options
     end
@@ -94,7 +98,7 @@ module Dvdprofiler2xbmc
     # Reinitialize the logger using the loaded config.
     # logger:: logger for any user messages
     # config:: is the application's config hash.
-    def self.reinitialize_logger(logger, verbose, debug)
+    def self.reinitialize_logger(logger, quiet, debug)
       # switch the logger to the one specified in the config files
       unless AppConfig[:logfile].nil?
 	logfile_outputter = Log4r::RollingFileOutputter.new(:logfile, :filename => AppConfig[:logfile], :maxsize => 1000000 )
@@ -106,8 +110,8 @@ module Dvdprofiler2xbmc
 	  logfile_outputter.level = level_map[AppConfig[:logfile_level]] || Log4r::INFO
 	end
       end
-      Log4r::Outputter[:console].level = Log4r::WARN
-      Log4r::Outputter[:console].level = Log4r::INFO if verbose
+      Log4r::Outputter[:console].level = Log4r::INFO
+      Log4r::Outputter[:console].level = Log4r::WARN if quiet
       Log4r::Outputter[:console].level = Log4r::DEBUG if debug
       # logger.trace = true
       AppConfig[:logger] = logger
