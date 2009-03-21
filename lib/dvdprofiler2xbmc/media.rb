@@ -1,7 +1,8 @@
 # == Synopsis
 # Media encapsulates information about a single media file
+# Everything except the isbn value is immutable.
 class Media
-  attr_reader :media_path, :nfo_files, :image_files, :year, :media_subdirs
+  attr_reader :media_path, :nfo_files, :image_files, :year, :media_subdirs, :title, :title_with_year
   attr_accessor :isbn
 
   DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
@@ -13,21 +14,8 @@ class Media
     @nfo_files = Dir.glob("*.{#{AppConfig[:nfo_extensions].join(',')}}")
     @image_files = Dir.glob("*.{#{AppConfig[:media_extensions].join(',')}}")
     @year = $1 if File.basename(@media_path) =~ /\s\-\s(\d{4})/
-  end
-
-  # return the media's title extracted from the filename and cleaned up
-  def title
-    if @title.nil?
-      # ditch extensions including disc number (ex, a.part2.b => a, a.cd1.b => a)
-      @title = File.basename(@media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
-      @title.gsub!(/\s\-\s\d{4}/, '')  # remove year
-      @title.gsub!(/\s\-\s0/, '')      # remove "- 0", i.e., bad year
-      @title.gsub!(/\(\d{4}\)/, '')    # remove (year)
-      @title.gsub!(/\[.+\]/, '')       # remove square brackets
-      @title.gsub!(/\s\s+/, ' ')       # remove multiple whitespace
-      @title = @title.strip            # remove leading and trailing whitespace
-    end
-    @title
+    @title = find_title(@media_path)
+    @title_with_year = find_title_with_year(@title, @year)
   end
 
   def path_to(type)
@@ -39,13 +27,6 @@ class Media
     File.join(File.dirname(@media_path), new_path)
   end
 
-  # return the media's title but with the (year) appended
-  def title_with_year
-    name = title
-    name = "#{name} (#{@year})" unless @year.nil?
-    name
-  end
-
   def to_s
     buf = []
     buf << @media_path
@@ -53,4 +34,26 @@ class Media
     buf << title_with_year
     buf.join(' ')
   end
+
+  protected
+
+  # return the media's title extracted from the filename and cleaned up
+  def find_title(media_path)
+    # ditch extensions including disc number (ex, a.part2.b => a, a.cd1.b => a)
+    title = File.basename(media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
+    title.gsub!(/\s\-\s\d{4}/, '')  # remove year
+    title.gsub!(/\s\-\s0/, '')      # remove "- 0", i.e., bad year
+    title.gsub!(/\(\d{4}\)/, '')    # remove (year)
+    title.gsub!(/\[.+\]/, '')       # remove square brackets
+    title.gsub!(/\s\s+/, ' ')       # remove multiple whitespace
+    title.strip                     # remove leading and trailing whitespace
+  end
+
+  # return the media's title but with the (year) appended
+  def find_title_with_year(title, year)
+    name = title
+    name = "#{name} (#{year})" unless year.nil?
+    name
+  end
+
 end

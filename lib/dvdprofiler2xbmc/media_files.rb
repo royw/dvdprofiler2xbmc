@@ -1,33 +1,45 @@
 # == Synopsis
 # encapsulation of all media files
 class MediaFiles
-  attr_reader :medias, :titles
+  attr_reader :medias, :titles, :duplicate_titles
 
   # given:
   # directories Array of String directory pathspecs
   def initialize(directories)
-    @medias = []
+    @medias = find_medias(directories)
+    @titles = find_titles(@medias)
+    @duplicate_titles = find_duplicate_titles(@titles)
+  end
+
+  protected
+
+  def find_medias(directories)
+    medias = []
     directories.each do |dir|
       Dir.chdir(dir)
-      @medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename|
+      medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename|
         Media.new(dir, filename)
       end
     end
-    @titles = {}
-    @medias.each do |media|
-      title = media.title_with_year
-      @titles[title] ||= []
-      @titles[title] << media
-    end
+    medias
   end
 
+  def find_titles(medias)
+    titles = {}
+    medias.each do |media|
+      title = media.title_with_year
+      titles[title] ||= []
+      titles[title] << media
+    end
+    titles
+  end
 
   # find duplicate titles and return them in a hash
   # where the key is the title and the value is an
   # array of Media objects
-  def duplicate_titles
+  def find_duplicate_titles(titles)
     duplicates = {}
-    @titles.each do |title, medias|
+    titles.each do |title, medias|
       base_medias = medias.collect{|media| media.path_to(:base) }.uniq
       if base_medias.length > 1
         duplicates[title] = medias
@@ -35,5 +47,6 @@ class MediaFiles
     end
     duplicates
   end
+
 end
 

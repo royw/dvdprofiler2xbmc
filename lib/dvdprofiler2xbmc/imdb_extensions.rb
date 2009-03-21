@@ -1,12 +1,20 @@
+# add some methods to ImdbMovie
+
 class ImdbMovie
+
+  # return the raw title
   def raw_title
     document.at("h1").innerText
   end
 
+  # is this a video game as indicated by a '(VG)' in the raw title?
   def video_game?
     raw_title =~ /\(VG\)/
   end
 
+  # find the release year
+  # Note, this is needed because not all entries on IMDB have a full
+  # release date as parsed by release_date.
   def release_year
     document.search("//h5[text()^='Release Date']/..").innerHTML[/\d{4}/]
   end
@@ -22,9 +30,47 @@ class ImdbMovie
     aka.collect!{|a| a.gsub(/\([^\)]*\)/, '').strip}
     aka.uniq!
     aka.collect!{|a| a.blank? ? nil : a}
-    aka.compact!
-    aka
+    aka.compact
   end
+
+  # The MPAA rating, i.e. "PG-13"
+  def mpaa
+    document.search("//h5[text()^='MPAA']/..").text.gsub('MPAA:', '').strip rescue nil
+  end
+
+  # older films may not have MPAA ratings but usually have a certification.
+  # return a hash with country abbreviations for keys and the certification string for the value
+  # example:  {'USA' => 'Approved'}
+  def certifications
+    cert_hash = {}
+    certs = document.search("h5[text()='Certification:'] ~ a[@href*=/List?certificates']").map { |link| link.innerHTML.strip } rescue []
+    certs.each { |line| cert_hash[$1] = $2 if line =~ /(.*):(.*)/ }
+    cert_hash
+  end
+
+  private
+
+  MAX_ATTEMPTS = 3
+  SECONDS_BETWEEN_RETRIES = 1
+
+  # replace the document handler with one that will retry to handle
+  # the occasional glitches
+  def document
+    attempts = 0
+    begin
+      @document ||= Hpricot(open(self.url).read)
+    rescue Exception => e
+      attempts += 1
+      if attempts > MAX_ATTEMPTS
+        AppConfig[:logger].error{ "Error reading IMDB page (#{self.url}) - #{e.to_s}"}
+        raise
+      else
+        sleep SECONDS_BETWEEN_RETRIES
+        retry
+      end
+    end
+  end
+
 end
 
 class ImdbSearch
@@ -72,10 +118,10 @@ class ImdbSearch
     unless result
       result = fuzzy_compare_titles(imdb_title, 'trailers and videos')
       unless result
-	aka_titles.each do |aka|
-	  result = fuzzy_compare_titles(aka, media_title)
-	  break if result
-	end
+        aka_titles.each do |aka|
+          result = fuzzy_compare_titles(aka, media_title)
+          break if result
+        end
       end
     end
     result

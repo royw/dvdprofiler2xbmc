@@ -6,6 +6,8 @@
 #  app.execute
 #  app.report.each {|line| puts line}
 class DvdProfiler2Xbmc
+  include Singleton
+
   @interrupted = false
 
   # A trap("INT") in the Runner calls this to indicate that a ^C has been detected.
@@ -23,37 +25,24 @@ class DvdProfiler2Xbmc
 
   def initialize
     @media_files = nil
-    @collection = nil
   end
 
   def execute
     @media_files = MediaFiles.new(AppConfig[:directories])
 
     collection_filepath = File.expand_path(AppConfig[:collection_filespec])
-    @collection = Collection.new(collection_filepath)
+    collection = Collection.new(collection_filepath)
 
     @media_files.titles.each do |title, medias|
       break if DvdProfiler2Xbmc.interrupted?
       # the following lines are order dependent
-      find_isbns(title, medias)
+      find_isbns(title, medias, collection)
       copy_thumbnails(title, medias)
-      create_nfos(title, medias)
+      create_nfos(title, medias, collection)
     end
 
     # set file and directory permissions
-    AppConfig[:directories].each do |dir|
-      Dir.glob(File.join(dir, '**/*')).each do |f|
-        begin
-          if File.directory?(f)
-            File.chmod(AppConfig[:dir_permissions], f) unless AppConfig[:dir_permissions].nil?
-          else
-            File.chmod(AppConfig[:file_permissions], f) unless AppConfig[:file_permissions].nil?
-          end
-        rescue Exception => e
-          AppConfig[:logger].error {e.to_s}
-        end
-      end
-    end
+    AppConfig[:directories].each { |dir| set_permissions(dir) }
   end
 
   # generate the report.
@@ -81,11 +70,11 @@ class DvdProfiler2Xbmc
   protected
 
   # find ISBN for each title and assign to the media
-  def find_isbns(title, medias)
+  def find_isbns(title, medias, collection)
     title_pattern = Collection.title_pattern(title)
-    unless @collection.title_isbn_hash[title_pattern].nil?
+    unless collection.title_isbn_hash[title_pattern].nil?
       medias.each do |media|
-        media.isbn = @collection.title_isbn_hash[title_pattern]
+        media.isbn = collection.title_isbn_hash[title_pattern]
       end
     end
   end
@@ -110,16 +99,26 @@ class DvdProfiler2Xbmc
   end
 
   # create nfo files from collection.isbn_dvd_hash
-  def create_nfos(title, medias)
+  def create_nfos(title, medias, collection)
     medias.each do |media|
-      unless media.isbn.nil?
-        media.isbn.each do |isbn|
-          dvd_hash = @collection.isbn_dvd_hash[isbn]
-          unless dvd_hash.nil?
-            nfo = NFO.new(media, dvd_hash)
-            nfo.save
-          end
+      dvd_hash = (media.isbn.nil? ? nil : collection.isbn_dvd_hash[media.isbn.first])
+      nfo = NFO.new(media, dvd_hash)
+      nfo.save
+    end
+  end
+
+  # set the directory and file permissions for all files and directories under
+  # the given directory
+  def set_permissions(dir)
+    Dir.glob(File.join(dir, '**/*')).each do |f|
+      begin
+        if File.directory?(f)
+          File.chmod(AppConfig[:dir_permissions], f) unless AppConfig[:dir_permissions].nil?
+        else
+          File.chmod(AppConfig[:file_permissions], f) unless AppConfig[:file_permissions].nil?
         end
+      rescue Exception => e
+        AppConfig[:logger].error {e.to_s}
       end
     end
   end
