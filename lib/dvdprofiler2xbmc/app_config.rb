@@ -11,39 +11,39 @@
 module AppConfig
   @config = Mash.new
   @yaml_filespec = File.join(ENV['HOME'], '.dvdprofiler2xbmcrc')
-  
+
   def self.[](k)
     @config[k]
   end
-  
+
   def self.[]=(k,v)
     @config[k] = v
   end
-  
+
   def self.save
     begin
       File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
       AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
       File.open(@yaml_filespec, "w") do |f|
-	YAML.dump(@config, f)
+        YAML.dump(@config, f)
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s + "\n" + e.backtrace.join("\n")}
     end
   end
-  
+
   def self.load
     begin
       if File.exist?(@yaml_filespec)
-	@config.merge YAML.load_file(@yaml_filespec)
+        @config.merge YAML.load_file(@yaml_filespec)
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error loading config file \"#{@yaml_filespec} - " + e.to_s }
     end
   end
-  
+
   def self.default
-    # Note, all paths and extensions are case sensitive 
+    # Note, all paths and extensions are case sensitive
 
     # Array of paths to scan for media
     # Note, directories underneath these will be added as genres to
@@ -53,10 +53,10 @@ module AppConfig
     # Also note, that duplicate genres will be collapsed into single
     # genres in the .nfo file.
     @config.directories = [
-	'/media/dad-kubuntu/public/data/videos_iso',
-	'/media/dcerouter/public/data/videos_iso',
-	'/media/royw-gentoo/public/data/videos_iso',
-	'/media/royw-gentoo/public/data/movies'
+        '/media/dad-kubuntu/public/data/videos_iso',
+        '/media/dcerouter/public/data/videos_iso',
+        '/media/royw-gentoo/public/data/videos_iso',
+        '/media/royw-gentoo/public/data/movies'
       ]
 
     # Typical locations are:
@@ -83,11 +83,12 @@ module AppConfig
 
     # map some genre names
     @config.genre_maps = {
-	'SciFi'           => 'Science Fiction',
-	'Science-Fiction' => 'Science Fiction',
-	'Anime'           => 'Animation',
-	'Musical'         => 'Musicals'
-      }
+        'SciFi'           => 'Science Fiction',
+        'Science-Fiction' => 'Science Fiction',
+        'Anime'           => 'Animation',
+        'Musical'         => 'Musicals',
+        'Music'           => 'Musicals'
+    }
 
     @config.file_permissions = 0664
     @config.dir_permissions = 0777
