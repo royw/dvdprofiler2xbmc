@@ -10,7 +10,6 @@ class NFO
 
   # save as a .nfo file, creating a backup if the .nfo already exists
   def save
-#     AppConfig[:logger].info "save"
     begin
       nfo_filespec = @media.path_to(:nfo_extension)
       nfo_backup_filespec = @media.path_to(:nfo_backup_extension)
@@ -25,7 +24,6 @@ class NFO
   end
 
   def load
-#     AppConfig[:logger].info "load"
     nfo_filespec = @media.path_to(:nfo_extension)
     begin
       if File.exist?(nfo_filespec) && File.size?(nfo_filespec)
@@ -39,15 +37,12 @@ class NFO
 
   # return a nfo xml String from the given dvd_hash (from Collection)
   def to_nfo(dvd_hash)
-#     AppConfig[:logger].info "to_nfo"
     xml = ''
     @movie ||= {}
 
     dvd_hash ||= {}
     dvd_hash[:title] ||= @media.title
     dvd_hash[:productionyear] ||= @media.year
-
-#     AppConfig[:logger].info { @movie.inspect }
 
     imdb_id = @movie['id']
     if AppConfig[:imdb_query] && imdb_id.blank?

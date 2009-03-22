@@ -42,7 +42,7 @@ class Collection
     save
   end
 
-  # save as a collection.yaml file unless the existing 
+  # save as a collection.yaml file unless the existing
   # collection.yaml is newer than the collection.xml
   def save
     unless @filespec.nil?
@@ -65,7 +65,7 @@ class Collection
     end
   end
 
-  # load the collection from the collection.yaml if it exists, 
+  # load the collection from the collection.yaml if it exists,
   # otherwise from the collection.xml
   def reload
     @title_isbn_hash.clear
@@ -102,10 +102,10 @@ class Collection
               name << a['FirstName'] unless a['FirstName'].blank?
               name << a['MiddleName'] unless a['MiddleName'].blank?
               name << a['LastName'] unless a['LastName'].blank?
-	      info = {}
-	      info['name'] = name.join(' ')
-	      info['role'] = a['Role']
-	      info
+              info = {}
+              info['name'] = name.join(' ')
+              info['role'] = a['Role']
+              info
             end
           end
           dvd_hash[:genres] = dvd[:genres].collect{|a| a[:genre]}.flatten unless dvd[:genres].blank?
@@ -148,7 +148,7 @@ class Collection
       title = src_title.dup
       title.downcase!
       TITLE_REPLACEMENTS.each do |replacement|
-        replacement.each do |regex, value| 
+        replacement.each do |regex, value|
           title.gsub!(regex, value)
         end
       end

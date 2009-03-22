@@ -54,13 +54,13 @@ class Object
     def blank?
       result = nil?
       unless result
-	if respond_to? 'empty?'
-	  if respond_to? 'strip'
-	    result = strip.empty?
-	  else
-	    result = empty?
-	  end
-	end
+        if respond_to? 'empty?'
+          if respond_to? 'strip'
+            result = strip.empty?
+          else
+            result = empty?
+          end
+        end
       end
       result
     end
@@ -83,7 +83,7 @@ class Numeric
     end
   end
 end
-  
+
 # == Synopsis
 # add a timer method to the Kernel
 module Kernel
