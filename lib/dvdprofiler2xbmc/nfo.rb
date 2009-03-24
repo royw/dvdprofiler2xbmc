@@ -35,18 +35,29 @@ class NFO
           @movie = XmlSimple.xml_in(file)
         end
       end
-      load_from_collection
-      if AppConfig[:imdb_query] && imdb_id.blank?
-        load_from_imdb
-      end
-      @movie.merge!(to_movie(@dvd_hash))
     rescue Exception => e
       AppConfig[:logger].error { "Error loading \"#{nfo_filespec}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
       raise e
     end
   end
 
+  def update
+    begin
+      load_from_collection
+      if AppConfig[:imdb_query] && imdb_id.blank?
+        load_from_imdb
+      end
+      @movie.merge!(to_movie(@dvd_hash))
+    rescue Exception => e
+      AppConfig[:logger].error { "Error updating \"#{nfo_filespec}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
+      raise e
+    end
+  end
+
   def isbn
+    if @dvd_hash[:isbn].blank?
+      @dvd_hash[:isbn] = @movie['isbn']
+    end
     @dvd_hash[:isbn]
   end
 
@@ -58,11 +69,14 @@ class NFO
     if @dvd_hash[:imdb_id].nil?
       @dvd_hash[:imdb_id] = @movie['id']
     end
-    @dvd_hash[:imdb_id]
+    unless @dvd_hash[:imdb_id].nil?
+      # make sure is not an array
+      @dvd_hash[:imdb_id] = [@dvd_hash[:imdb_id]].flatten.uniq.compact.first
+    end
   end
 
-  def imdb_id=(imdb_id)
-    @dvd_hash[:imdb_id] = imdb_id
+  def imdb_id=(id)
+    @dvd_hash[:imdb_id] = id
   end
 
   protected

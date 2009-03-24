@@ -35,7 +35,8 @@ class DvdProfiler2Xbmc
     @media_files.titles.each do |title, medias|
       break if DvdProfiler2Xbmc.interrupted?
       medias.each do |media|
-        media.update
+        media.load
+        media.update if AppConfig[:do_update]
       end
     end
 

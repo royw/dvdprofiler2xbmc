@@ -61,6 +61,8 @@ module Dvdprofiler2xbmc
         AppConfig.save
         reinitialize_logger(logger, od["--quiet"], od["--debug"])
 
+        AppConfig[:do_update] = !od["--reports"]
+
         unless od["--help"] || od["--version"]
           # create and execute class instance here
           app = DvdProfiler2Xbmc.instance
@@ -86,9 +88,10 @@ module Dvdprofiler2xbmc
       options << Option.new(:flag, :names => %w(--version -v),
                             :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{"Dvdprofiler2xbmc #{Dvdprofiler2xbmc::VERSION}"}},
                             :opt_description => "This version of dvdprofiler2xbmc")
-      options << Option.new(:flag, :names => %w(--no_imdb_query -n))
-      options << Option.new(:flag, :names => %w(--quiet -q))
-      options << Option.new(:flag, :names => %w(--debug -d))
+      options << Option.new(:flag, :names => %w(--no_imdb_query -n), :opt_description => 'Do not query IMDB.com')
+      options << Option.new(:flag, :names => %w(--quiet -q),         :opt_description => 'Display error messages only')
+      options << Option.new(:flag, :names => %w(--debug -d),         :opt_description => 'Display debug messages')
+      options << Option.new(:flag, :names => %w(--reports -r),       :opt_description => 'Display reports only.  Do not do any updates.')
       options
     end
 

@@ -12,16 +12,23 @@ class Media
     @media_path = File.expand_path(File.join(directory, media_file))
     Dir.chdir(File.dirname(@media_path))
     @nfo_files = Dir.glob("*.{#{AppConfig[:nfo_extensions].join(',')}}")
-    @image_files = Dir.glob("*.{#{AppConfig[:media_extensions].join(',')}}")
+    @image_files = Dir.glob("*.{#{AppConfig[:thumbnail_extension]}}")
     @year = $1 if File.basename(@media_path) =~ /\s\-\s(\d{4})/
     @title = find_title(@media_path)
     @title_with_year = find_title_with_year(@title, @year)
 
     @nfo = NFO.new(self, @collection)
+    @loaded = false
+  end
+
+  def load
+    @nfo.load
+    @loaded = true
   end
 
   def update
-    @nfo.load
+    load unless @loaded
+    @nfo.update
     update_thumbnail
   end
 
@@ -55,8 +62,8 @@ class Media
   # update the movie's thumbnail (.tbn) image
   def update_thumbnail
     if @nfo.isbn.blank?
-      if @image_files.empty?
-        unless @nfo.imdb_id.blank?
+      unless @nfo.imdb_id.blank?
+        if @image_files.empty?
           fetch_imdb_thumbnail(@nfo.imdb_id)
         end
       end
@@ -68,7 +75,15 @@ class Media
 
   def fetch_imdb_thumbnail(imdb_id)
     # TODO: implement
-    puts "fetch_imdb_thumbnail(#{imdb_id})"
+    imdb_movie = ImdbMovie.new(imdb_id.gsub(/^tt/, ''))
+    source_uri = imdb_movie.poster.image
+    dest_image_filespec = path_to(:thumbnail_extension)
+    puts "fetch_imdb_thumbnail(#{imdb_id}) => #{source_uri}"
+    begin
+      File.open(dest_image_filespec, "wb") {|f| f.write(open(source_uri).read)}
+    rescue Exception => e
+      AppConfig[:logger].error { "Error downloading image from \"#{source_uri}\" to \"#{dest_image_filespec}\" - #{e.to_s}" }
+    end
   end
 
   # copy images from .../isbn.jpg to .../basename.jpg

@@ -94,5 +94,6 @@ module AppConfig
     @config.file_permissions = 0664
     @config.dir_permissions = 0777
     @config.imdb_query = true
+    @config.do_update = true
   end
 end
