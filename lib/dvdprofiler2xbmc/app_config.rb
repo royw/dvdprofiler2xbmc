@@ -80,6 +80,7 @@ module AppConfig
     @config.nfo_extension        = 'nfo'
     @config.nfo_backup_extension = 'nfo~'
     @config.no_imdb_extension    = 'no_imdb_lookup'
+    @config.no_isbn_extension    = 'no_isbn'
 
     # map some genre names
     @config.genre_maps = {

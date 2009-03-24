@@ -28,17 +28,15 @@ class DvdProfiler2Xbmc
   end
 
   def execute
-    @media_files = MediaFiles.new(AppConfig[:directories])
-
     collection_filepath = File.expand_path(AppConfig[:collection_filespec])
     collection = Collection.new(collection_filepath)
 
+    @media_files = MediaFiles.new(AppConfig[:directories], collection)
     @media_files.titles.each do |title, medias|
       break if DvdProfiler2Xbmc.interrupted?
-      # the following lines are order dependent
-      find_isbns(title, medias, collection)
-      copy_thumbnails(title, medias)
-      create_nfos(title, medias, collection)
+      medias.each do |media|
+        media.update
+      end
     end
 
     # set file and directory permissions
@@ -60,7 +58,20 @@ class DvdProfiler2Xbmc
 
         missing_isbns = missing_isbn_report
         unless missing_isbns.empty?
+          buf << ''
           buf += missing_isbns
+        end
+
+        missing_imdb_ids = missing_imdb_ids_report
+        unless missing_imdb_ids.empty?
+          buf << ''
+          buf += missing_imdb_ids
+        end
+
+        missing_thumbnails = missing_thumbnails_report
+        unless missing_thumbnails.empty?
+          buf << ''
+          buf += missing_thumbnails
         end
       end
     end
@@ -68,44 +79,6 @@ class DvdProfiler2Xbmc
   end
 
   protected
-
-  # find ISBN for each title and assign to the media
-  def find_isbns(title, medias, collection)
-    title_pattern = Collection.title_pattern(title)
-    unless collection.title_isbn_hash[title_pattern].nil?
-      medias.each do |media|
-        media.isbn = collection.title_isbn_hash[title_pattern]
-      end
-    end
-  end
-
-  # copy images from .../isbn.jpg to .../basename.jpg
-  def copy_thumbnails(title, medias)
-    medias.each do |media|
-      unless media.isbn.nil?
-        media.isbn.each do |isbn|
-          src_image_filespec = File.join(AppConfig[:images_dir], "#{isbn}f.jpg")
-          if File.exist?(src_image_filespec)
-            dest_image_filespec = media.path_to(:thumbnail_extension)
-            begin
-              File.copy(src_image_filespec, dest_image_filespec)
-            rescue Exception => e
-              AppConfig[:logger].error {e.to_s}
-            end
-          end
-        end
-      end
-    end
-  end
-
-  # create nfo files from collection.isbn_dvd_hash
-  def create_nfos(title, medias, collection)
-    medias.each do |media|
-      dvd_hash = (media.isbn.nil? ? nil : collection.isbn_dvd_hash[media.isbn.first])
-      nfo = NFO.new(media, dvd_hash)
-      nfo.save
-    end
-  end
 
   # set the directory and file permissions for all files and directories under
   # the given directory
@@ -146,8 +119,50 @@ class DvdProfiler2Xbmc
         buf << "No media for #{title}"
       else
         if medias[0].isbn.nil?
-          buf << "ISBN not found for #{title}"
-          medias.each {|media| buf << "  #{media.media_path}"}
+          paths = []
+          medias.each do |media|
+            unless File.exist? media.path_to(:no_isbn_extension)
+              paths << "  #{media.media_path}"
+            end
+          end
+          unless paths.empty?
+            buf << "Missing ISBN for #{title}"
+#             buf += paths
+          end
+        end
+      end
+    end
+    buf
+  end
+
+  def missing_imdb_ids_report
+    buf = []
+    @media_files.titles.each do |title, medias|
+      if medias.nil?
+        buf << "No media for #{title}"
+      else
+        medias.each do |media|
+          if media.imdb_id.blank?
+            buf << "Missing IMDB id for #{title}"
+            break
+          end
+        end
+      end
+    end
+    buf
+  end
+
+  def missing_thumbnails_report
+    buf = []
+    @media_files.titles.each do |title, medias|
+      if medias.nil?
+        buf << "No media for #{title}"
+      else
+        medias.each do |media|
+          thumbnail = media.path_to(:thumbnail_extension)
+          unless File.exist?(thumbnail)
+            buf << "Missing thumbnail image #{thumbnail}"
+          end
         end
       end
     end

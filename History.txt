@@ -1,4 +1,20 @@
-== 0.0.1 2009-03-18
 
-* 1 major enhancement:
-  * refactored into gem using newgem
+    ignore file backups and generated content
+    tab cleanup and added Music => Musical default genre mapping
+    tab cleanup
+    general cleanup, minor refactoring
+    added limited support for stacking
+
+== 0.0.3 2009-03-20
+    add support for moviename.no_imdb_lookup
+    create rc file on first run
+
+== 0.0.2 2009-03-19
+    bumping version to see if gem will generate
+    forgot to remove old README
+    refactored into gem using newgem
+
+== 0.0.1 2009-03-18
+    added IMDB scraping currently to get the IMDB ID
+    initial files
+    first commit
