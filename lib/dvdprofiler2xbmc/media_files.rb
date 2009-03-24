@@ -14,6 +14,7 @@ class MediaFiles
 
   protected
 
+  # find all the media files in the given set of directories
   def find_medias(directories)
     medias = []
     directories.each do |dir|
@@ -25,6 +26,8 @@ class MediaFiles
     medias
   end
 
+  # return a hash where the key is the media's title and
+  # the value is an Array of Media instances
   def find_titles(medias)
     titles = {}
     medias.each do |media|

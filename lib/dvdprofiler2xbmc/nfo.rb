@@ -1,6 +1,9 @@
 
 # == Synopsis
 # NFO (info) files
+#
+# the @movie hash has keys that map directly to the .nfo file
+# the @dvd_hash has keys that map to DVD Profiler's Collection.xml file
 class NFO
   def initialize(media, collection)
     @media = media
@@ -27,6 +30,7 @@ class NFO
     end
   end
 
+  # load the .nfo file into the @movie hash
   def load
     nfo_filespec = @media.path_to(:nfo_extension)
     begin
@@ -41,6 +45,8 @@ class NFO
     end
   end
 
+  # merge meta-data from the DVD Profiler collection.xml and from IMDB
+  # into the @movie hash
   def update
     begin
       load_from_collection
@@ -54,6 +60,7 @@ class NFO
     end
   end
 
+  # return the ISBN or nil
   def isbn
     if @dvd_hash[:isbn].blank?
       @dvd_hash[:isbn] = @movie['isbn']
@@ -61,10 +68,12 @@ class NFO
     @dvd_hash[:isbn]
   end
 
+  # set the ISBN
   def isbn=(isbn)
     @dvd_hash[:isbn] = isbn
   end
 
+  # return the IMDB ID or nil
   def imdb_id
     if @dvd_hash[:imdb_id].nil?
       @dvd_hash[:imdb_id] = @movie['id']
@@ -75,12 +84,14 @@ class NFO
     end
   end
 
+  # set the IMDB ID
   def imdb_id=(id)
     @dvd_hash[:imdb_id] = id
   end
 
   protected
 
+  # load @dvd_hash from the collection
   def load_from_collection
     # find ISBN for each title and assign to the media
     if isbn.nil?
@@ -97,6 +108,7 @@ class NFO
     end
   end
 
+  # load data from IMDB.com and merge into the @dvd_hash
   def load_from_imdb
     unless File.exist?(@media.path_to(:no_imdb_extension))
       years = (@media.year.nil? ? released_years(@dvd_hash) : [@media.year])
@@ -109,7 +121,7 @@ class NFO
     end
   end
 
-  # return a nfo xml String from the given dvd_hash (from Collection)
+  # convert the @movie hash into xml and return the xml as a String
   def to_xml
     xml = ''
     begin
@@ -156,20 +168,22 @@ class NFO
     years.flatten.uniq.compact.sort
   end
 
+  # given a ImdbMovie instance, extract meta-data into and return a dvd_hash
   def to_dvd_hash(imdb_movie)
     dvd_hash = {}
-    dvd_hash[:title]          ||= imdb_movie.title
-    dvd_hash[:imdb_id]        ||= 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
-    dvd_hash[:rating]         ||= imdb_movie.mpaa
+    dvd_hash[:title]          = imdb_movie.title
+    dvd_hash[:imdb_id]        = 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
+    dvd_hash[:rating]         = imdb_movie.mpaa
     dvd_hash[:rating]         ||= imdb_movie.certifications['USA']
-    dvd_hash[:productionyear] ||= imdb_movie.release_year
-    dvd_hash[:plot]           ||= imdb_movie.plot
-    dvd_hash[:runningtime]    ||= imdb_movie.length
-    dvd_hash[:genre]          ||= imdb_movie.genres
-    dvd_hash[:actor]          ||= imdb_movie.cast_members
+    dvd_hash[:productionyear] = imdb_movie.release_year
+    dvd_hash[:plot]           = imdb_movie.plot
+    dvd_hash[:runningtime]    = imdb_movie.length
+    dvd_hash[:genre]          = imdb_movie.genres
+    dvd_hash[:actor]          = imdb_movie.cast_members
     dvd_hash
   end
 
+  # map the given dvd_hash into a @movie hash
   def to_movie(dvd_hash)
     dvd_hash[:genres] ||= []
     genres = map_genres((dvd_hash[:genres] + @media.media_subdirs.split('/')).uniq)
@@ -187,6 +201,9 @@ class NFO
     movie
   end
 
+  # map the given genres using the AppConfig[:genre_maps].
+  # given an Array of String genres
+  # returns an Array of String genres that have been mapped, are unique, and do not include any nils
   def map_genres(genres)
     new_genres = []
     genres.each do |genre|

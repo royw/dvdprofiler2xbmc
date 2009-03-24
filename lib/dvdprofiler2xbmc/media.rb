@@ -1,6 +1,5 @@
 # == Synopsis
 # Media encapsulates information about a single media file
-# Everything except the isbn value is immutable.
 class Media
   attr_reader :media_path, :image_files, :year, :media_subdirs, :title, :title_with_year
 
@@ -21,25 +20,37 @@ class Media
     @loaded = false
   end
 
+  # load existing meta-data
   def load
     @nfo.load
     @loaded = true
   end
 
+  # update the meta-data and thumbnails
   def update
     load unless @loaded
     @nfo.update
     update_thumbnail
   end
 
+  # return the ISBN or nil
   def isbn
     @nfo.isbn
   end
 
+  # return the IMDB ID or nil
   def imdb_id
     @nfo.imdb_id
   end
 
+  # return a path to a file file based on the media's filespec
+  # but without any stacking parts and with the given extension
+  # instead of the media's extension.
+  # Example:
+  #  media_path = '/a/b/c.m4v'
+  #  path_to('nfo') => '/a/b/c.nfo'
+  #  media_path = '/a/b/c.part1.m4v'
+  #  path_to('nfo') => '/a/b/c.nfo'
   def path_to(type)
     # ditch all extensions (ex, a.b => a, a.cd1.b => a)
     new_path = File.basename(@media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
@@ -73,8 +84,8 @@ class Media
     @nfo.save
   end
 
+  # fetch the thumbnail from IMDB and save as path_to('tbn')
   def fetch_imdb_thumbnail(imdb_id)
-    # TODO: implement
     imdb_movie = ImdbMovie.new(imdb_id.gsub(/^tt/, ''))
     source_uri = imdb_movie.poster.image
     dest_image_filespec = path_to(:thumbnail_extension)
