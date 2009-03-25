@@ -62,8 +62,10 @@ module Dvdprofiler2xbmc
 
         reinitialize_logger(logger, od["--quiet"], od["--debug"])
         AppConfig.load
-        AppConfig[:imdb_query] = !od["--no_imdb_query"]
         AppConfig.save
+        AppConfig[:imdb_query] = !od["--no_imdb_query"]
+        AppConfig[:logfile] = od['--output'] if od['--output']
+        AppConfig[:logfile_level] = od['--output_level'] if od['--output_level']
         reinitialize_logger(logger, od["--quiet"], od["--debug"])
 
         AppConfig[:do_update] = !od["--reports"]
@@ -97,6 +99,18 @@ module Dvdprofiler2xbmc
       options << Option.new(:flag, :names => %w(--quiet -q),         :opt_description => 'Display error messages only')
       options << Option.new(:flag, :names => %w(--debug -d),         :opt_description => 'Display debug messages')
       options << Option.new(:flag, :names => %w(--reports -r),       :opt_description => 'Display reports only.  Do not do any updates.')
+      options << Option.new(:names => %w(--output -o),
+                            :argument_arity => [1,1],
+                            :arg_description => 'logfile',
+                            :opt_description => 'Write log messages to file. Default = no log file',
+                            :opt_found       => OptionParser::GET_ARGS
+                           )
+      options << Option.new(:names => %w(--output_level -l),
+                            :argument_arity => [1,1],
+                            :arg_description => 'level',
+                            :opt_description => 'Output logging level: DEBUG, INFO, WARN, ERROR. Default = INFO',
+                            :opt_found       => OptionParser::GET_ARGS
+                           )
       options
     end
 
@@ -105,21 +119,21 @@ module Dvdprofiler2xbmc
     # config:: is the application's config hash.
     def self.reinitialize_logger(logger, quiet, debug)
       # switch the logger to the one specified in the config files
-      unless AppConfig[:logfile].nil?
+      unless AppConfig[:logfile].blank?
         logfile_outputter = Log4r::RollingFileOutputter.new(:logfile, :filename => AppConfig[:logfile], :maxsize => 1000000 )
         logger.add logfile_outputter
-        logfile_outputter.level = Log4r::INFO
+        AppConfig[:logfile_level] ||= 'INFO'
         Log4r::Outputter[:logfile].formatter = Log4r::PatternFormatter.new(:pattern => "[%l] %d :: %M")
-        unless AppConfig[:logfile_level].nil?
-          level_map = {'DEBUG' => Log4r::DEBUG, 'INFO' => Log4r::INFO, 'WARN' => Log4r::WARN}
-          logfile_outputter.level = level_map[AppConfig[:logfile_level]] || Log4r::INFO
-        end
+        level_map = {'DEBUG' => Log4r::DEBUG, 'INFO' => Log4r::INFO, 'WARN' => Log4r::WARN}
+        logfile_outputter.level = level_map[AppConfig[:logfile_level].upcase] || Log4r::INFO
       end
       Log4r::Outputter[:console].level = Log4r::INFO
       Log4r::Outputter[:console].level = Log4r::WARN if quiet
       Log4r::Outputter[:console].level = Log4r::DEBUG if debug
       # logger.trace = true
       AppConfig[:logger] = logger
+      AppConfig[:logger].info { "AppConfig[:logfile] => #{AppConfig[:logfile].inspect}" }
+      AppConfig[:logger].info { "AppConfig[:logfile_level] => #{AppConfig[:logfile_level].inspect}" }
     end
   end
 end
