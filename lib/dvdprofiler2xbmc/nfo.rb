@@ -12,24 +12,6 @@ class NFO
     @movie = {}
   end
 
-  # save as a .nfo file, creating a backup if the .nfo already exists
-  def save
-    begin
-      unless @movie.empty?
-        @movie['title'] = @media.title if @movie['title'].blank?
-        nfo_filespec = @media.path_to(:nfo_extension)
-        nfo_backup_filespec = @media.path_to(:nfo_backup_extension)
-        File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
-        File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
-        File.open(nfo_filespec, "w") do |file|
-          file.puts(to_xml)
-        end
-      end
-    rescue Exception => e
-      AppConfig[:logger].error { "Error saving nfo file - " + e.to_s + "\n" + e.backtrace.join("\n")}
-    end
-  end
-
   # load the .nfo file into the @movie hash
   def load
     nfo_filespec = @media.path_to(:nfo_extension)
@@ -37,6 +19,9 @@ class NFO
       if File.exist?(nfo_filespec) && (File.size(nfo_filespec) > 1)
         File.open(nfo_filespec) do |file|
           @movie = XmlSimple.xml_in(file)
+          @original_movie = @movie.dup
+          self.isbn = @movie['isbn']
+          self.imdb_id = @movie['id']
         end
       end
     rescue Exception => e
@@ -50,7 +35,7 @@ class NFO
   def update
     begin
       load_from_collection
-      if AppConfig[:imdb_query] && imdb_id.blank?
+      if AppConfig[:imdb_query] && self.imdb_id.blank?
         load_from_imdb
       end
       @movie.merge!(to_movie(@dvd_hash))
@@ -60,33 +45,76 @@ class NFO
     end
   end
 
+  # save as a .nfo file, creating a backup if the .nfo already exists
+  def save
+    begin
+      unless @movie.empty?
+        @movie['title'] = @media.title if @movie['title'].blank?
+        nfo_filespec = @media.path_to(:nfo_extension)
+        if dirty? || !File.exist?(nfo_filespec)
+          new_filespec = nfo_filespec + '.new'
+          File.open(new_filespec, "w") do |file|
+            file.puts(to_xml)
+          end
+          nfo_backup_filespec = @media.path_to(:nfo_backup_extension)
+          File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
+          File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
+          File.rename(new_filespec, nfo_filespec)
+          AppConfig[:logger].info { "updated #{nfo_filespec}"}
+          File.delete(new_filespec) if File.exist?(new_filespec)
+        end
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error saving nfo file - " + e.to_s + "\n" + e.backtrace.join("\n")}
+    end
+  end
+
+  def dirty?
+    result = false
+    @movie.each do |key, value|
+      if @movie[key].to_s != @original_movie[key].to_s
+#         puts "key: #{key}, @movie=>\"#{@movie[key]}\", @original_movie=>\"#{@original_movie[key]}\""
+        result = true
+        break
+      end
+    end
+    unless result
+      diff_keys = @movie.keys.sort - @original_movie.keys.sort
+      unless diff_keys.empty?
+#         puts "diff_keys=>#{diff_keys.pretty_inspect}"
+        result = true
+      end
+    end
+    result
+  end
+
   # return the ISBN or nil
   def isbn
-    if @dvd_hash[:isbn].blank?
-      @dvd_hash[:isbn] = @movie['isbn']
+    if @dvd_hash[:isbn].blank? && !@movie['isbn'].blank?
+      @dvd_hash[:isbn] = [@movie['isbn']].flatten.uniq.compact.first.to_s
     end
     @dvd_hash[:isbn]
   end
 
   # set the ISBN
-  def isbn=(isbn)
-    @dvd_hash[:isbn] = isbn
+  def isbn=(n)
+    @dvd_hash[:isbn] = n.to_s unless n.blank?
   end
 
   # return the IMDB ID or nil
   def imdb_id
-    if @dvd_hash[:imdb_id].nil?
-      @dvd_hash[:imdb_id] = @movie['id']
+    if @dvd_hash[:imdb_id].nil? && !@movie['id'].blank?
+      @dvd_hash[:imdb_id] = @movie['id'].to_s
     end
     unless @dvd_hash[:imdb_id].nil?
       # make sure is not an array
-      @dvd_hash[:imdb_id] = [@dvd_hash[:imdb_id]].flatten.uniq.compact.first
+      @dvd_hash[:imdb_id] = [@dvd_hash[:imdb_id].to_s].flatten.uniq.compact.first
     end
   end
 
   # set the IMDB ID
   def imdb_id=(id)
-    @dvd_hash[:imdb_id] = id
+    @dvd_hash[:imdb_id] = id.to_s unless id.blank?
   end
 
   protected
@@ -94,16 +122,16 @@ class NFO
   # load @dvd_hash from the collection
   def load_from_collection
     # find ISBN for each title and assign to the media
-    if isbn.nil?
+    if self.isbn.nil?
       title_pattern = Collection.title_pattern(@media.title)
       unless @collection.title_isbn_hash[title_pattern].nil?
-        isbn = [@collection.title_isbn_hash[title_pattern]].flatten.uniq.compact.first
+        self.isbn = [@collection.title_isbn_hash[title_pattern]].flatten.uniq.compact.first
       end
     end
 
     # merge the meta-data from the collection to dvd_hash
-    unless isbn.nil?
-      collection_hash = @collection.isbn_dvd_hash[isbn]
+    unless self.isbn.blank?
+      collection_hash = @collection.isbn_dvd_hash[self.isbn]
       @dvd_hash.merge!(collection_hash) unless collection_hash.blank?
     end
   end
