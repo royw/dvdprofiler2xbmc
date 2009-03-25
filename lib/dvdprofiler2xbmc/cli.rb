@@ -43,6 +43,7 @@ module Dvdprofiler2xbmc
       # the config files are read if config[:logger_output] is set
       logger = Log4r::Logger.new('dvdprofiler2xbmc')
       logger.outputters = Log4r::StdoutOutputter.new(:console)
+      Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
       logger.level = Log4r::DEBUG
 
       begin
@@ -70,11 +71,14 @@ module Dvdprofiler2xbmc
 
         AppConfig[:do_update] = !od["--reports"]
 
+        AppConfig[:logger].info { "logfile => #{AppConfig[:logfile].inspect}" } unless AppConfig[:logfile].nil?
+        AppConfig[:logger].info { "logfile_level => #{AppConfig[:logfile_level].inspect}" } unless AppConfig[:logfile_level].nil?
+
         unless od["--help"] || od["--version"]
           # create and execute class instance here
           app = DvdProfiler2Xbmc.instance
           app.execute
-          app.report.each {|line| puts line}
+          app.report.each {|line| AppConfig[:logger].info line}
         end
       rescue Exception => eMsg
         logger.error {eMsg.to_s}
@@ -130,10 +134,9 @@ module Dvdprofiler2xbmc
       Log4r::Outputter[:console].level = Log4r::INFO
       Log4r::Outputter[:console].level = Log4r::WARN if quiet
       Log4r::Outputter[:console].level = Log4r::DEBUG if debug
-      # logger.trace = true
+      Log4r::Outputter[:console].formatter = Log4r::PatternFormatter.new(:pattern => "%m")
+                                                                                       # logger.trace = true
       AppConfig[:logger] = logger
-      AppConfig[:logger].info { "AppConfig[:logfile] => #{AppConfig[:logfile].inspect}" }
-      AppConfig[:logger].info { "AppConfig[:logfile_level] => #{AppConfig[:logfile_level].inspect}" }
     end
   end
 end
