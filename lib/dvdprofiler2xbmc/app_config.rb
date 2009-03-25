@@ -22,10 +22,14 @@ module AppConfig
 
   def self.save
     begin
-      File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
-      AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
-      File.open(@yaml_filespec, "w") do |f|
-        YAML.dump(@config, f)
+      unless @config.blank?
+        File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
+        AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
+        File.open(@yaml_filespec, "w") do |f|
+          cfg = @config
+          cfg.delete('logger')
+          YAML.dump(cfg, f)
+        end
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s + "\n" + e.backtrace.join("\n")}
@@ -35,7 +39,9 @@ module AppConfig
   def self.load
     begin
       if File.exist?(@yaml_filespec)
-        @config.merge YAML.load_file(@yaml_filespec)
+        cfg = YAML.load_file(@yaml_filespec)
+        cfg.delete('logger')
+        @config.merge! cfg
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error loading config file \"#{@yaml_filespec} - " + e.to_s }
