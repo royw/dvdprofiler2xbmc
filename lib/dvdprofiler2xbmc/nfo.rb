@@ -71,18 +71,24 @@ class NFO
 
   def dirty?
     result = false
-    @movie.each do |key, value|
-      if @movie[key].to_s != @original_movie[key].to_s
-#         puts "key: #{key}, @movie=>\"#{@movie[key]}\", @original_movie=>\"#{@original_movie[key]}\""
-        result = true
-        break
+    if @original_movie.nil?
+      result = true
+    else
+      @movie.each do |key, value|
+        if @original_movie[key].nil?
+          result = true
+          break
+        end
+        if @movie[key].to_s != @original_movie[key].to_s
+          result = true
+          break
+        end
       end
-    end
-    unless result
-      diff_keys = @movie.keys.sort - @original_movie.keys.sort
-      unless diff_keys.empty?
-#         puts "diff_keys=>#{diff_keys.pretty_inspect}"
-        result = true
+      unless result
+        diff_keys = @movie.keys.sort - @original_movie.keys.sort
+        unless diff_keys.empty?
+          result = true
+        end
       end
     end
     result
