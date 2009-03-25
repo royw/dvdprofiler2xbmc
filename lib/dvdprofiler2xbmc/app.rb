@@ -27,6 +27,7 @@ class DvdProfiler2Xbmc
     @media_files = nil
   end
 
+  # the application's main execution loop
   def execute
     collection_filepath = File.expand_path(AppConfig[:collection_filespec])
     collection = Collection.new(collection_filepath)
@@ -51,30 +52,26 @@ class DvdProfiler2Xbmc
     buf = []
     unless DvdProfiler2Xbmc.interrupted?
       unless @media_files.nil?
-        duplicates = duplicates_report
-        unless duplicates.empty?
-          buf << "Duplicates:\n"
-          buf += duplicates
-        end
-
-        missing_isbns = missing_isbn_report
-        unless missing_isbns.empty?
-          buf << ''
-          buf += missing_isbns
-        end
-
-        missing_imdb_ids = missing_imdb_ids_report
-        unless missing_imdb_ids.empty?
-          buf << ''
-          buf += missing_imdb_ids
-        end
-
-        missing_thumbnails = missing_thumbnails_report
-        unless missing_thumbnails.empty?
-          buf << ''
-          buf += missing_thumbnails
-        end
+        buf += gen_report('duplicates', 'Duplicates')
+        buf += gen_report('missing_isbns', 'Missing ISBNs')
+        buf += gen_report('missing_imdb_ids', 'Missing IMDB IDs')
+        buf += gen_report('missing_thumbnails', 'Missing Thumbnails')
       end
+    end
+    buf
+  end
+
+  def gen_report(name, heading='')
+    buf = []
+    begin
+      lines = send("#{name}_report")
+      unless lines.empty?
+        buf << ''
+        buf << heading
+        buf += lines
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error generating #{name} report - #{e.to_s}" }
     end
     buf
   end
@@ -113,7 +110,7 @@ class DvdProfiler2Xbmc
   end
 
   # unable to find ISBN for these titles report
-  def missing_isbn_report
+  def missing_isbns_report
     buf = []
     @media_files.titles.each do |title, medias|
       if medias.nil?
@@ -127,8 +124,7 @@ class DvdProfiler2Xbmc
             end
           end
           unless paths.empty?
-            buf << "Missing ISBN for #{title}"
-#             buf += paths
+            buf += paths
           end
         end
       end
@@ -144,7 +140,7 @@ class DvdProfiler2Xbmc
       else
         medias.each do |media|
           if media.imdb_id.blank?
-            buf << "Missing IMDB id for #{title}"
+            buf << "  #{title}"
             break
           end
         end
@@ -162,7 +158,7 @@ class DvdProfiler2Xbmc
         medias.each do |media|
           thumbnail = media.path_to(:thumbnail_extension)
           unless File.exist?(thumbnail)
-            buf << "Missing thumbnail image #{thumbnail}"
+            buf << "  #{thumbnail} #{media.imdb_id.nil? ? '' : media.imdb_id}"
           end
         end
       end
