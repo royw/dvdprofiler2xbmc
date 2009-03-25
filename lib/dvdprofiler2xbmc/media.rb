@@ -30,6 +30,7 @@ class Media
   def update
     load unless @loaded
     @nfo.update
+    @nfo.save
     update_thumbnail
   end
 
@@ -81,7 +82,6 @@ class Media
     else
       copy_thumbnail(@nfo.isbn)
     end
-    @nfo.save
   end
 
   # fetch the thumbnail from IMDB and save as path_to('tbn')

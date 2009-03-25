@@ -29,6 +29,7 @@ class DvdProfiler2Xbmc
 
   # the application's main execution loop
   def execute
+    AppConfig[:logger].info { "Processing directories: #{AppConfig[:directories].join(", ")}" }
     collection_filepath = File.expand_path(AppConfig[:collection_filespec])
     collection = Collection.new(collection_filepath)
 
