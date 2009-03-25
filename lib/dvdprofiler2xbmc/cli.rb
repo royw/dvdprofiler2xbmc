@@ -3,7 +3,6 @@ require 'yaml'
 require 'xmlsimple'
 require 'ftools'
 require 'imdb'
-require 'pp'
 require 'mash'
 require 'log4r'
 require 'commandline/optionparser'
@@ -13,10 +12,16 @@ require 'dvdprofiler2xbmc/app'
 require 'dvdprofiler2xbmc/app_config'
 require 'dvdprofiler2xbmc/collection'
 require 'dvdprofiler2xbmc/extensions'
-require 'dvdprofiler2xbmc/imdb_extensions'
 require 'dvdprofiler2xbmc/media'
 require 'dvdprofiler2xbmc/media_files'
 require 'dvdprofiler2xbmc/nfo'
+
+# Command Line interface for the Dvdprofiler2Xbmc application.
+# All application output is via AppConfig[:logger] so we have
+# to set up the logger here.
+# Also handle the command line options.
+# Finally creates an instance of Dvdprofiler2Xbmc and executes
+# it.
 
 module Dvdprofiler2xbmc
   # == Synopsis
