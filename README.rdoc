@@ -25,8 +25,8 @@ based.
 
 3) Media filename convention is to take the media's title from DVD Profiler,
 replace any punctuation with a space character, then replace any multiple
-spaces with a single space.  Next remove any leading or trailing spaces.  
-Optionally can append " - YYYY" where YYYY is the movie's release year.  
+spaces with a single space.  Next remove any leading or trailing spaces.
+Optionally can append " - YYYY" where YYYY is the movie's release year.
 Naturally the extension is the media's container type.  Note, you should
 not include in the title edition info like "Widescreen" or "Special Edition"
 eventhough there are some mistakes in the DVD Profiler profiles that do
@@ -45,9 +45,6 @@ Features:
 
 Problems:
 
-* Always overwriting .nfo.  Needs to only write if there has been a change.
-* Loses any tags not directly supported.  Needs to change from overwrite
-  to merge.
 * IMDB ID scraping doesn't handle boxed sets or multiple movies per media
   file.  I don't see how to work around this exept to eliminate from media
   library.
@@ -55,7 +52,6 @@ Problems:
   is to prompt for required parameters on first run.
 * Needs to support selectable/multiple regex based naming conventions
 * Needs to support directory containers
-* Does not support stacking
 * .dvdprofiler2xbmcrc uses base 10 integers for permissions.  Should be
   either base 8 or symbolic.
 
@@ -64,10 +60,10 @@ Problems:
 First check the version by running:
 
  $ bin/dvdprofiler2xbmc -v
- INFO dvdprofiler2xbmc: Dvdprofiler2xbmc 0.0.2
+ INFO dvdprofiler2xbmc: Dvdprofiler2xbmc 0.0.4
  INFO dvdprofiler2xbmc: saving: /home/royw/.dvdprofiler2xbmcrc
 
-Notice that this generated a config file for you 
+Notice that this generated a config file for you
 (/home/royw/.dvdprofiler2xbmcrc) in your home directory.
 
 Now edit the config file.  Be sure to change the following fields to match
