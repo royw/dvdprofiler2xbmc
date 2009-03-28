@@ -118,6 +118,7 @@ To process your media, simply run:
 
 * ruby 1.8.x
 * rubygem
+* my imdb fork on github (gem install )
 
 == INSTALL:
 
