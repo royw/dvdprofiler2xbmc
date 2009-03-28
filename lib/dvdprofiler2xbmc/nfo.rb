@@ -40,7 +40,7 @@ class NFO
       end
       @movie.merge!(to_movie(@dvd_hash))
     rescue Exception => e
-      AppConfig[:logger].error { "Error updating \"#{nfo_filespec}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
+      AppConfig[:logger].error { "Error updating \"#{@media.path_to(:nfo_extension)}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
       raise e
     end
   end
@@ -130,8 +130,10 @@ class NFO
     # find ISBN for each title and assign to the media
     if self.isbn.nil?
       title_pattern = Collection.title_pattern(@media.title)
+      AppConfig[:logger].debug { "Using Collection.title_pattern => \"#{title_pattern}\""}
       unless @collection.title_isbn_hash[title_pattern].nil?
         self.isbn = [@collection.title_isbn_hash[title_pattern]].flatten.uniq.compact.first
+        AppConfig[:logger].info { "ISBN => #{self.isbn}" }
       end
     end
 
@@ -145,12 +147,28 @@ class NFO
   # load data from IMDB.com and merge into the @dvd_hash
   def load_from_imdb
     unless File.exist?(@media.path_to(:no_imdb_extension))
-      years = (@media.year.nil? ? released_years(@dvd_hash) : [@media.year])
+      # find imdb_id
       title = (@dvd_hash[:title].nil? ? @media.title : @dvd_hash[:title])
-      self.imdb_id = imdb_lookup(title, years) if self.imdb_id.blank?
+      [[@media.year.to_i], released_years(@dvd_hash, 0), released_years(@dvd_hash, -1..1)].each do |years|
+        ident = nil
+        [false, true].each do |search_akas|
+          ident = imdb_lookup(title, years, search_akas)
+          break unless ident.blank?
+        end
+        unless ident.blank?
+          self.imdb_id = ident
+          break
+        end
+      end
+      # if we have an imdb_id, then merge the imdb_movie to @dvd_hash
       unless self.imdb_id.nil?
         imdb_movie = ImdbMovie.new(self.imdb_id.gsub(/^tt/, ''))
-        @dvd_hash.merge!(to_dvd_hash(imdb_movie))
+        begin
+          @dvd_hash.merge!(to_dvd_hash(imdb_movie))
+        rescue Exception => e
+          AppConfig[:logger].info { "imdb_movie.url => #{imdb_movie.url} "}
+          raise e
+        end
       end
     end
   end
@@ -168,32 +186,49 @@ class NFO
   end
 
   # try to find the imdb id for the movie
-  def imdb_lookup(title, years)
+  def imdb_lookup(title, years, search_akas)
     id = nil
 
-    AppConfig[:logger].info { "Searching IMDB for \"#{title}\"" }
+    AppConfig[:logger].info { "Searching IMDB for \"#{title}\" (#{years.join(", ")})" }
     unless title.blank?
       begin
-        imdb_search = ImdbSearch.new(title)
-        id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
+        imdb_search = ImdbSearch.new(title, search_akas)
+        movies = imdb_search.movies
+        AppConfig[:logger].debug { "movies => (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
+        if movies.size == 1
+          id = movies.first.id
+        elsif movies.size > 1
+          AppConfig[:logger].debug { "years => #{years.inspect}"}
+          movies = movies.select { |m| !m.year.blank? && years.include?(m.year.to_i) }
+          AppConfig[:logger].debug { "movies[years] => (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
+          if movies.size == 1
+            id = movies.first.id
+          elsif movies.size > 1
+            AppConfig[:logger].debug { "Multiple titles found (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
+          end
+        end
+#         id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
       rescue Exception => e
         AppConfig[:logger].error { "Error searching IMDB - " + e.to_s }
         AppConfig[:logger].error { e.backtrace.join("\n") }
       end
     end
-    AppConfig[:logger].info { "IMDB id => #{id}" } unless id.nil?
-    id
+    AppConfig[:logger].info { "IMDB id => #{id.to_s}" } unless id.blank?
+    id.to_s
   end
 
   # Different databases seem to mix up released versus production years.
   # So we combine both into a Array of integer years.
-  def released_years(dvd_hash)
+  # fuzzy is an integer range, basically expand each known year by the fuzzy range
+  # i.e., let production and released year both be 2000 and fuzzy=-1..1,
+  # then the returned years would be [1999, 2000, 2001]
+  def released_years(dvd_hash, fuzzy)
     years = []
     unless dvd_hash[:productionyear].blank?
-      years += dvd_hash[:productionyear].collect{|y| [y.to_i - 1, y.to_i, y.to_i + 1]}.flatten
+      years += [dvd_hash[:productionyear]].flatten.collect{|y| [*fuzzy].collect{|f| y.to_i + f}}.flatten
     end
     unless dvd_hash[:released].blank?
-      years += dvd_hash[:released].collect do |date|
+      years += [dvd_hash[:released]].flatten.collect do |date|
         y = nil
         y = $1.to_i if date =~ /(\d{4})\-/
         y
