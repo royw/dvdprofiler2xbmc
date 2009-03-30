@@ -2,6 +2,18 @@
 
 * http://www.github.com/royw/dvdprofiler2xbmc
 
+== STATUS
+
+The initial goal of using DVD Profiler data when available along
+with IMDB data otherwise is just about met.  There is still some
+performance issues mainly related to using the production or
+released years to refine searches that have multiple title matches.
+
+Near term plans include:
+* supporting multiple file matching patterns
+* supporting directory containers
+* interfacing to TMDb, primarily for fanart.
+
 == DESCRIPTION:
 
 This script will attempt to match up media files from a set of directories
@@ -17,13 +29,10 @@ scraping.
 
 == NOTES:
 
-1) currently you lose a few meta data fields such as Rating and Director
-using this script instead of a scraper.
-
-2) Currently only supports file based media containers, not directory
+1) Currently only supports file based media containers, not directory
 based.
 
-3) Media filename convention is to take the media's title from DVD Profiler,
+2) Media filename convention is to take the media's title from DVD Profiler,
 replace any punctuation with a space character, then replace any multiple
 spaces with a single space.  Next remove any leading or trailing spaces.
 Optionally can append " - YYYY" where YYYY is the movie's release year.

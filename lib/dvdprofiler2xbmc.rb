@@ -19,5 +19,5 @@ require 'dvdprofiler2xbmc/nfo'
 require 'dvdprofiler2xbmc/imdb'
 
 module Dvdprofiler2xbmc
-  VERSION = '0.0.4'
+  VERSION = '0.0.5'
 end
