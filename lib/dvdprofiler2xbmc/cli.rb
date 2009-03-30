@@ -1,20 +1,22 @@
-require 'rubygems'
-require 'yaml'
-require 'xmlsimple'
-require 'ftools'
-require 'imdb'
-require 'mash'
-require 'log4r'
+# require 'rubygems'
+# require 'yaml'
+# require 'xmlsimple'
+# require 'ftools'
+# require 'imdb'
+# require 'mash'
+# require 'log4r'
 require 'commandline/optionparser'
 include CommandLine
 
-require 'dvdprofiler2xbmc/app'
-require 'dvdprofiler2xbmc/app_config'
-require 'dvdprofiler2xbmc/collection'
-require 'dvdprofiler2xbmc/extensions'
-require 'dvdprofiler2xbmc/media'
-require 'dvdprofiler2xbmc/media_files'
-require 'dvdprofiler2xbmc/nfo'
+# require 'dvdprofiler2xbmc/app'
+# require 'dvdprofiler2xbmc/app_config'
+# require 'dvdprofiler2xbmc/collection'
+# require 'dvdprofiler2xbmc/extensions'
+# require 'dvdprofiler2xbmc/media'
+# require 'dvdprofiler2xbmc/media_files'
+# require 'dvdprofiler2xbmc/nfo'
+
+require 'dvdprofiler2xbmc'
 
 # Command Line interface for the Dvdprofiler2Xbmc application.
 # All application output is via AppConfig[:logger] so we have
