@@ -148,18 +148,12 @@ class NFO
   def load_from_imdb
     unless File.exist?(@media.path_to(:no_imdb_extension))
       # find imdb_id
-      title = (@dvd_hash[:title].nil? ? @media.title : @dvd_hash[:title])
-      [[@media.year.to_i], released_years(@dvd_hash, 0), released_years(@dvd_hash, -1..1)].each do |years|
-        ident = nil
-        [false, true].each do |search_akas|
-          ident = imdb_lookup(title, years, search_akas)
-          break unless ident.blank?
-        end
-        unless ident.blank?
-          self.imdb_id = ident
-          break
-        end
+      imdb = Imdb.new
+      ident = imdb.first(get_imdb_titles, [@media.year.to_i], @dvd_hash[:productionyear], @dvd_hash[:released])
+      unless ident.blank?
+        self.imdb_id = ident
       end
+
       # if we have an imdb_id, then merge the imdb_movie to @dvd_hash
       unless self.imdb_id.nil?
         imdb_movie = ImdbMovie.new(self.imdb_id.gsub(/^tt/, ''))
@@ -173,6 +167,19 @@ class NFO
     end
   end
 
+  def get_imdb_titles
+    titles = []
+    unless @dvd_hash[:title].blank?
+      titles << @dvd_hash[:title]
+      titles << Collection.title_pattern(@dvd_hash[:title])
+    end
+    unless @media.title.blank?
+      titles << @media.title
+      titles << Collection.title_pattern(@media.title)
+    end
+    titles.uniq.compact
+  end
+
   # convert the @movie hash into xml and return the xml as a String
   def to_xml
     xml = ''
@@ -183,58 +190,6 @@ class NFO
       raise e
     end
     xml
-  end
-
-  # try to find the imdb id for the movie
-  def imdb_lookup(title, years, search_akas)
-    id = nil
-
-    AppConfig[:logger].info { "Searching IMDB for \"#{title}\" (#{years.join(", ")})" }
-    unless title.blank?
-      begin
-        imdb_search = ImdbSearch.new(title, search_akas)
-        movies = imdb_search.movies
-        AppConfig[:logger].debug { "movies => (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
-        if movies.size == 1
-          id = movies.first.id
-        elsif movies.size > 1
-          AppConfig[:logger].debug { "years => #{years.inspect}"}
-          movies = movies.select { |m| !m.year.blank? && years.include?(m.year.to_i) }
-          AppConfig[:logger].debug { "movies[years] => (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
-          if movies.size == 1
-            id = movies.first.id
-          elsif movies.size > 1
-            AppConfig[:logger].debug { "Multiple titles found (#{movies.collect{|m| [m.id, m.year, m.title]}.inspect})"}
-          end
-        end
-#         id = imdb_search.find_id(:years => years, :media_path => @media.media_path)
-      rescue Exception => e
-        AppConfig[:logger].error { "Error searching IMDB - " + e.to_s }
-        AppConfig[:logger].error { e.backtrace.join("\n") }
-      end
-    end
-    AppConfig[:logger].info { "IMDB id => #{id.to_s}" } unless id.blank?
-    id.to_s
-  end
-
-  # Different databases seem to mix up released versus production years.
-  # So we combine both into a Array of integer years.
-  # fuzzy is an integer range, basically expand each known year by the fuzzy range
-  # i.e., let production and released year both be 2000 and fuzzy=-1..1,
-  # then the returned years would be [1999, 2000, 2001]
-  def released_years(dvd_hash, fuzzy)
-    years = []
-    unless dvd_hash[:productionyear].blank?
-      years += [dvd_hash[:productionyear]].flatten.collect{|y| [*fuzzy].collect{|f| y.to_i + f}}.flatten
-    end
-    unless dvd_hash[:released].blank?
-      years += [dvd_hash[:released]].flatten.collect do |date|
-        y = nil
-        y = $1.to_i if date =~ /(\d{4})\-/
-        y
-      end
-    end
-    years.flatten.uniq.compact.sort
   end
 
   # given a ImdbMovie instance, extract meta-data into and return a dvd_hash
@@ -260,8 +215,8 @@ class NFO
     movie['title']   = dvd_hash[:title]
     movie['mpaa']    = dvd_hash[:rating]         unless dvd_hash[:rating].blank?
     movie['year']    = dvd_hash[:productionyear] unless dvd_hash[:productionyear].blank?
-    movie['outline'] = dvd_hash[:overview]       unless dvd_hash[:overview].blank?
-    movie['plot']    = dvd_hash[:plot]           unless dvd_hash[:plot].blank?
+    movie['outline'] = dvd_hash[:plot]           unless dvd_hash[:plot].blank?
+    movie['plot']    = dvd_hash[:overview]       unless dvd_hash[:overview].blank?
     movie['runtime'] = dvd_hash[:runningtime]    unless dvd_hash[:runningtime].blank?
     movie['actor']   = dvd_hash[:actors]         unless dvd_hash[:actors].blank?
     movie['isbn']    = dvd_hash[:isbn]           unless dvd_hash[:isbn].blank?
