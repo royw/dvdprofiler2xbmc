@@ -51,7 +51,7 @@ class NFO
       unless @movie.empty?
         @movie['title'] = @media.title if @movie['title'].blank?
         nfo_filespec = @media.path_to(:nfo_extension)
-        if dirty? || !File.exist?(nfo_filespec)
+        if dirty? || !File.exist?(nfo_filespec) || AppConfig[:force_nfo_replacement]
           new_filespec = nfo_filespec + '.new'
           File.open(new_filespec, "w") do |file|
             file.puts(to_xml)

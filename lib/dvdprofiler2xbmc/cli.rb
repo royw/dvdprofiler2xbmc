@@ -55,6 +55,7 @@ module Dvdprofiler2xbmc
         reinitialize_logger(logger, od["--quiet"], od["--debug"])
 
         AppConfig[:do_update] = !od["--reports"]
+        AppConfig[:force_nfo_replacement] = od["--force_nfo_replacement"]
 
         AppConfig[:logger].info { "logfile => #{AppConfig[:logfile].inspect}" } unless AppConfig[:logfile].nil?
         AppConfig[:logger].info { "logfile_level => #{AppConfig[:logfile_level].inspect}" } unless AppConfig[:logfile_level].nil?
@@ -87,6 +88,7 @@ module Dvdprofiler2xbmc
       options << Option.new(:flag, :names => %w(--no_imdb_query -n), :opt_description => 'Do not query IMDB.com')
       options << Option.new(:flag, :names => %w(--quiet -q),         :opt_description => 'Display error messages only')
       options << Option.new(:flag, :names => %w(--debug -d),         :opt_description => 'Display debug messages')
+      options << Option.new(:flag, :names => %w(--force_nfo_replacement -f), :opt_description => 'Delete old .nfo files and generate new ones')
       options << Option.new(:flag, :names => %w(--reports -r),       :opt_description => 'Display reports only.  Do not do any updates.')
       options << Option.new(:names => %w(--output -o),
                             :argument_arity => [1,1],
