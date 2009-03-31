@@ -3,7 +3,7 @@
 class Collection
   # various regexes used to clean up a title for matching purposes.
   # used in TITLE_REPLACEMENTS hash below
-  PUNCTUATION = /[\?\:\!\"\'\,\.\-\/]/
+  PUNCTUATION = /[\?\:\!\"\'\,\.\-\/\*]/
   HTML_ESCAPES = /\&[a-zA-Z]+\;/
   SQUARE_BRACKET_ENCLOSURES = /\[.*?\]/
   PARENTHESIS_ENCLOSURES = /\(.*?\)/
