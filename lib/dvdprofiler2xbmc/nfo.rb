@@ -19,9 +19,10 @@ class NFO
       if File.exist?(nfo_filespec) && (File.size(nfo_filespec) > 1)
         File.open(nfo_filespec) do |file|
           @movie = XmlSimple.xml_in(file)
-          @original_movie = @movie.dup
           self.isbn = @movie['isbn']
           self.imdb_id = @movie['id']
+          @movie = {} if AppConfig[:force_nfo_replacement]
+          @original_movie = @movie.dup
         end
       end
     rescue Exception => e
@@ -35,7 +36,7 @@ class NFO
   def update
     begin
       load_from_collection
-      if AppConfig[:imdb_query] && self.imdb_id.blank?
+      if AppConfig[:imdb_query] && (self.imdb_id.blank? || AppConfig[:force_nfo_replacement])
         load_from_imdb
       end
       @movie.merge!(to_movie(@dvd_hash))
@@ -69,31 +70,6 @@ class NFO
     end
   end
 
-  def dirty?
-    result = false
-    if @original_movie.nil?
-      result = true
-    else
-      @movie.each do |key, value|
-        if @original_movie[key].nil?
-          result = true
-          break
-        end
-        if @movie[key].to_s != @original_movie[key].to_s
-          result = true
-          break
-        end
-      end
-      unless result
-        diff_keys = @movie.keys.sort - @original_movie.keys.sort
-        unless diff_keys.empty?
-          result = true
-        end
-      end
-    end
-    result
-  end
-
   # return the ISBN or nil
   def isbn
     if @dvd_hash[:isbn].blank? && !@movie['isbn'].blank?
@@ -116,11 +92,22 @@ class NFO
       # make sure is not an array
       @dvd_hash[:imdb_id] = [@dvd_hash[:imdb_id].to_s].flatten.uniq.compact.first
     end
+    ident = @dvd_hash[:imdb_id]
+    unless ident.blank? || (ident.to_s =~ /^tt\d+$/)|| (ident.to_s =~ /^\d+$/)
+      AppConfig[:logger].warn { "Attempting to return invalid IMDB ID: \"#{ident}\"" }
+    end
+    ident
   end
 
   # set the IMDB ID
-  def imdb_id=(id)
-    @dvd_hash[:imdb_id] = id.to_s unless id.blank?
+  def imdb_id=(ident)
+    if ident.blank?
+      @dvd_hash[:imdb_id] = nil
+    elsif (ident.to_s =~ /^tt\d+$/) || (ident.to_s =~ /^\d+$/)
+      @dvd_hash[:imdb_id] = ident.to_s
+    else
+      AppConfig[:logger].warn { "Attempting to set invalid IMDB ID: \"#{ident}\"" }
+    end
   end
 
   protected
@@ -149,13 +136,15 @@ class NFO
     unless File.exist?(@media.path_to(:no_imdb_extension))
       # find imdb_id
       imdb = Imdb.new
-      ident = imdb.first(get_imdb_titles, [@media.year.to_i], @dvd_hash[:productionyear], @dvd_hash[:released])
-      unless ident.blank?
-        self.imdb_id = ident
+      if self.imdb_id.blank?
+        ident = imdb.first(get_imdb_titles, [@media.year.to_i], @dvd_hash[:productionyear], @dvd_hash[:released])
+        unless ident.blank?
+          self.imdb_id = ident
+        end
       end
 
       # if we have an imdb_id, then merge the imdb_movie to @dvd_hash
-      unless self.imdb_id.nil?
+      unless self.imdb_id.blank?
         imdb_movie = ImdbMovie.new(self.imdb_id.gsub(/^tt/, ''))
         begin
           @dvd_hash.merge!(to_dvd_hash(imdb_movie))
@@ -171,13 +160,39 @@ class NFO
     titles = []
     unless @dvd_hash[:title].blank?
       titles << @dvd_hash[:title]
-      titles << Collection.title_pattern(@dvd_hash[:title])
+#       titles << Collection.title_pattern(@dvd_hash[:title])
     end
     unless @media.title.blank?
       titles << @media.title
-      titles << Collection.title_pattern(@media.title)
+#       titles << Collection.title_pattern(@media.title)
     end
     titles.uniq.compact
+  end
+
+  # has any of the data changed?
+  def dirty?
+    result = false
+    if @original_movie.nil?
+      result = true
+    else
+      @movie.each do |key, value|
+        if @original_movie[key].nil?
+          result = true
+          break
+        end
+        if @movie[key].to_s != @original_movie[key].to_s
+          result = true
+          break
+        end
+      end
+      unless result
+        diff_keys = @movie.keys.sort - @original_movie.keys.sort
+        unless diff_keys.empty?
+          result = true
+        end
+      end
+    end
+    result
   end
 
   # convert the @movie hash into xml and return the xml as a String
