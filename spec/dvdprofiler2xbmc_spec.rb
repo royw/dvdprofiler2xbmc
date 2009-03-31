@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 require File.dirname(__FILE__) + '/../lib/dvdprofiler2xbmc.rb'
 
-FULL_REGRESSION = true
+FULL_REGRESSION = false
 
 # Time to add your specs!
 # http://rspec.info/
@@ -37,14 +37,15 @@ describe "IMDB lookup" do
     it "verify some titles (quick regression) find an IMDB ID using Imdb.first" do
       titles = [
           'Alexander the Great',
-          'Anastasia',
-          'About a Boy',
-          'Gung Ho',
-          'Hot Shots',
-          'Meltdown',
-          'Oklahoma!',
-          'The Man From Snowy River',
-          'Rooster Cogburn'
+#           'Anastasia',
+#           'About a Boy',
+#           'Gung Ho',
+#           'Hot Shots',
+#           'Meltdown',
+#           'Oklahoma!',
+#           'The Man From Snowy River',
+#           'Rooster Cogburn',
+          'batteries not included'
         ].collect{|title| Collection.title_pattern(title)}
       buf = regression(titles)
       buf.should be_empty
@@ -62,15 +63,22 @@ describe "IMDB lookup" do
     buf = []
     count = 0
     titles.each do |title|
-      isbn = @collection.title_isbn_hash[title].flatten.uniq.compact.first
-      unless @ignore_isbns.include?(isbn.to_s)
-        dvd_hash = @collection.isbn_dvd_hash[isbn]
-        unless dvd_hash[:genres].include?('Television')
-          count += 1
-          imdb = Imdb.new
-          ident = imdb.first([dvd_hash[:title], title], [], dvd_hash[:productionyear], dvd_hash[:released])
-          if ident.blank?
-            buf << "Can not find IMDB ID for #{isbn} #{title}"
+      puts "title => #{title}"
+      isbns = @collection.title_isbn_hash[title]
+      if isbns.nil?
+        buf << "Can not find ISBN for #{title}"
+      else
+        isbn = isbns.flatten.uniq.compact.first
+        puts "ISBN => #{isbn}"
+        unless @ignore_isbns.include?(isbn.to_s)
+          dvd_hash = @collection.isbn_dvd_hash[isbn]
+          unless dvd_hash[:genres].include?('Television')
+            count += 1
+            imdb = Imdb.new
+            ident = imdb.first([dvd_hash[:title], title], [], dvd_hash[:productionyear], dvd_hash[:released])
+            if ident.blank?
+              buf << "Can not find IMDB ID for #{isbn} #{title}"
+            end
           end
         end
       end
