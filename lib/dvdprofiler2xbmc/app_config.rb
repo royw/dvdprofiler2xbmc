@@ -82,11 +82,16 @@ module AppConfig
     @config.image_extensions    = [ 'jpg', 'jpeg', 'png', 'gif' ]
     @config.nfo_extensions      = [ 'nfo' ]
     # Destination file extensions
-    @config.thumbnail_extension  = 'tbn'
-    @config.nfo_extension        = 'nfo'
-    @config.nfo_backup_extension = 'nfo~'
-    @config.no_imdb_extension    = 'no_imdb_lookup'
-    @config.no_isbn_extension    = 'no_isbn'
+    @config.thumbnail_extension        = 'tbn'
+    @config.nfo_extension              = 'nfo'
+    @config.no_imdb_extension          = 'no_imdb_lookup'
+    @config.no_isbn_extension          = 'no_isbn'
+    @config.dvdprofiler_xml_extension  = 'dvdprofiler.xml'
+    @config.dvdprofiler_yaml_extension = 'dvdprofiler.yaml'
+    @config.imdb_xml_extension         = 'imdb.xml'
+    @config.imdb_yaml_extension        = 'imdb.yaml'
+    @config.new_extension              = '.new'
+    @config.backup_extension           = '~'
 
     # map some genre names
     @config.genre_maps = {
