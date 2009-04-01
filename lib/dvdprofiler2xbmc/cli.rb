@@ -26,39 +26,18 @@ module Dvdprofiler2xbmc
 
       # we start a STDOUT logger, but it will be switched after
       # the config files are read if config[:logger_output] is set
-      logger = Log4r::Logger.new('dvdprofiler2xbmc')
-      logger.outputters = Log4r::StdoutOutputter.new(:console)
-      Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-      logger.level = Log4r::DEBUG
 
       begin
         # trap ^C interrupts and let the app instance cleanly exit any long loops
         Signal.trap("INT") {DvdProfiler2Xbmc.interrupt}
 
+        logger = setup_logger
+
         # parse the command line
-        options = setupParser()
+        options = setup_parser()
         od = options.parse(arguments)
 
-        # load config values
-        AppConfig.default
-
-        # the first reinitialize_logger adds the command line logging options to the default config
-        # then we load the config files
-        # then we run reinitialize_logger again to modify the logger for any logging options from the config files
-
-        reinitialize_logger(logger, od["--quiet"], od["--debug"])
-        AppConfig.load
-        AppConfig.save
-        AppConfig[:imdb_query] = !od["--no_imdb_query"]
-        AppConfig[:logfile] = od['--output'] if od['--output']
-        AppConfig[:logfile_level] = od['--output_level'] if od['--output_level']
-        reinitialize_logger(logger, od["--quiet"], od["--debug"])
-
-        AppConfig[:do_update] = !od["--reports"]
-        AppConfig[:force_nfo_replacement] = od["--force_nfo_replacement"]
-
-        AppConfig[:logger].info { "logfile => #{AppConfig[:logfile].inspect}" } unless AppConfig[:logfile].nil?
-        AppConfig[:logger].info { "logfile_level => #{AppConfig[:logfile_level].inspect}" } unless AppConfig[:logfile_level].nil?
+        setup_app_config(od, logger)
 
         unless od["--help"] || od["--version"]
           # create and execute class instance here
@@ -75,34 +54,96 @@ module Dvdprofiler2xbmc
       exit_code
     end
 
+    def self.setup_app_config(od, logger)
+      # load config values
+      AppConfig.default
+
+      # the first reinitialize_logger adds the command line logging options to the default config
+      # then we load the config files
+      # then we run reinitialize_logger again to modify the logger for any logging options from the config files
+
+      reinitialize_logger(logger, od["--quiet"], od["--debug"])
+      AppConfig.load
+      AppConfig.save
+      AppConfig[:imdb_query] = !od["--no_imdb_query"]
+      AppConfig[:logfile] = od['--output'] if od['--output']
+      AppConfig[:logfile_level] = od['--output_level'] if od['--output_level']
+      reinitialize_logger(logger, od["--quiet"], od["--debug"])
+
+      AppConfig[:do_update] = !od["--reports"]
+      AppConfig[:force_nfo_replacement] = od["--force_nfo_replacement"]
+
+      AppConfig[:logger].info { "logfile => #{AppConfig[:logfile].inspect}" } unless AppConfig[:logfile].nil?
+      AppConfig[:logger].info { "logfile_level => #{AppConfig[:logfile_level].inspect}" } unless AppConfig[:logfile_level].nil?
+    end
+
     # Setup the command line option parser
     # Returns:: OptionParser instances
-    def self.setupParser()
+    def self.setup_parser()
       options = OptionParser.new()
-      options << Option.new(:flag, :names => %w(--help -h),
-                            :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}},
-                            :opt_description => "This usage information")
-      options << Option.new(:flag, :names => %w(--version -v),
-                            :opt_found => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{"Dvdprofiler2xbmc #{Dvdprofiler2xbmc::VERSION}"}},
-                            :opt_description => "This version of dvdprofiler2xbmc")
-      options << Option.new(:flag, :names => %w(--no_imdb_query -n), :opt_description => 'Do not query IMDB.com')
-      options << Option.new(:flag, :names => %w(--quiet -q),         :opt_description => 'Display error messages only')
-      options << Option.new(:flag, :names => %w(--debug -d),         :opt_description => 'Display debug messages')
-      options << Option.new(:flag, :names => %w(--force_nfo_replacement -f), :opt_description => 'Delete old .nfo files and generate new ones')
-      options << Option.new(:flag, :names => %w(--reports -r),       :opt_description => 'Display reports only.  Do not do any updates.')
-      options << Option.new(:names => %w(--output -o),
-                            :argument_arity => [1,1],
-                            :arg_description => 'logfile',
-                            :opt_description => 'Write log messages to file. Default = no log file',
-                            :opt_found       => OptionParser::GET_ARGS
-                           )
-      options << Option.new(:names => %w(--output_level -l),
-                            :argument_arity => [1,1],
-                            :arg_description => 'level',
-                            :opt_description => 'Output logging level: DEBUG, INFO, WARN, ERROR. Default = INFO',
-                            :opt_found       => OptionParser::GET_ARGS
-                           )
+
+      # flag options
+      [
+        {
+          :names           => %w(--version -v),
+          :opt_found       => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{"Dvdprofiler2xbmc #{Dvdprofiler2xbmc::VERSION}"}},
+          :opt_description => "This version of dvdprofiler2xbmc"
+        },
+        {
+          :names           => %w(--help -h),
+          :opt_found       => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}},
+          :opt_description => "This usage information"
+        },
+        {
+          :names           => %w(--no_imdb_query -n),
+          :opt_description => 'Do not query IMDB.com'
+        },
+        {
+          :names           => %w(--quiet -q),
+          :opt_description => 'Display error messages only'
+        },
+        {
+          :names           => %w(--debug -d),
+          :opt_description => 'Display debug messages'
+        },
+        {
+          :names           => %w(--force_nfo_replacement -f),
+          :opt_description => 'Delete old .nfo files and generate new ones'
+        },
+        {
+          :names           => %w(--reports -r),
+          :opt_description => 'Display reports only.  Do not do any updates.'
+        }
+      ].each { |opt| options << Option.new(:flag, opt) }
+
+      # non-flag options
+      [
+        {
+          :names           => %w(--output -o),
+          :argument_arity  => [1,1],
+          :arg_description => 'logfile',
+          :opt_description => 'Write log messages to file. Default = no log file',
+          :opt_found       => OptionParser::GET_ARGS
+        },
+        {
+          :names           => %w(--output_level -l),
+          :argument_arity  => [1,1],
+          :arg_description => 'level',
+          :opt_description => 'Output logging level: DEBUG, INFO, WARN, ERROR. Default = INFO',
+          :opt_found       => OptionParser::GET_ARGS
+        }
+      ].each { |opt| options << Option.new(opt) }
+
       options
+    end
+
+    # Initial setup of logger
+    def self.setup_logger
+      logger = Log4r::Logger.new('dvdprofiler2xbmc')
+      logger.outputters = Log4r::StdoutOutputter.new(:console)
+      Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
+      logger.level = Log4r::DEBUG
+      logger
     end
 
     # Reinitialize the logger using the loaded config.
