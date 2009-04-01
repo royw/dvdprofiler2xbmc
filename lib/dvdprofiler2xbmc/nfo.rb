@@ -8,8 +8,8 @@ class NFO
   def initialize(media, collection)
     @media = media
     @collection = collection
-    @dvd_hash = {}
-    @movie = {}
+    @dvd_hash = Hash.new
+    @movie = Hash.new
   end
 
   # load the .nfo file into the @movie hash
@@ -53,16 +53,8 @@ class NFO
         @movie['title'] = @media.title if @movie['title'].blank?
         nfo_filespec = @media.path_to(:nfo_extension)
         if dirty? || !File.exist?(nfo_filespec) || AppConfig[:force_nfo_replacement]
-          new_filespec = nfo_filespec + '.new'
-          File.open(new_filespec, "w") do |file|
-            file.puts(to_xml)
-          end
-          nfo_backup_filespec = @media.path_to(:nfo_backup_extension)
-          File.delete(nfo_backup_filespec) if File.exist?(nfo_backup_filespec)
-          File.rename(nfo_filespec, nfo_backup_filespec) if File.exist?(nfo_filespec)
-          File.rename(new_filespec, nfo_filespec)
+          save_to_file(nfo_filespec, to_xml)
           AppConfig[:logger].info { "updated #{nfo_filespec}"}
-          File.delete(new_filespec) if File.exist?(new_filespec)
         end
       end
     rescue Exception => e
@@ -127,6 +119,7 @@ class NFO
     # merge the meta-data from the collection to dvd_hash
     unless self.isbn.blank?
       collection_hash = @collection.isbn_dvd_hash[self.isbn]
+      save_dvdprofiler_movie(collection_hash)
       @dvd_hash.merge!(collection_hash) unless collection_hash.blank?
     end
   end
@@ -147,6 +140,7 @@ class NFO
       unless self.imdb_id.blank?
         imdb_movie = ImdbMovie.new(self.imdb_id.gsub(/^tt/, ''))
         begin
+          save_imdb_movie(imdb_movie)
           @dvd_hash.merge!(to_dvd_hash(imdb_movie))
         rescue Exception => e
           AppConfig[:logger].info { "imdb_movie.url => #{imdb_movie.url} "}
@@ -156,15 +150,49 @@ class NFO
     end
   end
 
+  def save_dvdprofiler_movie(collection_hash)
+    unless collection_hash.blank?
+      begin
+        data = collection_hash.stringify_keys
+        xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
+        save_to_file(@media.path_to(:dvdprofiler_xml_extension), xml)
+      rescue Exception => e
+        AppConfig[:logger].error "Unable to save dvdprofiler data for #{@media.media_path} - #{e.to_s}"
+      end
+    end
+  end
+
+  def save_imdb_movie(imdb_movie)
+    unless imdb_movie.blank? || imdb_movie.id.blank?
+      data = ''
+      begin
+        data = imdb_movie.to_xml
+        save_to_file(@media.path_to(:imdb_xml_extension), data)
+      rescue Exception => e
+        AppConfig[:logger].error "Unable to save imdb data for #{@media.media_path} - #{e.to_s}\n#{data}\n#{e.backtrace.join("\n")}"
+      end
+    end
+  end
+
+  def save_to_file(filespec, data)
+    new_filespec = filespec + AppConfig[:new_extension]
+    File.open(new_filespec, "w") do |file|
+      file.puts(data)
+    end
+    backup_filespec = filespec + AppConfig[:backup_extension]
+    File.delete(backup_filespec) if File.exist?(backup_filespec)
+    File.rename(filespec, backup_filespec) if File.exist?(filespec)
+    File.rename(new_filespec, filespec)
+    File.delete(new_filespec) if File.exist?(new_filespec)
+  end
+
   def get_imdb_titles
     titles = []
     unless @dvd_hash[:title].blank?
       titles << @dvd_hash[:title]
-#       titles << Collection.title_pattern(@dvd_hash[:title])
     end
     unless @media.title.blank?
       titles << @media.title
-#       titles << Collection.title_pattern(@media.title)
     end
     titles.uniq.compact
   end
@@ -209,7 +237,7 @@ class NFO
 
   # given a ImdbMovie instance, extract meta-data into and return a dvd_hash
   def to_dvd_hash(imdb_movie)
-    dvd_hash = {}
+    dvd_hash = Hash.new
     dvd_hash[:title]          = imdb_movie.title
     dvd_hash[:imdb_id]        = 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
     dvd_hash[:rating]         = imdb_movie.mpaa
@@ -226,7 +254,7 @@ class NFO
   def to_movie(dvd_hash)
     dvd_hash[:genres] ||= []
     genres = map_genres((dvd_hash[:genres] + @media.media_subdirs.split('/')).uniq)
-    movie = {}
+    movie = Hash.new
     movie['title']   = dvd_hash[:title]
     movie['mpaa']    = dvd_hash[:rating]         unless dvd_hash[:rating].blank?
     movie['year']    = dvd_hash[:productionyear] unless dvd_hash[:productionyear].blank?
