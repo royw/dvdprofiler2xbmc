@@ -34,9 +34,9 @@ class Collection
   @filespec = nil
 
   def initialize(filename = 'Collection.xml')
-    @title_isbn_hash = {}
-    @isbn_dvd_hash = {}
-    @isbn_title_hash = {}
+    @title_isbn_hash = Hash.new
+    @isbn_dvd_hash = Hash.new
+    @isbn_title_hash = Hash.new
     @filespec = filename
     reload
     save
@@ -71,7 +71,7 @@ class Collection
     @title_isbn_hash.clear
     @isbn_dvd_hash.clear
     @isbn_title_hash.clear
-    collection = {}
+    collection = Hash.new
     yaml_filespec = @filespec.ext('.yaml')
     if File.exist?(yaml_filespec) && (File.mtime(yaml_filespec) > File.mtime(@filespec))
       AppConfig[:logger].info { "Loading #{yaml_filespec}" }
@@ -93,7 +93,7 @@ class Collection
           @title_isbn_hash[title] ||= []
           @title_isbn_hash[title] << isbn
           @isbn_title_hash[isbn] = original_title
-          dvd_hash = {}
+          dvd_hash = Hash.new
           dvd_hash[:isbn] = isbn
           dvd_hash[:title] = original_title
           unless dvd[:actors].blank?
@@ -102,7 +102,7 @@ class Collection
               name << a['FirstName'] unless a['FirstName'].blank?
               name << a['MiddleName'] unless a['MiddleName'].blank?
               name << a['LastName'] unless a['LastName'].blank?
-              info = {}
+              info = Hash.new
               info['name'] = name.join(' ')
               info['role'] = a['Role']
               info
