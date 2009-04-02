@@ -18,6 +18,7 @@ class NfoController
   # into the @movie hash
   def update
     begin
+      AppConfig[:logger].info { "\n#{@media.title}" }
       @movie.merge!(@xbmc_info.movie)
       @dvd_hash.merge!(load_dvdprofiler)
       if AppConfig[:imdb_query] && (self.imdb_id.blank? || AppConfig[:force_nfo_replacement])
@@ -47,7 +48,7 @@ class NfoController
   end
 
   # load data from IMDB.com and merge into the @dvd_hash
-  def load_from_imdb
+  def load_imdb
     dvd_hash = Hash.new
     unless File.exist?(@media.path_to(:no_imdb_extension))
       profile = ImdbProfile.first(:imdb_id => self.imdb_id,
