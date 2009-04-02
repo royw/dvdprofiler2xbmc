@@ -8,6 +8,7 @@ require 'ftools'
 require 'imdb'
 require 'mash'
 require 'log4r'
+require 'ruby-debug'
 
 require 'dvdprofiler2xbmc/app_config'
 require 'dvdprofiler2xbmc/extensions'
