@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 # require File.dirname(__FILE__) + '/../lib/dvdprofiler2xbmc.rb'
 
 require 'tempfile'
-require 'ruby-debug'
 
 FULL_REGRESSION = false
 TMPDIR = File.join(File.dirname(__FILE__), '../tmp')
