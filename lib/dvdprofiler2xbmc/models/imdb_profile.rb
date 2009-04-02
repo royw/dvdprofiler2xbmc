@@ -45,14 +45,17 @@ class ImdbProfile
 
   def to_xml
     xml = ''
-    xml = @movie.to_xml unless @movie.blank?
+    xml = movie.to_xml unless movie.nil?
     xml
   end
 
   def save(filespec)
     begin
       xml = self.to_xml
-      save_to_file(filespec, xml) unless xml.blank?
+      unless xml.blank?
+        AppConfig[:logger].debug { "saving #{filespec}" }
+        save_to_file(filespec, xml)
+      end
     rescue Exception => e
       AppConfig[:logger].error "Unable to save imdb profile to #{filespec} - #{e.to_s}"
     end
@@ -160,7 +163,7 @@ class ImdbProfile
         AppConfig[:logger].error { e.backtrace.join("\n") }
       end
     end
-    AppConfig[:logger].info { "IMDB id => #{idents.join(', ')}" } unless idents.blank?
+#     AppConfig[:logger].info { "IMDB id => #{idents.join(', ')}" } unless idents.blank?
     idents
   end
 end
