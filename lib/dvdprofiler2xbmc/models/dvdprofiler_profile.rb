@@ -13,7 +13,7 @@ class DvdprofilerProfile
     if options.has_key?(:isbn) && !options[:isbn].blank?
       dvd_hash = collection.isbn_dvd_hash[options[:isbn]]
       unless dvd_hash.blank?
-        result << DvdprofilerProfile.new(hash, options[:isbn])
+        result << DvdprofilerProfile.new(dvd_hash, options[:isbn])
       end
     end
 
@@ -79,16 +79,19 @@ class DvdprofilerProfile
   attr_reader :isbn, :title, :dvd_hash
 
   def to_xml
-    data = collection_hash.stringify_keys
+    data = @dvd_hash.stringify_keys
     xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
   end
 
   def save(filespec)
     begin
       xml = self.to_xml
-      save_to_file(filespec, xml) unless xml.blank?
+      unless xml.blank?
+        AppConfig[:logger].debug { "saving #{filespec}" }
+        save_to_file(filespec, xml)
+      end
     rescue Exception => e
-      AppConfig[:logger].error "Unable to save dvdprofiler profile to #{filespec} - #{e.to_s}"
+      AppConfig[:logger].error { "Unable to save dvdprofiler profile to #{filespec} - #{e.to_s}" }
     end
   end
 
