@@ -16,18 +16,10 @@ class Media
     @title_with_year = find_title_with_year(@title, @year)
 
     @nfo = NfoController.new(self)
-    @loaded = false
-  end
-
-  # load existing meta-data
-  def load
-    @nfo.load
-    @loaded = true
   end
 
   # update the meta-data and thumbnails
   def update
-    load unless @loaded
     @nfo.update
     @nfo.save
     update_thumbnail
