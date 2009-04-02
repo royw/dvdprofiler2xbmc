@@ -30,10 +30,8 @@ class DvdProfiler2Xbmc
   # the application's main execution loop
   def execute
     AppConfig[:logger].info { "Processing directories: #{AppConfig[:directories].join(", ")}" }
-    collection_filepath = File.expand_path(AppConfig[:collection_filespec])
-    collection = Collection.new(collection_filepath)
 
-    @media_files = MediaFiles.new(AppConfig[:directories], collection)
+    @media_files = MediaFiles.new(AppConfig[:directories])
     @media_files.titles.each do |title, medias|
       break if DvdProfiler2Xbmc.interrupted?
       medias.each do |media|

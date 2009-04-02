@@ -5,8 +5,7 @@ class MediaFiles
 
   # given:
   # directories Array of String directory pathspecs
-  def initialize(directories, collection)
-    @collection = collection
+  def initialize(directories)
     @medias = find_medias(directories)
     @titles = find_titles(@medias)
     @duplicate_titles = find_duplicate_titles(@titles)
@@ -20,7 +19,7 @@ class MediaFiles
     directories.each do |dir|
       Dir.chdir(dir)
       medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename|
-        Media.new(dir, filename, @collection)
+        Media.new(dir, filename)
       end
     end
     medias

@@ -1,0 +1,262 @@
+<movie>
+  <isbn>086162103995</isbn>
+  <title>Die Hard</title>
+  <mpaa>R</mpaa>
+  <actor>
+    <name>Bruce Willis</name>
+    <role>John McClane</role>
+  </actor>
+  <actor>
+    <name>Bonnie Bedelia</name>
+    <role>Holly Gennero McClane</role>
+  </actor>
+  <actor>
+    <name>Reginald VelJohnson</name>
+    <role>Sgt. Al Powell</role>
+  </actor>
+  <actor>
+    <name>Paul Gleason</name>
+    <role>Dwayne T. Robinson</role>
+  </actor>
+  <actor>
+    <name>De&apos;voreaux White</name>
+    <role>Argyle</role>
+  </actor>
+  <actor>
+    <name>William Atherton</name>
+    <role>Thornburg</role>
+  </actor>
+  <actor>
+    <name>Hart Bochner</name>
+    <role>Ellis</role>
+  </actor>
+  <actor>
+    <name>James Shigeta</name>
+    <role>Takagi</role>
+  </actor>
+  <actor>
+    <name>Alan Rickman</name>
+    <role>Hans Gruber</role>
+  </actor>
+  <actor>
+    <name>Alexander Godunov</name>
+    <role>Karl</role>
+  </actor>
+  <actor>
+    <name>Bruno Doyon</name>
+    <role>Franco</role>
+  </actor>
+  <actor>
+    <name>Andreas Wisniewski</name>
+    <role>Tony</role>
+  </actor>
+  <actor>
+    <name>Clarence Gilyard, Jr.</name>
+    <role>Theo</role>
+  </actor>
+  <actor>
+    <name>Joey Plewa</name>
+    <role>Alexander</role>
+  </actor>
+  <actor>
+    <name>Lorenzo Caccialanza</name>
+    <role>Marco</role>
+  </actor>
+  <actor>
+    <name>Gerard Bonn</name>
+    <role>Kristoff</role>
+  </actor>
+  <actor>
+    <name>Dennis Hayden</name>
+    <role>Eddie</role>
+  </actor>
+  <actor>
+    <name>Al Leong</name>
+    <role>Uli</role>
+  </actor>
+  <actor>
+    <name>Gary Roberts</name>
+    <role>Heinrich</role>
+  </actor>
+  <actor>
+    <name>Hans Buhringer</name>
+    <role>Fritz</role>
+  </actor>
+  <actor>
+    <name>Wilhelm von Homburg</name>
+    <role>James</role>
+  </actor>
+  <actor>
+    <name>Robert Davi</name>
+    <role>Big Johnson</role>
+  </actor>
+  <actor>
+    <name>Grand L. Bush</name>
+    <role>Little Johnson</role>
+  </actor>
+  <actor>
+    <name>Bill Marcus</name>
+    <role>City Engineer</role>
+  </actor>
+  <actor>
+    <name>Rick Ducommun</name>
+    <role>City Worker</role>
+  </actor>
+  <actor>
+    <name>Matt Landers</name>
+    <role>Capt. Mitchell</role>
+  </actor>
+  <actor>
+    <name>Carmine Zozzora</name>
+    <role>Rivers</role>
+  </actor>
+  <actor>
+    <name>Dustyn Taylor</name>
+    <role>Ginny</role>
+  </actor>
+  <actor>
+    <name>George Christy</name>
+    <role>Hasseldorf</role>
+  </actor>
+  <actor>
+    <name>Anthony Peck</name>
+    <role>Young Cop</role>
+  </actor>
+  <actor>
+    <name>Cheryl Baker</name>
+    <role>Woman</role>
+  </actor>
+  <actor>
+    <name>Richard Parker</name>
+    <role>Man</role>
+  </actor>
+  <actor>
+    <name>David Ursin</name>
+    <role>Harvey Johnson</role>
+  </actor>
+  <actor>
+    <name>Mary Ellen Trainor</name>
+    <role>Gail Wallens</role>
+  </actor>
+  <actor>
+    <name>Diana James</name>
+    <role>Supervisor</role>
+  </actor>
+  <actor>
+    <name>Shelley Pogoda</name>
+    <role>Dispatcher</role>
+  </actor>
+  <actor>
+    <name>Selma Archerd</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Scot Bennett</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Rebecca Broussard</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Kate Finlayson</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Shanna Higgins</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Kym Malin</name>
+    <role>Hostage</role>
+  </actor>
+  <actor>
+    <name>Taylor Fry</name>
+    <role>Lucy McClane</role>
+  </actor>
+  <actor>
+    <name>Noah Land</name>
+    <role>John Jr.</role>
+  </actor>
+  <actor>
+    <name>Betty Carvalho</name>
+    <role>Paulina</role>
+  </actor>
+  <actor>
+    <name>Kip Waldo</name>
+    <role>Convenience Store Clerk</role>
+  </actor>
+  <actor>
+    <name>Mark Goldstein</name>
+    <role>Station Manager</role>
+  </actor>
+  <actor>
+    <name>Tracy Reiner</name>
+    <role>Thornburg&apos;s Assistant</role>
+  </actor>
+  <actor>
+    <name>Rick Cicetti</name>
+    <role>Guard</role>
+  </actor>
+  <actor>
+    <name>Fred Lerner</name>
+    <role>Guard</role>
+  </actor>
+  <actor>
+    <name>Bill Margolin</name>
+    <role>Producer</role>
+  </actor>
+  <actor>
+    <name>Bob Jennings</name>
+    <role>Cameraman</role>
+  </actor>
+  <actor>
+    <name>Bruce P. Schultz</name>
+    <role>Cameraman</role>
+  </actor>
+  <actor>
+    <name>David Katz</name>
+    <role>Soundman</role>
+  </actor>
+  <actor>
+    <name>Robert Lesser</name>
+    <role>Businessman</role>
+  </actor>
+  <actor>
+    <name>Stella Hall</name>
+    <role>Stewardess</role>
+  </actor>
+  <actor>
+    <name>Terri Lynn Doss</name>
+    <role>Girl at Airport</role>
+  </actor>
+  <actor>
+    <name>Jon E. Greene</name>
+    <role>Boy at Airport</role>
+  </actor>
+  <actor>
+    <name>P. Randall Bowers</name>
+    <role>Kissing Man</role>
+  </actor>
+  <actor>
+    <name>Michele Laybourn</name>
+    <role>Girl in Window</role>
+  </actor>
+  <actor>
+    <name>Rick Bross</name>
+    <role>Cameraman</role>
+  </actor>
+  <actor>
+    <name>Charlie Picerni</name>
+    <role>Dwayne T. Robinson&apos;s Driver</role>
+  </actor>
+  <plot>High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. But one man has managed to escape detection...an off-duty cop. He&apos;s alone...tired...and the only chance anyone has.
+
+Bruce Willis stars as New York City Detective John McClane, newly arrived in Los Angeles to spend the Christmas holiday with his estranged wife (Bonnie Bedelia). But as McClane waits for his wife&apos;s office party to break up, terrorists take control of the building. While the terrorist leader, Hans Gruber (Alan Rickman) and his savage henchman (Alexander Godunov) round up hostages, McClane slips away unnoticed. Armed with only a service revolver and his cunning, McClane launches his own one-man war. A crackling thriller from beginning to end, DIE HARD explodes with heart-stopping suspense.</plot>
+  <outline>New York cop John McClane gives terrorists a dose of their own medicine as they hold hostages in an LA office building.</outline>
+  <id>tt0095016</id>
+  <runtime>131</runtime>
+  <genre>Action</genre>
+  <genre>Suspense/Thriller</genre>
+  <year>1988</year>
+</movie>

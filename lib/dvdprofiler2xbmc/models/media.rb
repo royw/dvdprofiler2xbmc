@@ -5,8 +5,7 @@ class Media
 
   DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
 
-  def initialize(directory, media_file, collection)
-    @collection = collection
+  def initialize(directory, media_file)
     @media_subdirs = File.dirname(media_file)
     @media_path = File.expand_path(File.join(directory, media_file))
     Dir.chdir(File.dirname(@media_path))
@@ -16,7 +15,7 @@ class Media
     @title = find_title(@media_path)
     @title_with_year = find_title_with_year(@title, @year)
 
-    @nfo = NFO.new(self, @collection)
+    @nfo = NfoController.new(self)
     @loaded = false
   end
 
