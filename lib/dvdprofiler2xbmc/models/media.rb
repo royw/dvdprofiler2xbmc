@@ -11,6 +11,7 @@ class Media
     Dir.chdir(File.dirname(@media_path))
     @nfo_files = Dir.glob("*.{#{AppConfig[:nfo_extensions].join(',')}}")
     @image_files = Dir.glob("*.{#{AppConfig[:thumbnail_extension]}}")
+    @fanart_files = Dir.glob("*fanart*}")
     @year = $1 if File.basename(@media_path) =~ /\s\-\s(\d{4})/
     @title = find_title(@media_path)
     @title_with_year = find_title_with_year(@title, @year)
@@ -23,6 +24,7 @@ class Media
     @nfo.update
     @nfo.save
     update_thumbnail
+    update_fanart
   end
 
   # return the ISBN or nil
@@ -104,6 +106,47 @@ class Media
       rescue Exception => e
         AppConfig[:logger].error {e.to_s}
       end
+    end
+  end
+
+  def update_fanart
+    unless @nfo.imdb_id.blank?
+      if @fanart_files.empty?
+        fetch_fanart(@nfo.imdb_id)
+      end
+    end
+  end
+
+  def fetch_fanart(imdb_id)
+    profile = TmdbProfile.new(imdb_id)
+    unless profile.nil?
+      unless profile.fanarts.blank?
+        fanart = profile.fanarts.first
+        AppConfig[:logger].info { "#{fanart.inspect}" }
+        src_url = fanart['content']
+        AppConfig[:logger].info { "src_url => #{src_url}" }
+        unless src_url.blank?
+          fanart_filename = File.basename(@media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
+          fanart_filename += AppConfig[:fanart_extension]
+          fanart_filename += File.extname(src_url)
+          dest_filespec = File.join(File.dirname(@media_path), fanart_filename)
+          AppConfig[:logger].info { "dest_fanart_filespec => #{dest_filespec}" }
+          unless File.exist?(dest_filespec)
+            copy_fanart(src_url, dest_filespec)
+          end
+        end
+      end
+    end
+  end
+
+  def copy_fanart(src_url, dest_filespec)
+    begin
+      data = open(src_url).read
+      File.open(dest_filespec, 'w') do |file|
+        file.print(data)
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error fetching fanart.\n  src_url => #{src_url},\n  dest_filespec => #{dest_filespec}\n  #{e.to_s}" }
     end
   end
 

@@ -92,6 +92,7 @@ module AppConfig
     @config.imdb_yaml_extension        = 'imdb.yaml'
     @config.tmdb_xml_extension         = 'tmdb.xml'
     @config.tmdb_yaml_extension        = 'tmdb.yaml'
+    @config.fanart_extension           = '-fanart'
     @config.new_extension              = '.new'
     @config.backup_extension           = '~'
 

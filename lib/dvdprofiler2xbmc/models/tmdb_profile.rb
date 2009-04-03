@@ -37,8 +37,15 @@ class TmdbProfile
   def fanarts
     result = []
     document['moviematches'].each do |moviematches|
-      moviematches['movie'].each do |movie|
-        result += movie['backdrop']
+      unless moviematches.nil?
+        moviematches['movie'].each do |movie|
+          unless movie.blank?
+            backdrop = movie['backdrop']
+            unless backdrop.blank?
+              result += backdrop
+            end
+          end
+        end
       end
     end
     result
