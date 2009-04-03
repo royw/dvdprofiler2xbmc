@@ -90,6 +90,8 @@ module AppConfig
     @config.dvdprofiler_yaml_extension = 'dvdprofiler.yaml'
     @config.imdb_xml_extension         = 'imdb.xml'
     @config.imdb_yaml_extension        = 'imdb.yaml'
+    @config.tmdb_xml_extension         = 'tmdb.xml'
+    @config.tmdb_yaml_extension        = 'tmdb.yaml'
     @config.new_extension              = '.new'
     @config.backup_extension           = '~'
 
@@ -105,6 +107,7 @@ module AppConfig
     @config.file_permissions = 0664
     @config.dir_permissions = 0777
     @config.imdb_query = true
+    @config.tmdb_query = true
     @config.do_update = true
   end
 end

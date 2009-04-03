@@ -21,50 +21,17 @@ class NfoController
       AppConfig[:logger].info { "\n#{@media.title}" }
       @movie.merge!(@xbmc_info.movie)
       @dvd_hash.merge!(load_dvdprofiler)
-      if AppConfig[:imdb_query] && (self.imdb_id.blank? || AppConfig[:force_nfo_replacement])
+      if AppConfig[:imdb_query] && self.imdb_id.blank?
         @dvd_hash.merge!(load_imdb)
+      end
+      if AppConfig[:tmdb_query] && !self.imdb_id.blank?
+        @dvd_hash.merge!(load_tmdb)
       end
       @movie.merge!(to_movie(@dvd_hash))
     rescue Exception => e
       AppConfig[:logger].error { "Error updating \"#{@media.path_to(:nfo_extension)}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
       raise e
     end
-  end
-
-  protected
-
-  # load @dvd_hash from the collection
-  def load_dvdprofiler
-    dvd_hash = Hash.new
-    # find ISBN for each title and assign to the media
-    profile = DvdprofilerProfile.first(:isbn => self.isbn, :title => @media.title)
-    unless profile.nil?
-      self.isbn ||= profile.isbn
-      AppConfig[:logger].info { "ISBN => #{self.isbn}" } unless self.isbn.nil?
-      profile.save(@media.path_to(:dvdprofiler_xml_extension))
-      dvd_hash = profile.dvd_hash
-    end
-    dvd_hash
-  end
-
-  # load data from IMDB.com and merge into the @dvd_hash
-  def load_imdb
-    dvd_hash = Hash.new
-    unless File.exist?(@media.path_to(:no_imdb_extension))
-      profile = ImdbProfile.first(:imdb_id => self.imdb_id,
-                                  :titles => self.get_imdb_titles,
-                                  :media_years => [@media.year.to_i],
-                                  :production_years => @dvd_hash[:productionyear],
-                                  :released_years => @dvd_hash[:released]
-                                  )
-      unless profile.nil?
-        self.imdb_id ||= profile.imdb_id
-        AppConfig[:logger].info { "IMDB ID => #{self.imdb_id}" } unless self.imdb_id.nil?
-        profile.save(@media.path_to(:imdb_xml_extension))
-        dvd_hash = to_dvd_hash(profile.movie)
-      end
-    end
-    dvd_hash
   end
 
   public
@@ -124,71 +91,99 @@ class NfoController
 
   protected
 
-#   def save_to_file(filespec, data)
-#     new_filespec = filespec + AppConfig[:new_extension]
-#     File.open(new_filespec, "w") do |file|
-#       file.puts(data)
-#     end
-#     backup_filespec = filespec + AppConfig[:backup_extension]
-#     File.delete(backup_filespec) if File.exist?(backup_filespec)
-#     File.rename(filespec, backup_filespec) if File.exist?(filespec)
-#     File.rename(new_filespec, filespec)
-#     File.delete(new_filespec) if File.exist?(new_filespec)
-#   end
+  # load @dvd_hash from the collection
+  def load_dvdprofiler
+    dvd_hash = Hash.new
+    # find ISBN for each title and assign to the media
+    profile = DvdprofilerProfile.first(:isbn => self.isbn, :title => @media.title)
+    unless profile.nil?
+      self.isbn ||= profile.isbn
+      AppConfig[:logger].info { "ISBN => #{self.isbn}" } unless self.isbn.nil?
+      profile.save(@media.path_to(:dvdprofiler_xml_extension))
+      dvd_hash = profile.dvd_hash
+    end
+    dvd_hash
+  end
+
+  # load data from IMDB.com and merge into the @dvd_hash
+  def load_imdb
+    dvd_hash = Hash.new
+    unless File.exist?(@media.path_to(:no_imdb_extension))
+      profile = ImdbProfile.first(:imdb_id => self.imdb_id,
+                                  :titles => self.get_imdb_titles,
+                                  :media_years => [@media.year.to_i],
+                                  :production_years => @dvd_hash[:productionyear],
+                                  :released_years => @dvd_hash[:released]
+                                  )
+      unless profile.nil?
+        self.imdb_id ||= profile.imdb_id
+        AppConfig[:logger].info { "IMDB ID => #{self.imdb_id}" } unless self.imdb_id.nil?
+        profile.save(@media.path_to(:imdb_xml_extension))
+        dvd_hash = to_dvd_hash(profile.movie)
+      end
+    end
+    dvd_hash
+  end
+
+  def load_tmdb
+    dvd_hash = Hash.new
+    profile = TmdbProfile.first(:imdb_id => self.imdb_id)
+    unless profile.nil?
+      profile.save(@media.path_to(:tmdb_xml_extension))
+      # TODO: load data from profile into dvd_hash
+    end
+    dvd_hash
+  end
 
   def get_imdb_titles
     titles = []
-    unless @dvd_hash[:title].blank?
-      titles << @dvd_hash[:title]
-    end
-    unless @media.title.blank?
-      titles << @media.title
-    end
+    titles << @dvd_hash[:title] unless @dvd_hash[:title].blank?
+    titles << @media.title unless @media.title.blank?
     titles.uniq.compact
   end
 
-#   # convert the @movie hash into xml and return the xml as a String
-#   def to_xml
-#     xml = ''
-#     begin
-#       xml = XmlSimple.xml_out(@movie, 'NoAttr' => true, 'RootName' => 'movie')
-#     rescue Exception => e
-#       AppConfig[:logger].error { "Error creating nfo file - " + e.to_s}
-#       raise e
-#     end
-#     xml
-#   end
+  IMDB_MOVIE_TO_DVD_HASH_MAP = {
+      'title'         => :title,
+      'mpaa'          => :rating,
+      'release_year'  => :productionyear,
+      'plot'          => :plot,
+      'length'        => :runningtime,
+      'genres'        => :genre,
+      'cast_members'  => :actor
+    }
 
   # given a ImdbMovie instance, extract meta-data into and return a dvd_hash
   def to_dvd_hash(imdb_movie)
     dvd_hash = Hash.new
-    dvd_hash[:title]          = imdb_movie.title
-    dvd_hash[:imdb_id]        = 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
-    dvd_hash[:rating]         = imdb_movie.mpaa
-    dvd_hash[:rating]         ||= imdb_movie.certifications['USA']
-    dvd_hash[:productionyear] = imdb_movie.release_year
-    dvd_hash[:plot]           = imdb_movie.plot
-    dvd_hash[:runningtime]    = imdb_movie.length
-    dvd_hash[:genre]          = imdb_movie.genres
-    dvd_hash[:actor]          = imdb_movie.cast_members
+    IMDB_MOVIE_TO_DVD_HASH_MAP.each do |key, value|
+      dvd_hash[value] = imdb_movie.send(key)
+    end
+    dvd_hash[:imdb_id] = 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
+    dvd_hash[:rating] ||= imdb_movie.certifications['USA']
     dvd_hash
   end
 
+  DVD_HASH_TO_MOVIE_MAP =     {
+      :rating         => 'mpaa',
+      :productionyear => 'year',
+      :plot           => 'outline',
+      :overview       => 'plot',
+      :runningtime    => 'runtime',
+      :actors         => 'actor',
+      :isbn           => 'isbn',
+      :imdb_id        => 'id'
+    }
+
   # map the given dvd_hash into a @movie hash
   def to_movie(dvd_hash)
+    movie = Hash.new
     dvd_hash[:genres] ||= []
     genres = map_genres((dvd_hash[:genres] + @media.media_subdirs.split('/')).uniq)
-    movie = Hash.new
-    movie['title']   = dvd_hash[:title]
-    movie['mpaa']    = dvd_hash[:rating]         unless dvd_hash[:rating].blank?
-    movie['year']    = dvd_hash[:productionyear] unless dvd_hash[:productionyear].blank?
-    movie['outline'] = dvd_hash[:plot]           unless dvd_hash[:plot].blank?
-    movie['plot']    = dvd_hash[:overview]       unless dvd_hash[:overview].blank?
-    movie['runtime'] = dvd_hash[:runningtime]    unless dvd_hash[:runningtime].blank?
-    movie['actor']   = dvd_hash[:actors]         unless dvd_hash[:actors].blank?
-    movie['isbn']    = dvd_hash[:isbn]           unless dvd_hash[:isbn].blank?
-    movie['id']      = dvd_hash[:imdb_id]        unless dvd_hash[:imdb_id].blank?
-    movie['genre']   = genres                    unless genres.blank?
+    movie['genre'] = genres unless genres.blank?
+    movie['title'] = dvd_hash[:title]
+    DVD_HASH_TO_MOVIE_MAP.each do |key, value|
+      movie[value] = dvd_hash[key] unless dvd_hash[key].blank?
+    end
     movie
   end
 
