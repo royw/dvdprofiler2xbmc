@@ -9,11 +9,18 @@ class ImdbProfile
   #   :released_years => @dvd_hash[:released]
   # returns Array of ImdbProfile instances
   def self.all(options={})
-    self.lookup(options[:titles],
-                options[:media_years],
-                options[:production_years],
-                options[:released_years]
-               ).collect{|ident| ImdbProfile.new(ident)}
+    result = []
+    if options.has_key?(:imdb_id)
+      result << ImdbProfile.new(options[:imdb_id])
+    end
+    if options.has_key?(:titles)
+      result += self.lookup(options[:titles],
+                            options[:media_years],
+                            options[:production_years],
+                            options[:released_years]
+                          ).collect{|ident| ImdbProfile.new(ident)}
+    end
+    result
   end
 
   # options:
