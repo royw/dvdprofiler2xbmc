@@ -1,3 +1,8 @@
 *~
 /pkg
 /spec/samples/www.imdb.com
+Announcement
+script/
+spec/samples/Collection.yaml
+test/
+
