@@ -1,5 +1,8 @@
 
 class XbmcInfo
+
+  FILTER_HTML = /<[^>]*>/
+
   def initialize(filespec)
     @nfo_filespec = filespec
     @movie = nil
@@ -21,7 +24,16 @@ class XbmcInfo
     xml = ''
     begin
       unless @movie.blank?
-        xml = XmlSimple.xml_out(@movie, 'NoAttr' => true, 'RootName' => 'movie')
+        data = @movie.dup
+        data.delete_if { |key, value| value.nil? }
+        %w(plot tagline overview).each do |key|
+          if data[key].respond_to?('first')
+            data[key] = data[key].first
+          end
+          data[key] = data[key].gsub(FILTER_HTML, '') unless data[key].blank?
+          pp [key, data[key]]
+        end
+        xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error creating nfo file - " + e.to_s}

@@ -9,16 +9,16 @@ class ImdbProfile
   #   :released_years => @dvd_hash[:released]
   # returns Array of ImdbProfile instances
   def self.all(options={})
+    AppConfig[:logger].info { "ImdbProfile.all(#{options.inspect})" }
     result = []
-    if options.has_key?(:imdb_id)
-      result << ImdbProfile.new(options[:imdb_id])
-    end
-    if options.has_key?(:titles)
+    if has_option?(options, :imdb_id) || (has_option?(options, :filespec) && File.exist?(options[:filespec]))
+      result << ImdbProfile.new(options[:imdb_id], options[:filespec])
+    elsif has_option?(options, :titles)
       result += self.lookup(options[:titles],
                             options[:media_years],
                             options[:production_years],
                             options[:released_years]
-                          ).collect{|ident| ImdbProfile.new(ident)}
+                          ).collect{|ident| ImdbProfile.new(ident, options[:filespec])}
     end
     result
   end
@@ -36,23 +36,26 @@ class ImdbProfile
 
   protected
 
-  def initialize(ident)
+  def self.has_option?(options, key)
+    options.has_key?(key) && !options[key].blank?
+  end
+
+  def initialize(ident, filespec=nil)
     @imdb_id = ident
-    @movie = nil
+    @filespec = filespec
+    load
   end
 
   public
 
-  attr_reader :imdb_id
-
-  def movie
-    @movie ||= ImdbMovie.new(@imdb_id.gsub(/^tt/, '')) unless @imdb_id.blank?
-    @movie
-  end
+  attr_reader :imdb_id, :movie
 
   def to_xml
     xml = ''
-    xml = movie.to_xml unless movie.nil?
+    unless @movie.blank?
+      @movie.delete_if { |key, value| value.nil? }
+      xml = XmlSimple.xml_out(@movie, 'NoAttr' => true, 'RootName' => 'movie')
+    end
     xml
   end
 
@@ -69,6 +72,41 @@ class ImdbProfile
   end
 
   protected
+
+  # @movie keys => [:title, :directors, :poster_url, :tiny_poster_url, :poster,
+  #                 :rating, :cast_members, :writers, :year, :genres, :plot,
+  #                 :tagline, :aspect_ratio, :length, :release_date, :countries,
+  #                 :languages, :color, :company, :photos, :raw_title,
+  #                 :release_year, :also_known_as, :mpaa, :certifications]
+  # returns Hash or nil
+  def load
+    if @movie.blank? && !@filespec.blank? && File.exist?(@filespec)
+      AppConfig[:logger].info { "loading movie filespec=> #{@filespec.inspect}" }
+      @movie = from_xml(open(@filespec).read)
+    end
+    if @movie.blank? && !@imdb_id.blank?
+      AppConfig[:logger].info { "loading movie from imdb.com, filespec=> #{@filespec.inspect}" }
+      @movie = ImdbMovie.new(@imdb_id.gsub(/^tt/, '')).to_hash
+      @movie['id'] = 'tt' + @imdb_id.gsub(/^tt/, '') unless @movie.blank?
+      save(@filespec) unless @filespec.blank?
+    end
+    unless @movie.blank?
+      @imdb_id = @movie['id']
+    else
+      @movie = nil
+    end
+    @movie
+  end
+
+  def from_xml(xml)
+    begin
+      movie = XmlSimple.xml_in(xml)
+    rescue Exception => e
+      AppConfig[:logger].warn { "Error converting from xml: #{e.to_s}" }
+      movie = nil
+    end
+    movie
+  end
 
   def save_to_file(filespec, data)
     new_filespec = filespec + AppConfig[:new_extension]

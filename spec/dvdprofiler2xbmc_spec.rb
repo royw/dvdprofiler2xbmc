@@ -17,6 +17,7 @@ describe "Profile finders" do
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
+    AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
 
     # the ignore_isbns array contain ISBNs for titles that can not be looked up on IMDB,
     # i.e., sets ands really low volume/special interest titles.
@@ -48,7 +49,10 @@ describe "Profile finders" do
 #           'Oklahoma!',
 #           'The Man From Snowy River',
 #           'Rooster Cogburn',
-          'batteries not included'
+#           'Call Me The Rise And Fall of Heidi Fleiss',
+#           'batteries not included',
+          'Flyboys',
+          "Captain Corelli's Mandolin",
         ].collect{|title| Collection.title_pattern(title)}
       buf = regression(titles)
       buf.should be_empty

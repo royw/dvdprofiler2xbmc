@@ -116,10 +116,32 @@ class Collection
           dvd_hash[:released] = [dvd[:released].join(',')] unless dvd[:released].blank?
           dvd_hash[:overview] = [dvd[:overview].join(',')] unless dvd[:overview].blank?
           dvd_hash[:lastedited] = dvd[:lastedited][0] unless dvd[:lastedited].blank?
+          directors = find_directors(dvd[:credits])
+          dvd_hash[:directors] = directors unless directors.blank?
           @isbn_dvd_hash[isbn] = dvd_hash
         end
       end
     end
+  end
+
+  def find_directors(dvd_credits)
+    directors = nil
+    begin
+      dvd[:credits].each do |credits_hash|
+        credits_hash[:credit].each do |credit_hash|
+          if((credit_hash['CreditType'] == 'Direction') || (credit_hash['CreditSubtype'] == 'Director'))
+            name = []
+            name << credit_hash['FirstName']  unless credit_hash['FirstName'].blank?
+            name << credit_hash['MiddleName'] unless credit_hash['MiddleName'].blank?
+            name << credit_hash['LastName']   unless credit_hash['LastName'].blank?
+            directors ||= []
+            directors << name.join(' ')
+          end
+        end
+      end
+    rescue
+    end
+    directors
   end
 
   # == Synopsis

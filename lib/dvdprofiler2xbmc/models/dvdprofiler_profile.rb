@@ -80,6 +80,7 @@ class DvdprofilerProfile
 
   def to_xml
     data = @dvd_hash.stringify_keys
+    data.delete_if { |key, value| value.nil? }
     xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
   end
 

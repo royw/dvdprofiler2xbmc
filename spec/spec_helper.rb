@@ -10,3 +10,6 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'dvdprofiler2xbmc'
 
 TMPDIR = File.join(File.dirname(__FILE__), '../tmp')
+
+# Kernel.html_cache_dir = 'spec/samples'
+

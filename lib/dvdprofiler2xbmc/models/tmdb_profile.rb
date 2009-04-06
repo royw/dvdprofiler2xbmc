@@ -36,27 +36,29 @@ class TmdbProfile
 
   def fanarts
     result = []
-    document['moviematches'].each do |moviematches|
-      unless moviematches.nil?
+    begin
+      document['moviematches'].each do |moviematches|
         moviematches['movie'].each do |movie|
-          unless movie.blank?
-            backdrop = movie['backdrop']
-            unless backdrop.blank?
-              result += backdrop
-            end
+          backdrop = movie['backdrop']
+          unless backdrop.blank?
+            result += backdrop
           end
         end
       end
+    rescue
     end
     result
   end
 
   def posters
     result = []
-    document['moviematches'].each do |moviematches|
-      moviematches['movie'].each do |movie|
-        result += movie['poster']
+    begin
+      document['moviematches'].each do |moviematches|
+        moviematches['movie'].each do |movie|
+          result += movie['poster']
+        end
       end
+    rescue
     end
     result
   end
@@ -98,6 +100,7 @@ class TmdbProfile
   end
 
   def to_xml
+#     data.delete_if { |key, value| value.nil? }
     XmlSimple.xml_out(document, 'NoAttr' => true, 'RootName' => 'movie')
   end
 
@@ -141,7 +144,7 @@ class TmdbProfile
     attempts = 0
     begin
       if @document.nil?
-        xml = ''
+        xml = {}
         if TmdbProfile::use_html_cache
           begin
             filespec = self.query.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
@@ -153,7 +156,7 @@ class TmdbProfile
         else
           xml = open(self.query).read
         end
-        @document = XmlSimple.xml_in(xml)
+        @document = XmlSimple.xml_in(xml) unless xml.blank?
 #         pp @document
       end
     rescue Exception => e
