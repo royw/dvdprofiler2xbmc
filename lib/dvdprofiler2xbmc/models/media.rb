@@ -16,25 +16,25 @@ class Media
     @title = find_title(@media_path)
     @title_with_year = find_title_with_year(@title, @year)
 
-    @nfo = NfoController.new(self)
+    @nfo_controller = NfoController.new(self)
   end
 
   # update the meta-data and thumbnails
   def update
-    @nfo.update
-    @nfo.save
+    @nfo_controller.update
+    @nfo_controller.save
     update_thumbnail
     update_fanart
   end
 
   # return the ISBN or nil
   def isbn
-    @nfo.isbn
+    @nfo_controller.isbn
   end
 
   # return the IMDB ID or nil
   def imdb_id
-    @nfo.imdb_id
+    @nfo_controller.imdb_id
   end
 
   # return a path to a file file based on the media's filespec
@@ -66,14 +66,14 @@ class Media
 
   # update the movie's thumbnail (.tbn) image
   def update_thumbnail
-    if @nfo.isbn.blank?
-      unless @nfo.imdb_id.blank?
+    if @nfo_controller.isbn.blank?
+      unless @nfo_controller.imdb_id.blank?
         if @image_files.empty?
-          fetch_imdb_thumbnail(@nfo.imdb_id)
+          fetch_imdb_thumbnail(@nfo_controller.imdb_id)
         end
       end
     else
-      copy_thumbnail(@nfo.isbn)
+      copy_thumbnail(@nfo_controller.isbn)
     end
   end
 
@@ -110,28 +110,30 @@ class Media
   end
 
   def update_fanart
-    unless @nfo.imdb_id.blank?
+    unless @nfo_controller.imdb_id.blank?
       if @fanart_files.empty?
-        fetch_fanart(@nfo.imdb_id)
+        fetch_fanart(@nfo_controller.imdb_id)
       end
     end
   end
 
   def fetch_fanart(imdb_id)
-    profile = TmdbProfile.new(imdb_id)
-    unless profile.nil?
-      unless profile.fanarts.blank?
-        fanart = profile.fanarts.first
-        AppConfig[:logger].info { "#{fanart.inspect}" }
+    # TODO the fanart hash should be retrieved from the nfo_controller
+    profile = TmdbProfile.new(imdb_id, path_to(:tmdb_xml_extension))
+    unless profile.nil? || profile.movie.blank?
+      movie = profile.movie
+      unless movie['fanarts'].blank?
+        fanart = movie['fanarts'].first
+        AppConfig[:logger].debug { "#{fanart.inspect}" }
         src_url = fanart['content']
-        AppConfig[:logger].info { "src_url => #{src_url}" }
         unless src_url.blank?
           fanart_filename = File.basename(@media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
           fanart_filename += AppConfig[:fanart_extension]
           fanart_filename += File.extname(src_url)
           dest_filespec = File.join(File.dirname(@media_path), fanart_filename)
-          AppConfig[:logger].info { "dest_fanart_filespec => #{dest_filespec}" }
           unless File.exist?(dest_filespec)
+            AppConfig[:logger].info { "src_url => #{src_url}" }
+            AppConfig[:logger].info { "dest_fanart_filespec => #{dest_filespec}" }
             copy_fanart(src_url, dest_filespec)
           end
         end
