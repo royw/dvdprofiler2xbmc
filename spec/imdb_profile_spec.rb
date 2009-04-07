@@ -15,6 +15,7 @@ describe "ImdbProfile" do
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
+    File.mkdirs(TMPDIR)
   end
 
   before(:each) do
@@ -37,6 +38,22 @@ describe "ImdbProfile" do
   it "should find by title" do
     profile = ImdbProfile.first(:titles => ['National Treasure: Book of Secrets'])
     profile.should_not == nil
+  end
+
+  it "should find by multiple title" do
+    profile = ImdbProfile.first(:titles => [['National Treasure: Book of Secrets'], 'National Treasure 2'])
+    profile.should_not == nil
+  end
+
+  it "should be able to convert to xml and then from xml" do
+    hash = nil
+    begin
+      xml = @profile.to_xml
+      hash = XmlSimple.xml_in(xml)
+    rescue
+      hash = nil
+    end
+    hash.should_not be_nil
   end
 
 end

@@ -80,12 +80,11 @@ class ImdbProfile
   #                 :release_year, :also_known_as, :mpaa, :certifications]
   # returns Hash or nil
   def load
-    if @movie.blank? && !@filespec.blank? && File.exist?(@filespec)
-      AppConfig[:logger].info { "loading movie filespec=> #{@filespec.inspect}" }
+    if !@filespec.blank? && File.exist?(@filespec)
+      AppConfig[:logger].debug { "loading movie filespec=> #{@filespec.inspect}" }
       @movie = from_xml(open(@filespec).read)
-    end
-    if @movie.blank? && !@imdb_id.blank?
-      AppConfig[:logger].info { "loading movie from imdb.com, filespec=> #{@filespec.inspect}" }
+    elsif !@imdb_id.blank?
+      AppConfig[:logger].debug { "loading movie from imdb.com, filespec=> #{@filespec.inspect}" }
       @movie = ImdbMovie.new(@imdb_id.gsub(/^tt/, '')).to_hash
       @movie['id'] = 'tt' + @imdb_id.gsub(/^tt/, '') unless @movie.blank?
       save(@filespec) unless @filespec.blank?
@@ -95,7 +94,6 @@ class ImdbProfile
     else
       @movie = nil
     end
-    @movie
   end
 
   def from_xml(xml)
@@ -142,7 +140,7 @@ class ImdbProfile
     year_sets << fuzzy_years(released_years, -1..1)
     year_sets << [] if media_years.blank?
 
-    titles.each do |title|
+    titles.flatten.uniq.compact.each do |title|
       [false, true].each do |search_akas|
         AppConfig[:logger].debug { (search_akas ? 'Search AKAs' : 'Do not search AKAs') }
         imdb_search = ImdbSearch.new(title, search_akas)
@@ -208,7 +206,7 @@ class ImdbProfile
         AppConfig[:logger].error { e.backtrace.join("\n") }
       end
     end
-#     AppConfig[:logger].info { "IMDB id => #{idents.join(', ')}" } unless idents.blank?
+    AppConfig[:logger].debug { "IMDB id => #{idents.join(', ')}" } unless idents.blank?
     idents
   end
 end
