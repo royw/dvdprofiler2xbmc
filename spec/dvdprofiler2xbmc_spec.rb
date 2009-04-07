@@ -18,6 +18,7 @@ describe "Profile finders" do
     AppConfig[:logger] = logger
     AppConfig.load
     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
+    File.mkdirs(TMPDIR)
 
     # the ignore_isbns array contain ISBNs for titles that can not be looked up on IMDB,
     # i.e., sets ands really low volume/special interest titles.
