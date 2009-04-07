@@ -19,6 +19,7 @@ require 'dvdprofiler2xbmc/models/dvdprofiler_profile'
 require 'dvdprofiler2xbmc/models/imdb_profile'
 require 'dvdprofiler2xbmc/models/media'
 require 'dvdprofiler2xbmc/models/media_files'
+require 'dvdprofiler2xbmc/models/tmdb_movie'
 require 'dvdprofiler2xbmc/models/tmdb_profile'
 require 'dvdprofiler2xbmc/models/xbmc_info'
 

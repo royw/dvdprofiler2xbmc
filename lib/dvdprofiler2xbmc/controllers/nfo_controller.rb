@@ -114,7 +114,7 @@ class NfoController
                                   :filespec => @media.path_to(:imdb_xml_extension)
                                   )
       unless profile.nil?
-        profile.save(@media.path_to(:imdb_xml_extension))
+#         profile.save(@media.path_to(:imdb_xml_extension))
         self.imdb_id ||= profile.imdb_id
         AppConfig[:logger].info { "IMDB ID => #{self.imdb_id}" } unless self.imdb_id.nil?
         imdb_hash = profile.movie
@@ -130,8 +130,8 @@ class NfoController
     profile = TmdbProfile.first(:imdb_id => self.imdb_id,
                                 :filespec => @media.path_to(:tmdb_xml_extension))
     unless profile.nil?
-      profile.save(@media.path_to(:tmdb_xml_extension))
-      # TODO: load data from profile into movie
+#       profile.save(@media.path_to(:tmdb_xml_extension))
+      tmdb_hash = profile.movie
     end
     tmdb_hash
   end
