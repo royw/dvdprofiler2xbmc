@@ -15,13 +15,22 @@ lib/dvdprofiler2xbmc/models/dvdprofiler_profile.rb
 lib/dvdprofiler2xbmc/models/imdb_profile.rb
 lib/dvdprofiler2xbmc/models/media.rb
 lib/dvdprofiler2xbmc/models/media_files.rb
+lib/dvdprofiler2xbmc/models/tmdb_movie.rb
 lib/dvdprofiler2xbmc/models/tmdb_profile.rb
 lib/dvdprofiler2xbmc/models/xbmc_info.rb
 lib/dvdprofiler2xbmc/views/cli.rb
 spec/dvdprofiler2xbmc_spec.rb
+spec/dvdprofiler_profile_spec.rb
+spec/imdb_profile_spec.rb
 spec/samples/Collection.xml
 spec/samples/Collection.yaml
 spec/samples/Die Hard - 1988.nfo
 spec/spec.opts
 spec/spec_helper.rb
+spec/tmdb_movie_spec.rb
+spec/tmdb_profile_spec.rb
+spec/xbmc_info_spec.rb
 tasks/rspec.rake
+test/test_dvdprofiler2xbmc.rb
+test/test_dvdprofiler2xbmc_cli.rb
+test/test_helper.rb
