@@ -31,7 +31,6 @@ class XbmcInfo
             data[key] = data[key].first
           end
           data[key] = data[key].gsub(FILTER_HTML, '') unless data[key].blank?
-          pp [key, data[key]]
         end
         xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
       end
