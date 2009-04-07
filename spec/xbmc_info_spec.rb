@@ -15,6 +15,7 @@ describe "XbmcInfo" do
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
+    File.mkdirs(TMPDIR)
   end
 
   before(:each) do
@@ -50,6 +51,17 @@ describe "XbmcInfo" do
   it "should not overwrite the .nfo file if not changed"
 
   it "should overwrite the .nfo file when changed"
+
+  it "should be able to convert to xml and then from xml" do
+    hash = nil
+    begin
+      xml = @xbmc_info.to_xml
+      hash = XmlSimple.xml_in(xml)
+    rescue
+      hash = nil
+    end
+    hash.should_not be_nil
+  end
 
 end
 
