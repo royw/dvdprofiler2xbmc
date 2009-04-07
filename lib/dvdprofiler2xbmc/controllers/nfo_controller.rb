@@ -5,6 +5,11 @@
 # the @movie hash has keys that map directly to the .nfo file
 # the @dvd_hash has keys that map to DVD Profiler's Collection.xml file
 class NfoController
+
+  def self.update(media)
+    NfoController.new(media).update
+  end
+
   def initialize(media)
     @media = media
     @info = Hash.new
@@ -16,6 +21,7 @@ class NfoController
   # merge meta-data from the DVD Profiler collection.xml and from IMDB
   # into the @movie hash
   def update
+    result = false
     begin
       AppConfig[:logger].info { "\n#{@media.title}" }
       @info.merge!(@xbmc_info.movie)
@@ -27,13 +33,55 @@ class NfoController
       @info.merge!(tmdb_hash_to_info(tmdb_hash))
       @info.merge!(imdb_hash_to_info(imdb_hash))
       @info.merge!(dvd_hash_to_info(dvd_hash))
+
+      save
+      result = true
     rescue Exception => e
       AppConfig[:logger].error { "Error updating \"#{@media.path_to(:nfo_extension)}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
       raise e
     end
+    result
   end
 
-  public
+  # return the ISBN or nil
+  def isbn
+    unless @info['isbn'].blank?
+      @media.isbn ||= [@info['isbn']].flatten.uniq.compact.first.to_s
+    end
+    @media.isbn
+  end
+
+  # set the ISBN
+  def isbn=(n)
+    @media.isbn = n.to_s unless n.blank?
+    @media.isbn
+  end
+
+  # return the IMDB ID or nil
+  def imdb_id
+    unless @info['id'].blank?
+      # make sure is not an array
+      @media.imdb_id ||= [@info['id'].to_s].flatten.uniq.compact.first
+    end
+    unless @media.imdb_id.blank? || (@media.imdb_id.to_s =~ /^tt\d+$/)|| (@media.imdb_id.to_s =~ /^\d+$/)
+      AppConfig[:logger].warn { "Attempting to return invalid IMDB ID: \"#{@media.imdb_id}\"" }
+    end
+    @media.imdb_id
+  end
+
+  # set the IMDB ID
+  def imdb_id=(ident)
+    if ident.blank?
+      @media.imdb_id = nil
+    elsif (ident.to_s =~ /^tt\d+$/) || (ident.to_s =~ /^\d+$/)
+      @media.imdb_id = ident.to_s
+    else
+      AppConfig[:logger].warn { "Attempting to set invalid IMDB ID: \"#{ident}\"" }
+    end
+    @media.imdb_id
+  end
+
+  protected
 
   # save as a .nfo file, creating a backup if the .nfo already exists
   def save
@@ -47,44 +95,6 @@ class NfoController
       AppConfig[:logger].error { "Error saving nfo file - " + e.to_s + "\n" + e.backtrace.join("\n")}
     end
   end
-
-  # return the ISBN or nil
-  def isbn
-    unless @info['isbn'].blank?
-      @movie_isbn ||= [@info['isbn']].flatten.uniq.compact.first.to_s
-    end
-    @movie_isbn
-  end
-
-  # set the ISBN
-  def isbn=(n)
-    @movie_isbn = n.to_s unless n.blank?
-  end
-
-  # return the IMDB ID or nil
-  def imdb_id
-    unless @info['id'].blank?
-      # make sure is not an array
-      @movie_imdb_id ||= [@info['id'].to_s].flatten.uniq.compact.first
-    end
-    unless @movie_imdb_id.blank? || (@movie_imdb_id.to_s =~ /^tt\d+$/)|| (@movie_imdb_id.to_s =~ /^\d+$/)
-      AppConfig[:logger].warn { "Attempting to return invalid IMDB ID: \"#{@movie_imdb_id}\"" }
-    end
-    @movie_imdb_id
-  end
-
-  # set the IMDB ID
-  def imdb_id=(ident)
-    if ident.blank?
-      @movie_imdb_id = nil
-    elsif (ident.to_s =~ /^tt\d+$/) || (ident.to_s =~ /^\d+$/)
-      @movie_imdb_id = ident.to_s
-    else
-      AppConfig[:logger].warn { "Attempting to set invalid IMDB ID: \"#{ident}\"" }
-    end
-  end
-
-  protected
 
   # load from the collection
   # return movie hash
@@ -114,7 +124,6 @@ class NfoController
                                   :filespec => @media.path_to(:imdb_xml_extension)
                                   )
       unless profile.nil?
-#         profile.save(@media.path_to(:imdb_xml_extension))
         self.imdb_id ||= profile.imdb_id
         AppConfig[:logger].info { "IMDB ID => #{self.imdb_id}" } unless self.imdb_id.nil?
         imdb_hash = profile.movie
@@ -130,7 +139,6 @@ class NfoController
     profile = TmdbProfile.first(:imdb_id => self.imdb_id,
                                 :filespec => @media.path_to(:tmdb_xml_extension))
     unless profile.nil?
-#       profile.save(@media.path_to(:tmdb_xml_extension))
       tmdb_hash = profile.movie
     end
     tmdb_hash
@@ -152,46 +160,13 @@ class NfoController
       :isbn           => 'isbn',
       :imdb_id        => 'id',
       :directors      => 'director'
-#       :ProfileTimestamp =>
-#       :ID               =>
-#       :MediaTypes       =>
-#       :UPC              =>
-#       :CollectionNumber =>
-#       :CollectionType   =>
-#       :DistTrait        =>
-#       :OriginalTitle    =>
-#       :CountryOfOrigin  =>
-#       :ProductionYear   =>
-#       :RunningTime      =>
-#       :RatingSystem     =>
-#       :RatingAge        =>
-#       :RatingVariant    =>
-#       :CaseType         =>
-#       :Genres           =>
-#       :Regions          =>
-#       :Format           =>
-#       :Features         =>
-#       :Studios          =>
-#       :MediaCompanies   =>
-#       :Audio            =>
-#       :Subtitles        =>
-#       :'SRP DenominationType' =>
-#       :Actors
-#       :Credits          =>
-#       :Overview
-#       :EasterEggs
-#       :Disks
-#       :SortTitle
-#       :LastEdited
-#       :WishPriority
-#       :PurchaseInfo
-#       :Review
-#       :Events
-#       :BoxSet
-#       :LoanInfo
-#       :Notes
-#       :Tags
-#       :Locks
+      # Unused => :ProfileTimestamp, :ID, :MediaTypes, :UPC, :CollectionNumber
+      # :CollectionType, :DistTrait, :OriginalTitle, :CountryOfOrigin
+      # :ProductionYear, :RunningTime, :RatingSystem, :RatingAge, :RatingVariant
+      # :CaseType, :Genres, :Regions, :Format, :Features, :Studios, :MediaCompanies
+      # :Audio, :Subtitles, :'SRP DenominationType', :Actors, :Credits, :Overview
+      # :EasterEggs, :Disks, :SortTitle, :LastEdited, :WishPriority, :PurchaseInfo
+      # :Review, :Events, :BoxSet, :LoanInfo, :Notes, :Tags, :Locks
     }
 
   # map the given dvd_hash into a @movie hash
@@ -225,18 +200,9 @@ class NfoController
       'length'          => 'runtime',
       'genres'          => 'genre',
       'id'              => 'id',
-#       'company'         =>
-#       'countries'       =>
-#       'poster_url'      =>
-#       'writers'         =>
-#       'photos'          =>
-#       'poster'          =>
-#       'color'           =>
-#       'aspect_ratio'    =>
-#       'languages'       =>
-#       'release_date'    =>
-#       'tiny_poster_url' =>
-#       'also_known_as'   =>
+      # Unused: 'company', 'countries', 'poster_url', 'writers', 'photos'
+      # 'poster', 'color', 'aspect_ratio', 'languages', 'release_date'
+      # 'tiny_poster_url', 'also_known_as'
     }
   def imdb_hash_to_info(imdb_hash)
     info = Hash.new
@@ -246,18 +212,21 @@ class NfoController
       end
       info['id'] = self.imdb_id if info['id'].blank?
       # special cases:
-      if info['mpaa'].blank? && !imdb_hash[:certifications].blank?
-        pp imdb_hash[:certifications]
-        debugger
-#         imdb_hash[:certifications].each do |certs|
-#
-#         end
+      if info['mpaa'].blank? && !imdb_hash['certifications'].blank?
+        imdb_hash['certifications'].each do |certs|
+          if certs['country'] == 'USA'
+            AppConfig[:logger].info { "Using alternative USA certification instead of mpaa rating" }
+            info['mpaa'] = certs['rating'] unless certs['rating'].blank?
+            break
+          end
+        end
       end
-#       info['mpaa'] ||= imdb_hash[:certifications]['USA'] rescue nil
-      imdb_hash['cast_members'].each do |anon|
-        # anon[2] => {name,role}
-        info['actor'] ||= []
-        info['actor'] << {'name' => anon[0], 'role' => anon[1]}
+      unless imdb_hash['cast_members'].blank?
+        imdb_hash['cast_members'].each do |anon|
+          # anon[2] => {name,role}
+          info['actor'] ||= []
+          info['actor'] << {'name' => anon[0], 'role' => anon[1]}
+        end
       end
       info['year'] ||= imdb_hash['release_year']
     end

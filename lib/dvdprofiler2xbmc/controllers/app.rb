@@ -35,7 +35,10 @@ class DvdProfiler2Xbmc
     @media_files.titles.each do |title, medias|
       break if DvdProfiler2Xbmc.interrupted?
       medias.each do |media|
-        media.update if AppConfig[:do_update]
+        # note, NfoController update must be first as it sets isbn and imdb_id for media
+        NfoController.update(media)
+        ThumbnailController.update(media)
+        FanartController.update(media)
       end
     end
 

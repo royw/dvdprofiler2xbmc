@@ -11,5 +11,7 @@ require 'dvdprofiler2xbmc'
 
 TMPDIR = File.join(File.dirname(__FILE__), '../tmp')
 
+SAMPLES_DIR = File.join(File.dirname(__FILE__), 'samples')
+
 # Kernel.html_cache_dir = 'spec/samples'
 
