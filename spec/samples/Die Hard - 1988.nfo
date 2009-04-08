@@ -1,7 +1,7 @@
 <movie>
-  <isbn>086162103995</isbn>
+  <rating>8.3</rating>
   <title>Die Hard</title>
-  <mpaa>R</mpaa>
+  <isbn>086162103995</isbn>
   <actor>
     <name>Bruce Willis</name>
     <role>John McClane</role>
@@ -250,10 +250,12 @@
     <name>Charlie Picerni</name>
     <role>Dwayne T. Robinson&apos;s Driver</role>
   </actor>
+  <director>John McTiernan</director>
   <plot>High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. But one man has managed to escape detection...an off-duty cop. He&apos;s alone...tired...and the only chance anyone has.
 
 Bruce Willis stars as New York City Detective John McClane, newly arrived in Los Angeles to spend the Christmas holiday with his estranged wife (Bonnie Bedelia). But as McClane waits for his wife&apos;s office party to break up, terrorists take control of the building. While the terrorist leader, Hans Gruber (Alan Rickman) and his savage henchman (Alexander Godunov) round up hostages, McClane slips away unnoticed. Armed with only a service revolver and his cunning, McClane launches his own one-man war. A crackling thriller from beginning to end, DIE HARD explodes with heart-stopping suspense.</plot>
-  <outline>New York cop John McClane gives terrorists a dose of their own medicine as they hold hostages in an LA office building.</outline>
+  <mpaa>R</mpaa>
+  <tagline>It will blow you through the back wall of the theater!</tagline>
   <id>tt0095016</id>
   <runtime>131</runtime>
   <genre>Action</genre>
