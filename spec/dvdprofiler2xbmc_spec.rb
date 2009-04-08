@@ -13,13 +13,13 @@ describe "Dvdprofiler2xbmc" do
     logger = Log4r::Logger.new('dvdprofiler2xbmc')
     logger.outputters = Log4r::StdoutOutputter.new(:console)
     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-    logger.level = Log4r::INFO
+    logger.level = Log4r::WARN
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].info { "Dvdprofiler2xbmc Specs" }
+    AppConfig[:logger].warn { "\nDvdprofiler2xbmc Specs" }
 
     # the ignore_isbns array contain ISBNs for titles that can not be looked up on IMDB,
     # i.e., sets ands really low volume/special interest titles.
@@ -70,14 +70,14 @@ describe "Dvdprofiler2xbmc" do
     buf = []
     count = 0
     titles.each do |title|
-      puts "title => #{title}"
+      AppConfig[:logger].debug "title => #{title}"
       dvdprofiler_profiles = DvdprofilerProfile.all(:title => title)
       if dvdprofiler_profiles.blank?
         buf << "Can not find profile for #{title}"
       else
         dvdprofiler_profile = dvdprofiler_profiles.first
         isbn = dvdprofiler_profile.isbn
-        puts "ISBN => #{isbn}"
+        AppConfig[:logger].debug "ISBN => #{isbn}"
         unless @ignore_isbns.include?(isbn.to_s)
           dvd_hash = dvdprofiler_profile.dvd_hash
           unless dvd_hash[:genres].include?('Television')
@@ -88,13 +88,13 @@ describe "Dvdprofiler2xbmc" do
             if imdb_profile.blank?
               buf << "Can not find IMDB ID for #{isbn} #{title}"
             else
-              puts "IMDB ID => #{imdb_profile.imdb_id}"
+              AppConfig[:logger].debug "IMDB ID => #{imdb_profile.imdb_id}"
             end
           end
         end
       end
     end
-    puts buf.join("\n") + "\n\m# movies: #{count}\n# missing IMDB ID: #{buf.size}"
+    AppConfig[:logger].debug buf.join("\n") + "\n\m# movies: #{count}\n# missing IMDB ID: #{buf.size}"
     buf
   end
 

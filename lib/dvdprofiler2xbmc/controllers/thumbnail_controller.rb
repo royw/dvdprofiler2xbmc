@@ -1,5 +1,11 @@
 # == Synopsis
 # Media encapsulates information about a single media file
+#
+# Usage:
+#  controller = ThumbnailController.new(media)
+#  controller.update
+# or
+#  ThumbnailController.update(media)
 class ThumbnailController
 
   def self.update(media)
@@ -26,6 +32,8 @@ class ThumbnailController
     end
     result
   end
+
+  protected
 
   # fetch the thumbnail from IMDB and save as path_to('tbn')
   def fetch_imdb_thumbnail(imdb_id)

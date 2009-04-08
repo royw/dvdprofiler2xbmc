@@ -1,4 +1,20 @@
-
+# This is the model for the DVD Profiler profile which is used
+# to find meta data from DVD Profiler's exported Collection.xml
+#
+# Usage:
+#
+# profiles = DvdprofilerProfile.all(:titles => ['The Alamo'])
+#
+# profile = DvdprofilerProfile.first(:isbn => '012345678901')
+# or
+# profile = DvdprofilerProfile.first(:title => 'movie title')
+#
+# puts profile.dvd_hash[:key]
+# puts profile.to_xml
+# puts profile.isbn
+# puts profile.title
+# profile.save(media.path_to(:dvdprofiler_xml_extension))
+#
 class DvdprofilerProfile
 
   # options:
@@ -59,13 +75,11 @@ class DvdprofilerProfile
     result
   end
 
-  private
+  protected
 
   def self.collection
     @collection ||= Collection.new(File.expand_path(AppConfig[:collection_filespec]))
   end
-
-  protected
 
   def initialize(dvd_hash, isbn, title=nil)
     @dvd_hash = dvd_hash

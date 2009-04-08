@@ -1,4 +1,15 @@
-
+# This is the model for the XBMC's Info profile which is used
+# to manage a .nfo file
+#
+# Usage:
+#
+# profile = XbmcInfo.new(media.path_to(:nfo_extension))
+#
+# profile.movie['key'] = 'some value'
+# puts profile.movie['key']
+# puts profile.to_xml
+# puts profile.save
+#
 class XbmcInfo
 
   FILTER_HTML = /<[^>]*>/

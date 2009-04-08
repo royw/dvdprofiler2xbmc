@@ -11,12 +11,12 @@ describe "TmdbMovie" do
     logger = Log4r::Logger.new('dvdprofiler2xbmc')
     logger.outputters = Log4r::StdoutOutputter.new(:console)
     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-    logger.level = Log4r::INFO
+    logger.level = Log4r::WARN
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].info { "TmdbMovie Specs" }
+    AppConfig[:logger].warn { "\nTmdbMovie Specs" }
   end
 
   before(:each) do

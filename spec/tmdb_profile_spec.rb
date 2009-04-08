@@ -11,12 +11,12 @@ describe "TmdbProfile" do
     logger = Log4r::Logger.new('dvdprofiler2xbmc')
     logger.outputters = Log4r::StdoutOutputter.new(:console)
     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-    logger.level = Log4r::INFO
+    logger.level = Log4r::WARN
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].info { "TmdbProfile Specs" }
+    AppConfig[:logger].warn { "\nTmdbProfile Specs" }
   end
 
   before(:each) do
@@ -32,12 +32,13 @@ describe "TmdbProfile" do
   end
 
   it "should save the .tmdb.xml file" do
+    # get a temp filename to a non-existing file
     outfile = Tempfile.new('tmdb_movie_spec_saving', TMPDIR)
-    profile = TmdbProfile.first(:imdb_id => 'tt0465234')
-    unless profile.nil?
-      profile.save(outfile.path)
-    end
-    (File.exist?(outfile.path).should be_true) && (File.size(outfile.path).should > 0)
+    filespec = outfile.path
+    outfile.unlink
+
+    profile = TmdbProfile.first(:imdb_id => 'tt0465234', :filespec => filespec)
+    (File.exist?(filespec).should be_true) && (File.size(filespec).should > 0)
   end
 
   it "should be able to convert to xml" do

@@ -1,3 +1,15 @@
+# This is the model for the themovieDb profile which is used
+# to find TmdbMovie meta data from either online or from
+# a cached file.
+#
+# Usage:
+#
+# profile = TmdbProfile.first(:imdb_id => 'tt0123456')
+#
+# puts profile.movie['key'].first
+# puts profile.to_xml
+# puts profile.imdb_id
+#
 class TmdbProfile
 
   # options:
@@ -46,18 +58,6 @@ class TmdbProfile
     xml
   end
 
-  def save(filespec)
-    begin
-      xml = self.to_xml
-      unless xml.blank?
-        AppConfig[:logger].debug { "saving #{filespec}" }
-        save_to_file(filespec, xml)
-      end
-    rescue Exception => e
-      AppConfig[:logger].error "Unable to save tmdb profile to #{filespec} - #{e.to_s}"
-    end
-  end
-
   protected
 
   def load
@@ -68,7 +68,6 @@ class TmdbProfile
     elsif !@imdb_id.blank?
       AppConfig[:logger].debug { "loading movie from tmdb.com, filespec=> #{@filespec.inspect}" }
       @movie = TmdbMovie.new(@imdb_id.gsub(/^tt/, '')).to_hash
-#       pp @movie
       save(@filespec) unless @filespec.blank?
     end
     if @movie.blank?
@@ -84,6 +83,18 @@ class TmdbProfile
       movie = nil
     end
     movie
+  end
+
+  def save(filespec)
+    begin
+      xml = self.to_xml
+      unless xml.blank?
+        AppConfig[:logger].debug { "saving #{filespec}" }
+        save_to_file(filespec, xml)
+      end
+    rescue Exception => e
+      AppConfig[:logger].error "Unable to save tmdb profile to #{filespec} - #{e.to_s}"
+    end
   end
 
   def save_to_file(filespec, data)

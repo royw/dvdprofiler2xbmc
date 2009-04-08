@@ -22,16 +22,6 @@ class Media
     @title_with_year = find_title_with_year(@title, @year)
   end
 
-#   # return the ISBN or nil
-#   def isbn
-#     @nfo_controller.isbn
-#   end
-#
-#   # return the IMDB ID or nil
-#   def imdb_id
-#     @nfo_controller.imdb_id
-#   end
-
   # return a path to a file file based on the media's filespec
   # but without any stacking parts and with the given extension
   # instead of the media's extension.

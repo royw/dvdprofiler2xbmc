@@ -2,8 +2,15 @@
 # == Synopsis
 # NFO (info) files
 #
-# the @movie hash has keys that map directly to the .nfo file
-# the @dvd_hash has keys that map to DVD Profiler's Collection.xml file
+# the @info hash has keys that map directly to the .nfo file
+#
+# Usage:
+#  controller = NfoController.new(media)
+#  controller.update
+#  puts controller.isbn
+#  puts controller.imdb_id
+# or
+#  NfoController.update(media)
 class NfoController
 
   def self.update(media)
@@ -233,6 +240,7 @@ class NfoController
     info
   end
 
+  # TODO map tmdb meta data to info
   TMDB_HASH_TO_INFO_MAP = {
     }
   def tmdb_hash_to_info(tmdb_hash)
@@ -244,27 +252,6 @@ class NfoController
     end
     info
   end
-
-#   IMDB_MOVIE_TO_DVD_HASH_MAP = {
-#       'title'         => :title,
-#       'mpaa'          => :rating,
-#       'release_year'  => :productionyear,
-#       'plot'          => :plot,
-#       'length'        => :runningtime,
-#       'genres'        => :genre,
-#       'cast_members'  => :actor
-#     }
-#
-#   # given a ImdbMovie instance, extract meta-data into and return a dvd_hash
-#   def to_dvd_hash(imdb_movie)
-#     dvd_hash = Hash.new
-#     IMDB_MOVIE_TO_DVD_HASH_MAP.each do |key, value|
-#       dvd_hash[value] = imdb_movie.send(key)
-#     end
-#     dvd_hash[:imdb_id] = 'tt' + imdb_movie.id.gsub(/^tt/,'') unless imdb_movie.id.blank?
-#     dvd_hash[:rating] ||= imdb_movie.certifications['USA']
-#     dvd_hash
-#   end
 
   # map the given genres using the AppConfig[:genre_maps].
   # given an Array of String genres

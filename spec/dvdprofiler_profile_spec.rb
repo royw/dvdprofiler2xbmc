@@ -11,13 +11,13 @@ describe "DvdprofilerProfile" do
     logger = Log4r::Logger.new('dvdprofiler2xbmc')
     logger.outputters = Log4r::StdoutOutputter.new(:console)
     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-    logger.level = Log4r::INFO
+    logger.level = Log4r::WARN
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].info { "DvdprofilerProfile Specs" }
+    AppConfig[:logger].warn { "\nDvdprofilerProfile Specs" }
   end
 
   before(:each) do

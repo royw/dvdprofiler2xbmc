@@ -1,9 +1,13 @@
 # == Synopsis
 # Media encapsulates information about a single media file
+#
+# Usage:
+#  controller = FanartController.new(media)
+#  controller.update
+# or
+#  FanartController.update(media)
 class FanartController
   attr_reader :media_path, :image_files, :year, :media_subdirs, :title, :title_with_year
-
-  DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
 
   def self.update(media)
     FanartController.new(media).update
@@ -23,6 +27,10 @@ class FanartController
     end
     result
   end
+
+  protected
+
+  DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
 
   def fetch_fanart(imdb_id)
     # TODO the fanart hash should be retrieved from the nfo_controller

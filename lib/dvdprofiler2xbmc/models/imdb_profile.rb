@@ -1,4 +1,22 @@
-
+# This is the model for the IDMB profile which is used
+# to find ImdbMovie meta data from either online or from
+# a cached file.
+#
+# Usage:
+#
+# profiles = ImdbProfile.all(:titles => ['The Alamo'])
+#
+# profile = ImdbProfile.first(:imdb_id => 'tt0123456')
+# or
+# profile = ImdbProfile.first(:titles => ['movie title 1', 'movie title 2',...]
+#                             :media_years => ['2000'],
+#                             :production_years => ['1999'],
+#                             :released_years => ['2002', '2008']
+#                             :filespec => media.path_to(:imdb_xml_extension))
+# puts profile.movie['key'].first
+# puts profile.to_xml
+# puts profile.imdb_id
+#
 class ImdbProfile
 
   # options:
@@ -59,18 +77,6 @@ class ImdbProfile
     xml
   end
 
-  def save(filespec)
-    begin
-      xml = self.to_xml
-      unless xml.blank?
-        AppConfig[:logger].debug { "saving #{filespec}" }
-        save_to_file(filespec, xml)
-      end
-    rescue Exception => e
-      AppConfig[:logger].error "Unable to save imdb profile to #{filespec} - #{e.to_s}"
-    end
-  end
-
   protected
 
   # @movie keys => [:title, :directors, :poster_url, :tiny_poster_url, :poster,
@@ -104,6 +110,18 @@ class ImdbProfile
       movie = nil
     end
     movie
+  end
+
+  def save(filespec)
+    begin
+      xml = self.to_xml
+      unless xml.blank?
+        AppConfig[:logger].debug { "saving #{filespec}" }
+        save_to_file(filespec, xml)
+      end
+    rescue Exception => e
+      AppConfig[:logger].error "Unable to save imdb profile to #{filespec} - #{e.to_s}"
+    end
   end
 
   def save_to_file(filespec, data)
