@@ -240,14 +240,24 @@ class NfoController
     info
   end
 
-  # TODO map tmdb meta data to info
   TMDB_HASH_TO_INFO_MAP = {
+      # urls
+      # scores
+      # idents
+      # titles
+      # imdb_ids
+      # alternative_titles
+      # posters
+      # types
+      # fanarts
+      'short_overviews' => 'plot',
+      'releases' => 'year'
     }
   def tmdb_hash_to_info(tmdb_hash)
     info = Hash.new
     unless tmdb_hash.blank?
       TMDB_HASH_TO_INFO_MAP.each do |key, value|
-        info[value] = tmdb_hash[key] unless imdb_hash[key].blank?
+        info[value] = tmdb_hash[key].first unless tmdb_hash[key].blank?
       end
     end
     info
