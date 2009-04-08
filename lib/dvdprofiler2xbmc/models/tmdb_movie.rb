@@ -130,7 +130,6 @@ class TmdbMovie
   end
 
   def read_page(page)
-    puts "TmdbMovie::read_page"
     open(page).read
   end
 
