@@ -143,10 +143,12 @@ class NfoController
   # return movie hash
   def load_tmdb
     tmdb_hash = Hash.new
-    profile = TmdbProfile.first(:imdb_id => self.imdb_id,
-                                :filespec => @media.path_to(:tmdb_xml_extension))
-    unless profile.nil?
-      tmdb_hash = profile.movie
+    unless File.exist?(@media.path_to(:no_tmdb_extension))
+      profile = TmdbProfile.first(:imdb_id => self.imdb_id,
+                                  :filespec => @media.path_to(:tmdb_xml_extension))
+      unless profile.nil?
+        tmdb_hash = profile.movie
+      end
     end
     tmdb_hash
   end

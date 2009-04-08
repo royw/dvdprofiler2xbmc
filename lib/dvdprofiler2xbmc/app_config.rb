@@ -85,6 +85,7 @@ module AppConfig
     @config.thumbnail_extension        = 'tbn'
     @config.nfo_extension              = 'nfo'
     @config.no_imdb_extension          = 'no_imdb_lookup'
+    @config.no_tmdb_extension          = 'no_tmdb_lookup'
     @config.no_isbn_extension          = 'no_isbn'
     @config.dvdprofiler_xml_extension  = 'dvdprofiler.xml'
     @config.dvdprofiler_yaml_extension = 'dvdprofiler.yaml'
