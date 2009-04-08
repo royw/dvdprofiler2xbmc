@@ -1,4 +1,9 @@
+== 0.0.6 2009-04-08
+    added support for tmdb
+    added caching lookup data with movie (performance boost)
+    added specs which cache online lookups (first time slow, afterwards very fast)
 
+== 0.0.4
     ignore file backups and generated content
     tab cleanup and added Music => Musical default genre mapping
     tab cleanup

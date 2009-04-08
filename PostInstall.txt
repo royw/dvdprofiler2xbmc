@@ -1,7 +1,58 @@
+First check the version by running:
 
-For more information on dvdprofiler2xbmc, see http://dvdprofiler2xbmc.rubyforge.org
+ $ bin/dvdprofiler2xbmc -v
+ INFO dvdprofiler2xbmc: Dvdprofiler2xbmc 0.0.4
+ INFO dvdprofiler2xbmc: saving: /home/royw/.dvdprofiler2xbmcrc
 
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
+Notice that this generated a config file for you
+(/home/royw/.dvdprofiler2xbmcrc) in your home directory.
 
+Now edit the config file.  Be sure to change the following fields to match
+your system:
+
+  collection_filespec: /home/royw/DVD Profiler/Shared/Collection.xml
+  images_dir: /home/royw/DVD Profiler/Shared/Images
+  directories:
+  - /media/dad-kubuntu/public/data/videos_iso
+  - /media/dcerouter/public/data/videos_iso
+  - /media/royw-gentoo/public/data/videos_iso
+  - /media/royw-gentoo/public/data/movies
+  genre_maps: !map:Mash
+    Anime: Animation
+    Science-Fiction: Science Fiction
+    SciFi: Science Fiction
+    Musical: Musicals
+
+The "collection_filespec" points to the collection.xml file exported by
+DVD Profiler.
+
+The "images_dir" points to the directory containing the images (cover scans)
+from DVD Profiler.
+
+The "directories" are the top level directories of where your media is
+stored.  Note, may be mount points or symbolic links.
+
+The "genre_maps" is a list of genres to rename.  In the above example,
+"Anime" will be renamed "Animation", "Science-Fiction" will be renamed
+"Science Fiction", etc.
+
+You may want to adjust these also:
+
+  file_permissions: 436
+  dir_permissions: 511
+
+Note the permissions are the base 10 integer of the octal permission mask.
+For example, 436 (base 10) is 664 (base 8) and 511 (base 10) is 777 (base 8).
+
+Save the .dvdprofiler2xbmcrc file.
+
+You may want to get the command line help by running:
+
+  dvdprofiler2xbmc --help
+
+To process your media, simply run:
+
+  dvdprofiler2xbmc
+
+For more information on dvdprofiler2xbmc, see http://www/github.com/royw/dvdprofiler2xbmc
 
