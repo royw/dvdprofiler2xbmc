@@ -32,8 +32,10 @@ class FanartController
 
   DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
 
+  # TODO this only fetches the first fanart.  Probably should fetch
+  # all fanart but will need a naming scheme.  Need to research what
+  # the other xbmc utilities are doing.
   def fetch_fanart(imdb_id)
-    # TODO the fanart hash should be retrieved from the nfo_controller
     profile = TmdbProfile.new(imdb_id, @media.path_to(:tmdb_xml_extension))
     unless profile.nil? || profile.movie.blank?
       movie = profile.movie
@@ -56,6 +58,7 @@ class FanartController
     end
   end
 
+  # download the fanart
   def copy_fanart(src_url, dest_filespec)
     begin
       data = open(src_url).read
