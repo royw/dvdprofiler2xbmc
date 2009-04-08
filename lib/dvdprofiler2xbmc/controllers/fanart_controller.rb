@@ -26,7 +26,7 @@ class FanartController
 
   def fetch_fanart(imdb_id)
     # TODO the fanart hash should be retrieved from the nfo_controller
-    profile = TmdbProfile.new(imdb_id, path_to(:tmdb_xml_extension))
+    profile = TmdbProfile.new(imdb_id, @media.path_to(:tmdb_xml_extension))
     unless profile.nil? || profile.movie.blank?
       movie = profile.movie
       unless movie['fanarts'].blank?

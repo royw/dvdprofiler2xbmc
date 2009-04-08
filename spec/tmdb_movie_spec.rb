@@ -16,6 +16,7 @@ describe "TmdbMovie" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "TmdbMovie Specs" }
   end
 
   before(:each) do
@@ -76,7 +77,6 @@ describe "TmdbMovie" do
 
   it "should handle The Sand Pebble" do
     profile = TmdbMovie.new('tt0060934')
-    pp profile
     profile.idents.should be_nil
   end
 

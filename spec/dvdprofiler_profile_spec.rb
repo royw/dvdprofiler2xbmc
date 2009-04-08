@@ -17,6 +17,7 @@ describe "DvdprofilerProfile" do
     AppConfig.load
     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "DvdprofilerProfile Specs" }
   end
 
   before(:each) do

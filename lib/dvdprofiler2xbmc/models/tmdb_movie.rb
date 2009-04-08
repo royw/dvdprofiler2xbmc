@@ -89,8 +89,6 @@ class TmdbMovie
     hash
   end
 
-
-
   def to_xml
     XmlSimple.xml_out(document, 'NoAttr' => true, 'RootName' => 'movie')
   end
@@ -101,29 +99,24 @@ class TmdbMovie
 
   private
 
+    # Fetch the document with retry to handle the occasional glitches
+  def document
+    if @document.nil?
+      html = fetch(self.query)
+      @document = XmlSimple.xml_in(html)
+      @document = nil if @document['totalResults'] == ['0']
+    end
+    @document
+  end
+
   MAX_ATTEMPTS = 3
   SECONDS_BETWEEN_RETRIES = 1.0
 
-  # Fetch the document with retry to handle the occasional glitches
-  def document
+  def fetch(page)
+    doc = nil
     attempts = 0
     begin
-      if @document.nil?
-        xml = {}
-        if TmdbProfile::use_html_cache
-          begin
-            filespec = self.query.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-            xml = open(filespec).read
-          rescue Exception
-            xml = open(self.query).read
-            cache_html_files(xml)
-          end
-        else
-          xml = open(self.query).read
-        end
-        @document = XmlSimple.xml_in(xml) unless xml.blank?
-        @document = nil if @document['totalResults'].first == '0'
-      end
+      doc = read_page(page)
     rescue Exception => e
       attempts += 1
       if attempts > MAX_ATTEMPTS
@@ -133,20 +126,12 @@ class TmdbMovie
         retry
       end
     end
-    @document
+    doc
   end
 
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(html)
-    begin
-      filespec = self.query.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
+  def read_page(page)
+    puts "TmdbMovie::read_page"
+    open(page).read
   end
+
 end

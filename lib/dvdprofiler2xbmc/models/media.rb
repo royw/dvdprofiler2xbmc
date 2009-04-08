@@ -1,7 +1,7 @@
 # == Synopsis
 # Media encapsulates information about a single media file
 class Media
-  attr_reader :media_path, :image_files, :year, :media_subdirs, :title, :title_with_year
+  attr_reader :media_path, :image_files, :fanart_files, :year, :media_subdirs, :title, :title_with_year
   attr_accessor :isbn, :imdb_id
 
   DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i

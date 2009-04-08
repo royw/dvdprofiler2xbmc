@@ -16,6 +16,7 @@ describe "TmdbProfile" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "TmdbProfile Specs" }
   end
 
   before(:each) do

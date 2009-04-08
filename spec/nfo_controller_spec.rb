@@ -16,6 +16,7 @@ describe "NfoController" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "NfoController Specs" }
   end
 
   before(:each) do
@@ -32,7 +33,13 @@ describe "NfoController" do
   end
 
 
-  it "should use certifications if mpaa not available"
+  it "should use certifications if mpaa not available" do
+    NfoController.update(@media)
+    filespec = @media.path_to(:nfo_extension)
+    xml = open(filespec).read
+    hash = XmlSimple.xml_in(xml)
+    hash['mpaa'].should == ['Approved']
+  end
 
   it "should update" do
     NfoController.update(@media).should be_true

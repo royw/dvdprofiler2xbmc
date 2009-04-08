@@ -7,7 +7,7 @@ FULL_REGRESSION = false
 # Time to add your specs!
 # http://rspec.info/
 
-describe "Profile finders" do
+describe "Dvdprofiler2xbmc" do
 
   before(:all) do
     logger = Log4r::Logger.new('dvdprofiler2xbmc')
@@ -19,6 +19,7 @@ describe "Profile finders" do
     AppConfig.load
     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "Dvdprofiler2xbmc Specs" }
 
     # the ignore_isbns array contain ISBNs for titles that can not be looked up on IMDB,
     # i.e., sets ands really low volume/special interest titles.
@@ -32,10 +33,6 @@ describe "Profile finders" do
       '025192829925', # the mummy collector s set
       '707729138280'  # topper topper and topper returns
       ]
-  end
-
-  before(:each) do
-    ImdbMovie.stub!(:use_html_cache).and_return(true)
   end
 
   unless FULL_REGRESSION

@@ -16,6 +16,7 @@ describe "XbmcInfo" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
+    AppConfig[:logger].info { "XbmcInfo Specs" }
   end
 
   before(:each) do
