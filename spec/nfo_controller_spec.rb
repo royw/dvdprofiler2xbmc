@@ -30,6 +30,10 @@ describe "NfoController" do
 
   after(:all) do
     Dir.glob(File.join(TMPDIR, "nfo_controller_spec*")).each { |filename| File.delete(filename) }
+    ['imdb.xml', 'tmdb.xml', 'nfo'].each do |extension|
+      filespec = File.join(File.dirname(__FILE__), "samples/The Egg and I.#{extension}")
+      File.delete(filespec) if File.exist?(filespec)
+    end
   end
 
 
