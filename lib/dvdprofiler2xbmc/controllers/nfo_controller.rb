@@ -41,6 +41,10 @@ class NfoController
       @info.merge!(imdb_hash_to_info(imdb_hash))
       @info.merge!(dvd_hash_to_info(dvd_hash))
 
+      genres = @info['genre']
+      genres += @media.media_subdirs.split('/') if AppConfig[:subdirs_as_genres]
+      @info['genre'] = map_genres(genres.uniq)
+
       save
       result = true
     rescue Exception => e
@@ -183,8 +187,7 @@ class NfoController
     info = Hash.new
     unless dvd_hash.nil?
       dvd_hash[:genres] ||= []
-      genres = map_genres((dvd_hash[:genres] + @media.media_subdirs.split('/')).uniq)
-      info['genre'] = genres unless genres.blank?
+      info['genre'] = dvd_hash[:genres] unless dvd_hash[:genres].blank?
       info['title'] = dvd_hash[:title]
       info['year']  = [dvd_hash[:productionyear], dvd_hash[:released]].flatten.uniq.collect{|s| ((s =~ /(\d{4})/) ? $1 : nil)}.uniq.compact.first
       DVD_HASH_TO_INFO_MAP.each do |key, value|

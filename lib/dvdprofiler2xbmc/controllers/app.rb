@@ -32,13 +32,15 @@ class DvdProfiler2Xbmc
     AppConfig[:logger].info { "Media Directories:\n  #{AppConfig[:directories].join("\n  ")}" }
 
     @media_files = MediaFiles.new(AppConfig[:directories])
-    @media_files.titles.each do |title, medias|
-      break if DvdProfiler2Xbmc.interrupted?
-      medias.each do |media|
-        # note, NfoController update must be first as it sets isbn and imdb_id for media
-        NfoController.update(media)
-        ThumbnailController.update(media)
-        FanartController.update(media)
+    if AppConfig[:do_update]
+      @media_files.titles.each do |title, medias|
+        break if DvdProfiler2Xbmc.interrupted?
+        medias.each do |media|
+          # note, NfoController update must be first as it sets isbn and imdb_id for media
+          NfoController.update(media)
+          ThumbnailController.update(media)
+          FanartController.update(media)
+        end
       end
     end
 

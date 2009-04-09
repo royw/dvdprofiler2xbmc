@@ -65,7 +65,6 @@ module Dvdprofiler2xbmc
       reinitialize_logger(logger, od["--quiet"], od["--debug"])
       AppConfig.load
       AppConfig.save
-      AppConfig[:imdb_query] = !od["--no_imdb_query"]
       AppConfig[:logfile] = od['--output'] if od['--output']
       AppConfig[:logfile_level] = od['--output_level'] if od['--output_level']
       reinitialize_logger(logger, od["--quiet"], od["--debug"])
@@ -93,10 +92,6 @@ module Dvdprofiler2xbmc
           :names           => %w(--help -h),
           :opt_found       => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}},
           :opt_description => "This usage information"
-        },
-        {
-          :names           => %w(--no_imdb_query -n),
-          :opt_description => 'Do not query IMDB.com'
         },
         {
           :names           => %w(--quiet -q),

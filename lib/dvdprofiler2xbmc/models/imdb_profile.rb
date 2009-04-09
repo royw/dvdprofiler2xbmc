@@ -124,18 +124,6 @@ class ImdbProfile
     end
   end
 
-#   def save_to_file(filespec, data)
-#     new_filespec = filespec + AppConfig[:new_extension]
-#     File.open(new_filespec, "w") do |file|
-#       file.puts(data)
-#     end
-#     backup_filespec = filespec + AppConfig[:extension][:backup]
-#     File.delete(backup_filespec) if File.exist?(backup_filespec)
-#     File.rename(filespec, backup_filespec) if File.exist?(filespec)
-#     File.rename(new_filespec, filespec)
-#     File.delete(new_filespec) if File.exist?(new_filespec)
-#   end
-
   # lookup IMDB title using years as the secondary search key
   # the titles should behave as an Array, the intent here is to be
   # able to try to find the exact title from DVD Profiler and if that
