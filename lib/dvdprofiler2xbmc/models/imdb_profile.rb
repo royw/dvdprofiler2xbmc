@@ -12,7 +12,7 @@
 #                             :media_years => ['2000'],
 #                             :production_years => ['1999'],
 #                             :released_years => ['2002', '2008']
-#                             :filespec => media.path_to(:imdb_xml_extension))
+#                             :filespec => media.path_to(:imdb_xml))
 # puts profile.movie['key'].first
 # puts profile.to_xml
 # puts profile.imdb_id
@@ -117,24 +117,24 @@ class ImdbProfile
       xml = self.to_xml
       unless xml.blank?
         AppConfig[:logger].debug { "saving #{filespec}" }
-        save_to_file(filespec, xml)
+        DvdProfiler2Xbmc.save_to_file(filespec, xml)
       end
     rescue Exception => e
       AppConfig[:logger].error "Unable to save imdb profile to #{filespec} - #{e.to_s}"
     end
   end
 
-  def save_to_file(filespec, data)
-    new_filespec = filespec + AppConfig[:new_extension]
-    File.open(new_filespec, "w") do |file|
-      file.puts(data)
-    end
-    backup_filespec = filespec + AppConfig[:backup_extension]
-    File.delete(backup_filespec) if File.exist?(backup_filespec)
-    File.rename(filespec, backup_filespec) if File.exist?(filespec)
-    File.rename(new_filespec, filespec)
-    File.delete(new_filespec) if File.exist?(new_filespec)
-  end
+#   def save_to_file(filespec, data)
+#     new_filespec = filespec + AppConfig[:new_extension]
+#     File.open(new_filespec, "w") do |file|
+#       file.puts(data)
+#     end
+#     backup_filespec = filespec + AppConfig[:extension][:backup]
+#     File.delete(backup_filespec) if File.exist?(backup_filespec)
+#     File.rename(filespec, backup_filespec) if File.exist?(filespec)
+#     File.rename(new_filespec, filespec)
+#     File.delete(new_filespec) if File.exist?(new_filespec)
+#   end
 
   # lookup IMDB title using years as the secondary search key
   # the titles should behave as an Array, the intent here is to be

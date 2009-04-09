@@ -21,7 +21,7 @@ describe "NfoController" do
 
   before(:each) do
     @media = Media.new(SAMPLES_DIR, 'The Egg and I.dummy')
-    [:nfo_extension, :imdb_xml_extension, :tmdb_xml_extension].each do |extension|
+    [:imdb_xml, :tmdb_xml, :nfo].each do |extension|
       filespec = @media.path_to(extension)
       File.delete(filespec) if File.exist?(filespec)
     end
@@ -30,8 +30,8 @@ describe "NfoController" do
 
   after(:all) do
     Dir.glob(File.join(TMPDIR, "nfo_controller_spec*")).each { |filename| File.delete(filename) }
-    ['imdb.xml', 'tmdb.xml', 'nfo'].each do |extension|
-      filespec = File.join(File.dirname(__FILE__), "samples/The Egg and I.#{extension}")
+    [:imdb_xml, :tmdb_xml, :nfo].each do |extension|
+      filespec = File.join(File.dirname(__FILE__), "samples/The Egg and I.#{AppConfig[:extensions][extension]}")
       File.delete(filespec) if File.exist?(filespec)
     end
   end
@@ -39,7 +39,7 @@ describe "NfoController" do
 
   it "should use certifications if mpaa not available" do
     NfoController.update(@media)
-    filespec = @media.path_to(:nfo_extension)
+    filespec = @media.path_to(:nfo)
     xml = open(filespec).read
     hash = XmlSimple.xml_in(xml)
     hash['mpaa'].should == ['Approved']
@@ -51,7 +51,7 @@ describe "NfoController" do
 
   it "should generate populated nfo file on update" do
     NfoController.update(@media)
-    filespec = @media.path_to(:nfo_extension)
+    filespec = @media.path_to(:nfo)
     xml = open(filespec).read
     hash = XmlSimple.xml_in(xml)
     hash['runtime'].should == ['108 min']
@@ -59,7 +59,7 @@ describe "NfoController" do
 
   it "should generate populated imdb.xml file on update" do
     NfoController.update(@media)
-    filespec = @media.path_to(:imdb_xml_extension)
+    filespec = @media.path_to(:imdb_xml)
     xml = open(filespec).read
     hash = XmlSimple.xml_in(xml)
     hash['length'].should == ['108 min']
@@ -67,7 +67,7 @@ describe "NfoController" do
 
   it "should generate populated tmdb.xml file on update" do
     NfoController.update(@media)
-    filespec = @media.path_to(:tmdb_xml_extension)
+    filespec = @media.path_to(:tmdb_xml)
     xml = open(filespec).read
     hash = XmlSimple.xml_in(xml)
     hash.should be_empty

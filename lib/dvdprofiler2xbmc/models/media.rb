@@ -1,10 +1,8 @@
 # == Synopsis
 # Media encapsulates information about a single media file
 class Media
-  attr_reader :media_path, :image_files, :fanart_files, :year, :media_subdirs, :title, :title_with_year
+  attr_reader :media_path, :image_files, :fanart_files, :year, :media_subdirs, :title, :title_with_year, :part, :extension
   attr_accessor :isbn, :imdb_id
-
-  DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
 
   def initialize(directory, media_file)
     @media_subdirs = File.dirname(media_file)
@@ -12,13 +10,18 @@ class Media
 
     cwd = File.expand_path(Dir.getwd)
     Dir.chdir(File.dirname(@media_path))
-    @nfo_files = Dir.glob("*.{#{AppConfig[:nfo_extensions].join(',')}}")
-    @image_files = Dir.glob("*.{#{AppConfig[:thumbnail_extension]}}")
-    @fanart_files = Dir.glob("*fanart*}")
+    @nfo_files = Dir.glob("*.{#{AppConfig[:extensions][:nfo]}}")
+    @image_files = Dir.glob("*.{#{AppConfig[:extensions][:thumbnail]}}")
+    @fanart_files = Dir.glob("*#{AppConfig[:extensions][:fanart]}*}")
     Dir.chdir(cwd)
 
-    @year = $1 if File.basename(@media_path) =~ /\s\-\s(\d{4})/
-    @title = find_title(@media_path)
+    components = Media.parse(@media_path)
+    unless components.nil?
+      @year = components[:year]
+      @title = components[:title]
+      @part = components[:part]
+      @extension = components[:extension]
+    end
     @title_with_year = find_title_with_year(@title, @year)
   end
 
@@ -32,11 +35,33 @@ class Media
   #  path_to('nfo') => '/a/b/c.nfo'
   def path_to(type)
     # ditch all extensions (ex, a.b => a, a.cd1.b => a)
-    new_path = File.basename(@media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
-    unless (type == :base) || AppConfig[type].nil?
-      new_path += '.' + AppConfig[type]
+    DvdProfiler2Xbmc.generate_filespec(@media_path, type)
+  end
+
+  # parse the given filespec into a hash the consists of the
+  # found parts with keys:
+  #  :title       required
+  #  :year        optional
+  #  :part        optional
+  #  :extension   required
+  def self.parse(filespec)
+    result = nil
+    filename = File.basename(filespec)
+    AppConfig[:media_parsers].each do |parser|
+      match_data = parser.regex.match(filename)
+      unless match_data.nil?
+        if((match_data.length - 1) == parser.tokens.length)
+          index = 1
+          result = {}
+          parser.tokens.each do |token|
+            result[token] = match_data[index]
+            index += 1
+          end
+          break
+        end
+      end
     end
-    File.join(File.dirname(@media_path), new_path)
+    result
   end
 
   def to_s
@@ -51,14 +76,7 @@ class Media
 
   # return the media's title extracted from the filename and cleaned up
   def find_title(media_path)
-    # ditch extensions including disc number (ex, a.part2.b => a, a.cd1.b => a)
-    title = File.basename(media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
-    title.gsub!(/\s\-\s\d{4}/, '')  # remove year
-    title.gsub!(/\s\-\s0/, '')      # remove "- 0", i.e., bad year
-    title.gsub!(/\(\d{4}\)/, '')    # remove (year)
-    title.gsub!(/\[.+\]/, '')       # remove square brackets
-    title.gsub!(/\s\s+/, ' ')       # remove multiple whitespace
-    title.strip                     # remove leading and trailing whitespace
+    Media.parse(media_path)[:title] rescue nil
   end
 
   # return the media's title but with the (year) appended

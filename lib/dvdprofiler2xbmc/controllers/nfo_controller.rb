@@ -20,7 +20,7 @@ class NfoController
   def initialize(media)
     @media = media
     @info = Hash.new
-    @xbmc_info = XbmcInfo.new(@media.path_to(:nfo_extension))
+    @xbmc_info = XbmcInfo.new(@media.path_to(:nfo))
     self.isbn = @xbmc_info.movie['isbn']
     self.imdb_id = @xbmc_info.movie['id']
   end
@@ -44,7 +44,7 @@ class NfoController
       save
       result = true
     rescue Exception => e
-      AppConfig[:logger].error { "Error updating \"#{@media.path_to(:nfo_extension)}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
+      AppConfig[:logger].error { "Error updating \"#{@media.path_to(:nfo)}\" - " + e.to_s + "\n" + e.backtrace.join("\n") }
       raise e
     end
     result
@@ -112,7 +112,7 @@ class NfoController
     unless profile.nil?
       self.isbn ||= profile.isbn
       AppConfig[:logger].info { "ISBN => #{self.isbn}" } unless self.isbn.nil?
-      profile.save(@media.path_to(:dvdprofiler_xml_extension))
+      profile.save(@media.path_to(:dvdprofiler_xml))
       dvd_hash = profile.dvd_hash
     end
     dvd_hash
@@ -122,13 +122,13 @@ class NfoController
   # return movie hash
   def load_imdb(dvd_hash)
     imdb_hash = Hash.new
-    unless File.exist?(@media.path_to(:no_imdb_extension))
+    unless File.exist?(@media.path_to(:no_imdb_lookup))
       profile = ImdbProfile.first(:imdb_id => self.imdb_id,
                                   :titles => self.get_imdb_titles,
                                   :media_years => [@media.year.to_i],
                                   :production_years => dvd_hash[:productionyear],
                                   :released_years => dvd_hash[:released],
-                                  :filespec => @media.path_to(:imdb_xml_extension)
+                                  :filespec => @media.path_to(:imdb_xml)
                                   )
       unless profile.nil?
         self.imdb_id ||= profile.imdb_id
@@ -143,9 +143,9 @@ class NfoController
   # return movie hash
   def load_tmdb
     tmdb_hash = Hash.new
-    unless File.exist?(@media.path_to(:no_tmdb_extension))
+    unless File.exist?(@media.path_to(:no_tmdb_lookup))
       profile = TmdbProfile.first(:imdb_id => self.imdb_id,
-                                  :filespec => @media.path_to(:tmdb_xml_extension))
+                                  :filespec => @media.path_to(:tmdb_xml))
       unless profile.nil?
         tmdb_hash = profile.movie
       end

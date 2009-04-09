@@ -20,6 +20,7 @@ describe "TmdbProfile" do
   end
 
   before(:each) do
+    # tt0465234 => National Treasure: Book of Secrets
     @profile = TmdbProfile.first(:imdb_id => 'tt0465234')
   end
 

@@ -80,30 +80,67 @@ module AppConfig
     # You probably will not need to change these
     # Source file extensions.
     @config.image_extensions    = [ 'jpg', 'jpeg', 'png', 'gif' ]
-    @config.nfo_extensions      = [ 'nfo' ]
     # Destination file extensions
-    @config.thumbnail_extension        = 'tbn'
-    @config.nfo_extension              = 'nfo'
-    @config.no_imdb_extension          = 'no_imdb_lookup'
-    @config.no_tmdb_extension          = 'no_tmdb_lookup'
-    @config.no_isbn_extension          = 'no_isbn'
-    @config.dvdprofiler_xml_extension  = 'dvdprofiler.xml'
-    @config.dvdprofiler_yaml_extension = 'dvdprofiler.yaml'
-    @config.imdb_xml_extension         = 'imdb.xml'
-    @config.imdb_yaml_extension        = 'imdb.yaml'
-    @config.tmdb_xml_extension         = 'tmdb.xml'
-    @config.tmdb_yaml_extension        = 'tmdb.yaml'
-    @config.fanart_extension           = '-fanart'
-    @config.new_extension              = '.new'
-    @config.backup_extension           = '~'
+
+    @config.extensions  = {
+      :fanart           => '-fanart',
+      :thumbnail        => 'tbn',
+      :nfo              => 'nfo',
+      :dvdprofiler_xml  => 'dvdprofiler.xml',
+      :imdb_xml         => 'imdb.xml',
+      :tmdb_xml         => 'tmdb.xml',
+      :new              => 'new',
+      :backup           => '~',
+      :no_isbn          => 'no_isbn',
+      :no_imdb_lookup   => 'no_imdb_lookup',
+      :no_tmdb_lookup   => 'no_tmdb_lookup',
+      }
+
+    @config.naming = {
+      :fanart          => {:part => '%t%e',  :no_part => '%t%e'},
+      :thumbnail       => {:part => '%t.%e', :no_part => '%t.%e'},
+      :nfo             => {:part => '%t.%e', :no_part => '%t.%e'},
+      :dvdprofiler_xml => {:part => '%t.%e', :no_part => '%t.%e'},
+      :imdb_xml        => {:part => '%t.%e', :no_part => '%t.%e'},
+      :tmdb_xml        => {:part => '%t.%e', :no_part => '%t.%e'}
+    }
+
+    @config.part_regex = /\.(cd|part|pt|disk|disc)\d+/i
+
+    # "movie title - yyyy.ext"
+    # "movie title (yyyy).ext"
+    # "movie title.ext"
+    # "movie title - yyyy.partN.ext"
+    # "movie title (yyyy).partN.ext"
+    # "movie title.partN.ext"
+    @config.media_parsers = [
+      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\.(cd\d+|part\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+       :tokens => [:title, :year, :part, :extension]
+       },
+      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\.(cd\d+|part\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+       :tokens => [:title, :year, :part, :extension]
+       },
+      {:regex => /^\s*(.*\S)\s*\.(cd\d+|part\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+       :tokens => [:title, :part, :extension]
+       },
+      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\.([^.]+)\s*$/,
+       :tokens => [:title, :year, :extension]
+       },
+      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\.([^.]+)\s*$/,
+       :tokens => [:title, :year, :extension]
+       },
+      {:regex => /^\s*(.*\S)\s*\.([^.]+)\s*$/,
+       :tokens => [:title, :extension]
+       }
+    ]
 
     # map some genre names
     @config.genre_maps = {
-        'SciFi'           => 'Science Fiction',
-        'Science-Fiction' => 'Science Fiction',
-        'Anime'           => 'Animation',
-        'Musical'         => 'Musicals',
-        'Music'           => 'Musicals'
+      'SciFi'           => 'Science Fiction',
+      'Science-Fiction' => 'Science Fiction',
+      'Anime'           => 'Animation',
+      'Musical'         => 'Musicals',
+      'Music'           => 'Musicals'
     }
 
     @config.file_permissions = 0664

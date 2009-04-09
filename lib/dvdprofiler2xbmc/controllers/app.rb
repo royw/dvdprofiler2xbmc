@@ -77,6 +77,52 @@ class DvdProfiler2Xbmc
     buf
   end
 
+  def self.save_to_file(filespec, data)
+    new_filespec = filespec + AppConfig[:extensions][:new]
+    File.open(new_filespec, "w") do |file|
+      file.puts(data)
+    end
+    backup_filespec = filespec + AppConfig[:extensions][:backup]
+    File.delete(backup_filespec) if File.exist?(backup_filespec)
+    File.rename(filespec, backup_filespec) if File.exist?(filespec)
+    File.rename(new_filespec, filespec)
+    File.delete(new_filespec) if File.exist?(new_filespec)
+  end
+
+  def self.generate_filespec(media_pathspec, type, append_extension=nil)
+    filespec = nil
+    begin
+      basespec = File.basename(media_pathspec, ".*").gsub(AppConfig[:part_regex], '')
+      dirname = File.dirname(media_pathspec)
+      part = :no_part
+      if media_pathspec =~ AppConfig[:part_regex]
+        part = :part
+      end
+
+      extension = AppConfig[:extensions][type]
+
+      if AppConfig[:naming][type].nil?
+        filespec = File.join(dirname, basespec)
+        unless extension.blank?
+          filespec += extension
+        end
+      else
+        format_str = AppConfig[:naming][type][part]
+        unless format_str.blank?
+          unless extension.blank?
+            filespec = File.join(dirname, format_str.gsub(/%t/, basespec).gsub(/%e/, extension))
+          end
+        end
+      end
+      unless append_extension.nil?
+        filespec += append_extension
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error in generate_filespec(#{media_pathspec}, #{type}, #{append_extension}) - #{e.to_s}" }
+    end
+    filespec
+  end
+
   protected
 
   # set the directory and file permissions for all files and directories under
@@ -120,7 +166,7 @@ class DvdProfiler2Xbmc
         if medias[0].isbn.nil?
           paths = []
           medias.each do |media|
-            unless File.exist? media.path_to(:no_isbn_extension)
+            unless File.exist? media.path_to(:no_isbn)
               paths << "  #{media.media_path}"
             end
           end
@@ -157,7 +203,7 @@ class DvdProfiler2Xbmc
         buf << "No media for #{title}"
       else
         medias.each do |media|
-          thumbnail = media.path_to(:thumbnail_extension)
+          thumbnail = media.path_to(:thumbnail)
           unless File.exist?(thumbnail)
             buf << "  #{thumbnail} #{media.imdb_id.nil? ? '' : media.imdb_id}"
           end

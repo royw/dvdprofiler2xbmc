@@ -39,7 +39,7 @@ class ThumbnailController
   def fetch_imdb_thumbnail(imdb_id)
     imdb_movie = ImdbMovie.new(imdb_id.gsub(/^tt/, ''))
     source_uri = imdb_movie.poster.image
-    dest_image_filespec = @media.path_to(:thumbnail_extension)
+    dest_image_filespec = @media.path_to(:thumbnail)
     puts "fetch_imdb_thumbnail(#{imdb_id}) => #{source_uri}"
     begin
       File.open(dest_image_filespec, "wb") {|f| f.write(open(source_uri).read)}
@@ -52,7 +52,7 @@ class ThumbnailController
   def copy_thumbnail(isbn)
     src_image_filespec = File.join(AppConfig[:images_dir], "#{isbn}f.jpg")
     if File.exist?(src_image_filespec)
-      dest_image_filespec = @media.path_to(:thumbnail_extension)
+      dest_image_filespec = @media.path_to(:thumbnail)
       do_copy = true
       if File.exist?(dest_image_filespec)
         if File.mtime(src_image_filespec) <= File.mtime(dest_image_filespec)

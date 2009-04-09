@@ -23,39 +23,61 @@ class FanartController
     unless @media.imdb_id.blank?
       if @media.fanart_files.empty?
         fetch_fanart(@media.imdb_id)
+        link_fanart(@media.path_to(:fanart))
       end
     end
     result
   end
 
+  def link_fanart(dest_filespec)
+    ['original', 'mid', 'cover', 'thumb'].each do |size|
+      files = Dir.glob("#{dest_filespec}.#{size}.*")
+      unless files.blank?
+        filespec = files.sort.first
+        extension = File.extname(filespec)
+        link_filespec = dest_filespec + extension
+        unless File.exist?(link_filespec)
+          File.link(filespec, link_filespec)
+        end
+        break
+      end
+    end
+  end
+
   protected
 
-  DISC_NUMBER_REGEX = /\.(cd|part|disk|disc)\d+/i
-
-  # TODO this only fetches the first fanart.  Probably should fetch
-  # all fanart but will need a naming scheme.  Need to research what
-  # the other xbmc utilities are doing.
   def fetch_fanart(imdb_id)
-    profile = TmdbProfile.new(imdb_id, @media.path_to(:tmdb_xml_extension))
+    profile = TmdbProfile.new(imdb_id, @media.path_to(:tmdb_xml))
+    indexes = {}
     unless profile.nil? || profile.movie.blank?
       movie = profile.movie
       unless movie['fanarts'].blank?
-        fanart = movie['fanarts'].first
-        AppConfig[:logger].debug { "#{fanart.inspect}" }
-        src_url = fanart['content']
-        unless src_url.blank?
-          fanart_filename = File.basename(@media.media_path, ".*").gsub(DISC_NUMBER_REGEX, '')
-          fanart_filename += AppConfig[:fanart_extension]
-          fanart_filename += File.extname(src_url)
-          dest_filespec = File.join(File.dirname(@media.media_path), fanart_filename)
-          unless File.exist?(dest_filespec)
-            AppConfig[:logger].info { "src_url => #{src_url}" }
-            AppConfig[:logger].info { "dest_fanart_filespec => #{dest_filespec}" }
-            copy_fanart(src_url, dest_filespec)
+        fanarts = movie['fanarts']
+        fanarts.each do |fanart|
+          AppConfig[:logger].debug { "#{fanart.inspect}" }
+          src_url = fanart['content']
+          unless src_url.blank?
+            dest_filespec = FanartController.get_destination_filespec(@media.media_path, fanart, indexes)
+            unless File.exist?(dest_filespec)
+              AppConfig[:logger].info { "src_url => #{src_url}" }
+              AppConfig[:logger].info { "dest_fanart_filespec => #{dest_filespec}" }
+              copy_fanart(src_url, dest_filespec)
+            end
           end
         end
       end
     end
+  end
+
+  def FanartController.get_destination_filespec(media_path, fanart, indexes)
+    extension = File.extname(fanart['content'])
+    size = fanart['size']
+    unless size.blank?
+      indexes[size] ||= -1
+      indexes[size] += 1
+      extension = ".#{size}.#{indexes[size]}#{extension}"
+    end
+    fanart_filename = DvdProfiler2Xbmc.generate_filespec(media_path, :fanart, extension)
   end
 
   # download the fanart
