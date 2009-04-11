@@ -118,6 +118,9 @@ class Collection
           dvd_hash[:lastedited] = dvd[:lastedited][0] unless dvd[:lastedited].blank?
           directors = find_directors(dvd[:credits])
           dvd_hash[:directors] = directors unless directors.blank?
+          dvd_hash[:boxset] = dvd[:boxset] unless dvd[:boxset].blank?
+          dvd_hash[:mediatypes] = dvd[:mediatypes] unless dvd[:mediatypes].blank?
+          dvd_hash[:format] = dvd[:format] unless dvd[:format].blank?
           @isbn_dvd_hash[isbn] = dvd_hash
         end
       end
