@@ -14,7 +14,8 @@ $hoe = Hoe.new('dvdprofiler2xbmc', Dvdprofiler2xbmc::VERSION) do |p|
     ['royw-imdb','>= 0.0.16'],
     ['log4r','>= 1.0.5'],
     ['commandline','>= 0.7.10'],
-    ['mash','>= 0.0.3']
+    ['mash','>= 0.0.3'],
+    ['highline', '>= 1.5.0']
   ]
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"]

@@ -1,5 +1,6 @@
+require File.join(File.dirname(__FILE__), 'config_editor')
 require 'commandline/optionparser'
-include CommandLine
+# include CommandLine
 
 # Command Line interface for the Dvdprofiler2Xbmc application.
 # All application output is via AppConfig[:logger] so we have
@@ -39,7 +40,16 @@ module Dvdprofiler2xbmc
 
         setup_app_config(od, logger)
 
-        unless od["--help"] || od["--version"]
+        logger.info(AppConfig.to_s) if  od["--show_config"]
+
+        if od["--edit_config"]
+          editor = ConfigEditor.new
+          editor.execute
+        end
+
+        skip_execution = false
+        %w(--help --version --show_config --edit_config).each {|flag| skip_execution = true if od[flag]}
+        unless skip_execution
           # create and execute class instance here
           app = DvdProfiler2Xbmc.instance
           app.execute
@@ -79,7 +89,7 @@ module Dvdprofiler2xbmc
     # Setup the command line option parser
     # Returns:: OptionParser instances
     def self.setup_parser()
-      options = OptionParser.new()
+      options = CommandLine::OptionParser.new()
 
       # flag options
       [
@@ -92,6 +102,14 @@ module Dvdprofiler2xbmc
           :names           => %w(--help -h),
           :opt_found       => lambda {Log4r::Logger['dvdprofiler2xbmc'].info{options.to_s}},
           :opt_description => "This usage information"
+        },
+        {
+          :names           => %w(--show_config -s),
+          :opt_description => "This is the current configuration information"
+        },
+        {
+          :names           => %w(--edit_config -e),
+          :opt_description => "Edit the current configuration information"
         },
         {
           :names           => %w(--quiet -q),
@@ -109,7 +127,7 @@ module Dvdprofiler2xbmc
           :names           => %w(--reports -r),
           :opt_description => 'Display reports only.  Do not do any updates.'
         }
-      ].each { |opt| options << Option.new(:flag, opt) }
+      ].each { |opt| options << CommandLine::Option.new(:flag, opt) }
 
       # non-flag options
       [
@@ -118,16 +136,16 @@ module Dvdprofiler2xbmc
           :argument_arity  => [1,1],
           :arg_description => 'logfile',
           :opt_description => 'Write log messages to file. Default = no log file',
-          :opt_found       => OptionParser::GET_ARGS
+          :opt_found       => CommandLine::OptionParser::GET_ARGS
         },
         {
           :names           => %w(--output_level -l),
           :argument_arity  => [1,1],
           :arg_description => 'level',
           :opt_description => 'Output logging level: DEBUG, INFO, WARN, ERROR. Default = INFO',
-          :opt_found       => OptionParser::GET_ARGS
+          :opt_found       => CommandLine::OptionParser::GET_ARGS
         }
-      ].each { |opt| options << Option.new(opt) }
+      ].each { |opt| options << CommandLine::Option.new(opt) }
 
       options
     end
