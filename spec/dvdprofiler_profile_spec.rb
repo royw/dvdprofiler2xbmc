@@ -33,7 +33,7 @@ describe "DvdprofilerProfile" do
   end
 
   it "should find by title" do
-    profile = DvdprofilerProfile.first(:titles => ['National Treasure: Book of Secrets'])
+    profile = DvdprofilerProfile.first(:title => 'National Treasure 2: Book of Secrets')
     profile.should_not == nil
   end
 
@@ -46,6 +46,21 @@ describe "DvdprofilerProfile" do
       hash = nil
     end
     hash.should_not be_nil
+  end
+
+  it "should find multiple movies with the same title" do
+    profiles = DvdprofilerProfile.all(:title => 'Sabrina')
+    profiles.length.should == 2
+  end
+
+  it "should find a single movie using the year when multiple movies have the same title" do
+    profiles = DvdprofilerProfile.all(:title => 'Sabrina', :year => '1995')
+    (profiles.length.should == 1) && (profiles.first.isbn.should == '097363304340')
+  end
+
+  it "should find the other single movie using the year when multiple movies have the same title" do
+    profiles = DvdprofilerProfile.all(:title => 'Sabrina', :year => '1954')
+    (profiles.length.should == 1) && (profiles.first.isbn.should == '097360540246')
   end
 
 end

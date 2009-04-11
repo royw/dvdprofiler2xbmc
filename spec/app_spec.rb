@@ -76,12 +76,12 @@ describe "App" do
   end
 
   it 'should generate -fanart.jpg filespec for single part media' do
-    filespec = DvdProfiler2Xbmc.generate_filespec('/a/b/c.m4v', :fanart, File.extname('foo.jpg'))
+    filespec = DvdProfiler2Xbmc.generate_filespec('/a/b/c.m4v', :fanart, :extension => File.extname('foo.jpg'))
     filespec.should == '/a/b/c-fanart.jpg'
   end
 
   it 'should generate -fanart.jpg filespec for multiple part media' do
-    filespec = DvdProfiler2Xbmc.generate_filespec('/a/b/c.cd1.m4v', :fanart, File.extname('foo.jpg'))
+    filespec = DvdProfiler2Xbmc.generate_filespec('/a/b/c.cd1.m4v', :fanart, :extension => File.extname('foo.jpg'))
     filespec.should == '/a/b/c-fanart.jpg'
   end
 

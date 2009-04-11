@@ -77,7 +77,7 @@ class FanartController
       indexes[size] += 1
       extension = ".#{size}.#{indexes[size]}#{extension}"
     end
-    fanart_filename = DvdProfiler2Xbmc.generate_filespec(media_path, :fanart, extension)
+    fanart_filename = DvdProfiler2Xbmc.generate_filespec(media_path, :fanart, :extension => extension)
   end
 
   # download the fanart

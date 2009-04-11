@@ -42,8 +42,10 @@ class NfoController
       @info.merge!(dvd_hash_to_info(dvd_hash))
 
       genres = @info['genre']
+      genres ||= []
       genres += @media.media_subdirs.split('/') if AppConfig[:subdirs_as_genres]
-      @info['genre'] = map_genres(genres.uniq)
+      new_genres = map_genres(genres.uniq).uniq.compact
+      @info['genre'] = new_genres unless new_genres.blank?
 
       save
       result = true
@@ -112,12 +114,20 @@ class NfoController
   def load_dvdprofiler
     dvd_hash = Hash.new
     # find ISBN for each title and assign to the media
-    profile = DvdprofilerProfile.first(:isbn => self.isbn, :title => @media.title)
-    unless profile.nil?
-      self.isbn ||= profile.isbn
-      AppConfig[:logger].info { "ISBN => #{self.isbn}" } unless self.isbn.nil?
-      profile.save(@media.path_to(:dvdprofiler_xml))
-      dvd_hash = profile.dvd_hash
+    profiles = DvdprofilerProfile.all(:isbn => self.isbn, :title => @media.title, :year => @media.year)
+    if profiles.length > 1
+      title = "#{@media.title}#{@media.year.blank? ? '' : ' (' + @media.year + ')'}"
+      Dvdprofiler2Xbmc.multiple_profiles << "#{title} #{profiles.collect{|prof| prof.isbn}.join(", ")}"
+      AppConfig[:logger].warn { "Multiple profiles found for #{title}" }
+    else
+      profile = profiles.first
+      unless profile.nil?
+        self.isbn ||= profile.isbn
+        AppConfig[:logger].info { "ISBN => #{self.isbn}" } unless self.isbn.nil?
+        profile.save(@media.path_to(:dvdprofiler_xml))
+        dvd_hash = profile.dvd_hash
+        @media.year = [dvd_hash[:productionyear]].flatten.sort.first if @media.year.blank? && !dvd_hash[:productionyear].blank?
+      end
     end
     dvd_hash
   end
@@ -128,7 +138,7 @@ class NfoController
     imdb_hash = Hash.new
     unless File.exist?(@media.path_to(:no_imdb_lookup))
       profile = ImdbProfile.first(:imdb_id => self.imdb_id,
-                                  :titles => self.get_imdb_titles,
+                                  :titles => self.get_imdb_titles(dvd_hash),
                                   :media_years => [@media.year.to_i],
                                   :production_years => dvd_hash[:productionyear],
                                   :released_years => dvd_hash[:released],
@@ -157,11 +167,34 @@ class NfoController
     tmdb_hash
   end
 
-  def get_imdb_titles
+  def get_imdb_titles(dvd_hash)
     titles = []
     titles << @info['title'] unless @info['title'].blank?
     titles << @media.title unless @media.title.blank?
+    titles += get_parent_titles(dvd_hash)
     titles.uniq.compact
+  end
+
+  # try to find box set parent's title
+  def get_parent_titles(dvd_hash)
+    titles = []
+    unless dvd_hash[:boxset].blank?
+      begin
+        AppConfig[:logger].info { "Need to find box set parent's title" }
+        pp dvd_hash[:boxset]
+        parent_isbn = dvd_hash[:boxset].first['parent'].first
+        unless parent_isbn.blank?
+          parent_profile = DvdprofilerProfile.first(:isbn => parent_isbn)
+          unless parent_profile.blank?
+            titles << parent_profile.title
+            titles += get_parent_titles(parent_profile.dvd_hash)
+          end
+        end
+      rescue
+      end
+    end
+    AppConfig[:logger].info { "parent titles => #{titles.pretty_inspect}" } unless titles.empty?
+    titles
   end
 
   DVD_HASH_TO_INFO_MAP =     {

@@ -73,4 +73,9 @@ describe "NfoController" do
     hash.should be_empty
   end
 
+#   it "should handle different movies with the same title" do
+#     media1 = Media.new('Sabrina - 1954')
+#     media2 = Media.new('Sabrina - 1995')
+#   end
+
 end

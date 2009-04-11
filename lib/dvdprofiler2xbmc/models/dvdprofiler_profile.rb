@@ -40,7 +40,13 @@ class DvdprofilerProfile
         isbns.each do |isbn|
           dvd_hash = collection.isbn_dvd_hash[isbn]
           unless dvd_hash.blank?
-            result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title])
+            unless options[:year].blank?
+              if dvd_hash[:productionyear].include? options[:year]
+                result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title])
+              end
+            else
+              result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title])
+            end
           end
         end
       end
