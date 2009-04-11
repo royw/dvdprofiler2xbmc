@@ -1,8 +1,8 @@
 # == Synopsis
 # Media encapsulates information about a single media file
 class Media
-  attr_reader :media_path, :image_files, :fanart_files, :year, :media_subdirs, :title, :title_with_year, :part, :extension
-  attr_accessor :isbn, :imdb_id
+  attr_reader :media_path, :image_files, :fanart_files, :media_subdirs, :title, :title_with_year, :part, :extension
+  attr_accessor :isbn, :imdb_id, :resolution, :year
 
   def initialize(directory, media_file)
     @media_subdirs = File.dirname(media_file)
@@ -21,6 +21,7 @@ class Media
       @title = components[:title]
       @part = components[:part]
       @extension = components[:extension]
+      @resolution = components[:resolution]
     end
     @title_with_year = find_title_with_year(@title, @year)
   end
@@ -35,7 +36,7 @@ class Media
   #  path_to('nfo') => '/a/b/c.nfo'
   def path_to(type)
     # ditch all extensions (ex, a.b => a, a.cd1.b => a)
-    DvdProfiler2Xbmc.generate_filespec(@media_path, type)
+    DvdProfiler2Xbmc.generate_filespec(@media_path, type, :year => @year, :resolution => @resolution)
   end
 
   # parse the given filespec into a hash the consists of the
