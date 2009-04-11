@@ -8,6 +8,8 @@
 class DvdProfiler2Xbmc
   include Singleton
 
+  attr_accessor :multiple_profiles
+
   @interrupted = false
 
   # A trap("INT") in the Runner calls this to indicate that a ^C has been detected.
@@ -25,6 +27,7 @@ class DvdProfiler2Xbmc
 
   def initialize
     @media_files = nil
+    @multiple_profiles = []
   end
 
   # the application's main execution loop
@@ -59,6 +62,7 @@ class DvdProfiler2Xbmc
         buf += gen_report('missing_isbns', 'Missing ISBNs')
         buf += gen_report('missing_imdb_ids', 'Missing IMDB IDs')
         buf += gen_report('missing_thumbnails', 'Missing Thumbnails')
+        buf += gen_report('multiple_profiles', 'Multiple Profiles Found For Single Titles')
       end
     end
     buf
@@ -91,7 +95,11 @@ class DvdProfiler2Xbmc
     File.delete(new_filespec) if File.exist?(new_filespec)
   end
 
-  def self.generate_filespec(media_pathspec, type, append_extension=nil)
+  # options hash may have the following:
+  #  :extension  - an extension to append to the generated filespec
+  #  :year       - the production year
+  #  :resolution - the video resolution
+  def self.generate_filespec(media_pathspec, type, options={})
     filespec = nil
     begin
       basespec = File.basename(media_pathspec, ".*").gsub(AppConfig[:part_regex], '')
@@ -102,6 +110,8 @@ class DvdProfiler2Xbmc
       end
 
       extension = AppConfig[:extensions][type]
+      year = options[:year] || ''
+      resolution = options[:resolution] || ''
 
       if AppConfig[:naming][type].nil?
         filespec = File.join(dirname, basespec)
@@ -112,15 +122,15 @@ class DvdProfiler2Xbmc
         format_str = AppConfig[:naming][type][part]
         unless format_str.blank?
           unless extension.blank?
-            filespec = File.join(dirname, format_str.gsub(/%t/, basespec).gsub(/%e/, extension))
+            filespec = File.join(dirname, format_str.gsub(/%t/, basespec).gsub(/%e/, extension).gsub(/%r/, resolution).gsub(/%y/, year))
           end
         end
       end
-      unless append_extension.nil?
-        filespec += append_extension
+      unless options[:extension].blank?
+        filespec += options[:extension]
       end
     rescue Exception => e
-      AppConfig[:logger].error { "Error in generate_filespec(#{media_pathspec}, #{type}, #{append_extension}) - #{e.to_s}" }
+      AppConfig[:logger].error { "Error in generate_filespec(#{media_pathspec}, #{type}, #{options.inspect}) - #{e.to_s}" }
     end
     filespec
   end
@@ -213,6 +223,10 @@ class DvdProfiler2Xbmc
       end
     end
     buf
+  end
+
+  def multiple_profiles_report
+    @multiple_profiles
   end
 
 end
