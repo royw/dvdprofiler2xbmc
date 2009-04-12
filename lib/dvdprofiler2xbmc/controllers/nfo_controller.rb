@@ -181,7 +181,6 @@ class NfoController
     unless dvd_hash[:boxset].blank?
       begin
         AppConfig[:logger].info { "Need to find box set parent's title" }
-        pp dvd_hash[:boxset]
         parent_isbn = dvd_hash[:boxset].first['parent'].first
         unless parent_isbn.blank?
           parent_profile = DvdprofilerProfile.first(:isbn => parent_isbn)
