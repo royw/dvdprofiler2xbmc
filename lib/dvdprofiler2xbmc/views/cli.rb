@@ -37,18 +37,20 @@ module Dvdprofiler2xbmc
         # parse the command line
         options = setup_parser()
         od = options.parse(arguments)
+        run_editor = !AppConfig.exist?
 
         setup_app_config(od, logger)
+        run_editor = true unless AppConfig.valid?
 
         logger.info(AppConfig.to_s) if  od["--show_config"]
 
-        if od["--edit_config"]
+        if run_editor || od["--edit_config"]
           editor = ConfigEditor.new
           editor.execute
         end
 
         skip_execution = false
-        %w(--help --version --show_config --edit_config).each {|flag| skip_execution = true if od[flag]}
+        %w(--help --version --show_config --edit_config).each {|flag| skip_execution = true if od[flag] || run_editor}
         unless skip_execution
           # create and execute class instance here
           app = DvdProfiler2Xbmc.instance
