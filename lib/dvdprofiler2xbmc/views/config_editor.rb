@@ -33,10 +33,10 @@ class ConfigEditor
       say AppConfig.help[field]
       say "\n"
       say "Default:"
-      say AppConfig.initial[field].pretty_inspect
+      say prettify(AppConfig.initial[field])
       say "\n"
       say "Current:"
-      say AppConfig.config[field].pretty_inspect
+      say prettify(AppConfig.config[field])
       say "\n"
 
       choose do |menu|
@@ -50,14 +50,89 @@ class ConfigEditor
           menu.choice(:false, 'False') {AppConfig.config[field] = false}
         else
           menu.choice(:default, 'Default') {AppConfig.config[field] = AppConfig.initial[field]}
-          menu.choice(:edit, 'Edit') do
-            value = data_type_editor(field, AppConfig.data_type[field], AppConfig.initial[field])
-            AppConfig.config[field] = value unless value.nil?
+          if AppConfig.data_type[field].to_s =~ /^ARRAY/
+            menu.choice(:add, 'Add') {array_add(field)}
+            menu.choice(:delete, 'Delete') {array_delete(field)}
+          elsif AppConfig.data_type[field].to_s =~ /^HASH/
+            menu.choice(:add, 'Add') {hash_add(field)}
+            menu.choice(:delete, 'Delete') {hash_delete(field)}
+          else
+            menu.choice(:edit, 'Edit') {object_edit(field)}
           end
         end
       end
     end
     result
+  end
+
+  def object_edit(field)
+    value = data_type_editor(field, AppConfig.data_type[field], AppConfig.initial[field])
+    AppConfig.config[field] = value unless value.nil?
+  end
+
+  def hash_add(field)
+    value = data_type_editor(field, AppConfig.data_type[field], AppConfig.initial[field])
+    if value =~ /([^,]+)\s*,\s*(\S.*)/
+      AppConfig.config[field][$1.strip] = $2.strip
+    end
+  end
+
+  def hash_delete(field)
+    choose do |menu|
+      menu.prompt = "Please select to remove: "
+      menu.index = :number
+      menu.index_suffix = ') '
+      menu.choice(:quit, 'Quit') {result = false}
+      values = []
+      AppConfig.config[field].each do |key, value|
+        values << "#{key} => #{value}"
+      end
+      menu.choices(*values) do |value, details|
+        if value =~ /(.*\S)\s+=>/
+          AppConfig.config[field].delete($1)
+        end
+      end
+    end
+  end
+
+  def array_add(field)
+    value = data_type_editor(field, AppConfig.data_type[field], AppConfig.initial[field])
+    AppConfig.config[field] += [value].flatten unless value.nil?
+    AppConfig.config[field].uniq!
+  end
+
+  def array_delete(field)
+    choose do |menu|
+      menu.prompt = "Please select to remove: "
+      menu.index = :number
+      menu.index_suffix = ') '
+      menu.choice(:quit, 'Quit') {result = false}
+      menu.choices(*AppConfig.config[field]) do |extension, details|
+        AppConfig.config[field].delete(extension)
+      end
+    end
+  end
+
+  def prettify(obj)
+    str = obj.pretty_inspect
+    if obj.kind_of? Mash
+      str = obj.to_hash.pretty_inspect
+    end
+    if obj.kind_of? Array
+      str = obj.inspect
+    end
+    if obj.kind_of? Hash
+      key_length = 0
+      obj.keys.each do |key|
+        key_length = key.length if key.length > key_length
+      end
+      buf = []
+      obj.each do |key,value|
+        buf << sprintf("%-#{key_length}.#{key_length}s => %s", key, value)
+      end
+      str = buf.join("\n")
+    end
+    str
   end
 
   def data_type_editor(field, data_type, default_value=nil)
@@ -145,9 +220,6 @@ class ConfigEditor
     if config_value.kind_of? Mash
       config_value = config_value.to_hash
     end
-#     if AppConfig.data_type[value] == :PERMISSIONS
-#       config_value = config_value.to_s(8)
-#     end
     str = [config_value.inspect].flatten.first.split("\n").first
     if str.length > VALUE_LENGTH
       str = str[0..(VALUE_LENGTH - 4)] + '...'
