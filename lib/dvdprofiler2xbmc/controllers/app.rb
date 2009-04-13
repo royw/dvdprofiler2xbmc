@@ -143,9 +143,9 @@ class DvdProfiler2Xbmc
     Dir.glob(File.join(dir, '**/*')).each do |f|
       begin
         if File.directory?(f)
-          File.chmod(AppConfig[:dir_permissions], f) unless AppConfig[:dir_permissions].nil?
+          File.chmod(AppConfig[:dir_permissions].to_i(8), f) unless AppConfig[:dir_permissions].nil?
         else
-          File.chmod(AppConfig[:file_permissions], f) unless AppConfig[:file_permissions].nil?
+          File.chmod(AppConfig[:file_permissions].to_i(8), f) unless AppConfig[:file_permissions].nil?
         end
       rescue Exception => e
         AppConfig[:logger].error {e.to_s}

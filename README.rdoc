@@ -8,8 +8,10 @@ The initial goal of using DVD Profiler data when available along
 with IMDB data otherwise is met.
 
 Near term plans include:
+* config editor
 * supporting multiple file matching patterns
 * supporting directory containers
+* maybe scrape posters from MoviePosterDB.com
 
 == DESCRIPTION:
 

@@ -16,6 +16,13 @@ describe "App" do
     AppConfig[:logger].warn { "\nApp Specs" }
   end
 
+  after(:all) do
+    Dir.glob(File.join(TMPDIR, "app_*")).each do |filename|
+      File.delete(filename) if File.file?(filename)
+      Dir.rmdir(filename) if File.directory?(filename)
+    end
+  end
+
   it 'should save a file' do
     # get a temp filename to a non-existing file
     outfile = Tempfile.new('tmdb_movie_spec_saving', TMPDIR)
@@ -115,4 +122,25 @@ describe "App" do
     filespec.should == '/a/b/c.dvdprofiler.xml'
   end
 
+  it 'should change file permissions' do
+    outfile = Tempfile.new('app_permission_check', TMPDIR)
+    filespec = outfile.path
+    File.chmod(0777, filespec)
+    AppConfig.config[:file_permissions] = 0642.to_s(8)
+    # set_permissions is protected method
+    DvdProfiler2Xbmc.instance.send('set_permissions', TMPDIR)
+    (File.stat(filespec).mode & 07777).should == 0642
+  end
+
+  it 'should change directory permissions' do
+    outdir = Tempfile.new('app_permission_check', TMPDIR)
+    dirspec = outdir.path
+    outdir.unlink
+    Dir.mkdir(dirspec)
+    File.chmod(0777, dirspec)
+    AppConfig.config[:dir_permissions] = 0642.to_s(8)
+    # set_permissions is protected method
+    DvdProfiler2Xbmc.instance.send('set_permissions', TMPDIR)
+    (File.stat(dirspec).mode & 07777).should == 0642
+  end
 end

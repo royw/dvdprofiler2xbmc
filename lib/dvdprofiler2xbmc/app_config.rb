@@ -10,14 +10,15 @@
 # a symbol or a string.
 module AppConfig
 
-  @config = Mash.new
-  @help = Mash.new
-  @initial = Mash.new
+  @config    = Mash.new
+  @help      = Mash.new
+  @initial   = Mash.new
   @data_type = Mash.new
+  @validate  = Mash.new
   @navigation = []
 
   class << self
-    attr_reader :help, :initial, :navigation, :config, :data_type
+    attr_reader :help, :initial, :navigation, :config, :data_type, :validate
   end
 
   @yaml_filespec = File.join(ENV['HOME'], '.dvdprofiler2xbmcrc')
@@ -101,6 +102,8 @@ module AppConfig
     # removal of no longer existing keys
     @config.version = '0.1.0'
 
+    @config.color_enabled = true
+
     @navigation = [
         {'Setup Paths' => %w(directories subdirs_as_genres collection_filespec images_dir)},
         {'Setup Permissions'=> %w(file_permissions dir_permissions)},
@@ -121,6 +124,19 @@ module AppConfig
         '/media/royw-gentoo/public/data/movies'
       ]
     @data_type.directories = :ARRAY_OF_PATHSPECS
+    @validate.directories = lambda do |directories|
+      valid = false
+      unless directories.empty?
+        valid = true
+        directories.each do |dir|
+          unless File.exist?(dir) && File.directory?(dir)
+            valid = false
+          end
+        end
+      end
+      valid
+    end
+
     @help.subdirs_as_genres = [
         'Directories underneath these will be added as genres to each .nfo file.',
         'For example:',
@@ -143,6 +159,9 @@ module AppConfig
     # My location is:
     @config.collection_filespec = '/home/royw/DVD Profiler/Shared/Collection.xml'
     @data_type.collection_filespec = :FILESPEC
+    @validate.collection_filespec = lambda do |filespec|
+      File.exist?(filespec) && File.file?(filespec)
+    end
 
     @help.collection_filespec = [
         'The location of DVD Profiler\'s cover scan images.'
@@ -151,6 +170,9 @@ module AppConfig
     # My location is:
     @config.images_dir = '/home/royw/DVD Profiler/Shared/Images'
     @data_type.images_dir = :PATHSPEC
+    @validate.images_dir = lambda do |directory|
+      File.exist?(directory) && File.directory?(directory)
+    end
 
     # You will probably need to edit the MEDIA_EXTENSIONS to specify
     # the containers used in your library
@@ -161,6 +183,9 @@ module AppConfig
     @initial.media_extensions = %w(iso m4v mp4 mpeg wmv asf flv mkv mov aac nut ogg ogm ram rm rv ra rmvb 3gp vivo pva nuv nsv nsa fli flc)
     @config.media_extensions = @initial.media_extensions
     @data_type.media_extensions = :ARRAY_OF_STRINGS
+    @validate.media_extensions = lambda do |extensions|
+      !extensions.collect{|ext| ext.blank? ? nil : ext}.compact.empty?
+    end
 
     # You probably will not need to change these
     # Source file extensions.
@@ -171,6 +196,9 @@ module AppConfig
     @initial.image_extensions = %w(jpg jpeg png gif bmp tbn)
     @config.image_extensions  = @initial.image_extensions
     @data_type.image_extensions = :ARRAY_OF_STRINGS
+    @validate.image_extensions = lambda do |extensions|
+      !extensions.collect{|ext| ext.blank? ? nil : ext}.compact.empty?
+    end
 
     # This maps the file type to extension.
     # The one unusual case in the list is for :fanart where
@@ -195,7 +223,7 @@ module AppConfig
         :no_tmdb_lookup   => 'no_tmdb_lookup',
       }
     @config.extensions  = @initial.extensions
-    @data_type.extensions = :HASH_FIXED_SYMBOL_KEYS_STRING_VALUES
+#     @data_type.extensions = :HASH_FIXED_SYMBOL_KEYS_STRING_VALUES
 
     # substitutions:
     #  %t  => movie title
@@ -320,17 +348,23 @@ module AppConfig
         'Set the file permissions of all files in the scanned directories to this value.',
         'This is useful to maintain consistancy of file permissions'
       ].join("\n")
-    @initial.file_permissions = 0664
+    @initial.file_permissions = 0664.to_s(8)
     @config.file_permissions = @initial.file_permissions
     @data_type.file_permissions = :PERMISSIONS
+    @validate.file_permissions = lambda do |permissions|
+      (permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777)
+    end
 
     @help.dir_permissions = [
         'Set the directory permissions of all sub-directories in the scanned directories to this value.',
         'This is useful to maintain consistancy of directory permissions'
       ].join("\n")
-    @initial.dir_permissions = 0777
+    @initial.dir_permissions = 0777.to_s(8)
     @config.dir_permissions = @initial.dir_permissions
     @data_type.dir_permissions = :PERMISSIONS
+    @validate.dir_permissions = lambda do |permissions|
+      (permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777)
+    end
 
     @help.do_update = [
         'Perform update.'

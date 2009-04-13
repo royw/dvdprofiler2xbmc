@@ -48,29 +48,29 @@ describe "Media" do
     result.should == {:title => 'movie title', :year => '1999', :extension => 'm4v'}
   end
 
-  it 'should parse "movie title.part1.m4v"' do
-    result = Media.parse('movie title.part1.m4v')
-    result.should == {:title => 'movie title', :part => 'part1', :extension => 'm4v'}
+  it 'should parse "movie title.cd1.m4v"' do
+    result = Media.parse('movie title.cd1.m4v')
+    result.should == {:title => 'movie title', :part => 'cd1', :extension => 'm4v'}
   end
 
-  it 'should parse "movie title - 1999.part1.m4v"' do
-    result = Media.parse('movie title - 1999.part1.m4v')
-    result.should == {:title => 'movie title', :year => '1999', :part => 'part1', :extension => 'm4v'}
+  it 'should parse "movie title - 1999.cd1.m4v"' do
+    result = Media.parse('movie title - 1999.cd1.m4v')
+    result.should == {:title => 'movie title', :year => '1999', :part => 'cd1', :extension => 'm4v'}
   end
 
-  it 'should parse "movie title-1999.part1.m4v"' do
-    result = Media.parse('movie title-1999.part1.m4v')
-    result.should == {:title => 'movie title', :year => '1999', :part => 'part1', :extension => 'm4v'}
+  it 'should parse "movie title-1999.cd1.m4v"' do
+    result = Media.parse('movie title-1999.cd1.m4v')
+    result.should == {:title => 'movie title', :year => '1999', :part => 'cd1', :extension => 'm4v'}
   end
 
-  it 'should parse "movie title (1999).part1.m4v"' do
-    result = Media.parse('movie title (1999).part1.m4v')
-    result.should == {:title => 'movie title', :year => '1999', :part => 'part1', :extension => 'm4v'}
+  it 'should parse "movie title (1999).cd1.m4v"' do
+    result = Media.parse('movie title (1999).cd1.m4v')
+    result.should == {:title => 'movie title', :year => '1999', :part => 'cd1', :extension => 'm4v'}
   end
 
-  it 'should parse "movie title ( 1999 ) .part1.m4v"' do
-    result = Media.parse('movie title ( 1999 ) .part1.m4v')
-    result.should == {:title => 'movie title', :year => '1999', :part => 'part1', :extension => 'm4v'}
+  it 'should parse "movie title ( 1999 ) .cd1.m4v"' do
+    result = Media.parse('movie title ( 1999 ) .cd1.m4v')
+    result.should == {:title => 'movie title', :year => '1999', :part => 'cd1', :extension => 'm4v'}
   end
 
   it 'should generate path_to(:nfo)' do
@@ -79,7 +79,7 @@ describe "Media" do
   end
 
   it 'should generate path_to(:nfo) for multipart media' do
-    media = Media.new(File.join(File.dirname(__FILE__), 'samples'), 'Ma and Pa Kettle.part1.dummy')
+    media = Media.new(File.join(File.dirname(__FILE__), 'samples'), 'Ma and Pa Kettle.cd1.dummy')
     media.path_to(:nfo).should == File.expand_path('spec/samples/Ma and Pa Kettle.nfo')
   end
 
