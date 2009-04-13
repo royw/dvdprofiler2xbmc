@@ -10,43 +10,57 @@
 # a symbol or a string.
 module AppConfig
 
+  # @config, @help, @initial, @data_type, @validate, and @validate_item
+  # are mashes that share the same keys.  For example @help.foo would be
+  # the help text for @config.foo
+
+  # the current config values
   @config    = Mash.new
+
+  # help about the config item
   @help      = Mash.new
+
+  # initial (default) config values
   @initial   = Mash.new
+
+  # data type constants used in the editor
   @data_type = Mash.new
+
+  # validate the config item
   @validate  = Mash.new
+
+  # validate an entry for a config item, note usually need to allow
+  # empty string for either array entry termination or to accept
+  # a default value
+  @validate_item = Mash.new
+
+  # the @navigation array contains hashes where each hash is a "page"
+  # that contains an array of @config keys.  This provides a natural
+  # organization for UIs.
   @navigation = []
 
   class << self
-    attr_reader :help, :initial, :navigation, :config, :data_type, :validate
+    attr_reader :help, :initial, :navigation, :config, :data_type, :validate, :validate_item
   end
 
   @yaml_filespec = File.join(ENV['HOME'], '.dvdprofiler2xbmcrc')
 
+  # shortcut accessor for @config items
   def self.[](k)
     @config[k]
   end
 
+  # shortcut accessor for @config items
   def self.[]=(k,v)
     @config[k] = v
   end
 
-  def self.save
-    begin
-      unless @config.blank?
-        File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
-        AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
-        File.open(@yaml_filespec, "w") do |f|
-          cfg = @config
-          cfg.delete('logger')
-          YAML.dump(cfg, f)
-        end
-      end
-    rescue Exception => e
-      AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s + "\n" + e.backtrace.join("\n")}
-    end
+  # does the config file exist?
+  def self.exist?
+    File.exist?(@yaml_filespec)
   end
 
+  # load the config file, overwriting current values
   def self.load
     begin
       if File.exist?(@yaml_filespec)
@@ -74,6 +88,24 @@ module AppConfig
     end
   end
 
+  # save the config file
+  def self.save
+    begin
+      unless @config.blank?
+        File.delete(@yaml_filespec) if File.exist?(@yaml_filespec)
+        AppConfig[:logger].info { "saving: #{@yaml_filespec}" }
+        File.open(@yaml_filespec, "w") do |f|
+          cfg = @config
+          cfg.delete('logger')
+          YAML.dump(cfg, f)
+        end
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error saving config file \"#{@yaml_filespec} - " + e.to_s + "\n" + e.backtrace.join("\n")}
+    end
+  end
+
+  # generate a string for displaying the current config
   def self.to_s
     buf = []
     @navigation.each do |page|
@@ -95,6 +127,18 @@ module AppConfig
     buf.join("\n")
   end
 
+  # is the current config valid?
+  def self.valid?
+    valid = true
+    @validate.each do |field, value|
+      unless @validate[field].call(@config[field])
+        valid = false
+      end
+    end
+    valid
+  end
+
+  # set the config to the default values
   def self.default
     # Note, all paths and extensions are case sensitive
 
@@ -105,6 +149,7 @@ module AppConfig
     @config.color_enabled = true
 
     @navigation = [
+        {'Application Options' => %w(color_enabled)},
         {'Setup Paths' => %w(directories subdirs_as_genres collection_filespec images_dir)},
         {'Setup Permissions'=> %w(file_permissions dir_permissions)},
         {'Setup Genre Mapping' => %w(genre_maps)},
@@ -118,10 +163,10 @@ module AppConfig
     @initial.directories = []
     # My directories are:
     @config.directories = [
-        '/media/dad-kubuntu/public/data/videos_iso',
-        '/media/dcerouter/public/data/videos_iso',
-        '/media/royw-gentoo/public/data/videos_iso',
-        '/media/royw-gentoo/public/data/movies'
+#         '/media/dad-kubuntu/public/data/videos_iso',
+#         '/media/dcerouter/public/data/videos_iso',
+#         '/media/royw-gentoo/public/data/videos_iso',
+#         '/media/royw-gentoo/public/data/movies'
       ]
     @data_type.directories = :ARRAY_OF_PATHSPECS
     @validate.directories = lambda do |directories|
@@ -135,6 +180,9 @@ module AppConfig
         end
       end
       valid
+    end
+    @validate_item.directories = lambda do |dir|
+      dir.empty? || (File.exist?(dir) && File.directory?(dir))
     end
 
     @help.subdirs_as_genres = [
@@ -162,8 +210,11 @@ module AppConfig
     @validate.collection_filespec = lambda do |filespec|
       File.exist?(filespec) && File.file?(filespec)
     end
+    @validate_item.collection_filespec = lambda do |filespec|
+      filespec.empty? || (File.exist?(filespec) && File.file?(filespec))
+    end
 
-    @help.collection_filespec = [
+    @help.images_dir = [
         'The location of DVD Profiler\'s cover scan images.'
       ].join("\n")
     @initial.images_dir = '~/DVD Profiler/Databases/Exports/Images'
@@ -172,6 +223,9 @@ module AppConfig
     @data_type.images_dir = :PATHSPEC
     @validate.images_dir = lambda do |directory|
       File.exist?(directory) && File.directory?(directory)
+    end
+    @validate_item.images_dir = lambda do |directory|
+      directory.empty? || (File.exist?(directory) && File.directory?(directory))
     end
 
     # You will probably need to edit the MEDIA_EXTENSIONS to specify
@@ -186,6 +240,9 @@ module AppConfig
     @validate.media_extensions = lambda do |extensions|
       !extensions.collect{|ext| ext.blank? ? nil : ext}.compact.empty?
     end
+    @validate_item.media_extensions = lambda do |extension|
+      true
+    end
 
     # You probably will not need to change these
     # Source file extensions.
@@ -198,6 +255,50 @@ module AppConfig
     @data_type.image_extensions = :ARRAY_OF_STRINGS
     @validate.image_extensions = lambda do |extensions|
       !extensions.collect{|ext| ext.blank? ? nil : ext}.compact.empty?
+    end
+    @validate_item.media_extensions = lambda do |extension|
+      true
+    end
+
+    # map some genre names
+    @help.genre_maps = [
+        'Change the name of genres.',
+        'For example, "SciFi" can be mapped to "Science Fiction"'
+      ].join("\n")
+    @initial.genre_maps = {
+      'SciFi'           => 'Science Fiction',
+      'Science-Fiction' => 'Science Fiction',
+      'Anime'           => 'Animation',
+      'Musical'         => 'Musicals',
+      'Music'           => 'Musicals',
+      'War Film'        => 'War'
+    }
+    @config.genre_maps = @initial.genre_maps
+    @data_type.genre_maps = :HASH_STRING_KEYS_STRING_VALUES
+
+    @help.file_permissions = [
+        'Set the file permissions of all files in the scanned directories to this value.',
+        'This is useful to maintain consistancy of file permissions'
+      ].join("\n")
+    @initial.file_permissions = 0664.to_s(8)
+    @config.file_permissions = @initial.file_permissions
+    @data_type.file_permissions = :PERMISSIONS
+    @validate.file_permissions = lambda do |permissions|
+      (permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777)
+    end
+    @validate_item.file_permissions = lambda do |permissions|
+      permissions.empty? || ((permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777))
+    end
+
+    @help.dir_permissions = [
+        'Set the directory permissions of all sub-directories in the scanned directories to this value.',
+        'This is useful to maintain consistancy of directory permissions'
+      ].join("\n")
+    @initial.dir_permissions = 0777.to_s(8)
+    @config.dir_permissions = @initial.dir_permissions
+    @data_type.dir_permissions = :PERMISSIONS
+    @validate.dir_permissions = lambda do |permissions|
+      permissions.empty? || ((permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777))
     end
 
     # This maps the file type to extension.
@@ -327,44 +428,6 @@ module AppConfig
       }
     ]
     @config.media_parsers = @initial.media_parsers
-
-    # map some genre names
-    @help.genre_maps = [
-        'Change the name of genres.',
-        'For example, "SciFi" can be mapped to "Science Fiction"'
-      ].join("\n")
-    @initial.genre_maps = {
-      'SciFi'           => 'Science Fiction',
-      'Science-Fiction' => 'Science Fiction',
-      'Anime'           => 'Animation',
-      'Musical'         => 'Musicals',
-      'Music'           => 'Musicals',
-      'War Film'        => 'War'
-    }
-    @config.genre_maps = @initial.genre_maps
-    @data_type.genre_maps = :HASH_STRING_KEYS_STRING_VALUES
-
-    @help.file_permissions = [
-        'Set the file permissions of all files in the scanned directories to this value.',
-        'This is useful to maintain consistancy of file permissions'
-      ].join("\n")
-    @initial.file_permissions = 0664.to_s(8)
-    @config.file_permissions = @initial.file_permissions
-    @data_type.file_permissions = :PERMISSIONS
-    @validate.file_permissions = lambda do |permissions|
-      (permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777)
-    end
-
-    @help.dir_permissions = [
-        'Set the directory permissions of all sub-directories in the scanned directories to this value.',
-        'This is useful to maintain consistancy of directory permissions'
-      ].join("\n")
-    @initial.dir_permissions = 0777.to_s(8)
-    @config.dir_permissions = @initial.dir_permissions
-    @data_type.dir_permissions = :PERMISSIONS
-    @validate.dir_permissions = lambda do |permissions|
-      (permissions.to_i(8) >= 0) && (permissions.to_i(8) <= 07777)
-    end
 
     @help.do_update = [
         'Perform update.'

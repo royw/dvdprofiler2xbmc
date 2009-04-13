@@ -1,43 +1,69 @@
 # require 'highline'
 require "highline/import"
 
+# monkey patch HighLine to get rid of the ugly message:
+#  Your answer isn't valid (must match #<Proc:0xb76cb378@/home/royw/views/dvdprofiler2xbmc/lib/dvdprofiler2xbmc/app_config.rb:180>)
+# basically the problem is with inspecting a lambda validator, so just don't do it...
+class HighLine
+  class Question
+    def build_responses(  )
+      append_default unless default.nil?
+      @responses = { :ambiguous_completion =>
+                       "Ambiguous choice.  " +
+                       "Please choose one of #{@answer_type.inspect}.",
+                     :ask_on_error         =>
+                       "?  ",
+                     :invalid_type         =>
+                       "You must enter a valid #{@answer_type}.",
+                     :no_completion        =>
+                       "You must choose one of " +
+                       "#{@answer_type.inspect}.",
+                     :not_in_range         =>
+                       "Your answer isn't within the expected range " +
+                       "(#{expected_range}).",
+                     :not_valid            =>
+                       "Your answer isn't valid " +
+                       (@validate.kind_of?(Proc) ?
+                       '' : "(must match #{@validate.inspect}).")
+                   }.merge(@responses)
+    end
+  end
+end
+
 class ConfigEditor
 
   def initialize
   end
 
   def execute
-    AppConfig[:logger].info('Configuration Editor')
+    @saved_interrupt_message = DvdProfiler2Xbmc.interrupt_message
+    DvdProfiler2Xbmc.interrupt_message = ''
+    begin
+      AppConfig[:logger].info('Configuration Editor')
 
-    fields = AppConfig.navigation.collect do |page|
-      page.values.flatten.select do|field|
-        AppConfig.data_type[field]
+      fields = AppConfig.navigation.collect do |page|
+        page.values.flatten.select do|field|
+          AppConfig.data_type[field]
+        end
+      end.flatten.uniq.compact
+      while(field = menu_select('field', fields))
+        begin
+          edit_field(field)
+        rescue
+        end
       end
-    end.flatten.uniq.compact
-    pp fields
-    while(field = menu_select('field', fields))
-      edit_field(field)
+      if agree("Save? yes/no") {|q| q.default = 'yes'}
+        AppConfig.save
+      end
+    rescue
     end
-    if agree("Save? yes/no") {|q| q.default = 'yes'}
-      AppConfig.save
-    end
+    DvdProfiler2Xbmc.interrupt_message = @saved_interrupt_message
   end
 
   def edit_field(field)
     result = true
     while(result)
-      say "\n"
-      say "-------------------------------"
-      say field
-      say "\n"
-      say AppConfig.help[field]
-      say "\n"
-      say "Default:"
-      say prettify(AppConfig.initial[field])
-      say "\n"
-      say "Current:"
-      say prettify(AppConfig.config[field])
-      say "\n"
+      field_header(field)
 
       choose do |menu|
         menu.prompt = "Please select: "
@@ -63,6 +89,21 @@ class ConfigEditor
       end
     end
     result
+  end
+
+  def field_header(field)
+    say "\n"
+    say "-------------------------------"
+    say field
+    say "\n"
+    say AppConfig.help[field]
+    say "\n"
+    say "Default:"
+    say prettify(AppConfig.initial[field])
+    say "\n"
+    say "Current:"
+    say prettify(AppConfig.config[field])
+    say "\n"
   end
 
   def object_edit(field)
@@ -145,25 +186,28 @@ class ConfigEditor
     when :FILESPEC
       value = ask('New filespec: ') do |q|
 #         q.answer_type = File
-        q.validate = lambda { |v| File.exist?(v) && File.file?(v) }
+        q.validate = AppConfig.validate_item[field] unless AppConfig.validate_item[field].nil?
         q.confirm = false
         q.default = default_value unless default_value.nil?
       end
     when :PATHSPEC
       value = ask('New pathspec: ') do |q|
 #         q.answer_type = Pathname
-        q.validate = lambda { |v| File.exist?(v) && File.directory?(v) }
+#         q.validate = lambda { |v| File.exist?(v) && File.directory?(v) }
+        q.validate = AppConfig.validate_item[field] unless AppConfig.validate_item[field].nil?
         q.confirm = false
         q.default = default_value unless default_value.nil?
       end
     when :PERMISSIONS
       value = ask('New value (octal): ') do |q|
-        q.validate = lambda { |v| (v.to_i(8) >= 0) && (v.to_i(8) <= 07777) }
+#         q.validate = lambda { |v| (v.to_i(8) >= 0) && (v.to_i(8) <= 07777) }
+        q.validate = AppConfig.validate_item[field] unless AppConfig.validate_item[field].nil?
         q.default = default_value unless default_value.nil?
       end
     when :ARRAY_OF_STRINGS
       value = ask('New values or a blank line to quit: ') do |q|
         q.gather = ''
+        q.validate = AppConfig.validate_item[field] unless AppConfig.validate_item[field].nil?
         # note, can not have both gather and default as there is no way to
         # terminate the input loop
       end
@@ -172,7 +216,8 @@ class ConfigEditor
       # terminate the input loop
       value = ask('New pathspecs or a blank line to quit: ') do |q|
         q.gather = ''
-        q.validate = lambda { |v| v.empty? || (File.exist?(v) && File.directory?(v)) }
+#         q.validate = lambda { |v| v.empty? || (File.exist?(v) && File.directory?(v)) }
+        q.validate = AppConfig.validate_item[field] unless AppConfig.validate_item[field].nil?
       end
     when :HASH_FIXED_SYMBOL_KEYS_STRING_VALUES
     when :HASH_STRING_KEYS_STRING_VALUES
