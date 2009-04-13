@@ -11,11 +11,16 @@ class DvdProfiler2Xbmc
   attr_accessor :multiple_profiles
 
   @interrupted = false
+  @interrupt_message = "control-C detected, finishing current task"
+
+  class << self
+    attr_accessor :interrupt_message
+  end
 
   # A trap("INT") in the Runner calls this to indicate that a ^C has been detected.
   # Note, once set, it is never cleared
   def self.interrupt
-    AppConfig[:logger].error { "control-C detected, finishing current task" }
+    AppConfig[:logger].error { @interrupt_message }
     @interrupted = true
   end
 
