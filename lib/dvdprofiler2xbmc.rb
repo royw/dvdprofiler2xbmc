@@ -27,5 +27,5 @@ require 'dvdprofiler2xbmc/models/xbmc_info'
 
 
 module Dvdprofiler2xbmc
-  VERSION = '0.0.7'
+  VERSION = '0.0.8'
 end

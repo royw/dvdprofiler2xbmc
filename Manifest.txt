@@ -1,4 +1,5 @@
 .gitignore
+Announcement
 History.txt
 Manifest.txt
 PostInstall.txt
@@ -43,3 +44,6 @@ spec/tmdb_movie_spec.rb
 spec/tmdb_profile_spec.rb
 spec/xbmc_info_spec.rb
 tasks/rspec.rake
+test/test_dvdprofiler2xbmc.rb
+test/test_dvdprofiler2xbmc_cli.rb
+test/test_helper.rb
