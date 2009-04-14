@@ -1,3 +1,6 @@
+== 0.0.7 2009-04-13
+    added config editor
+
 == 0.0.6 2009-04-08
     added support for tmdb
     added caching lookup data with movie (performance boost)

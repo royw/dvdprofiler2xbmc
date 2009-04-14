@@ -23,14 +23,20 @@ lib/dvdprofiler2xbmc/models/tmdb_profile.rb
 lib/dvdprofiler2xbmc/models/xbmc_info.rb
 lib/dvdprofiler2xbmc/open_cache_extension.rb
 lib/dvdprofiler2xbmc/views/cli.rb
+lib/dvdprofiler2xbmc/views/config_editor.rb
+spec/app_spec.rb
 spec/cache_extensions.rb
+spec/config_editor_spec.rb
 spec/dvdprofiler2xbmc_spec.rb
 spec/dvdprofiler_profile_spec.rb
+spec/fanart_controller_spec.rb
 spec/imdb_profile_spec.rb
+spec/media_spec.rb
 spec/nfo_controller_spec.rb
 spec/samples/Collection.xml
 spec/samples/Collection.yaml
 spec/samples/Die Hard - 1988.nfo
+spec/samples/Ma and Pa Kettle.cd1.dummy
 spec/samples/The Egg and I.dummy
 spec/spec.opts
 spec/spec_helper.rb

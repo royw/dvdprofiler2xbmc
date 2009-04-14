@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofiler2xbmc}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
-  s.date = %q{2009-04-08}
+  s.date = %q{2009-04-13}
   s.default_executable = %q{dvdprofiler2xbmc}
-  s.description = %q{This script will attempt to match up media files from a set of directories to the collection.xml file exported from DVD Profiler.  For matches, the script will then create a {moviename}.nfo from the data in collections.xml and also copy the front cover image to {moviename}.tbn.  Both files will be placed in the same directory as the source media file.  Also the specific profile information for each movie will be saved into {moviename}.dvdprofiler.xml.  The script will then search IMDB for a title or also known as (AKA) match. If necessary, the script will refine the search by using the media year (year in media filename), then dvdprofiler production year, then dvdprofiler release year, then try again with each year plus or minus a year.  The IMDB profile found will be saved as {moviename}.imdb.xml.  Next the script will use the IMDB ID to query themovieDb.com.  This is primarily to retrieve any fanart but will also add any missing parameters to the .nfo file (very unlikely).  The TMDB profile found will be saved as {moviename}.tmdb.xml.  So in summary the files generated are:  {moviename}.tmdb.xml        - profile from themovieDb.com {moviename}.imdb.xml        - profile from imdb.com {moviename}.dvdprofiler.xml - profile from collection.xml {moviename}-fanart.jpg      - first fanart image from themovieDb.com {moviename}.tbn             - image from DVD Profiler {moviename}.nfo             - generated info profile for xbmc  To force regeneration, simply delete these files then run the script again.  Then on XBMC, set the source content to none to remove the meta data from the library, then set the source content back to Movies to import the media. This time, the data in the .nfo files will be used instead of scraping.}
+  s.description = %q{This script will attempt to match up media files from a set of directories to the collection.xml file exported from DVD Profiler.  For matches, the script will then create a {moviename}.nfo from the data in collections.xml and also copy the front cover image to {moviename}.tbn.  Both files will be placed in the same directory as the source media file.  Also the specific profile information for each movie will be saved into {moviename}.dvdprofiler.xml.  The script will then search IMDB for a title or also known as (AKA) match. If necessary, the script will refine the search by using the media year (year in media filename), then dvdprofiler production year, then dvdprofiler release year, then try again with each year plus or minus a year.  The IMDB profile found will be saved as {moviename}.imdb.xml.  Next the script will use the IMDB ID to query themovieDb.com.  This is primarily to retrieve any fanart but will also add any missing parameters to the .nfo file (very unlikely).  The TMDB profile found will be saved as {moviename}.tmdb.xml.  So in summary the files generated are:  {moviename}.tmdb.xml        - profile from themovieDb.com {moviename}.imdb.xml        - profile from imdb.com {moviename}.dvdprofiler.xml - profile from collection.xml {moviename}-fanart.jpg      - first fanart image from themovieDb.com {moviename}.tbn             - image from DVD Profiler {moviename}.nfo             - generated info profile for xbmc  To force regeneration, simply delete these files then run the script again.  Then on XBMC, set the source content to none to remove the meta data from the library, then set the source content back to Movies to import the media. This time, the data in the .nfo files will be used instead of scraping.  Note, XBMC pre-9.04 r19177 does not successfully scan all media.  The work-around is after the scan is complete to restart XBMC so it will scan again (if you have autoscan enabled).}
   s.email = ["roy@wright.org"]
   s.executables = ["dvdprofiler2xbmc"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<log4r>, [">= 1.0.5"])
       s.add_runtime_dependency(%q<commandline>, [">= 0.7.10"])
       s.add_runtime_dependency(%q<mash>, [">= 0.0.3"])
+      s.add_runtime_dependency(%q<highline>, [">= 1.5.0"])
       s.add_development_dependency(%q<newgem>, [">= 1.3.0"])
       s.add_development_dependency(%q<hoe>, [">= 1.8.0"])
     else
@@ -43,6 +44,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<log4r>, [">= 1.0.5"])
       s.add_dependency(%q<commandline>, [">= 0.7.10"])
       s.add_dependency(%q<mash>, [">= 0.0.3"])
+      s.add_dependency(%q<highline>, [">= 1.5.0"])
       s.add_dependency(%q<newgem>, [">= 1.3.0"])
       s.add_dependency(%q<hoe>, [">= 1.8.0"])
     end
@@ -53,6 +55,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<log4r>, [">= 1.0.5"])
     s.add_dependency(%q<commandline>, [">= 0.7.10"])
     s.add_dependency(%q<mash>, [">= 0.0.3"])
+    s.add_dependency(%q<highline>, [">= 1.5.0"])
     s.add_dependency(%q<newgem>, [">= 1.3.0"])
     s.add_dependency(%q<hoe>, [">= 1.8.0"])
   end

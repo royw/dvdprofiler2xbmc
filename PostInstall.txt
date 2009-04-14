@@ -1,58 +1,34 @@
 First check the version by running:
 
- $ bin/dvdprofiler2xbmc -v
- INFO dvdprofiler2xbmc: Dvdprofiler2xbmc 0.0.4
- INFO dvdprofiler2xbmc: saving: /home/royw/.dvdprofiler2xbmcrc
+Run the program and the CLI config editor will start:
 
-Notice that this generated a config file for you
-(/home/royw/.dvdprofiler2xbmcrc) in your home directory.
+    # dvdprofiler2xbmc
+    saving: /root/.dvdprofiler2xbmcrc
+    The following config items are not valid and need to be changed:
+      collection_filespec
+      directories
+      images_dir
+    Configuration Editor
 
-Now edit the config file.  Be sure to change the following fields to match
-your system:
+    Field Selection
+    1) quit
+    2)          directories  []
+    3)    subdirs_as_genres  true
+    4)  collection_filespec  "~/DVD Profiler/Databases/Exports/Collection.xml"
+    5)           images_dir  "~/DVD Profiler/Databases/Exports/Images"
+    6)     file_permissions  "664"
+    7)      dir_permissions  "777"
+    8)           genre_maps  {"Anime"=>"Animation", "Science-Fiction"=>"Science Fictio...
+    9)     media_extensions  ["iso", "m4v", "mp4", "mpeg", "wmv", "asf", "flv", "mkv",...
+    10)     image_extensions  ["jpg", "jpeg", "png", "gif", "bmp", "tbn"]
+    Please select field: 2
 
-  collection_filespec: /home/royw/DVD Profiler/Shared/Collection.xml
-  images_dir: /home/royw/DVD Profiler/Shared/Images
-  directories:
-  - /media/dad-kubuntu/public/data/videos_iso
-  - /media/dcerouter/public/data/videos_iso
-  - /media/royw-gentoo/public/data/videos_iso
-  - /media/royw-gentoo/public/data/movies
-  genre_maps: !map:Mash
-    Anime: Animation
-    Science-Fiction: Science Fiction
-    SciFi: Science Fiction
-    Musical: Musicals
+Add your media directories and the correct paths to DVD Profiler's
+Collection.xml and images directory.  Quit and save.  Now run the
+script again to process your media.
 
-The "collection_filespec" points to the collection.xml file exported by
-DVD Profiler.
+For help, run:  dvdprofiler2xbmc --help
 
-The "images_dir" points to the directory containing the images (cover scans)
-from DVD Profiler.
-
-The "directories" are the top level directories of where your media is
-stored.  Note, may be mount points or symbolic links.
-
-The "genre_maps" is a list of genres to rename.  In the above example,
-"Anime" will be renamed "Animation", "Science-Fiction" will be renamed
-"Science Fiction", etc.
-
-You may want to adjust these also:
-
-  file_permissions: 436
-  dir_permissions: 511
-
-Note the permissions are the base 10 integer of the octal permission mask.
-For example, 436 (base 10) is 664 (base 8) and 511 (base 10) is 777 (base 8).
-
-Save the .dvdprofiler2xbmcrc file.
-
-You may want to get the command line help by running:
-
-  dvdprofiler2xbmc --help
-
-To process your media, simply run:
-
-  dvdprofiler2xbmc
-
-For more information on dvdprofiler2xbmc, see http://www/github.com/royw/dvdprofiler2xbmc
+For more information on dvdprofiler2xbmc, see
+http://www/github.com/royw/dvdprofiler2xbmc
 

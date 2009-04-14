@@ -5,10 +5,9 @@
 == STATUS
 
 The initial goal of using DVD Profiler data when available along
-with IMDB data otherwise is met.
+with IMDB data otherwise is met.  Just added the CLI config editor.
 
 Near term plans include:
-* config editor
 * supporting multiple file matching patterns
 * supporting directory containers
 * maybe scrape posters from MoviePosterDB.com
@@ -47,7 +46,10 @@ To force regeneration, simply delete these files then run the script again.
 
 Then on XBMC, set the source content to none to remove the meta data from the
 library, then set the source content back to Movies to import the media.
-This time, the data in the .nfo files will be used instead of scraping.
+This time, the data in the .nfo files will be used instead of scraping.  Note,
+XBMC pre-9.04 r19177 does not successfully scan all media.  The work-around
+is after the scan is complete to restart XBMC so it will scan again (if you
+have autoscan enabled).
 
 == NOTES:
 
@@ -67,6 +69,11 @@ include these in the title.
 
 Features:
 
+* On first run will launch the config editor.  At a minimum you will
+  need to set at least one media directory and the paths to DVD Profiler's
+  exported Collection.xml and images directory must me valid.  The script
+  enforces validity by running the config editor when there is invalid
+  data and will not let you scan your media.
 * Creates .nfo files from exported collection.xml from DVD Profiler and
   imdb.com.
 * If .nfo does not have an <id> tag, then tries to find the IMDB ID by
@@ -80,76 +87,263 @@ Features:
   useful for titles you know are not on imdb.com)
 * To prevent lookup on tmdb, "touch {moviename}.no_tmdb_lookup" (this is
   useful for titles you know are not on themovieDb.com)
+* DVD Profiler recently added box set support which this script does handle.
 
 Problems:
 
-* IMDB ID scraping doesn't handle boxed sets or multiple movies per media
-  file.  I don't see how to work around this exept to eliminate from media
-  library.
-* Needs a better method to setup AppConfig defaults.  Current thinking
-  is to prompt for required parameters on first run.
 * Needs to support selectable/multiple regex based naming conventions
 * Needs to support directory containers
-* .dvdprofiler2xbmcrc uses base 10 integers for permissions.  Should be
-  either base 8 or symbolic.
 
 == SYNOPSIS:
 
-First check the version by running:
+Run the program and the CLI config editor will start:
 
- $ bin/dvdprofiler2xbmc -v
- INFO dvdprofiler2xbmc: Dvdprofiler2xbmc 0.0.4
- INFO dvdprofiler2xbmc: saving: /home/royw/.dvdprofiler2xbmcrc
+    # dvdprofiler2xbmc
+    saving: /root/.dvdprofiler2xbmcrc
+    The following config items are not valid and need to be changed:
+      collection_filespec
+      directories
+      images_dir
+    Configuration Editor
 
-Notice that this generated a config file for you
-(/home/royw/.dvdprofiler2xbmcrc) in your home directory.
+    Field Selection
+    1) quit
+    2)          directories  []
+    3)    subdirs_as_genres  true
+    4)  collection_filespec  "~/DVD Profiler/Databases/Exports/Collection.xml"
+    5)           images_dir  "~/DVD Profiler/Databases/Exports/Images"
+    6)     file_permissions  "664"
+    7)      dir_permissions  "777"
+    8)           genre_maps  {"Anime"=>"Animation", "Science-Fiction"=>"Science Fictio...
+    9)     media_extensions  ["iso", "m4v", "mp4", "mpeg", "wmv", "asf", "flv", "mkv",...
+    10)     image_extensions  ["jpg", "jpeg", "png", "gif", "bmp", "tbn"]
+    Please select field: 2
 
-Now edit the config file.  Be sure to change the following fields to match
-your system:
+    -------------------------------
+    directories
 
-  collection_filespec: /home/royw/DVD Profiler/Shared/Collection.xml
-  images_dir: /home/royw/DVD Profiler/Shared/Images
-  directories:
-  - /media/dad-kubuntu/public/data/videos_iso
-  - /media/dcerouter/public/data/videos_iso
-  - /media/royw-gentoo/public/data/videos_iso
-  - /media/royw-gentoo/public/data/movies
-  genre_maps: !map:Mash
-    Anime: Animation
-    Science-Fiction: Science Fiction
-    SciFi: Science Fiction
-    Musical: Musicals
+    Array of paths to scan for media.  Replace with your paths.
 
-The "collection_filespec" points to the collection.xml file exported by
-DVD Profiler.
+    Default:
+    []
 
-The "images_dir" points to the directory containing the images (cover scans)
-from DVD Profiler.
+    Current:
+    []
 
-The "directories" are the top level directories of where your media is
-stored.  Note, may be mount points or symbolic links.
+    1) quit
+    2) default
+    3) add
+    4) delete
+    Please select: 3
+    New pathspecs or a blank line to quit: /media/royw-gentoo/public/data/movies
 
-The "genre_maps" is a list of genres to rename.  In the above example,
-"Anime" will be renamed "Animation", "Science-Fiction" will be renamed
-"Science Fiction", etc.
 
-You may want to adjust these also:
+    -------------------------------
+    directories
 
-  file_permissions: 436
-  dir_permissions: 511
+    Array of paths to scan for media.  Replace with your paths.
 
-Note the permissions are the base 10 integer of the octal permission mask.
-For example, 436 (base 10) is 664 (base 8) and 511 (base 10) is 777 (base 8).
+    Default:
+    []
 
-Save the .dvdprofiler2xbmcrc file.
+    Current:
+    ["/media/royw-gentoo/public/data/movies"]
+
+    1) quit
+    2) default
+    3) add
+    4) delete
+    Please select: 1
+
+    Field Selection
+    1) quit
+    2)          directories  ["/media/royw-gentoo/public/data/movies"]
+    3)    subdirs_as_genres  true
+    4)  collection_filespec  "~/DVD Profiler/Databases/Exports/Collection.xml"
+    5)           images_dir  "~/DVD Profiler/Databases/Exports/Images"
+    6)     file_permissions  "664"
+    7)      dir_permissions  "777"
+    8)           genre_maps  {"Anime"=>"Animation", "Science-Fiction"=>"Science Fictio...
+    9)     media_extensions  ["iso", "m4v", "mp4", "mpeg", "wmv", "asf", "flv", "mkv",...
+    10)     image_extensions  ["jpg", "jpeg", "png", "gif", "bmp", "tbn"]
+    Please select field: 4
+
+    -------------------------------
+    collection_filespec
+
+    The location of DVD Profiler's exported Collection.xml
+
+    Default:
+    "~/DVD Profiler/Databases/Exports/Collection.xml"
+
+    Current:
+    "~/DVD Profiler/Databases/Exports/Collection.xml"
+
+    1) quit
+    2) default
+    3) edit
+    Please select: 3
+    New filespec: |~/DVD Profiler/Databases/Exports/Collection.xml| /home/royw/DVD Profiler/Shared/Collection.xml
+
+    -------------------------------
+    collection_filespec
+
+    The location of DVD Profiler's exported Collection.xml
+
+    Default:
+    "~/DVD Profiler/Databases/Exports/Collection.xml"
+
+    Current:
+    "/home/royw/DVD Profiler/Shared/Collection.xml"
+
+    1) quit
+    2) default
+    3) edit
+    Please select: 1
+
+    Field Selection
+    1) quit
+    2)          directories  ["/media/royw-gentoo/public/data/movies"]
+    3)    subdirs_as_genres  true
+    4)  collection_filespec  "/home/royw/DVD Profiler/Shared/Collection.xml"
+    5)           images_dir  "~/DVD Profiler/Databases/Exports/Images"
+    6)     file_permissions  "664"
+    7)      dir_permissions  "777"
+    8)           genre_maps  {"Anime"=>"Animation", "Science-Fiction"=>"Science Fictio...
+    9)     media_extensions  ["iso", "m4v", "mp4", "mpeg", "wmv", "asf", "flv", "mkv",...
+    10)     image_extensions  ["jpg", "jpeg", "png", "gif", "bmp", "tbn"]
+    Please select field: 5
+
+    -------------------------------
+    images_dir
+
+    The location of DVD Profiler's cover scan images.
+
+    Default:
+    "~/DVD Profiler/Databases/Exports/Images"
+
+    Current:
+    "~/DVD Profiler/Databases/Exports/Images"
+
+    1) quit
+    2) default
+    3) edit
+    Please select: 3
+    New pathspec: |~/DVD Profiler/Databases/Exports/Images| /home/royw/DVD Profiler/Shared/Images
+
+    -------------------------------
+    images_dir
+
+    The location of DVD Profiler's cover scan images.
+
+    Default:
+    "~/DVD Profiler/Databases/Exports/Images"
+
+    Current:
+    "/home/royw/DVD Profiler/Shared/Images"
+
+    1) quit
+    2) default
+    3) edit
+    Please select: 1
+
+    Field Selection
+    1) quit
+    2)          directories  ["/media/royw-gentoo/public/data/movies"]
+    3)    subdirs_as_genres  true
+    4)  collection_filespec  "/home/royw/DVD Profiler/Shared/Collection.xml"
+    5)           images_dir  "/home/royw/DVD Profiler/Shared/Images"
+    6)     file_permissions  "664"
+    7)      dir_permissions  "777"
+    8)           genre_maps  {"Anime"=>"Animation", "Science-Fiction"=>"Science Fictio...
+    9)     media_extensions  ["iso", "m4v", "mp4", "mpeg", "wmv", "asf", "flv", "mkv",...
+    10)     image_extensions  ["jpg", "jpeg", "png", "gif", "bmp", "tbn"]
+    Please select field: 1
+    Save? yes/no  |yes|
+
+    saving: /root/.dvdprofiler2xbmcrc
+
+For those really observant, you will have noticed that I run the script
+as root, which I highly recommend against.  In my case, my media is still
+shared with LinuxMCE which absolutely insanely requires the media to be
+owned by root.  One of the reasons I'm switching to XBMC.
+
+Now you can run the program again and it will start scanning your media:
+
+    # dvdprofiler2xbmc
+    saving: /root/.dvdprofiler2xbmcrc
+    Media Directories:
+      /media/royw-gentoo/public/data/movies
+
+    The Sand Pebbles
+    Loading /home/royw/DVD Profiler/Shared/Collection.yaml
+    not saving, yaml file is newer than xml file
+    ISBN => 024543013099
+    Need to find box set parent's title
+    ImdbProfile.all({:titles=>[["The Sand Pebbles"], "The Sand Pebbles"], :imdb_id=>"tt0060934", :media_years=>[1966], :production_years=>["1966"], :filespec=>"/media/royw-gentoo/public/data/movies/War/The Sand Pebbles.imdb.xml", :released_years=>["2001-05-15"]})
+    IMDB ID => tt0060934
+
+    My Super Ex-Girlfriend
+    ISBN => 024543380634
+    Need to find box set parent's title
+    ImdbProfile.all({:titles=>[["My Super Ex-Girlfriend"], "My Super Ex-Girlfriend"], :imdb_id=>"tt0465624", :media_years=>[2006], :production_years=>["2006"], :filespec=>"/media/royw-gentoo/public/data/movies/Comedy/My Super Ex-Girlfriend.imdb.xml", :released_years=>["2006-12-19"]})
+    IMDB ID => tt0465624
+    updated /media/royw-gentoo/public/data/movies/Comedy/My Super Ex-Girlfriend.nfo
+    ^Ccontrol-C detected, finishing current task
+
+As you can see above you can press ^C to interrupt at any time, but the
+script will finish processing the current media before terminating.
+
+If you let the script run to completion you may see some reports at the end
+that detail some of your problem media.  Example:
+
+    Missing ISBNs
+      /media/dcerouter/public/data/videos_iso/Drama/Across The Universe Special Features.iso
+      /media/royw-gentoo/public/data/videos_iso/Musicals/Going My Way and Holiday Inn.iso
+      /media/royw-gentoo/public/data/movies/Animation/No Time For Nuts.m4v
+      /media/dcerouter/public/data/videos_iso/Science Fiction/Riddick Trilogy 3.iso
+      /media/dcerouter/public/data/videos_iso/Science Fiction/Riddick Trilogy 1 & 2.iso
+      /media/royw-gentoo/public/data/videos_iso/Science Fiction/Aeon Flux [WS] [Special Collector s Edition].iso
+      /media/royw-gentoo/public/data/videos_iso/Thriller/Leon The Professional.iso
+      /media/dad-kubuntu/public/data/videos_iso/Action/Deja vu.iso
+
+    Missing IMDB IDs
+      Rodeo Racketeers: John Wayne Young Duke Series (1934)
+      Across The Universe Special Features
+      Going My Way and Holiday Inn
+      Pearl Harbor Payback Appointment in Tokyo (2001)
+      Riddick Trilogy 1 & 2
+      Deja vu
+      Seabiscuit: America s Legendary Racehorse (2003)
+
+    Missing Thumbnails
+      /media/dcerouter/public/data/videos_iso/Drama/Across The Universe Special Features.tbn
+      /media/royw-gentoo/public/data/videos_iso/Musicals/Going My Way and Holiday Inn.tbn
+      /media/royw-gentoo/public/data/movies/Animation/No Time For Nuts.tbn tt0902999
+      /media/dcerouter/public/data/videos_iso/Science Fiction/Riddick Trilogy 3.tbn tt0407749
+      /media/dcerouter/public/data/videos_iso/Science Fiction/Riddick Trilogy 1 & 2.tbn
+      /media/royw-gentoo/public/data/videos_iso/Comedy/The First To Go - 0.tbn tt0119126
+
+Usually the Missing ISBNs are letting you know that the media title (from
+the filename) could not be found in the DVD Profiler's Collection.xml.  The
+best approach is to check the title in the profile in DVD Profiler.
+
+Above, "Aeon Flux", "Deja vu" and "Leon The Professional" are not found
+because the actual titles have accented characters.  "Across The Universe
+Special Features" is the special feature disk so is not found.  "Going My
+Way and Holiday Inn" is a double feature disk, probably should transcode
+each movie into separate files.  "No Time For Nuts" is a cartoon on an Ice
+Age movie.  The Riddick Trilogy isos should be transcoded into separate files.
+
+The Missing IMDB IDs usually indicate either odd ball movies that are not on
+IMDB, or multiple feature titles, or multiple matches.  If it's the later then
+it's best to add the production year to the file name.
+
+You should have the idea now.
 
 You may want to get the command line help by running:
 
   dvdprofiler2xbmc --help
-
-To process your media, simply run:
-
-  dvdprofiler2xbmc
 
 
 == REQUIREMENTS:
@@ -166,7 +360,7 @@ To process your media, simply run:
 
   sudo gem uninstall royw-dvdprofiler2xbmc
 
-optionally
+optionally (shouldn't be necessary)
 
   rm ~/.dvdprofiler2xbmcrc
 
