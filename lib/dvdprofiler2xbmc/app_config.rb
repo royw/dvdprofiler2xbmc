@@ -205,7 +205,8 @@ module AppConfig
       ].join("\n")
     @initial.collection_filespec = '~/DVD Profiler/Databases/Exports/Collection.xml'
     # My location is:
-    @config.collection_filespec = '/home/royw/DVD Profiler/Shared/Collection.xml'
+    @config.collection_filespec = @initial.collection_filespec
+#     @config.collection_filespec = '/home/royw/DVD Profiler/Shared/Collection.xml'
     @data_type.collection_filespec = :FILESPEC
     @validate.collection_filespec = lambda do |filespec|
       File.exist?(filespec) && File.file?(filespec)
@@ -219,7 +220,8 @@ module AppConfig
       ].join("\n")
     @initial.images_dir = '~/DVD Profiler/Databases/Exports/Images'
     # My location is:
-    @config.images_dir = '/home/royw/DVD Profiler/Shared/Images'
+    @config.images_dir = @initial.images_dir
+#     @config.images_dir = '/home/royw/DVD Profiler/Shared/Images'
     @data_type.images_dir = :PATHSPEC
     @validate.images_dir = lambda do |directory|
       File.exist?(directory) && File.directory?(directory)
