@@ -38,6 +38,7 @@ class ConfigEditor
   def execute
     @saved_interrupt_message = DvdProfiler2Xbmc.interrupt_message
     DvdProfiler2Xbmc.interrupt_message = ''
+    report_invalid_config_items
     begin
       AppConfig[:logger].info('Configuration Editor')
 
@@ -58,6 +59,19 @@ class ConfigEditor
     rescue
     end
     DvdProfiler2Xbmc.interrupt_message = @saved_interrupt_message
+  end
+
+  def report_invalid_config_items
+    buf = []
+    AppConfig.validate.each do |field, value|
+      unless AppConfig.validate[field].call(AppConfig.config[field])
+        buf << field
+      end
+    end
+    unless buf.empty?
+      say 'The following config items are not valid and need to be changed:'
+      buf.each {|line| say "  #{line}"}
+    end
   end
 
   def edit_field(field)
@@ -236,7 +250,7 @@ class ConfigEditor
     result = false
     say("\n#{name.capitalize} Selection")
     choose do |menu|
-      menu.prompt = "Please select #{name}"
+      menu.prompt = "Please select #{name}: "
       menu.index = :number
       menu.index_suffix = ') '
       menu.choice(:quit, 'Quit') {result = false}
