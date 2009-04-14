@@ -34,7 +34,6 @@ spec/imdb_profile_spec.rb
 spec/media_spec.rb
 spec/nfo_controller_spec.rb
 spec/samples/Collection.xml
-spec/samples/Collection.yaml
 spec/samples/Die Hard - 1988.nfo
 spec/samples/Ma and Pa Kettle.cd1.dummy
 spec/samples/The Egg and I.dummy
