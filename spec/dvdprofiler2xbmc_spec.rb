@@ -84,7 +84,8 @@ describe "Dvdprofiler2xbmc" do
             count += 1
             imdb_profile = ImdbProfile.first(:titles => [dvd_hash[:title], title],
                                      :production_years => dvd_hash[:productionyear],
-                                     :released_years => dvd_hash[:released])
+                                     :released_years => dvd_hash[:released],
+                                     :logger => AppConfig[:logger])
             if imdb_profile.blank?
               buf << "Can not find IMDB ID for #{isbn} #{title}"
             else

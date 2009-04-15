@@ -142,7 +142,8 @@ class NfoController
                                   :media_years => [@media.year.to_i],
                                   :production_years => dvd_hash[:productionyear],
                                   :released_years => dvd_hash[:released],
-                                  :filespec => @media.path_to(:imdb_xml)
+                                  :filespec => @media.path_to(:imdb_xml),
+                                  :logger => AppConfig[:logger]
                                   )
       unless profile.nil?
         self.imdb_id ||= profile.imdb_id
