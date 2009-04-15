@@ -13,24 +13,27 @@
 class TmdbProfile
 
   # options:
-  #  :imdb_id => String (either with or without leading 'tt')
+  #  :imdb_id  => String (either with or without leading 'tt')
+  #  :filespec => nil or a valid pathspec
+  #  :logger   => nil or a logger instance
   def self.all(options={})
     result = []
     if has_option?(options, :imdb_id)
-      result << TmdbProfile.new(options[:imdb_id], options[:filespec])
+      result << TmdbProfile.new(options[:imdb_id], options[:filespec], options[:logger])
     end
     result
   end
 
+  # see TmdbProfile.all for description of options
   def self.first(options={})
     self.all(options).first
   end
 
-  # this is intended to be stubed by rspec where it
-  # should return true.
-  def self.use_html_cache
-    false
-  end
+#   # this is intended to be stubed by rspec where it
+#   # should return true.
+#   def self.use_html_cache
+#     false
+#   end
 
   protected
 
@@ -38,9 +41,10 @@ class TmdbProfile
     options.has_key?(key) && !options[key].blank?
   end
 
-  def initialize(ident, filespec=nil)
+  def initialize(ident, filespec, logger)
     @imdb_id = ident
     @filespec = filespec
+    @logger = OptionalLogger(logger)
     load
   end
 
@@ -63,10 +67,10 @@ class TmdbProfile
   def load
     @movie = nil
     if !@filespec.blank? && File.exist?(@filespec)
-      AppConfig[:logger].debug { "loading movie filespec=> #{@filespec.inspect}" }
+      @logger.debug { "loading movie filespec=> #{@filespec.inspect}" }
       @movie = from_xml(open(@filespec).read)
     elsif !@imdb_id.blank?
-      AppConfig[:logger].debug { "loading movie from tmdb.com, filespec=> #{@filespec.inspect}" }
+      @logger.debug { "loading movie from tmdb.com, filespec=> #{@filespec.inspect}" }
       @movie = TmdbMovie.new(@imdb_id.gsub(/^tt/, '')).to_hash
       save(@filespec) unless @filespec.blank?
     end
@@ -79,7 +83,7 @@ class TmdbProfile
     begin
       movie = XmlSimple.xml_in(xml)
     rescue Exception => e
-      AppConfig[:logger].warn { "Error converting from xml: #{e.to_s}" }
+      @logger.warn { "Error converting from xml: #{e.to_s}" }
       movie = nil
     end
     movie
@@ -89,12 +93,23 @@ class TmdbProfile
     begin
       xml = self.to_xml
       unless xml.blank?
-        AppConfig[:logger].debug { "saving #{filespec}" }
-        DvdProfiler2Xbmc.save_to_file(filespec, xml)
+        @logger.debug { "saving #{filespec}" }
+        save_to_file(filespec, xml)
       end
     rescue Exception => e
-      AppConfig[:logger].error "Unable to save tmdb profile to #{filespec} - #{e.to_s}"
+      @logger.error { "Unable to save tmdb profile to #{filespec} - #{e.to_s}" }
     end
   end
 
+  def self.save_to_file(filespec, data)
+    new_filespec = filespec + '.new'
+    File.open(new_filespec, "w") do |file|
+      file.puts(data)
+    end
+    backup_filespec = filespec + '~'
+    File.delete(backup_filespec) if File.exist?(backup_filespec)
+    File.rename(filespec, backup_filespec) if File.exist?(filespec)
+    File.rename(new_filespec, filespec)
+    File.delete(new_filespec) if File.exist?(new_filespec)
+  end
 end

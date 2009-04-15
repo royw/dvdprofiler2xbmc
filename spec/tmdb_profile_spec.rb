@@ -102,5 +102,52 @@ describe "TmdbProfile" do
     @profile.movie['scores'].first.should == '1.0'
   end
 
+    # let's make sure the generated xml from to_xml() is valid
+
+  it "should be able to convert to xml and then from xml" do
+    hash = nil
+    begin
+      profile = TmdbProfile.first(:imdb_id => 'tt0465234')
+      xml = profile.to_xml
+      hash = XmlSimple.xml_in(xml)
+    rescue
+      hash = nil
+    end
+    hash.should_not be_nil
+  end
+
+  # now let's test caching the profile to/from a file
+
+  it "should not create a file if a :filespec option is passed that is nil" do
+    profile = TmdbProfile.first(:imdb_id => 'tt0465234', :filespec => nil)
+    Dir.glob(File.join(TMPDIR, "imdb_profile_spec*")).empty?.should be_true
+  end
+
+  it "should create a file if a :filespec option is passed" do
+    filespec = get_temp_filename
+    profile = TmdbProfile.first(:imdb_id => 'tt0465234', :filespec => filespec)
+    (File.exist?(filespec) && (File.size(filespec) > 0)).should be_true
+  end
+
+  it "should load from a file if a :filespec option is passed and the file exists" do
+    filespec = get_temp_filename
+    profile1 = TmdbProfile.first(:imdb_id => 'tt0465234', :filespec => filespec)
+    profile2 = TmdbProfile.first(:filespec => filespec)
+    profile1.imdb_id.should == profile2.imdb_id
+  end
+
+  it "should not load from a file if a :filespec option is passed and the file does not exists" do
+    filespec = get_temp_filename
+    profile = TmdbProfile.first(:filespec => filespec)
+    profile.should be_nil
+  end
+
+  def get_temp_filename
+    outfile = Tempfile.new('tmdb_profile_spec', TMPDIR)
+    filespec = outfile.path
+    outfile.unlink
+    filespec
+  end
+
 end
 
