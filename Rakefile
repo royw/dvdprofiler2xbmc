@@ -24,7 +24,13 @@ begin
     gem.add_dependency('mash','>= 0.0.3')
     gem.add_dependency('highline', '>= 1.5.0')
 
-    gem.files.reject! { |fn| File.basename(fn) =~ /^tt\d+\.html/}
+    gem.files.reject! do |fn|
+      result = false
+      basename = File.basename(fn)
+      result = true if basename =~ /^tt\d+\.html/
+      result = true if basename =~ /^Collection.yaml/
+      result
+    end
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
