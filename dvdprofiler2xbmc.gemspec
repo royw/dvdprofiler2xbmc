@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofiler2xbmc}
-  s.version = "0.0.12"
+  s.version = "0.0.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
@@ -28,8 +28,6 @@ Gem::Specification.new do |s|
     "lib/dvdprofiler2xbmc/controllers/nfo_controller.rb",
     "lib/dvdprofiler2xbmc/controllers/thumbnail_controller.rb",
     "lib/dvdprofiler2xbmc/extensions.rb",
-    "lib/dvdprofiler2xbmc/models/collection.rb",
-    "lib/dvdprofiler2xbmc/models/dvdprofiler_profile.rb",
     "lib/dvdprofiler2xbmc/models/media.rb",
     "lib/dvdprofiler2xbmc/models/media_files.rb",
     "lib/dvdprofiler2xbmc/models/xbmc_info.rb",
@@ -40,7 +38,6 @@ Gem::Specification.new do |s|
     "spec/cache_extensions.rb",
     "spec/config_editor_spec.rb",
     "spec/dvdprofiler2xbmc_spec.rb",
-    "spec/dvdprofiler_profile_spec.rb",
     "spec/fanart_controller_spec.rb",
     "spec/media_spec.rb",
     "spec/nfo_controller_spec.rb",
@@ -75,7 +72,6 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/app_spec.rb",
     "spec/config_editor_spec.rb",
-    "spec/dvdprofiler_profile_spec.rb",
     "spec/fanart_controller_spec.rb",
     "spec/media_spec.rb",
     "spec/nfo_controller_spec.rb",
