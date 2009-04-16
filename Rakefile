@@ -8,10 +8,10 @@ require 'rake/rdoctask'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "tmdb"
+    gem.name = "dvdprofile2xbmc"
     gem.summary = %Q{TODO}
     gem.email = "roy@wright.org"
-    gem.homepage = "http://github.com/royw/tmdb"
+    gem.homepage = "http://github.com/royw/dvdprofile2xbmc"
     gem.authors = ["Roy Wright"]
 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
@@ -41,7 +41,6 @@ Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-
 task :default => :spec
 
 Rake::RDocTask.new do |rdoc|
@@ -53,41 +52,9 @@ Rake::RDocTask.new do |rdoc|
   end
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "tmdb #{version}"
+  rdoc.title = "dvdprofile2xbmc #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-#$hoe = Hoe.new('dvdprofiler2xbmc', Dvdprofiler2xbmc::VERSION) do |p|
-#  p.developer('Roy Wright', 'roy@wright.org')
-#  p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-#  p.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
-#  p.rubyforge_name       = p.name # TODO this is default value
-#  p.extra_deps         = [
-#    ['activesupport','>= 2.0.2'],
-#    ['xml-simple','>= 1.0.12'],
-#    ['royw-imdb','>= 0.0.19'],
-#    ['royw-tmdb','>= 0.0.1'],
-#    ['log4r','>= 1.0.5'],
-#    ['commandline','>= 0.7.10'],
-#    ['mash','>= 0.0.3'],
-#    ['highline', '>= 1.5.0']
-#  ]
-#  p.extra_dev_deps = [
-#    ['newgem', ">= #{::Newgem::VERSION}"]
-#  ]
-#
-#  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-#  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-#  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-#  p.rsync_args = '-av --delete --ignore-errors'
-#end
-
-#require 'newgem/tasks' # load /tasks/*.rake
-#Dir['tasks/**/*.rake'].each { |t| load t }
-
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
