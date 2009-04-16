@@ -17,7 +17,7 @@ describe "NfoController" do
     AppConfig[:logger] = logger
     AppConfig.load
 
-    DvdprofilerProfile.collection_filespec = AppConfig[:collection_filespec]
+    DvdprofilerProfile.collection_filespec = File.join(SAMPLES_DIR, 'Collection.xml')
     File.mkdirs(TMPDIR)
 
     AppConfig[:logger].warn { "\nNfoController Specs" }

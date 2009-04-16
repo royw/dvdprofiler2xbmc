@@ -17,7 +17,7 @@ describe "Dvdprofiler2xbmc" do
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
-    AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
+    DvdprofilerProfile.collection_filespec = File.join(SAMPLES_DIR, 'Collection.xml')
     File.mkdirs(TMPDIR)
     AppConfig[:logger].warn { "\nDvdprofiler2xbmc Specs" }
 
@@ -38,17 +38,17 @@ describe "Dvdprofiler2xbmc" do
   unless FULL_REGRESSION
     it "should find some titles (quick regression)" do
       titles = [
-#           'Alexander the Great',
-#           'Anastasia',
-#           'About a Boy',
-#           'Gung Ho',
-#           'Hot Shots',
-#           'Meltdown',
-#           'Oklahoma!',
-#           'The Man From Snowy River',
-#           'Rooster Cogburn',
-#           'Call Me The Rise And Fall of Heidi Fleiss',
-#           'batteries not included',
+          'Alexander the Great',
+          'Anastasia',
+          'About a Boy',
+          'Gung Ho',
+          'Hot Shots',
+          'Meltdown',
+          'Oklahoma!',
+          'The Man From Snowy River',
+          'Rooster Cogburn',
+          'Call Me The Rise And Fall of Heidi Fleiss',
+          'batteries not included',
           'Flyboys',
           "Captain Corelli's Mandolin",
         ].collect{|title| Collection.title_pattern(title)}
