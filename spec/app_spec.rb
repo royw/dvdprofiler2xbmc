@@ -25,7 +25,7 @@ describe "App" do
 
   it 'should save a file' do
     # get a temp filename to a non-existing file
-    outfile = Tempfile.new('tmdb_movie_spec_saving', TMPDIR)
+    outfile = Tempfile.new('app_spec', TMPDIR)
     filespec = outfile.path
     outfile.unlink
 
@@ -37,7 +37,7 @@ describe "App" do
 
   it 'should backup the file before saving' do
     # get a temp filename to a non-existing file
-    outfile = Tempfile.new('tmdb_movie_spec_saving', TMPDIR)
+    outfile = Tempfile.new('app_spec', TMPDIR)
     filespec = outfile.path
     backupspec = filespec + AppConfig[:extensions][:backup]
     outfile.unlink
