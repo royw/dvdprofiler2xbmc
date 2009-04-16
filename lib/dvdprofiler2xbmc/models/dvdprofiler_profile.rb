@@ -20,6 +20,7 @@ class DvdprofilerProfile
   # options:
   #  :isbn => String
   #  :title => String
+  #  :logger => nil or logger instance
   # returns:  Array of DvdprofilerProfile instances
   def self.all(options={})
     # :isbn_dvd_hash, :title_isbn_hash, :isbn_title_hash
@@ -29,7 +30,7 @@ class DvdprofilerProfile
     if options.has_key?(:isbn) && !options[:isbn].blank?
       dvd_hash = collection.isbn_dvd_hash[options[:isbn]]
       unless dvd_hash.blank?
-        result << DvdprofilerProfile.new(dvd_hash, options[:isbn])
+        result << DvdprofilerProfile.new(dvd_hash, options[:isbn], options[:title], options[:logger])
       end
     end
 
@@ -42,10 +43,10 @@ class DvdprofilerProfile
           unless dvd_hash.blank?
             unless options[:year].blank?
               if dvd_hash[:productionyear].include? options[:year]
-                result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title])
+                result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title], options[:logger])
               end
             else
-              result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title])
+              result << DvdprofilerProfile.new(dvd_hash, isbn, options[:title], options[:logger])
             end
           end
         end
@@ -55,7 +56,7 @@ class DvdprofilerProfile
     # return all profiles if neither :isbn nor :title are given
     if result.empty? && !options.has_key?(:isbn) && !options.has_key?(:title)
       collection.isbn_dvd_hash.each do |isbn, dvd_hash|
-        result << DvdprofilerProfile.new(dvd_hash, isbn)
+        result << DvdprofilerProfile.new(dvd_hash, isbn, nil, options[:logger])
       end
     end
 
@@ -81,17 +82,23 @@ class DvdprofilerProfile
     result
   end
 
+  class << self
+    @collection_filespec = 'Collection.xml'
+    attr_accessor :collection_filespec
+  end
+
   protected
 
   def self.collection
-    @collection ||= Collection.new(File.expand_path(AppConfig[:collection_filespec]))
+    @collection ||= Collection.new(File.expand_path(@collection_filespec))
   end
 
-  def initialize(dvd_hash, isbn, title=nil)
+  def initialize(dvd_hash, isbn, title, logger)
     @dvd_hash = dvd_hash
     @isbn = isbn
     @title = title
     @title ||= @dvd_hash[:title]
+    @logger = OptionalLogger.new(logger)
   end
 
   public
@@ -108,12 +115,24 @@ class DvdprofilerProfile
     begin
       xml = self.to_xml
       unless xml.blank?
-        AppConfig[:logger].debug { "saving #{filespec}" }
+        @logger.debug { "saving #{filespec}" }
         DvdProfiler2Xbmc.save_to_file(filespec, xml)
       end
     rescue Exception => e
-      AppConfig[:logger].error { "Unable to save dvdprofiler profile to #{filespec} - #{e.to_s}" }
+      @logger.error { "Unable to save dvdprofiler profile to #{filespec} - #{e.to_s}" }
     end
+  end
+
+  def save_to_file(filespec, data)
+    new_filespec = filespec + '.new'
+    File.open(new_filespec, "w") do |file|
+      file.puts(data)
+    end
+    backup_filespec = filespec + '~'
+    File.delete(backup_filespec) if File.exist?(backup_filespec)
+    File.rename(filespec, backup_filespec) if File.exist?(filespec)
+    File.rename(new_filespec, filespec)
+    File.delete(new_filespec) if File.exist?(new_filespec)
   end
 
 end

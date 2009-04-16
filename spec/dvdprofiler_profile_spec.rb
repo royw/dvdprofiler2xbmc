@@ -8,19 +8,21 @@ require 'tempfile'
 describe "DvdprofilerProfile" do
 
   before(:all) do
-    logger = Log4r::Logger.new('dvdprofiler2xbmc')
-    logger.outputters = Log4r::StdoutOutputter.new(:console)
-    Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
-    logger.level = Log4r::WARN
-    AppConfig.default
-    AppConfig[:logger] = logger
-    AppConfig.load
-    AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
+#     logger = Log4r::Logger.new('dvdprofiler2xbmc')
+#     logger.outputters = Log4r::StdoutOutputter.new(:console)
+#     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
+#     logger.level = Log4r::WARN
+#     AppConfig.default
+#     AppConfig[:logger] = logger
+#     AppConfig.load
+#     AppConfig[:collection_filespec] = 'spec/samples/Collection.xml'
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].warn { "\nDvdprofilerProfile Specs" }
+#     AppConfig[:logger].warn { "\nDvdprofilerProfile Specs" }
+    puts "\nDvdprofilerProfile Specs"
   end
 
   before(:each) do
+    DvdprofilerProfile.collection_filespec = 'spec/samples/Collection.xml'
     @profile = DvdprofilerProfile.first(:isbn => '786936735390')
   end
 
@@ -34,6 +36,16 @@ describe "DvdprofilerProfile" do
 
   it "should find by title" do
     profile = DvdprofilerProfile.first(:title => 'National Treasure 2: Book of Secrets')
+    profile.should_not == nil
+  end
+
+  it "should find find by fuzzy title" do
+    profile = DvdprofilerProfile.first(:title => 'National Treasure 2 Book of Secrets')
+    profile.should_not == nil
+  end
+
+  it "should find by case insensitive title" do
+    profile = DvdprofilerProfile.first(:title => 'national treasure 2: book of secrets')
     profile.should_not == nil
   end
 
