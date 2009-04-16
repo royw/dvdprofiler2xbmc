@@ -39,6 +39,8 @@ class DvdProfiler2Xbmc
   def execute
     AppConfig[:logger].info { "Media Directories:\n  #{AppConfig[:directories].join("\n  ")}" }
 
+    DvdprofilerProfile.collection_filespec = AppConfig[:collection_filespec]
+
     @media_files = MediaFiles.new(AppConfig[:directories])
     if AppConfig[:do_update]
       @media_files.titles.each do |title, medias|

@@ -12,10 +12,14 @@ describe "NfoController" do
     logger.outputters = Log4r::StdoutOutputter.new(:console)
     Log4r::Outputter[:console].formatter  = Log4r::PatternFormatter.new(:pattern => "%m")
     logger.level = Log4r::WARN
+
     AppConfig.default
     AppConfig[:logger] = logger
     AppConfig.load
+
+    DvdprofilerProfile.collection_filespec = AppConfig[:collection_filespec]
     File.mkdirs(TMPDIR)
+
     AppConfig[:logger].warn { "\nNfoController Specs" }
   end
 
