@@ -24,6 +24,6 @@ require 'dvdprofiler2xbmc/models/media_files'
 require 'dvdprofiler2xbmc/models/xbmc_info'
 
 
-module Dvdprofiler2xbmc
-  VERSION = '0.0.8'
-end
+# module Dvdprofiler2xbmc
+#   VERSION = '0.0.8'
+# end
