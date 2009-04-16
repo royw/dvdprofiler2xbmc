@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofile2xbmc}
-  s.version = "0.0.9"
+  s.version = "0.0.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
-  s.date = %q{2009-04-15}
+  s.date = %q{2009-04-16}
   s.default_executable = %q{dvdprofiler2xbmc}
   s.email = %q{roy@wright.org}
   s.executables = ["dvdprofiler2xbmc"]
@@ -45,7 +45,6 @@ Gem::Specification.new do |s|
     "spec/media_spec.rb",
     "spec/nfo_controller_spec.rb",
     "spec/samples/Collection.xml",
-    "spec/samples/Collection.yaml",
     "spec/samples/Die Hard - 1988.nfo",
     "spec/samples/Ma and Pa Kettle.cd1.dummy",
     "spec/samples/The Egg and I.dummy",
