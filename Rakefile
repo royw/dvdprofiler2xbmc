@@ -12,6 +12,7 @@ $hoe = Hoe.new('dvdprofiler2xbmc', Dvdprofiler2xbmc::VERSION) do |p|
     ['activesupport','>= 2.0.2'],
     ['xml-simple','>= 1.0.12'],
     ['royw-imdb','>= 0.0.19'],
+    ['royw-tmdb','>= 0.0.1'],
     ['log4r','>= 1.0.5'],
     ['commandline','>= 0.7.10'],
     ['mash','>= 0.0.3'],
