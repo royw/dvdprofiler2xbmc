@@ -8,10 +8,10 @@ require 'rake/rdoctask'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "dvdprofile2xbmc"
+    gem.name = "dvdprofiler2xbmc"
     gem.summary = %Q{TODO}
     gem.email = "roy@wright.org"
-    gem.homepage = "http://github.com/royw/dvdprofile2xbmc"
+    gem.homepage = "http://github.com/royw/dvdprofiler2xbmc"
     gem.authors = ["Roy Wright"]
 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
@@ -58,7 +58,7 @@ Rake::RDocTask.new do |rdoc|
   end
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "dvdprofile2xbmc #{version}"
+  rdoc.title = "dvdprofiler2xbmc #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
