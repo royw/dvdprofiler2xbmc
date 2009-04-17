@@ -47,7 +47,7 @@ class FanartController
   protected
 
   def fetch_fanart(imdb_id)
-    profile = TmdbProfile.new(imdb_id, TMDB_API_KEY, @media.path_to(:tmdb_xml))
+    profile = TmdbProfile.new(imdb_id, TMDB_API_KEY, @media.path_to(:tmdb_xml), AppConfig[:logger])
     indexes = {}
     unless profile.nil? || profile.movie.blank?
       movie = profile.movie
@@ -83,13 +83,18 @@ class FanartController
   # download the fanart
   def copy_fanart(src_url, dest_filespec)
     begin
-      data = open(src_url).read
+      data = read_page(src_url)
       File.open(dest_filespec, 'w') do |file|
         file.print(data)
       end
     rescue Exception => e
       AppConfig[:logger].error { "Error fetching fanart.\n  src_url => #{src_url},\n  dest_filespec => #{dest_filespec}\n  #{e.to_s}" }
     end
+  end
+
+  # makes reading from cache during specs possible
+  def read_page(src_url)
+    open(src_url).read
   end
 
 end

@@ -17,11 +17,15 @@ describe "FanartController" do
   end
 
   before(:each) do
-    Dir.glob(File.join(TMPDIR,'foo-fanart*')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*-fanart*')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*.dummy')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*.tmdb.xml')).each { |filename| File.delete(filename) }
   end
 
   after(:all) do
-    Dir.glob(File.join(TMPDIR,'foo-fanart*')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*-fanart*')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*.dummy')).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR,'*.tmdb.xml')).each { |filename| File.delete(filename) }
   end
 
   it 'should generate "original.0" size destination filespec' do
@@ -124,6 +128,21 @@ describe "FanartController" do
     controller = FanartController.new(nil)
     controller.link_fanart(dest_filespec)
     (File.exist?(link_filespec).should be_true) && (open(link_filespec).read.should == "#{dest_filespec}.thumb.0.jpg\n")
+  end
+
+  it 'should fetch fanart' do
+    FileUtils.touch(File.join(TMPDIR, 'Die Hard - 1988.dummy'))
+    media = Media.new(TMPDIR, 'Die Hard - 1988.dummy')
+    media.imdb_id = 'tt0095016'
+    controller = FanartController.new(media)
+    controller.send('fetch_fanart', 'tt0095016')
+    buf = []
+    %w(mid original thumb).each do |size|
+      filespec = File.join(TMPDIR, "Die Hard - 1988-fanart.#{size}.0.jpg")
+      buf << filespec unless (File.exist?(filespec).should be_true) && (File.size(filespec).should > 0)
+    end
+    puts buf.join("\n") unless buf.empty?
+    buf.empty?.should be_true
   end
 
   def touch(filespec)
