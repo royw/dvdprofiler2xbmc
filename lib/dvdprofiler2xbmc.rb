@@ -10,10 +10,14 @@ require 'tmdb'
 require 'dvdprofiler_collection'
 require 'mash'
 require 'log4r'
-require 'ruby-debug'
 
+require 'module_extensions'
+require 'kernel_extensions'
+require 'file_extensions'
+require 'object_extensions'
+require 'string_extensions'
+require 'numeric_extensions'
 require 'dvdprofiler2xbmc/app_config'
-require 'dvdprofiler2xbmc/extensions'
 require 'dvdprofiler2xbmc/controllers/app'
 require 'dvdprofiler2xbmc/controllers/fanart_controller'
 require 'dvdprofiler2xbmc/controllers/nfo_controller'
@@ -21,6 +25,8 @@ require 'dvdprofiler2xbmc/controllers/thumbnail_controller'
 require 'dvdprofiler2xbmc/models/media'
 require 'dvdprofiler2xbmc/models/media_files'
 require 'dvdprofiler2xbmc/models/xbmc_info'
+
+TMDB_API_KEY = '7a2f6eb9b6aa01651000f0a9324db835'
 
 
 # module Dvdprofiler2xbmc
