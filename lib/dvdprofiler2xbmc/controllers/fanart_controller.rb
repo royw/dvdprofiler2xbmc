@@ -47,7 +47,7 @@ class FanartController
   protected
 
   def fetch_fanart(imdb_id)
-    profile = TmdbProfile.new(imdb_id, @media.path_to(:tmdb_xml))
+    profile = TmdbProfile.new(imdb_id, TMDB_API_KEY, @media.path_to(:tmdb_xml))
     indexes = {}
     unless profile.nil? || profile.movie.blank?
       movie = profile.movie

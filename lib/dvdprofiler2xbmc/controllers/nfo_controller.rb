@@ -160,6 +160,7 @@ class NfoController
     tmdb_hash = Hash.new
     unless File.exist?(@media.path_to(:no_tmdb_lookup))
       profile = TmdbProfile.first(:imdb_id => self.imdb_id,
+                                  :api_key => TMDB_API_KEY,
                                   :filespec => @media.path_to(:tmdb_xml))
       unless profile.nil?
         tmdb_hash = profile.movie
