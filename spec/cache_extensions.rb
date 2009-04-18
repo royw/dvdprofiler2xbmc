@@ -61,6 +61,35 @@ class TmdbMovie
   end
 end
 
+class TmdbImage
+  private
+  def read_page(page)
+    html = nil
+    filespec = page.gsub(/^http:\//, 'spec/samples')
+    if File.exist?(filespec)
+      html = open(filespec).read
+    else
+      html = open(page).read
+      cache_html_files(page, html)
+    end
+    html
+  end
+
+  # this is used to save imdb pages so they may be used by rspec
+  def cache_html_files(page, html)
+    begin
+      filespec = page.gsub(/^http:\//, 'spec/samples')
+      unless File.exist?(filespec)
+        puts "caching #{filespec}"
+        File.mkdirs(File.dirname(filespec))
+        File.open(filespec, 'w') { |f| f.puts html }
+      end
+    rescue Exception => eMsg
+      puts eMsg.to_s
+    end
+  end
+end
+
 class ImdbMovie
   private
   def read_page(page)
