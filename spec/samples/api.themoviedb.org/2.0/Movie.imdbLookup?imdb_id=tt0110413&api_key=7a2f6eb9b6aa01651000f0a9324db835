@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0110413" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0110413"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>7</popularity>
+<title>Léon</title>
+<alternative_title>The Professional</alternative_title>
+<type>movie</type>
+<id>101</id>
+<imdb>tt0110413</imdb>
+<url>http://www.themoviedb.org/movie/101</url>
+<short_overview>Leon/The Professional is a story of a lonely hit-man who saves a little girl, played by Natalie Portman in her first starring role, and thus having to give her a place to stay. It’s an intense and fragile story of their relationship and how they take care of one another.</short_overview>
+<release>1994-11-18</release>
+<poster size="original">http://www.themoviedb.org/image/posters/6357/Leon_-_The_Professional__Directors_Cut__-_Poster_3__1994_.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/6357/Leon_-_The_Professional__Directors_Cut__-_Poster_3__1994__mid.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/6357/Leon_-_The_Professional__Directors_Cut__-_Poster_3__1994__cover.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/6357/Leon_-_The_Professional__Directors_Cut__-_Poster_3__1994__thumb.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/8579/Léon-fanart.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/8579/Léon-fanart_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/8579/Léon-fanart_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

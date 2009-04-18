@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0108171" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0108171"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Sniper</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>9545</id>
+<imdb>tt0108171</imdb>
+<url>http://www.themoviedb.org/movie/9545</url>
+<short_overview>Tough guy Thomas Beckett is an US soldier working in the Panamanian jungle. His job is to seek out rebels and remove them using his sniper skills. Beckett is notorious for losing his partners on such missions. This time he&apos;s accompanied by crack marksman Richard Miller, who&apos;s more of an office-type.</short_overview>
+<release>1993-01-29</release>
+<poster size="original">http://www.themoviedb.org/image/posters/10581/Sniper_-_Poster_1__1993_.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/10581/Sniper_-_Poster_1__1993__mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/10581/Sniper_-_Poster_1__1993__thumb.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/10581/Sniper_-_Poster_1__1993__cover.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/13391/Sniper_1__OdstĹ™elovaÄŤ_.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/13391/Sniper_1__OdstĹ™elovaÄŤ__thumb.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/13391/Sniper_1__OdstĹ™elovaÄŤ__poster.jpg</backdrop>
+</movie>
+</moviematches>
+</results>
