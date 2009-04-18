@@ -33,19 +33,22 @@ class NfoController
       AppConfig[:logger].info { "\n#{@media.title}" }
       @info.merge!(@xbmc_info.movie)
 
+      # load any manually cached IDs
+      self.isbn ||= load_isbn_id
+      self.imdb_id ||= load_imdb_id
+
+      # load the profiles
       dvd_hash = load_dvdprofiler
       imdb_hash = load_imdb(dvd_hash)
       tmdb_hash = load_tmdb
 
+      # merge the profiles into the @info hash
       @info.merge!(tmdb_hash_to_info(tmdb_hash))
       @info.merge!(imdb_hash_to_info(imdb_hash))
       @info.merge!(dvd_hash_to_info(dvd_hash))
 
-      genres = @info['genre']
-      genres ||= []
-      genres += @media.media_subdirs.split('/') if AppConfig[:subdirs_as_genres]
-      new_genres = map_genres(genres.uniq).uniq.compact
-      @info['genre'] = new_genres unless new_genres.blank?
+      # map any genres
+      @info['genre'] = remap_genres(@info['genre'])
 
       save
       result = true
@@ -54,6 +57,14 @@ class NfoController
       raise e
     end
     result
+  end
+
+  def remap_genres(genres)
+    genres ||= []
+    genres += @media.media_subdirs.split('/') if AppConfig[:subdirs_as_genres]
+    new_genres = map_genres(genres.uniq).uniq.compact
+    new_genres = nil if new_genres.blank?
+    new_genres
   end
 
   # return the ISBN or nil
@@ -107,6 +118,24 @@ class NfoController
     rescue Exception => e
       AppConfig[:logger].error { "Error saving nfo file - " + e.to_s + "\n" + e.backtrace.join("\n")}
     end
+  end
+
+  def load_isbn_id
+    ident = nil
+    filespec = @media.path_to(:isbn)
+    if File.exist?(filespec)
+      ident = open(filespec).read.strip
+    end
+    ident
+  end
+
+  def load_imdb_id
+    ident = nil
+    filespec = @media.path_to(:imdb)
+    if File.exist?(filespec)
+      ident = open(filespec).read.strip
+    end
+    ident
   end
 
   # load from the collection
@@ -182,7 +211,7 @@ class NfoController
     titles = []
     unless dvd_hash[:boxset].blank?
       begin
-        AppConfig[:logger].info { "Need to find box set parent's title" }
+        AppConfig[:logger].debug { "Need to find box set parent's title" }
         parent_isbn = dvd_hash[:boxset].first['parent'].first
         unless parent_isbn.blank?
           parent_profile = DvdprofilerProfile.first(:isbn => parent_isbn)
@@ -194,7 +223,7 @@ class NfoController
       rescue
       end
     end
-    AppConfig[:logger].info { "parent titles => #{titles.pretty_inspect}" } unless titles.empty?
+    AppConfig[:logger].debug { "parent titles => #{titles.pretty_inspect}" } unless titles.empty?
     titles
   end
 

@@ -269,11 +269,13 @@ module AppConfig
       ].join("\n")
     @initial.genre_maps = {
       'SciFi'           => 'Science Fiction',
+      'Sci-Fi'          => 'Science Fiction',
       'Science-Fiction' => 'Science Fiction',
       'Anime'           => 'Animation',
       'Musical'         => 'Musicals',
       'Music'           => 'Musicals',
-      'War Film'        => 'War'
+      'War Film'        => 'War',
+      'Western'         => 'Westerns'
     }
     @config.genre_maps = @initial.genre_maps
     @data_type.genre_maps = :HASH_STRING_KEYS_STRING_VALUES
@@ -321,6 +323,8 @@ module AppConfig
         :tmdb_xml         => 'tmdb.xml',
         :new              => 'new',
         :backup           => '~',
+        :isbn             => 'isbn',
+        :imdb             => 'imdb',
         :no_isbn          => 'no_isbn',
         :no_imdb_lookup   => 'no_imdb_lookup',
         :no_tmdb_lookup   => 'no_tmdb_lookup',
