@@ -8,6 +8,14 @@ class String
     end
   end
 
+  # this handles unicode characters by converting each byte to "%XX"
+  # where XX is the hex value
+  my_extension("escape_unicode") do
+    def escape_unicode
+      self.each_byte.collect{|c| c.to_i > 127 ? "%#{c.to_i.to_s(16)}" : c.chr}.join('')
+    end
+  end
+
   my_extension("strip_tags") do
     def strip_tags
       gsub(/<\/?[^>]*>/, "")
