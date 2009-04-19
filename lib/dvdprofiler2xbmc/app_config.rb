@@ -14,52 +14,65 @@ module AppConfig
   # are mashes that share the same keys.  For example @help.foo would be
   # the help text for @config.foo
 
+  # == Synopsis
   # the current config values
   @config    = Mash.new
 
+  # == Synopsis
   # help about the config item
   @help      = Mash.new
 
+  # == Synopsis
   # initial (default) config values
   @initial   = Mash.new
 
+  # == Synopsis
   # data type constants used in the editor
   @data_type = Mash.new
 
+  # == Synopsis
   # validate the config item
   @validate  = Mash.new
 
+  # == Synopsis
   # validate an entry for a config item, note usually need to allow
   # empty string for either array entry termination or to accept
   # a default value
   @validate_item = Mash.new
 
+  # == Synopsis
   # the @navigation array contains hashes where each hash is a "page"
   # that contains an array of @config keys.  This provides a natural
   # organization for UIs.
   @navigation = []
 
+  # make class variables readable
   class << self
     attr_reader :help, :initial, :navigation, :config, :data_type, :validate, :validate_item
   end
 
+  # the user's config file
   @yaml_filespec = File.join(ENV['HOME'], '.dvdprofiler2xbmcrc')
 
+  # == Synopsis
   # shortcut accessor for @config items
   def self.[](k)
     @config[k]
   end
 
+  # == Synopsis
   # shortcut accessor for @config items
   def self.[]=(k,v)
     @config[k] = v
   end
 
+  # == Synopsis
   # does the config file exist?
   def self.exist?
     File.exist?(@yaml_filespec)
   end
 
+  # == Synopsis
   # load the config file, overwriting current values
   def self.load
     begin
@@ -88,6 +101,7 @@ module AppConfig
     end
   end
 
+  # == Synopsis
   # save the config file
   def self.save
     begin
@@ -105,6 +119,7 @@ module AppConfig
     end
   end
 
+  # == Synopsis
   # generate a string for displaying the current config
   def self.to_s
     buf = []
@@ -127,6 +142,7 @@ module AppConfig
     buf.join("\n")
   end
 
+  # == Synopsis
   # is the current config valid?
   def self.valid?
     valid = true
@@ -138,6 +154,7 @@ module AppConfig
     valid
   end
 
+  # == Synopsis
   # set the config to the default values
   def self.default
     # Note, all paths and extensions are case sensitive
@@ -330,7 +347,6 @@ module AppConfig
         :no_tmdb_lookup   => 'no_tmdb_lookup',
       }
     @config.extensions  = @initial.extensions
-#     @data_type.extensions = :HASH_FIXED_SYMBOL_KEYS_STRING_VALUES
 
     # substitutions:
     #  %t  => movie title
