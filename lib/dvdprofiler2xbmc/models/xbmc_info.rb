@@ -1,3 +1,4 @@
+# == Synopsis
 # This is the model for the XBMC's Info profile which is used
 # to manage a .nfo file
 #
@@ -12,8 +13,8 @@
 #
 class XbmcInfo
 
-  FILTER_HTML = /<[^>]*>/
-
+  # == Synopsis
+  # filespec => String pathspec to the .nfo file
   def initialize(filespec)
     @nfo_filespec = filespec
     @movie = nil
@@ -21,28 +22,26 @@ class XbmcInfo
     load
   end
 
+  # == Synopsis
+  # return the movie hash that contains the media meta data
   def movie
     @movie ||= Hash.new
     @movie
   end
 
+  # == Synopsis
+  # set the movie hash
   def movie=(other)
     @movie = other
   end
 
+  # == Synopsis
   # convert the @movie hash into xml and return the xml as a String
   def to_xml
     xml = ''
     begin
       unless @movie.blank?
-        data = @movie.dup
-        data.delete_if { |key, value| value.nil? }
-        %w(plot tagline overview).each do |key|
-          if data[key].respond_to?('first')
-            data[key] = data[key].first
-          end
-          data[key] = data[key].gsub(FILTER_HTML, '') unless data[key].blank?
-        end
+        data = filter(@movie.dup)
         xml = XmlSimple.xml_out(data, 'NoAttr' => true, 'RootName' => 'movie')
       end
     rescue Exception => e
@@ -52,6 +51,8 @@ class XbmcInfo
     xml
   end
 
+  # == Synopsis
+  # save the profile to the .nfo file, but only if it has changed
   def save
     begin
       if dirty?
@@ -68,6 +69,24 @@ class XbmcInfo
 
   protected
 
+  FILTER_HTML = /<[^>]*>/
+
+  # == Synopsis
+  # filter the given movie hash first collapsing (removing from Array)
+  # the plot, tagline, and overview values by removing, then removing
+  # any HTML tags such as <b></b>, <i></i>,...
+  def filter(data)
+    data.delete_if { |key, value| value.nil? }
+    %w(plot tagline overview).each do |key|
+      if data[key].respond_to?('first')
+        data[key] = data[key].first
+      end
+      data[key] = data[key].gsub(FILTER_HTML, '') unless data[key].blank?
+    end
+    data
+  end
+
+  # == Synopsis
   # load the .nfo file into the @movie hash
   def load
     begin
@@ -83,6 +102,7 @@ class XbmcInfo
     end
   end
 
+  # == Synopsis
   # has any of the data changed?
   def dirty?
     result = false
