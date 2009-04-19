@@ -32,42 +32,42 @@ describe "ConfigEditor" do
   it "should return true for boolean data type edits that recieve y" do
     @input << "y\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, false)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, false)
     value.should be_true
   end
 
   it "should return false for boolean data type edits that recieve n" do
     @input << "n\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, true)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, true)
     value.should be_false
   end
 
   it "should return true for boolean data type edits that recieve yes" do
     @input << "yes\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, false)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, false)
     value.should be_true
   end
 
   it "should return false for boolean data type edits that recieve no" do
     @input << "no\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, true)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, true)
     value.should be_false
   end
 
   it "should return false for boolean data type edits that default to false" do
     @input << "\n\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, false)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, false)
     value.should be_false
   end
 
   it "should return true for boolean data type edits that default to true" do
     @input << "\n"
     @input.rewind
-    value = @editor.data_type_editor('field_name', :BOOLEAN, true)
+    value = @editor.send('data_type_editor', 'field_name', :BOOLEAN, true)
     value.should be_true
   end
 
@@ -95,7 +95,7 @@ describe "ConfigEditor" do
     default_pathspec = File.expand_path(File.join(File.dirname(__FILE__), '..'))
     @input << pathspec << "\n"
     @input.rewind
-    value = @editor.data_type_editor('images_dir', :PATHSPEC, default_pathspec)
+    value = @editor.send('data_type_editor', 'images_dir', :PATHSPEC, default_pathspec)
     value.should == pathspec
   end
 
@@ -103,7 +103,7 @@ describe "ConfigEditor" do
     default_pathspec = File.expand_path(File.join(File.dirname(__FILE__), '..'))
     @input << "\n"
     @input.rewind
-    value = @editor.data_type_editor('images_dir', :PATHSPEC, default_pathspec)
+    value = @editor.send('data_type_editor', 'images_dir', :PATHSPEC, default_pathspec)
     value.should == default_pathspec
   end
 
@@ -113,7 +113,7 @@ describe "ConfigEditor" do
     default_pathspec = File.expand_path(File.join(File.dirname(__FILE__), '..'))
     @input << badpathspec << "\n" << goodpathspec << "\n"
     @input.rewind
-    value = @editor.data_type_editor('images_dir', :PATHSPEC, default_pathspec)
+    value = @editor.send('data_type_editor', 'images_dir', :PATHSPEC, default_pathspec)
     value.should == goodpathspec
   end
 
@@ -122,7 +122,7 @@ describe "ConfigEditor" do
     default_filespec = File.expand_path(File.join(File.dirname(__FILE__), 'ruby_dragon'))
     @input << filespec << "\n"
     @input.rewind
-    value = @editor.data_type_editor('collection_filespec', :FILESPEC, default_filespec)
+    value = @editor.send('data_type_editor', 'collection_filespec', :FILESPEC, default_filespec)
     value.should == filespec
   end
 
@@ -132,28 +132,28 @@ describe "ConfigEditor" do
     default_filespec = File.expand_path(File.join(File.dirname(__FILE__), 'ruby_dragon'))
     @input << badfilespec << "\n" << goodfilespec << "\n"
     @input.rewind
-    value = @editor.data_type_editor('collection_filespec', :FILESPEC, default_filespec)
+    value = @editor.send('data_type_editor', 'collection_filespec', :FILESPEC, default_filespec)
     value.should == goodfilespec
   end
 
   it "should accept valid permission 0" do
     @input << "0" << "\n"
     @input.rewind
-    value = @editor.data_type_editor('file_permissions', :PERMISSIONS, 0644.to_s(8))
+    value = @editor.send('data_type_editor', 'file_permissions', :PERMISSIONS, 0644.to_s(8))
     value.should == 0.to_s(8)
   end
 
   it "should accept valid permission 7777" do
     @input << "7777" << "\n"
     @input.rewind
-    value = @editor.data_type_editor('file_permissions', :PERMISSIONS, 0644.to_s(8))
+    value = @editor.send('data_type_editor', 'file_permissions', :PERMISSIONS, 0644.to_s(8))
     value.should == 07777.to_s(8)
   end
 
   it "should reject permission > 7777" do
     @input << "65432" << "\n" << "6543" << "\n"
     @input.rewind
-    value = @editor.data_type_editor('file_permissions', :PERMISSIONS, 0644.to_s(8))
+    value = @editor.send('data_type_editor', 'file_permissions', :PERMISSIONS, 0644.to_s(8))
     value.should == 06543.to_s(8)
   end
 
@@ -161,7 +161,7 @@ describe "ConfigEditor" do
     strings = %w(foo bar howdy)
     @input << strings.join("\n") << "\n\n"
     @input.rewind
-    value = @editor.data_type_editor('image_extensions', :ARRAY_OF_STRINGS)
+    value = @editor.send('data_type_editor', 'image_extensions', :ARRAY_OF_STRINGS)
     value.should == strings
   end
 
@@ -169,7 +169,7 @@ describe "ConfigEditor" do
     strings = []
     @input << strings.join("\n") << "\n\n"
     @input.rewind
-    value = @editor.data_type_editor('image_extensions', :ARRAY_OF_STRINGS)
+    value = @editor.send('data_type_editor', 'image_extensions', :ARRAY_OF_STRINGS)
     value.should == strings
   end
 
@@ -178,7 +178,7 @@ describe "ConfigEditor" do
     pathspecs = [cwd, File.join(cwd, '..')]
     @input << pathspecs.join("\n") << "\n\n\n\n"
     @input.rewind
-    value = @editor.data_type_editor('directories', :ARRAY_OF_PATHSPECS)
+    value = @editor.send('data_type_editor', 'directories', :ARRAY_OF_PATHSPECS)
     value.should == pathspecs
   end
 
@@ -186,7 +186,7 @@ describe "ConfigEditor" do
     pathspecs = []
     @input << pathspecs.join("\n") << "\n\n\n"
     @input.rewind
-    value = @editor.data_type_editor('directories', :ARRAY_OF_PATHSPECS)
+    value = @editor.send('data_type_editor', 'directories', :ARRAY_OF_PATHSPECS)
     value.should == pathspecs
   end
 
