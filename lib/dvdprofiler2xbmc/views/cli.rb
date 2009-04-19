@@ -1,7 +1,8 @@
 require File.join(File.dirname(__FILE__), 'config_editor')
 require 'commandline/optionparser'
-# include CommandLine
+# can't include CommandLine thanks to HighLine polluting the namespace
 
+# == Synopsis
 # Command Line interface for the Dvdprofiler2Xbmc application.
 # All application output is via AppConfig[:logger] so we have
 # to set up the logger here.
@@ -19,9 +20,13 @@ module Dvdprofiler2xbmc
     OK = 0
   end
 
+  # == Synopsis
+  # The Command Line Interface
   class CLI
     include AppConfig
 
+    # == Synopsis
+    # Here's the main execution loop
     def self.execute(stdout, arguments=[])
       exit_code = ExitCode::OK
 
@@ -46,12 +51,15 @@ module Dvdprofiler2xbmc
 
         if run_editor || od["--edit_config"]
           editor = ConfigEditor.new
+          @saved_interrupt_message = DvdProfiler2Xbmc.interrupt_message
+          DvdProfiler2Xbmc.interrupt_message = ''
           editor.execute
+          DvdProfiler2Xbmc.interrupt_message = @saved_interrupt_message
         end
 
         skip_execution = false
-        %w(--help --version --show_config --edit_config).each {|flag| skip_execution = true if od[flag] || run_editor}
-        unless skip_execution
+        %w(--help --version --show_config --edit_config).each {|flag| skip_execution = true if od[flag] }
+        unless skip_execution || run_editor
           # create and execute class instance here
           app = DvdProfiler2Xbmc.instance
           app.execute
@@ -66,13 +74,13 @@ module Dvdprofiler2xbmc
       exit_code
     end
 
+    # == Synopsis
+    # the first reinitialize_logger adds the command line logging options to the default config
+    # then we load the config files
+    # then we run reinitialize_logger again to modify the logger for any logging options from the config files
     def self.setup_app_config(od, logger)
       # load config values
       AppConfig.default
-
-      # the first reinitialize_logger adds the command line logging options to the default config
-      # then we load the config files
-      # then we run reinitialize_logger again to modify the logger for any logging options from the config files
 
       reinitialize_logger(logger, od["--quiet"], od["--debug"])
       AppConfig.load
@@ -88,6 +96,7 @@ module Dvdprofiler2xbmc
       AppConfig[:logger].info { "logfile_level => #{AppConfig[:logfile_level].inspect}" } unless AppConfig[:logfile_level].nil?
     end
 
+    # == Synopsis
     # Setup the command line option parser
     # Returns:: OptionParser instances
     def self.setup_parser()
@@ -152,6 +161,7 @@ module Dvdprofiler2xbmc
       options
     end
 
+    # == Synopsis
     # Initial setup of logger
     def self.setup_logger
       logger = Log4r::Logger.new('dvdprofiler2xbmc')
@@ -161,6 +171,7 @@ module Dvdprofiler2xbmc
       logger
     end
 
+    # == Synopsis
     # Reinitialize the logger using the loaded config.
     # logger:: logger for any user messages
     # config:: is the application's config hash.
