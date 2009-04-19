@@ -8,15 +8,34 @@
 class DvdProfiler2Xbmc
   include Singleton
 
+  protected
+
+  # == Synopsis
+  # protected initializer because it is a Singleton class
+  def initialize
+    @media_files = nil
+    @multiple_profiles = []
+  end
+
+  public
+
+  # == Synopsis
+  # An Array of Strings that the external processing my write to to
+  # indicate that a given title has multiple ISBNs.
+  # HACK, this is a hack because I didn't see a way to cleanly pass
+  # the data up from the processing.
   attr_accessor :multiple_profiles
 
   @interrupted = false
   @interrupt_message = "control-C detected, finishing current task"
 
   class << self
+    # == Synopsis
+    # When ^C is pressed, this message is sent to stdout
     attr_accessor :interrupt_message
   end
 
+  # == Synopsis
   # A trap("INT") in the Runner calls this to indicate that a ^C has been detected.
   # Note, once set, it is never cleared
   def self.interrupt
@@ -24,18 +43,15 @@ class DvdProfiler2Xbmc
     @interrupted = true
   end
 
+  # == Synopsis
   # Long loops should poll this method to see if they should abort
   # Returns:: true if the application has trapped an "INT", false otherwise
   def self.interrupted?
     @interrupted
   end
 
-  def initialize
-    @media_files = nil
-    @multiple_profiles = []
-  end
-
-  # the application's main execution loop
+  # == Synopsis
+  # the application's main execution loop that processes all of the media
   def execute
     AppConfig[:logger].info { "Media Directories:\n  #{AppConfig[:directories].join("\n  ")}" }
 
@@ -58,6 +74,7 @@ class DvdProfiler2Xbmc
     AppConfig[:directories].each { |dir| set_permissions(dir) }
   end
 
+  # == Synopsis
   # generate the report.
   # Note, must be ran after execute()
   # returns an array of lines
@@ -75,21 +92,12 @@ class DvdProfiler2Xbmc
     buf
   end
 
-  def gen_report(name, heading='')
-    buf = []
-    begin
-      lines = send("#{name}_report")
-      unless lines.empty?
-        buf << ''
-        buf << heading
-        buf += lines
-      end
-    rescue Exception => e
-      AppConfig[:logger].error { "Error generating #{name} report - #{e.to_s}" }
-    end
-    buf
-  end
-
+  # == Synopsis
+  # utility method that saves the given data to the filespec safely by:
+  # 1) writes the data to a new file,
+  # 2) deletes any previous backup file,
+  # 3) renames the old file to a backup,
+  # 4) renames the new file to the original filename.
   def self.save_to_file(filespec, data)
     new_filespec = filespec + AppConfig[:extensions][:new]
     File.open(new_filespec, "w") do |file|
@@ -102,6 +110,7 @@ class DvdProfiler2Xbmc
     File.delete(new_filespec) if File.exist?(new_filespec)
   end
 
+  # == Synopsis
   # options hash may have the following:
   #  :extension  - an extension to append to the generated filespec
   #  :year       - the production year
@@ -144,6 +153,23 @@ class DvdProfiler2Xbmc
 
   protected
 
+  # == Synopsis
+  def gen_report(name, heading='')
+    buf = []
+    begin
+      lines = send("#{name}_report")
+      unless lines.empty?
+        buf << ''
+        buf << heading
+        buf += lines
+      end
+    rescue Exception => e
+      AppConfig[:logger].error { "Error generating #{name} report - #{e.to_s}" }
+    end
+    buf
+  end
+
+  # == Synopsis
   # set the directory and file permissions for all files and directories under
   # the given directory
   def set_permissions(dir)
@@ -160,6 +186,7 @@ class DvdProfiler2Xbmc
     end
   end
 
+  # == Synopsis
   # duplicate media file report
   def duplicates_report
     buf = []
@@ -175,6 +202,7 @@ class DvdProfiler2Xbmc
     buf
   end
 
+  # == Synopsis
   # unable to find ISBN for these titles report
   def missing_isbns_report
     buf = []
@@ -198,6 +226,7 @@ class DvdProfiler2Xbmc
     buf
   end
 
+  # == Synopsis
   def missing_imdb_ids_report
     buf = []
     @media_files.titles.each do |title, medias|
@@ -215,6 +244,7 @@ class DvdProfiler2Xbmc
     buf
   end
 
+  # == Synopsis
   def missing_thumbnails_report
     buf = []
     @media_files.titles.each do |title, medias|
@@ -232,6 +262,7 @@ class DvdProfiler2Xbmc
     buf
   end
 
+  # == Synopsis
   def multiple_profiles_report
     @multiple_profiles
   end
