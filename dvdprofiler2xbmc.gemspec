@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofiler2xbmc}
-  s.version = "0.0.17"
+  s.version = "0.0.18"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
-  s.date = %q{2009-04-18}
+  s.date = %q{2009-04-19}
   s.default_executable = %q{dvdprofiler2xbmc}
   s.email = %q{roy@wright.org}
   s.executables = ["dvdprofiler2xbmc"]
