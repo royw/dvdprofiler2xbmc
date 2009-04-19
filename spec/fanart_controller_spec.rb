@@ -121,7 +121,7 @@ describe "FanartController" do
     buf = []
     %w(mid original thumb).each do |size|
       filespec = File.join(TMPDIR, "Die Hard - 1988-fanart.#{size}.0.jpg")
-      buf << filespec unless (File.exist?(filespec).should be_true) && (File.size(filespec).should > 0)
+      buf << "Missing: \"#{filespec}\"" unless File.exist?(filespec) && (File.size(filespec) > 0)
     end
     puts buf.join("\n") unless buf.empty?
     buf.empty?.should be_true
@@ -141,7 +141,7 @@ describe "FanartController" do
       controller.send('fetch_fanart', imdb_id)
       %w(mid original thumb).each do |size|
         filespec = File.join(TMPDIR, "#{title}-fanart.#{size}.0.jpg")
-        buf << filespec unless (File.exist?(filespec).should be_true) && (File.size(filespec).should > 0)
+        buf << filespec unless File.exist?(filespec) && (File.size(filespec) > 0)
       end
     end
     puts buf.join("\n") unless buf.empty?
