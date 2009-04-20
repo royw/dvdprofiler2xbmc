@@ -1,7 +1,12 @@
+require 'module_extensions'
+
 # == Synopsis
-# add a blank? method to all Objects
+# Various extensions to the Object class
+# Note, uses the Module.my_extension method to only add the method if
+# it doesn't already exist.
 class Object
   my_extension("blank?") do
+    # == Synopsis
     # return asserted if object is nil or empty
     def blank?
       result = nil?

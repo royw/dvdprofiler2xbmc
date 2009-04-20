@@ -1,7 +1,12 @@
+require 'module_extensions'
+
 # == Synopsis
-# add an elapse_time_s method to Numeric
+# Various extensions to the Numeric class
+# Note, uses the Module.my_extension method to only add the method if
+# it doesn't already exist.
 class Numeric
   my_extension("elapsed_time_s") do
+    # == Synopsis
     # return String formated as "HH:MM:SS"
     def elapsed_time_s
       seconds = self

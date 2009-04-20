@@ -1,9 +1,9 @@
 ######################################################################
 # my extensions to Module. (taken from rake, named changed to not clash
-# when rake is used for this rails project.
+# when rake is used)
 #
 class Module
-  # Check for an existing method in the current class before extending.  IF
+  # Check for an existing method in the current class before extending.  If
   # the method already exists, then a warning is printed and the extension is
   # not added.  Otherwise the block is yielded and any definitions in the
   # block will take effect.
