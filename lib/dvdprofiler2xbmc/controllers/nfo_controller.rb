@@ -56,7 +56,9 @@ class NfoController
       end
 
       imdb_info = load_imdb_info(box_set_parent_titles, production_years, released_years)
-      self.imdb_id ||= imdb_info.imdb_id
+      unless imdb_info.nil?
+        self.imdb_id ||= imdb_info.imdb_id
+      end
 
       tmdb_info = load_tmdb_info
 
