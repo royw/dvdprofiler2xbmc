@@ -64,4 +64,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+desc "stalk github until gem is published"
+task :stalk do
+  `gemstalk royw dvdprofiler2xbmc`
+end
+
+
 
