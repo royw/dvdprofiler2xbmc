@@ -1,5 +1,5 @@
 # == Synopsis
-# Media encapsulates information about a single media file
+# Used to fetch thumbnail images from
 #
 # Usage:
 #  controller = ThumbnailController.new(media)
@@ -42,7 +42,9 @@ class ThumbnailController
     dest_image_filespec = @media.path_to(:thumbnail)
     puts "fetch_imdb_thumbnail(#{imdb_id}) => #{source_uri}"
     begin
-      File.open(dest_image_filespec, "wb") {|f| f.write(open(source_uri).read)}
+      File.open(dest_image_filespec, "wb") do |f|
+        f.write(read_page(source_uri.escape_unicode))
+      end
     rescue Exception => e
       AppConfig[:logger].error { "Error downloading image from \"#{source_uri}\" to \"#{dest_image_filespec}\" - #{e.to_s}" }
     end
@@ -65,6 +67,10 @@ class ThumbnailController
         AppConfig[:logger].error {e.to_s}
       end
     end
+  end
+
+  def read_page(page)
+    open(page).read
   end
 
 end

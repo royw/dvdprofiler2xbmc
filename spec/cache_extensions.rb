@@ -1,178 +1,53 @@
-# NOTE extremely ugly and non-DRY.  Probably good candidate for meta programming.
 
 # override the classes' read_page method and replace with one
 # that will cache pages in spec/samples/{url}
 
-class FanartController
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
+module CacheExtensions
+  # == Synopsis
+  # Attach the read_page and cache_file methods to the given
+  # class (cls) and use the given directory for the cache files
+  def self.attach_to(cls, directory='/tmp')
+
+    # define the read_page(page) method on the given class: cls
+    cls.send('define_method', "read_page") do |page|
+      data = nil
+      filespec = page.gsub(/^http:\//, directory).gsub(/\/$/, '.html')
+      if File.exist?(filespec)
+        data = open(filespec).read
+      else
+        data = open(page).read
+        cache_file(page, data)
+      end
+      data
     end
-    html
+
+    # define the cache_file(page, data) method on the given class: cls
+    cls.send('define_method', "cache_file") do |page, data|
+      begin
+        filespec = page.gsub(/^http:\//, directory).gsub(/\/$/, '.html')
+        unless File.exist?(filespec)
+          puts "caching #{filespec}"
+          File.mkdirs(File.dirname(filespec))
+          File.open(filespec, 'w') { |f| f.puts data }
+        end
+      rescue Exception => eMsg
+        puts eMsg.to_s
+      end
+    end
   end
 
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
+  # == Synopsis
+  # Find all classes that have a read_page instance method and
+  # then overwrite that read_page method with one that handles
+  # the caching.  Use the given directory for the cache files.
+  def self.attach_to_read_page_classes(directory='/tmp')
+    ObjectSpace.each_object(Class) do |cls|
+      if(cls.public_instance_methods(false).include?("read_page") ||
+        cls.protected_instance_methods(false).include?("read_page") ||
+        cls.private_instance_methods(false).include?("read_page"))
+        CacheExtensions.attach_to(cls, directory)
       end
-    rescue Exception => eMsg
-      puts eMsg.to_s
     end
   end
 end
 
-class TmdbMovie
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
-    end
-    html
-  end
-
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
-  end
-end
-
-class TmdbImage
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
-    end
-    html
-  end
-
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
-  end
-end
-
-class ImdbMovie
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
-    end
-    html
-  end
-
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
-  end
-end
-
-class ImdbSearch
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
-    end
-    html
-  end
-
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
-  end
-end
-
-class ImdbImage
-  private
-  def read_page(page)
-    html = nil
-    filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-    if File.exist?(filespec)
-      html = open(filespec).read
-    else
-      html = open(page).read
-      cache_html_files(page, html)
-    end
-    html
-  end
-
-  # this is used to save imdb pages so they may be used by rspec
-  def cache_html_files(page, html)
-    begin
-      filespec = page.gsub(/^http:\//, 'spec/samples').gsub(/\/$/, '.html')
-      unless File.exist?(filespec)
-        puts "caching #{filespec}"
-        File.mkdirs(File.dirname(filespec))
-        File.open(filespec, 'w') { |f| f.puts html }
-      end
-    rescue Exception => eMsg
-      puts eMsg.to_s
-    end
-  end
-end

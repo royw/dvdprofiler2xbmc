@@ -7,16 +7,20 @@
 # or
 #  FanartController.update(media)
 class FanartController
-  attr_reader :media_path, :image_files, :year, :media_subdirs, :title, :title_with_year
 
+  # == Synopsis
+  # class access method
   def self.update(media)
     FanartController.new(media).update
   end
 
+  # == Synopsis
+  # media => Media instance
   def initialize(media)
     @media = media
   end
 
+  # == Synopsis
   # update the meta-data and thumbnails
   def update
     result = true
@@ -31,6 +35,7 @@ class FanartController
 
   protected
 
+  # == Synopsis
   # link the largest fanart to moviename-fanart.jpg
   def link_fanart(dest_filespec)
     %w(original mid thumb).each do |size|
@@ -47,6 +52,7 @@ class FanartController
     end
   end
 
+  # == Synopsis
   # fetch all of the fanart for the movie
   # save to files using format: moviename-fanart.size.N.jpg
   # where size is the fanart size ['original', 'mid', 'thumb']
@@ -63,6 +69,7 @@ class FanartController
     end
   end
 
+  # == Synopsis
   # generate a filespec using format: moviename-fanart.size.N
   # where size is the fanart size ['original', 'mid', 'thumb']
   # and N is a sequential integer starting at 0
