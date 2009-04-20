@@ -17,9 +17,9 @@ begin
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.add_dependency('activesupport','>= 2.0.2')
     gem.add_dependency('xml-simple','>= 1.0.12')
-    gem.add_dependency('royw-imdb','>= 0.1.1')
-    gem.add_dependency('royw-tmdb','>= 0.1.1')
-    gem.add_dependency('royw-dvdprofiler_collection','>= 0.1.1')
+    gem.add_dependency('royw-imdb','>= 0.1.2')
+    gem.add_dependency('royw-tmdb','>= 0.1.5')
+    gem.add_dependency('royw-dvdprofiler_collection','>= 0.1.2')
     gem.add_dependency('log4r','>= 1.0.5')
     gem.add_dependency('commandline','>= 0.7.10')
     gem.add_dependency('mash','>= 0.0.3')
