@@ -18,6 +18,7 @@ begin
     gem.add_dependency('activesupport','>= 2.0.2')
     gem.add_dependency('xml-simple','>= 1.0.12')
     gem.add_dependency('royw-read_page_cache','>= 0.0.1')
+    gem.add_dependency('royw-roys_extensions','>= 0.0.2')
     gem.add_dependency('royw-imdb','>= 0.1.2')
     gem.add_dependency('royw-tmdb','>= 0.1.5')
     gem.add_dependency('royw-dvdprofiler_collection','>= 0.1.2')
