@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dvdprofiler2xbmc}
-  s.version = "0.0.19"
+  s.version = "0.0.20"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Roy Wright"]
-  s.date = %q{2009-04-20}
+  s.date = %q{2009-04-21}
   s.default_executable = %q{dvdprofiler2xbmc}
   s.email = %q{roy@wright.org}
   s.executables = ["dvdprofiler2xbmc"]
@@ -36,14 +36,7 @@ Gem::Specification.new do |s|
     "lib/dvdprofiler2xbmc/open_cache_extension.rb",
     "lib/dvdprofiler2xbmc/views/cli.rb",
     "lib/dvdprofiler2xbmc/views/config_editor.rb",
-    "lib/file_extensions.rb",
-    "lib/kernel_extensions.rb",
-    "lib/module_extensions.rb",
-    "lib/numeric_extensions.rb",
-    "lib/object_extensions.rb",
-    "lib/string_extensions.rb",
     "spec/app_spec.rb",
-    "spec/cache_extensions.rb",
     "spec/config_editor_spec.rb",
     "spec/dvdprofiler2xbmc_spec.rb",
     "spec/fanart_controller_spec.rb",
@@ -104,7 +97,6 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{TODO}
   s.test_files = [
-    "spec/cache_extensions.rb",
     "spec/spec_helper.rb",
     "spec/app_spec.rb",
     "spec/config_editor_spec.rb",
@@ -125,9 +117,11 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activesupport>, [">= 2.0.2"])
       s.add_runtime_dependency(%q<xml-simple>, [">= 1.0.12"])
-      s.add_runtime_dependency(%q<royw-imdb>, [">= 0.1.2"])
-      s.add_runtime_dependency(%q<royw-tmdb>, [">= 0.1.5"])
-      s.add_runtime_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.2"])
+      s.add_runtime_dependency(%q<royw-read_page_cache>, [">= 0.0.2"])
+      s.add_runtime_dependency(%q<royw-roys_extensions>, [">= 0.0.2"])
+      s.add_runtime_dependency(%q<royw-imdb>, [">= 0.1.3"])
+      s.add_runtime_dependency(%q<royw-tmdb>, [">= 0.1.6"])
+      s.add_runtime_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.3"])
       s.add_runtime_dependency(%q<log4r>, [">= 1.0.5"])
       s.add_runtime_dependency(%q<commandline>, [">= 0.7.10"])
       s.add_runtime_dependency(%q<mash>, [">= 0.0.3"])
@@ -135,9 +129,11 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<activesupport>, [">= 2.0.2"])
       s.add_dependency(%q<xml-simple>, [">= 1.0.12"])
-      s.add_dependency(%q<royw-imdb>, [">= 0.1.2"])
-      s.add_dependency(%q<royw-tmdb>, [">= 0.1.5"])
-      s.add_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.2"])
+      s.add_dependency(%q<royw-read_page_cache>, [">= 0.0.2"])
+      s.add_dependency(%q<royw-roys_extensions>, [">= 0.0.2"])
+      s.add_dependency(%q<royw-imdb>, [">= 0.1.3"])
+      s.add_dependency(%q<royw-tmdb>, [">= 0.1.6"])
+      s.add_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.3"])
       s.add_dependency(%q<log4r>, [">= 1.0.5"])
       s.add_dependency(%q<commandline>, [">= 0.7.10"])
       s.add_dependency(%q<mash>, [">= 0.0.3"])
@@ -146,9 +142,11 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<activesupport>, [">= 2.0.2"])
     s.add_dependency(%q<xml-simple>, [">= 1.0.12"])
-    s.add_dependency(%q<royw-imdb>, [">= 0.1.2"])
-    s.add_dependency(%q<royw-tmdb>, [">= 0.1.5"])
-    s.add_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.2"])
+    s.add_dependency(%q<royw-read_page_cache>, [">= 0.0.2"])
+    s.add_dependency(%q<royw-roys_extensions>, [">= 0.0.2"])
+    s.add_dependency(%q<royw-imdb>, [">= 0.1.3"])
+    s.add_dependency(%q<royw-tmdb>, [">= 0.1.6"])
+    s.add_dependency(%q<royw-dvdprofiler_collection>, [">= 0.1.3"])
     s.add_dependency(%q<log4r>, [">= 1.0.5"])
     s.add_dependency(%q<commandline>, [">= 0.7.10"])
     s.add_dependency(%q<mash>, [">= 0.0.3"])
