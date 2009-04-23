@@ -37,6 +37,7 @@ describe "NfoController" do
     Dir.glob(File.join(TMPDIR, "*.m4v")).each { |filename| File.delete(filename) }
     Dir.glob(File.join(TMPDIR, "*.nfo")).each { |filename| File.delete(filename) }
     Dir.glob(File.join(TMPDIR, "*.xml")).each { |filename| File.delete(filename) }
+    Dir.glob(File.join(TMPDIR, "*.dummy")).each { |filename| File.delete(filename) }
     [:imdb_xml, :tmdb_xml, :nfo].each do |extension|
       filespec = File.join(File.dirname(__FILE__), "samples/The Egg and I.#{AppConfig[:extensions][extension]}")
       File.delete(filespec) if File.exist?(filespec)
