@@ -401,11 +401,11 @@ module AppConfig
       ].join("\n")
     @initial.media_parsers = [
       # "movie title - yyyy[res].partN.ext"
-      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\[(\S*)\]\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\-\s*(0|\d{4})\s*\[(\S*)\]\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
       :tokens => [:title, :year, :resolution, :part, :extension]
       },
       # "movie title (yyyy)[res].partN.ext"
-      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\[(\S*)\]\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\(\s*(0|\d{4})\s*\)\s*\[(\S*)\]\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
       :tokens => [:title, :year, :resolution, :part, :extension]
       },
       # "movie title[res].partN.ext"
@@ -413,11 +413,11 @@ module AppConfig
       :tokens => [:title, :resolution, :part, :extension]
       },
       # "movie title - yyyy[res].ext"
-      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\[(\S*)\]\s*\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\-\s*(0|\d{4})\s*\[(\S*)\]\s*\.([^.]+)\s*$/,
       :tokens => [:title, :year, :resolution, :extension]
       },
       # "movie title (yyyy)[res].ext"
-      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\[(\S*)\]\s*\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\(\s*(0|\d{4})\s*\)\s*\[(\S*)\]\s*\.([^.]+)\s*$/,
       :tokens => [:title, :year, :resolution, :extension]
       },
       # "movie title[res].ext"
@@ -425,11 +425,11 @@ module AppConfig
       :tokens => [:title, :resolution, :extension]
       },
       # "movie title - yyyy.partN.ext"
-      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\-\s*(0|\d{4})\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
       :tokens => [:title, :year, :part, :extension]
       },
       # "movie title (yyyy).partN.ext"
-      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\(\s*(0|\d{4})\s*\)\s*\.(cd\d+|pt\d+|disk\d+|disc\d+)\.([^.]+)\s*$/,
       :tokens => [:title, :year, :part, :extension]
       },
       # "movie title.partN.ext"
@@ -437,11 +437,11 @@ module AppConfig
       :tokens => [:title, :part, :extension]
       },
       # "movie title - yyyy.ext"
-      {:regex => /^\s*(.*\S)\s*\-\s*(\d{4})\s*\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\-\s*(0|\d{4})\s*\.([^.]+)\s*$/,
       :tokens => [:title, :year, :extension]
       },
       # "movie title (yyyy).ext"
-      {:regex => /^\s*(.*\S)\s*\(\s*(\d{4})\s*\)\s*\.([^.]+)\s*$/,
+      {:regex => /^\s*(.*\S)\s*\(\s*(0|\d{4})\s*\)\s*\.([^.]+)\s*$/,
       :tokens => [:title, :year, :extension]
       },
       # "movie title.ext"

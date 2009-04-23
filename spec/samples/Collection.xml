@@ -2,181 +2,6 @@
 <!--DVD Profiler Collection Export-->
 <Collection>
   <DVD>
-    <ProfileTimestamp>2008-03-19T11:40:22.000Z</ProfileTimestamp>
-    <ID>018111247894</ID>
-    <MediaTypes>
-      <DVD>True</DVD>
-      <HDDVD>False</HDDVD>
-      <BluRay>False</BluRay>
-    </MediaTypes>
-    <UPC>018111-247894</UPC>
-    <CollectionNumber>506</CollectionNumber>
-    <CollectionType>Owned</CollectionType>
-    <Title>Seabiscuit: America&apos;s Legendary Racehorse</Title>
-    <DistTrait/>
-    <OriginalTitle/>
-    <CountryOfOrigin/>
-    <ProductionYear>2003</ProductionYear>
-    <Released>2003-06-01</Released>
-    <RunningTime>51</RunningTime>
-    <RatingSystem>Film</RatingSystem>
-    <Rating>G</Rating>
-    <RatingAge>1</RatingAge>
-    <RatingVariant>0</RatingVariant>
-    <CaseType>Clamshell</CaseType>
-    <Genres>
-      <Genre>Documentary</Genre>
-      <Genre>Sports</Genre>
-      <Genre>Special Interest</Genre>
-    </Genres>
-    <Regions/>
-    <Format>
-      <FormatAspectRatio>1.33</FormatAspectRatio>
-      <FormatVideoStandard>NTSC</FormatVideoStandard>
-      <FormatLetterBox>False</FormatLetterBox>
-      <FormatPanAndScan>False</FormatPanAndScan>
-      <FormatFullFrame>True</FormatFullFrame>
-      <Format16X9>False</Format16X9>
-      <FormatDualSided>False</FormatDualSided>
-      <FormatDualLayered>False</FormatDualLayered>
-    </Format>
-    <Features>
-      <FeatureSceneAccess>True</FeatureSceneAccess>
-      <FeatureCommentary>False</FeatureCommentary>
-      <FeatureTrailer>False</FeatureTrailer>
-      <FeaturePhotoGallery>True</FeaturePhotoGallery>
-      <FeatureDeletedScenes>False</FeatureDeletedScenes>
-      <FeatureMakingOf>True</FeatureMakingOf>
-      <FeatureProductionNotes>False</FeatureProductionNotes>
-      <FeatureGame>True</FeatureGame>
-      <FeatureDVDROMContent>False</FeatureDVDROMContent>
-      <FeatureMultiAngle>False</FeatureMultiAngle>
-      <FeatureMusicVideos>False</FeatureMusicVideos>
-      <FeatureInterviews>False</FeatureInterviews>
-      <FeatureStoryboardComparisons>False</FeatureStoryboardComparisons>
-      <FeatureOuttakes>False</FeatureOuttakes>
-      <FeatureClosedCaptioned>False</FeatureClosedCaptioned>
-      <FeatureTHXCertified>False</FeatureTHXCertified>
-      <OtherFeatures/>
-    </Features>
-    <Studios>
-      <Studio>Delta Entertainment</Studio>
-      <Studio>Buffalo Flicks</Studio>
-    </Studios>
-    <MediaCompanies/>
-    <Audio>
-      <AudioTrack>
-        <AudioContent>English</AudioContent>
-        <AudioFormat>Dolby Digital Stereo</AudioFormat>
-      </AudioTrack>
-    </Audio>
-    <Subtitles/>
-    <SRP DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$19.95">19.95</SRP>
-    <Actors>
-      <Actor FirstName="Doug" MiddleName="" LastName="Burge" BirthYear="0" Role="Himself - Exec. VP, CA Breeders Assoc." CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Leonard" MiddleName="" LastName="Dorfman" BirthYear="0" Role="Himself - Trainer" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="George" MiddleName="" LastName="O&apos;Brian" BirthYear="0" Role="Himself - Jockey&apos;s Agent" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Kris" MiddleName="" LastName="Goddard" BirthYear="0" Role="Herself - Former Jockey Trainer" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Charles &quot;Chip&quot;" MiddleName="" LastName="Sturniolo" BirthYear="0" Role="Himself - Owner, Derby Restaurant" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Keith" MiddleName="" LastName="Stucki" BirthYear="0" Role="Himself - Ex-Trainer" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Farrell" MiddleName="" LastName="Jones" BirthYear="0" Role="Himself - Ex-Trainer, Throughbred Owner" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Noble" MiddleName="" LastName="Threewit" BirthYear="0" Role="Himself - Trainer" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Bob" MiddleName="" LastName="Baffert" BirthYear="0" Role="Himself - Trainer" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="Tracy" MiddleName="" LastName="Livingston" BirthYear="0" Role="Himself - Ridgewood Ranch Representative" CreditedAs="" Voice="False" Uncredited="False"/>
-      <Actor FirstName="J.J." MiddleName="" LastName="Johnson" BirthYear="0" Role="Narrator" CreditedAs="" Voice="True" Uncredited="False"/>
-    </Actors>
-    <Credits>
-      <Credit FirstName="Nick" MiddleName="" LastName="Krantz" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
-      <Credit FirstName="Oscar" MiddleName="" LastName="Harrison" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
-      <Credit FirstName="Barry" MiddleName="" LastName="Rubinow" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
-      <Credit FirstName="Nick" MiddleName="" LastName="Krantz" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
-      <Credit FirstName="Oscar" MiddleName="" LastName="Harrison" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
-      <Credit FirstName="Charles" MiddleName="" LastName="Henry" BirthYear="0" CreditType="Cinematography" CreditSubtype="Cinematographer" CreditedAs=""/>
-      <Credit FirstName="Michael" MiddleName="" LastName="Johnson" BirthYear="0" CreditType="Cinematography" CreditSubtype="Cinematographer" CreditedAs=""/>
-      <Credit FirstName="Barry" MiddleName="" LastName="Rubinow" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
-      <Credit FirstName="Steve" MiddleName="" LastName="Hampar" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
-      <Credit FirstName="Richard" MiddleName="" LastName="Mercado" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
-      <Credit FirstName="Skip" MiddleName="" LastName="Waring" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
-      <Credit FirstName="Zsolt" MiddleName="" LastName="Magyar" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
-    </Credits>
-    <Overview>Heroes come in all shapes and sizes. The heroes of this true story entered the stage as minor players and left as champions...real life American legends. In 1936, an unlikely cast of characters came together:
-
-Seabiscuit: a burned-out, knobby kneed racehorse;
-Red Pollard: a down and out, half blind jockey;
-George Woolf: The &quot;Ice Man,&quot; a cool and cocky rider;
-Tom Smith: an aging western trainer bypassed by the big time;
-Charles S. Howard: Buick dealer and horse owner, a self made man.
-
-Seabiscuit&apos;s story played out against America&apos;s Great Depression, when one in four breadwinners was without work. Spectator sports, radio programming and movie theaters offered an escape and created instant celebrity...even for horses.
-
-When America needed him most, Seabiscuit became the working man&apos;s hero and the most remarkable thoroughbred racehorse in history! He made us believe in ourselves, in courage, in perseverance, in America. No other racehorse has come close to Seabiscuit&apos;s fame or his hold over the nation&apos;s imagination.
-
-This program includes the complete archival Seabiscuit/War Admiral &quot;Match Race,&quot; which is considered to be the greatest horse race in history. Riding Seabiscuit was George &quot;Ice Man&quot; Woolf, who has been called &quot;the greatest jockey who ever lived.&quot;
-
-This documentary includes real footage of Red Pollard&apos;s (Tobey Maguire in the Universal film) thrilling victory at the 1940 Santa Anita Handicap. Includes an interview with Bob Baffert, trainer of Kentucky Derby Winner &quot;Silver Charm&quot; and &quot;Real Quiet.&quot;</Overview>
-    <EasterEggs/>
-    <Discs>
-      <Disc>
-        <DescriptionSideA>Main Feature</DescriptionSideA>
-        <DescriptionSideB/>
-        <DiscIDSideA/>
-        <DiscIDSideB/>
-        <LabelSideA/>
-        <LabelSideB/>
-        <DualLayeredSideA>False</DualLayeredSideA>
-        <DualLayeredSideB>False</DualLayeredSideB>
-        <DualSided>False</DualSided>
-        <Location/>
-        <Slot/>
-      </Disc>
-    </Discs>
-    <SortTitle>Seabiscuit: America&apos;s Legendary Racehorse</SortTitle>
-    <LastEdited>2008-05-15T00:16:30.000Z</LastEdited>
-    <WishPriority>0</WishPriority>
-    <PurchaseInfo>
-      <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
-      <PurchasePlace/>
-      <PurchasePlaceType/>
-      <PurchasePlaceWebsite/>
-      <PurchaseDate>2003-08-29</PurchaseDate>
-    </PurchaseInfo>
-    <Review Film="0" Video="0" Audio="0" Extras="0"/>
-    <Events/>
-    <BoxSet>
-      <Parent/>
-      <Contents/>
-    </BoxSet>
-    <LoanInfo>
-      <Loaned>False</Loaned>
-    </LoanInfo>
-    <Notes/>
-    <Tags/>
-    <Locks>
-      <Entire>False</Entire>
-      <Covers>False</Covers>
-      <Title>False</Title>
-      <MediaType>False</MediaType>
-      <Overview>False</Overview>
-      <Regions>False</Regions>
-      <Genres>False</Genres>
-      <SRP>False</SRP>
-      <Studios>False</Studios>
-      <DiscInformation>False</DiscInformation>
-      <Cast>False</Cast>
-      <Crew>False</Crew>
-      <Features>False</Features>
-      <AudioTracks>False</AudioTracks>
-      <Subtitles>False</Subtitles>
-      <EasterEggs>False</EasterEggs>
-      <RunningTime>False</RunningTime>
-      <ReleaseDate>False</ReleaseDate>
-      <ProductionYear>False</ProductionYear>
-      <CaseType>False</CaseType>
-      <VideoFormats>False</VideoFormats>
-      <Rating>False</Rating>
-    </Locks>
-  </DVD>
-  <DVD>
     <ProfileTimestamp>2007-03-25T21:52:28.000Z</ProfileTimestamp>
     <ID>018111275491</ID>
     <MediaTypes>
@@ -1586,7 +1411,7 @@ When the shadow of revolution falls across Russia, the royal family&apos;s young
     <CollectionType>Owned</CollectionType>
     <Title>Rooster Cogburn (...and the Lady)</Title>
     <DistTrait/>
-    <OriginalTitle/>
+    <OriginalTitle>Rooster Cogburn</OriginalTitle>
     <CountryOfOrigin>United States</CountryOfOrigin>
     <ProductionYear>1975</ProductionYear>
     <Released>1998-03-31</Released>
@@ -1708,7 +1533,7 @@ When the shadow of revolution falls across Russia, the royal family&apos;s young
       </Disc>
     </Discs>
     <SortTitle>Rooster Cogburn (...and the Lady)</SortTitle>
-    <LastEdited>2009-03-24T15:00:26.000Z</LastEdited>
+    <LastEdited>2009-04-22T06:49:42.000Z</LastEdited>
     <WishPriority>0</WishPriority>
     <PurchaseInfo>
       <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
@@ -4820,6 +4645,378 @@ In &apos;Topper Returns&apos;, Cosmo Topper finds himself once again spooked by 
     <BoxSet>
       <Parent/>
       <Contents/>
+    </BoxSet>
+    <LoanInfo>
+      <Loaned>False</Loaned>
+    </LoanInfo>
+    <Notes/>
+    <Tags/>
+    <Locks>
+      <Entire>False</Entire>
+      <Covers>False</Covers>
+      <Title>False</Title>
+      <MediaType>False</MediaType>
+      <Overview>False</Overview>
+      <Regions>False</Regions>
+      <Genres>False</Genres>
+      <SRP>False</SRP>
+      <Studios>False</Studios>
+      <DiscInformation>False</DiscInformation>
+      <Cast>False</Cast>
+      <Crew>False</Crew>
+      <Features>False</Features>
+      <AudioTracks>False</AudioTracks>
+      <Subtitles>False</Subtitles>
+      <EasterEggs>False</EasterEggs>
+      <RunningTime>False</RunningTime>
+      <ReleaseDate>False</ReleaseDate>
+      <ProductionYear>False</ProductionYear>
+      <CaseType>False</CaseType>
+      <VideoFormats>False</VideoFormats>
+      <Rating>False</Rating>
+    </Locks>
+  </DVD>
+  <DVD>
+    <ProfileTimestamp>2009-01-03T10:54:09.000Z</ProfileTimestamp>
+    <ID>786936164282</ID>
+    <MediaTypes>
+      <DVD>True</DVD>
+      <HDDVD>False</HDDVD>
+      <BluRay>False</BluRay>
+    </MediaTypes>
+    <UPC>786936-164282</UPC>
+    <CollectionNumber>323</CollectionNumber>
+    <CollectionType>Owned</CollectionType>
+    <Title>Pearl Harbor</Title>
+    <DistTrait>60th Anniversary Commemorative Edition</DistTrait>
+    <OriginalTitle/>
+    <CountryOfOrigin>United States</CountryOfOrigin>
+    <ProductionYear>2001</ProductionYear>
+    <Released>2001-12-04</Released>
+    <RunningTime>183</RunningTime>
+    <RatingSystem>Film</RatingSystem>
+    <Rating>PG-13</Rating>
+    <RatingAge>13</RatingAge>
+    <RatingVariant>0</RatingVariant>
+    <RatingDetails>Sustained Intense War Sequences, Images of Wounded, Brief Sensuality and Some Language</RatingDetails>
+    <CaseType>Clamshell</CaseType>
+    <Genres>
+      <Genre>War</Genre>
+      <Genre>Action</Genre>
+      <Genre>Drama</Genre>
+    </Genres>
+    <Regions>
+      <Region>1</Region>
+      <Region>4</Region>
+    </Regions>
+    <Format>
+      <FormatAspectRatio>2.35</FormatAspectRatio>
+      <FormatVideoStandard>NTSC</FormatVideoStandard>
+      <FormatLetterBox>True</FormatLetterBox>
+      <FormatPanAndScan>False</FormatPanAndScan>
+      <FormatFullFrame>False</FormatFullFrame>
+      <Format16X9>True</Format16X9>
+      <FormatDualSided>False</FormatDualSided>
+      <FormatDualLayered>True</FormatDualLayered>
+    </Format>
+    <Features>
+      <FeatureSceneAccess>True</FeatureSceneAccess>
+      <FeatureCommentary>False</FeatureCommentary>
+      <FeatureTrailer>True</FeatureTrailer>
+      <FeaturePhotoGallery>False</FeaturePhotoGallery>
+      <FeatureDeletedScenes>False</FeatureDeletedScenes>
+      <FeatureMakingOf>True</FeatureMakingOf>
+      <FeatureProductionNotes>True</FeatureProductionNotes>
+      <FeatureGame>False</FeatureGame>
+      <FeatureDVDROMContent>True</FeatureDVDROMContent>
+      <FeatureMultiAngle>False</FeatureMultiAngle>
+      <FeatureMusicVideos>True</FeatureMusicVideos>
+      <FeatureInterviews>False</FeatureInterviews>
+      <FeatureStoryboardComparisons>False</FeatureStoryboardComparisons>
+      <FeatureOuttakes>False</FeatureOuttakes>
+      <FeatureClosedCaptioned>True</FeatureClosedCaptioned>
+      <FeatureTHXCertified>True</FeatureTHXCertified>
+      <OtherFeatures>Intro, Dolby Headphone Track</OtherFeatures>
+    </Features>
+    <Studios>
+      <Studio>Touchstone Pictures</Studio>
+      <Studio>Jerry Bruckheimer Films</Studio>
+    </Studios>
+    <MediaCompanies>
+      <MediaCompany>Buena Vista Home Entertainment</MediaCompany>
+    </MediaCompanies>
+    <Audio>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>DTS 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>French</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>Dolby Digital Surround</AudioFormat>
+      </AudioTrack>
+    </Audio>
+    <Subtitles>
+      <Subtitle>English</Subtitle>
+      <Subtitle>Spanish</Subtitle>
+    </Subtitles>
+    <SRP DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$29.99">29.99</SRP>
+    <Actors>
+      <Actor FirstName="Ben" MiddleName="" LastName="Affleck" BirthYear="0" Role="Rafe McCawley" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Josh" MiddleName="" LastName="Hartnett" BirthYear="0" Role="Danny Walker" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Kate" MiddleName="" LastName="Beckinsale" BirthYear="0" Role="Evelyn Johnson" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="William" MiddleName="Lee" LastName="Scott" BirthYear="0" Role="Billy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Greg" MiddleName="" LastName="Zola" BirthYear="0" Role="Anthony R. Fusco" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ewen" MiddleName="" LastName="Bremner" BirthYear="0" Role="Red" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Alec" MiddleName="" LastName="Baldwin" BirthYear="0" Role="Doolittle" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jaime" MiddleName="" LastName="King" BirthYear="0" Role="Betty" CreditedAs="James King" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Catherine" MiddleName="" LastName="Kellner" BirthYear="0" Role="Barbara" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jennifer" MiddleName="" LastName="Garner" BirthYear="0" Role="Sandra" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jon" MiddleName="" LastName="Voight" BirthYear="0" Role="President Roosevelt" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Cuba" MiddleName="" LastName="Gooding, Jr." BirthYear="0" Role="Doris &quot;Dorie&quot; Miller" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michael" MiddleName="" LastName="Shannon" BirthYear="0" Role="Gooz" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Matt" MiddleName="" LastName="Davis" BirthYear="0" Role="Joe" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mako" MiddleName="" LastName="" BirthYear="0" Role="Admiral Yamamoto" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Fujioka" BirthYear="0" Role="Nishikura" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Cary-Hiroyuki" MiddleName="" LastName="Tagawa" BirthYear="0" Role="Genda" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Colm" MiddleName="" LastName="Feore" BirthYear="0" Role="Admiral Kimmel" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Dan" MiddleName="" LastName="Aykroyd" BirthYear="0" Role="Captain Thurman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Reiley" MiddleName="" LastName="McClendon" BirthYear="0" Role="Young Danny" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jesse" MiddleName="" LastName="James" BirthYear="1989" Role="Young Rafe" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="William" MiddleName="" LastName="Fichtner" BirthYear="0" Role="Danny&apos;s Father" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Steve" MiddleName="" LastName="Rankin" BirthYear="0" Role="Rafe&apos;s Father" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Brian" MiddleName="" LastName="Haley" BirthYear="0" Role="Training Captain" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="David" MiddleName="" LastName="Hornsby" BirthYear="0" Role="Flyer with Murmur" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Scott" MiddleName="" LastName="Wilson" BirthYear="0" Role="General Marshall" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Graham" MiddleName="" LastName="Beckel" BirthYear="0" Role="Admiral" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Howard" MiddleName="" LastName="Mungo" BirthYear="0" Role="George" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Randy" MiddleName="" LastName="Oglesby" BirthYear="0" Role="Strategic Analyst" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ping" MiddleName="" LastName="Wu" BirthYear="0" Role="Japanese Officer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Stan" MiddleName="" LastName="Cahill" BirthYear="0" Role="Pentagon Lieutenant" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Kevin" MiddleName="" LastName="Wensing" BirthYear="0" Role="XO U.S.S. West Virginia" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tom" MiddleName="" LastName="Everett" BirthYear="0" Role="Presidential Aide" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tomas" MiddleName="" LastName="Arana" BirthYear="0" Role="Vice Admiral" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Beth" MiddleName="" LastName="Grant" BirthYear="0" Role="Motherly Secretary" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sara" MiddleName="" LastName="Rue" BirthYear="0" Role="Martha" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sung" MiddleName="" LastName="Kang" BirthYear="0" Role="Listener" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Raphael" MiddleName="" LastName="Sbarge" BirthYear="0" Role="Kimmel&apos;s Aide" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Marty" MiddleName="" LastName="Belafsky" BirthYear="0" Role="Louie the Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Yuji" MiddleName="" LastName="Okumoto" BirthYear="0" Role="Japanese Shy Bomber" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Josh" MiddleName="" LastName="Green" BirthYear="0" Role="Radar Private Ellis" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ian" MiddleName="" LastName="Bohen" BirthYear="0" Role="Radar Private #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michael" MiddleName="" LastName="Milhoan" BirthYear="0" Role="Army Commander" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="" LastName="Firth" BirthYear="0" Role="Captain of the West Virginia" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tom" MiddleName="" LastName="Sizemore" BirthYear="0" Role="Earl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Marco" MiddleName="" LastName="Gould" BirthYear="0" Role="Pop-Up Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Andrew" MiddleName="" LastName="Bryniarski" BirthYear="0" Role="Joe the Boxer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Nicholas" MiddleName="" LastName="Downs" BirthYear="0" Role="Terrified Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tim" MiddleName="" LastName="Choate" BirthYear="0" Role="Navy Doctor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Diehl" BirthYear="0" Role="Senior Doctor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Joe" MiddleName="" LastName="Kelly" BirthYear="0" Role="Medic" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ron" MiddleName="" LastName="Harper" BirthYear="0" Role="Minister" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ted" MiddleName="" LastName="McGinley" BirthYear="0" Role="Army Corps Major" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Madison" MiddleName="" LastName="Mason" BirthYear="0" Role="Admiral on the Hornet" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Kim" MiddleName="" LastName="Coates" BirthYear="0" Role="Jack Richards" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Andrew" MiddleName="" LastName="Baley" BirthYear="0" Role="Hornet Radio Op" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Glenn" MiddleName="" LastName="Morshower" BirthYear="0" Role="Admiral Halsey" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Paul" MiddleName="" LastName="Francis" BirthYear="0" Role="Doolittle Co-Pilot" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Scott" MiddleName="" LastName="Wiper" BirthYear="0" Role="Gunner" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Eric" MiddleName="Christian" LastName="Olsen" BirthYear="0" Role="Gunner" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rod" MiddleName="" LastName="Biermann" BirthYear="0" Role="Navigator" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Noriaki" MiddleName="" LastName="Kamata" BirthYear="0" Role="Japanese Soldier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Garret" MiddleName="T." LastName="Sato" BirthYear="0" Role="Japanese Soldier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Eiji" MiddleName="" LastName="Inoue" BirthYear="0" Role="Japanese Soldier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Precious" MiddleName="" LastName="Chong" BirthYear="0" Role="Nursing Supervisor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jeff" MiddleName="" LastName="Wadlow" BirthYear="0" Role="Next Guy in Line" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Will" MiddleName="" LastName="Gill, Jr." BirthYear="0" Role="Train Conductor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Seth" MiddleName="" LastName="Sakai" BirthYear="0" Role="Japanese Tourist" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Curtis" MiddleName="" LastName="Anderson" BirthYear="0" Role="18 Year Old Typist" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Blaine" MiddleName="" LastName="Pate" BirthYear="0" Role="Orderly in Aftermath" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Pyper-Ferguson" BirthYear="0" Role="Naval Officer in Hospital" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michael" MiddleName="Shamus" LastName="Wiles" BirthYear="0" Role="Captain of the Hornet" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Brett" MiddleName="" LastName="Pedigo" BirthYear="0" Role="Next Guy in Line #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Toru" MiddleName="M." LastName="Tanaka, Jr." BirthYear="0" Role="Samoan Bouncer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sean" MiddleName="" LastName="Gunn" BirthYear="0" Role="Traction Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Joshua" MiddleName="" LastName="Ackerman" BirthYear="0" Role="Wounded Sailor #1" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Matt" MiddleName="" LastName="Casper" BirthYear="0" Role="Wounded Sailor #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="David" MiddleName="" LastName="Kaufman" BirthYear="0" Role="Young Nervous Doctor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="L." MiddleName="L." LastName="Ginter" BirthYear="0" Role="Captain Low" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Joshua" MiddleName="Aaron" LastName="Gulledge" BirthYear="0" Role="Buster" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Guy" MiddleName="" LastName="Torry" BirthYear="0" Role="Teeny Mayfield" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Leland" MiddleName="" LastName="Orser" BirthYear="0" Role="Major Jackson" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="James" LastName="Smith" BirthYear="0" Role="Mission Listener" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mark" MiddleName="" LastName="Noon" BirthYear="0" Role="Medic" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Pat" MiddleName="" LastName="Healy" BirthYear="0" Role="News Reel Guy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Thomas" MiddleName="Wilson" LastName="Brown" BirthYear="0" Role="Young Flier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Chad" MiddleName="" LastName="Morgan" BirthYear="0" Role="Pearl Harbor Nurse" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="James" MiddleName="" LastName="Saito" BirthYear="0" Role="Japanese Aide #1" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Angel" MiddleName="" LastName="Sing" BirthYear="0" Role="Japanese Aide #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tak" MiddleName="" LastName="Kubota" BirthYear="0" Role="Japanese Aide #3" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Robert" MiddleName="" LastName="Jayne" BirthYear="0" Role="Sunburnt Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Vic" MiddleName="" LastName="Chao" BirthYear="0" Role="Japanese Doctor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michael" MiddleName="" LastName="Gradilone" BirthYear="0" Role="Screaming Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Fred" MiddleName="" LastName="Koehler" BirthYear="0" Role="Wounded Sailor #3" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Padget" BirthYear="0" Role="Hospital Chaplain" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ben" MiddleName="" LastName="Easter" BirthYear="0" Role="Baja Sailor #1" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Cory" MiddleName="" LastName="Tucker" BirthYear="0" Role="Baja Sailor #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Abe" MiddleName="" LastName="Sylvia" BirthYear="0" Role="Baja Sailor #4" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jason" MiddleName="" LastName="Liggett" BirthYear="0" Role="Baja Sailor #5" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mark" MiddleName="" LastName="Panasuk" BirthYear="0" Role="Baja Sailor #6" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Bret" MiddleName="" LastName="Roberts" BirthYear="0" Role="Baja Sailor #7" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Howry" BirthYear="0" Role="Lieutenant in Boat" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rufus" MiddleName="" LastName="Dorsey" BirthYear="0" Role="Dorie&apos;s Friend" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Patrice" MiddleName="" LastName="Martinez" BirthYear="0" Role="French Fisherman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rodney" MiddleName="" LastName="Bursiel" BirthYear="0" Role="Sailor with Dog" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rob" MiddleName="" LastName="McCabe" BirthYear="0" Role="Rescue Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Brandon" MiddleName="" LastName="Lozano" BirthYear="0" Role="Baby Danny" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Seiki" MiddleName="" LastName="Moriguchi" BirthYear="0" Role="Akagi Communication Officer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Brian" MiddleName="D." LastName="Falk" BirthYear="0" Role="Helmsman #1" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Estevan" MiddleName="" LastName="Gonzalo" BirthYear="0" Role="Bombing Sailor" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Christopher" MiddleName="" LastName="Stroop" BirthYear="0" Role="Helmsman #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sean" MiddleName="" LastName="Faris" BirthYear="0" Role="Danny&apos;s Gunner" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Vincent" MiddleName="J." LastName="Inghilterra" BirthYear="0" Role="Preacher" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Nicholas" MiddleName="" LastName="Farrell" BirthYear="0" Role="RAF Squadron Leader" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tony" MiddleName="" LastName="Curran" BirthYear="0" Role="Ian" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Viv" MiddleName="" LastName="Weatherall" BirthYear="0" Role="Pilot #1" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Benjamin" MiddleName="" LastName="Farry" BirthYear="0" Role="Pilot #2" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Daniel" MiddleName="" LastName="Mays" BirthYear="0" Role="Pilot #3" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Toshi" MiddleName="" LastName="Toda" BirthYear="0" Role="Dentist" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jaymee" MiddleName="" LastName="Ong" BirthYear="0" Role="Dental Assistant" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ford" MiddleName="" LastName="Austin" BirthYear="0" Role="Doolittle Pilot" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Greg" MiddleName="" LastName="Baine" BirthYear="0" Role="Young Sailor" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Annika" MiddleName="" LastName="Banko" BirthYear="0" Role="Extra" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Wally" MiddleName="" LastName="Burr" BirthYear="0" Role="Newsreel Voice" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Tanya" MiddleName="" LastName="Dempsey" BirthYear="0" Role="Nurse" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Jeremy" MiddleName="" LastName="Denzlinger" BirthYear="0" Role="Sailor" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="David" MiddleName="" LastName="de Vos" BirthYear="0" Role="Medical Orderly" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Jeremy" MiddleName="" LastName="Gilbreath" BirthYear="0" Role="Toothbrush Sailor" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Ken" MiddleName="" LastName="Goth" BirthYear="0" Role="Army 2nd Lieutenant" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Geoffrey" MiddleName="" LastName="Gould" BirthYear="0" Role="Dental Patient" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Anthony" MiddleName="" LastName="Grimley" BirthYear="0" Role="British Air Commander Peter Tubbs" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Manu" MiddleName="" LastName="Intiraymi" BirthYear="0" Role="Officer in Water Shouting &quot;P-40&apos;s&quot;" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Frieda" MiddleName="" LastName="Jane" BirthYear="0" Role="Nurse" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Elizabeth" MiddleName="" LastName="Leaff" BirthYear="0" Role="Nurse" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Kathleen" MiddleName="" LastName="Mullan" BirthYear="0" Role="Stearn Nurse" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Robert" MiddleName="C." LastName="Nelson" BirthYear="0" Role="Army Officer" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Naoko" MiddleName="" LastName="Niya" BirthYear="0" Role="Hawaiian Bar Girl" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Lin" MiddleName="" LastName="Oeding" BirthYear="0" Role="Japanese Sailor" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Pete" MiddleName="" LastName="Romano" BirthYear="0" Role="Soldier in the Water" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Lisa" MiddleName="" LastName="Ross" BirthYear="0" Role="Nurse" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="David" MiddleName="" LastName="Rountree" BirthYear="0" Role="Navy Pilot" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Barbara" MiddleName="" LastName="Scolaro" BirthYear="0" Role="Mrs. Doolittle" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Leway" MiddleName="" LastName="Shih" BirthYear="0" Role="Japanese Airplane Mechanic" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Lijay" MiddleName="" LastName="Shih" BirthYear="0" Role="Japanese Airplane Pilot" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Jack" MiddleName="" LastName="Truman" BirthYear="0" Role="Train Conductor" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Clyde" MiddleName="" LastName="Tull" BirthYear="0" Role="Army Officer" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Larry" MiddleName="" LastName="Wegger" BirthYear="0" Role="Taxi Driver" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="Mark" MiddleName="" LastName="Weiler" BirthYear="0" Role="Naval Messenger" CreditedAs="" Voice="False" Uncredited="True"/>
+      <Actor FirstName="James" MiddleName="" LastName="Yeung" BirthYear="0" Role="Japanese Sailor" CreditedAs="" Voice="False" Uncredited="True"/>
+    </Actors>
+    <Credits>
+      <Credit FirstName="Michael" MiddleName="" LastName="Bay" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
+      <Credit FirstName="Randall" MiddleName="" LastName="Wallace" BirthYear="0" CreditType="Writing" CreditSubtype="Writer" CreditedAs=""/>
+      <Credit FirstName="Jerry" MiddleName="" LastName="Bruckheimer" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Michael" MiddleName="" LastName="Bay" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Mike" MiddleName="" LastName="Stenson" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Barry" MiddleName="" LastName="Waldman" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Randall" MiddleName="" LastName="Wallace" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Chad" MiddleName="" LastName="Oman" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Bruce" MiddleName="" LastName="Hendricks" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="John" MiddleName="" LastName="Schwartzman" BirthYear="0" CreditType="Cinematography" CreditSubtype="Director of Photography" CreditedAs=""/>
+      <Credit FirstName="Chris" MiddleName="" LastName="Lebenzon" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Steven" MiddleName="" LastName="Rosenblum" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Mark" MiddleName="" LastName="Goldblatt" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Roger" MiddleName="" LastName="Barton" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Hans" MiddleName="" LastName="Zimmer" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
+      <Credit FirstName="Peter" MiddleName="J." LastName="Devlin" BirthYear="0" CreditType="Sound" CreditSubtype="Production Sound Mixer" CreditedAs=""/>
+      <Credit FirstName="George" MiddleName="" LastName="Watters II" BirthYear="0" CreditType="Sound" CreditSubtype="Supervising Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Christopher" MiddleName="" LastName="Boyes" BirthYear="0" CreditType="Sound" CreditSubtype="Supervising Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Kevin" MiddleName="" LastName="O&apos;Connell" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Greg" MiddleName="P." LastName="Russell" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Dan" MiddleName="" LastName="Sharp" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Tom" MiddleName="" LastName="Burns" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Scott" MiddleName="" LastName="Guitteau" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Suhail" MiddleName="" LastName="Kafity" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Adam" MiddleName="" LastName="Kopald" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="F." MiddleName="Hudson" LastName="Miller" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="R." MiddleName="J." LastName="Palmer" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Chris" MiddleName="" LastName="Scarabosio" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Rob" MiddleName="" LastName="Sephton" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Ethan" MiddleName="" LastName="Van Der Ryn" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Designer" CreditedAs=""/>
+      <Credit FirstName="Nigel" MiddleName="" LastName="Phelps" BirthYear="0" CreditType="Art" CreditSubtype="Production Designer" CreditedAs=""/>
+      <Credit FirstName="Eric" MiddleName="" LastName="Brevig" BirthYear="0" CreditType="Art" CreditSubtype="Visual Effects" CreditedAs=""/>
+      <Credit FirstName="Michael" MiddleName="" LastName="Kaplan" BirthYear="0" CreditType="Art" CreditSubtype="Costume Designer" CreditedAs=""/>
+      <Credit FirstName="Martin" MiddleName="" LastName="Laing" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Jon" MiddleName="" LastName="Billington" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="William" MiddleName="Ladd" LastName="Skinner" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Linda" MiddleName="" LastName="Matthews" BirthYear="0" CreditType="Art" CreditSubtype="Costume Designer" CreditedAs=""/>
+      <Credit FirstName="Julie" MiddleName="" LastName="Hewett" BirthYear="0" CreditType="Art" CreditSubtype="Make-up Artist" CreditedAs=""/>
+      <Credit FirstName="Mindy" MiddleName="" LastName="Hall" BirthYear="0" CreditType="Art" CreditSubtype="Make-up Artist" CreditedAs=""/>
+      <Credit FirstName="Edouard" MiddleName="" LastName="Henriques" BirthYear="0" CreditType="Art" CreditSubtype="Make-up Artist" CreditedAs=""/>
+      <Credit FirstName="Stacey" MiddleName="" LastName="Branch" BirthYear="0" CreditType="Art" CreditSubtype="Make-up Artist" CreditedAs=""/>
+      <Credit FirstName="Christian" MiddleName="" LastName="Tinsley" BirthYear="0" CreditType="Art" CreditSubtype="Make-up Artist" CreditedAs=""/>
+      <Credit FirstName="Nathan" MiddleName="" LastName="McGuinnes" BirthYear="0" CreditType="Art" CreditSubtype="Visual Effects" CreditedAs=""/>
+    </Credits>
+    <Overview>History comes alive in the unforgettable epic motion picture &lt;b&gt;Pearl Harbor&lt;/b&gt;, the spectacular blockbuster brought to the screen by Jerry Bruckheimer and Michael Bay. Astounding visual and audio effects put you at the center of the event that changed the world — that early Sunday morning in paradise when warplanes screamed across the peaceful skies of Pearl Harbor and jolted America into World War II. This real-life tale of catastrophic defeat, heroic victory and personal courage focuses on the war&apos;s devastating impact on two daring young pilots, Ben Affleck (&lt;i&gt;Armageddon&lt;/i&gt;) and Josh Hartnett (&lt;i&gt;The Virgin Suicides&lt;/i&gt;), and a beautiful, dedicated nurse, Kate Beckinsale (&lt;i&gt;Serendipity&lt;/i&gt;). &lt;b&gt;Pearl Harbor&lt;/b&gt; is extraordinary moviemaking — a breathtaking reenactment of the &quot;date which will live in infamy&quot; and a heartfelt tribute to the men and women who lived it.</Overview>
+    <EasterEggs>DTS sound trailer (60th Anniversary Edition): 
+Insert Disc 1 or Disc 2. Advance to Title 5 to view the trailer from the movie with DTS sound. 
+
+Hidden features (60th Anniversary Edition): 
+Insert Disc 1. Select the &quot;Set Up&quot; option at the main menu. Highlight the &quot;Audio Commentaries&quot; option and press Left until a star is highlighted. Press Enter to view a sequences outlining the differences between the letterbox and full screen version of the disc. 
+
+Insert Disc 2. Select the &quot;Special Features&quot; option at the main menu. Highlight the Faith Hill music video option and press Right until a star is highlighted. Press Enter to view a clip from the movie&apos;s wrap party.</EasterEggs>
+    <Discs>
+      <Disc>
+        <DescriptionSideA>Main Feature</DescriptionSideA>
+        <DescriptionSideB/>
+        <DiscIDSideA>A638221282BA5796</DiscIDSideA>
+        <DiscIDSideB/>
+        <LabelSideA>PEARL_HARBOR_DSC1</LabelSideA>
+        <LabelSideB/>
+        <DualLayeredSideA>True</DualLayeredSideA>
+        <DualLayeredSideB>False</DualLayeredSideB>
+        <DualSided>False</DualSided>
+        <Location/>
+        <Slot/>
+      </Disc>
+      <Disc>
+        <DescriptionSideA>Main Feature #2 + Bonus Materials</DescriptionSideA>
+        <DescriptionSideB/>
+        <DiscIDSideA>B3C9C96E485EDBF4</DiscIDSideA>
+        <DiscIDSideB/>
+        <LabelSideA>PEARL_HARBOR_DSC2</LabelSideA>
+        <LabelSideB/>
+        <DualLayeredSideA>True</DualLayeredSideA>
+        <DualLayeredSideB>False</DualLayeredSideB>
+        <DualSided>False</DualSided>
+        <Location/>
+        <Slot/>
+      </Disc>
+    </Discs>
+    <SortTitle>Pearl Harbor</SortTitle>
+    <LastEdited>2009-03-24T15:00:06.000Z</LastEdited>
+    <WishPriority>0</WishPriority>
+    <PurchaseInfo>
+      <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
+      <PurchasePlace/>
+      <PurchasePlaceType/>
+      <PurchasePlaceWebsite/>
+      <PurchaseDate>2002-10-02</PurchaseDate>
+    </PurchaseInfo>
+    <Review Film="0" Video="0" Audio="0" Extras="0"/>
+    <Events/>
+    <BoxSet>
+      <Parent/>
+      <Contents>
+        <Content>786936164299</Content>
+      </Contents>
     </BoxSet>
     <LoanInfo>
       <Loaned>False</Loaned>

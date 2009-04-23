@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0213149" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0213149"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Pearl Harbor</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>676</id>
+<imdb>tt0213149</imdb>
+<url>http://www.themoviedb.org/movie/676</url>
+<short_overview>Pearl Harbor is a fictional enriched film from 2001 about the Japanese attack on Pearl Harbor, Hawaii, during the Second World War. </short_overview>
+<release>2001-05-21</release>
+<poster size="original">http://www.themoviedb.org/image/posters/13581/pealr-1.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/13581/pealr-1_mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/13581/pealr-1_thumb.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/13581/pealr-1_cover.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/3737/tt0213149.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/3737/tt0213149_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/3737/tt0213149_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

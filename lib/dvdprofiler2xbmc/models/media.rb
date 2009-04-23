@@ -69,6 +69,7 @@ class Media
     components = Media.parse(@media_path)
     unless components.nil?
       @year = components[:year]
+      @year = (@year.to_i > 0 ? @year : nil) unless @year.blank?
       @title = components[:title]
       @part = components[:part]
       @extension = components[:extension]
@@ -140,7 +141,7 @@ class Media
   # return the media's title but with the (year) appended
   def find_title_with_year(title, year)
     name = title
-    name = "#{name} (#{year})" unless year.nil?
+    name = "#{name} (#{year})" unless year.blank?
     name
   end
 

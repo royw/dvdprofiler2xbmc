@@ -14,25 +14,25 @@ class DvdProfiler2Xbmc
   # protected initializer because it is a Singleton class
   def initialize
     @media_files = nil
-    @multiple_profiles = []
   end
 
   public
 
-  # == Synopsis
-  # An Array of Strings that the external processing my write to to
-  # indicate that a given title has multiple ISBNs.
-  # HACK, this is a hack because I didn't see a way to cleanly pass
-  # the data up from the processing.
-  attr_accessor :multiple_profiles
-
   @interrupted = false
   @interrupt_message = "control-C detected, finishing current task"
+  @multiple_profiles = []
 
   class << self
     # == Synopsis
     # When ^C is pressed, this message is sent to stdout
     attr_accessor :interrupt_message
+
+    # == Synopsis
+    # An Array of Strings that the external processing my write to to
+    # indicate that a given title has multiple ISBNs.
+    # HACK, this is a hack because I didn't see a way to cleanly pass
+    # the data up from the processing.
+    attr_accessor :multiple_profiles
   end
 
   # == Synopsis

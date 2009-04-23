@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 require 'tempfile'
 
-FULL_REGRESSION = false
+FULL_REGRESSION = true
 
 # Time to add your specs!
 # http://rspec.info/
@@ -46,7 +46,7 @@ describe "Dvdprofiler2xbmc" do
           'Meltdown',
           'Oklahoma!',
           'The Man From Snowy River',
-          'Rooster Cogburn',
+          'Rooster Cogburn (...and the Lady)',
           'Call Me The Rise And Fall of Heidi Fleiss',
           'batteries not included',
           'Flyboys',
@@ -58,11 +58,13 @@ describe "Dvdprofiler2xbmc" do
   end
 
   if FULL_REGRESSION
-    it "should find all Collection titles (full regression)" do
-      profiles = Dvdprofiler.all
-      titles = profiles.collect{|profile| profile.title}
-      buf = regression(titles.sort)
-      buf.should be_empty
+    DvdprofilerProfile.collection_filespec = File.join(SAMPLES_DIR, 'Collection.xml')
+    profiles = DvdprofilerProfile.all
+    titles = profiles.collect{|profile| profile.title}
+    titles.sort.each do |title|
+      it "should find all Collection titles (full regression) title=>#{title}" do
+        regression([title]).should == []
+      end
     end
   end
 
@@ -82,7 +84,7 @@ describe "Dvdprofiler2xbmc" do
           dvd_hash = dvdprofiler_profile.dvd_hash
           unless dvd_hash[:genres].include?('Television')
             count += 1
-            imdb_profile = ImdbProfile.first(:titles => [dvd_hash[:title], title],
+            imdb_profile = ImdbProfile.first(:titles => [dvd_hash[:title], title, dvd_hash[:originaltitle]].uniq.compact,
                                      :production_years => dvd_hash[:productionyear],
                                      :released_years => dvd_hash[:released],
                                      :logger => AppConfig[:logger])

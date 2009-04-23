@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0114319" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0114319"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Sabrina</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>11860</id>
+<imdb>tt0114319</imdb>
+<url>http://www.themoviedb.org/movie/11860</url>
+<short_overview></short_overview>
+<release>1995-12-15</release>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/4409/tt0114319.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/4409/tt0114319_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/4409/tt0114319_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

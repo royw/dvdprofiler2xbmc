@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0102059" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0102059"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Hot Shots!</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>9595</id>
+<imdb>tt0102059</imdb>
+<url>http://www.themoviedb.org/movie/9595</url>
+<short_overview></short_overview>
+<release>1991-07-31</release>
+<poster size="original">http://www.themoviedb.org/image/posters/23342/Hot_Shots.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/23342/Hot_Shots_cover.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/23342/Hot_Shots_mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/23342/Hot_Shots_thumb.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/13565/Hot_Shots.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/13565/Hot_Shots_thumb.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/13565/Hot_Shots_poster.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

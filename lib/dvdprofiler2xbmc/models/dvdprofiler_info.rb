@@ -9,11 +9,13 @@ class DvdprofilerInfo
   # really should include at least:  :title, :year, :isbn, :filespec
   def self.find(options)
     dvdprofiler_info = nil
+    # replace options[:year] => 0 with nil
+    options[:year] = (options[:year].to_i > 0 ? options[:year] : nil) unless options[:year].blank?
     # find ISBN for each title and assign to the media
     profiles = DvdprofilerProfile.all(options)
     if profiles.length > 1
       media_title = "#{options[:title]}#{options[:year].blank? ? '' : ' (' + options[:year] + ')'}"
-      Dvdprofiler2Xbmc.multiple_profiles << "#{media_title} #{profiles.collect{|prof| prof.isbn}.join(", ")}"
+      DvdProfiler2Xbmc.multiple_profiles << "#{media_title} #{profiles.collect{|prof| prof.isbn}.join(", ")}"
       AppConfig[:logger].warn { "Multiple profiles found for #{media_title}" }
     else
       profile = profiles.first
@@ -104,5 +106,17 @@ class DvdprofilerInfo
 
   def released_years
     @profile.dvd_hash[:released] rescue []
+  end
+
+  def original_titles
+    titles = []
+    originaltitle = @profile.dvd_hash[:originaltitle]
+    titles = [originaltitle].flatten.uniq.compact unless originaltitle.blank?
+    titles = titles.collect{|t| t.blank? ? nil : t}.compact
+    titles
+  end
+
+  def title
+    @profile.dvd_hash[:title] rescue nil
   end
 end

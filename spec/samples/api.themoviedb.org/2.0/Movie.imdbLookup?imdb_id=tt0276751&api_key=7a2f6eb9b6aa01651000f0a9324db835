@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0276751" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0276751"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>About a boy</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>245</id>
+<imdb>tt0276751</imdb>
+<url>http://www.themoviedb.org/movie/245</url>
+<short_overview>The film version of Nick Horby’s best-seller about a boy’s right of passage to adulthood. The still inexperienced Will searches for the possibility to meet women and therefore learns the responsibility of becoming an adult.</short_overview>
+<release>2002-05-17</release>
+<poster size="original">http://www.themoviedb.org/image/posters/20878/About_A_boy_-_Poster_1__2002_.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/20878/About_A_boy_-_Poster_1__2002__mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/20878/About_A_boy_-_Poster_1__2002__thumb.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/20878/About_A_boy_-_Poster_1__2002__cover.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/1115/tt0276751.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/1115/tt0276751_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/1115/tt0276751_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

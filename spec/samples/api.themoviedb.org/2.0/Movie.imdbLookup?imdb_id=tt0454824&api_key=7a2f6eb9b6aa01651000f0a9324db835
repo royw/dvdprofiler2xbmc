@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0454824" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0454824"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Flyboys</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>9664</id>
+<imdb>tt0454824</imdb>
+<url>http://www.themoviedb.org/movie/9664</url>
+<short_overview>The adventures of the Lafayette Escadrille, young Americans who volunteered for the French military before the U.S. entered World War I, and became the country&apos;s first fighter pilots.</short_overview>
+<release>2006-09-22</release>
+<poster size="original">http://www.themoviedb.org/image/posters/8737/flyboys_xlg.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/8737/flyboys_xlg_mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/8737/flyboys_xlg_thumb.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/8737/flyboys_xlg_cover.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/3026/tt0454824.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/3026/tt0454824_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/3026/tt0454824_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

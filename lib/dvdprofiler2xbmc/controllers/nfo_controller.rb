@@ -17,6 +17,8 @@
 #  NfoController.update(media)
 class NfoController
 
+  attr_reader :info
+
   # == Synopsis
   def self.update(media)
     NfoController.new(media).update
@@ -44,18 +46,22 @@ class NfoController
       self.isbn ||= load_isbn_id
       self.imdb_id ||= load_imdb_id
 
-      box_set_parent_titles = []
+      extra_titles = []
       production_years = []
       released_years = []
 
       dvdprofiler_info = load_dvdprofiler_info
       unless dvdprofiler_info.nil?
+        original_titles = dvdprofiler_info.original_titles
         box_set_parent_titles = dvdprofiler_info.box_set_parent_titles
+        extra_titles << dvdprofiler_info.title unless dvdprofiler_info.title.blank?
+        extra_titles += original_titles unless original_titles.blank?
+        extra_titles += box_set_parent_titles unless box_set_parent_titles.blank?
         production_years = dvdprofiler_info.production_years
         released_years = dvdprofiler_info.released_years
       end
 
-      imdb_info = load_imdb_info(box_set_parent_titles, production_years, released_years)
+      imdb_info = load_imdb_info(extra_titles, production_years, released_years)
       unless imdb_info.nil?
         self.imdb_id ||= imdb_info.imdb_id
       end
@@ -134,10 +140,10 @@ class NfoController
     dvdprofiler_info
   end
 
-  def load_imdb_info(box_set_parent_titles, production_years, released_years)
+  def load_imdb_info(extra_titles, production_years, released_years)
     imdb_info = nil
     unless File.exist?(@media.path_to(:no_imdb_lookup))
-      possible_imdb_titles = get_imdb_titles(box_set_parent_titles)
+      possible_imdb_titles = get_imdb_titles(extra_titles)
       imdb_info = ImdbInfo.find(:imdb_id => self.imdb_id,
                                 :titles => possible_imdb_titles,
                                 :media_years => [@media.year.to_i],
@@ -206,11 +212,11 @@ class NfoController
 
   # == Synopsis
   # get an Array of String titles
-  def get_imdb_titles(box_set_parent_titles)
+  def get_imdb_titles(extra_titles)
     titles = []
     titles << @info['title'] unless @info['title'].blank?
     titles << @media.title unless @media.title.blank?
-    titles += box_set_parent_titles
+    titles += extra_titles
     titles.uniq.compact
   end
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0238112" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0238112"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>Captain Corelli&apos;s Mandolin</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>1722</id>
+<imdb>tt0238112</imdb>
+<url>http://www.themoviedb.org/movie/1722</url>
+<short_overview></short_overview>
+<release>2001-05-04</release>
+<poster size="original">http://www.themoviedb.org/image/posters/24318/captain_corelli-poster.jpg</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/24318/captain_corelli-poster_mid.jpg</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/24318/captain_corelli-poster_thumb.jpg</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/24318/captain_corelli-poster_cover.jpg</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/3809/tt0238112.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/3809/tt0238112_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/3809/tt0238112_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>

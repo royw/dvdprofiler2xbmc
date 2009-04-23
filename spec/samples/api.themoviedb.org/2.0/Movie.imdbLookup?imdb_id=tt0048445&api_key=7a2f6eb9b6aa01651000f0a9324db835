@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0048445" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0048445"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>0</popularity>
+<title>Oklahoma!</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>13936</id>
+<imdb>tt0048445</imdb>
+<url>http://www.themoviedb.org/movie/13936</url>
+<short_overview></short_overview>
+<release></release>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/15539/Oklahoma_7f99f540.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/15539/Oklahoma_7f99f540_thumb.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/15539/Oklahoma_7f99f540_poster.jpg</backdrop>
+</movie>
+</moviematches>
+</results>
