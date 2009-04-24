@@ -42,6 +42,16 @@ end
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.spec_files = FileList['spec/**/*_spec.rb']
+  spec.spec_opts = ["--color", "--format nested"]
+end
+
+# spec under development task
+# NOTE, change the pathspec in the FileList to the spec you
+# are currently developing
+Spec::Rake::SpecTask.new('spec:ud') do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.spec_files = FileList['spec/dvdprofiler_info_spec.rb']
+  spec.spec_opts = ["--color", "--format nested"]
 end
 
 Spec::Rake::SpecTask.new(:rcov) do |spec|
