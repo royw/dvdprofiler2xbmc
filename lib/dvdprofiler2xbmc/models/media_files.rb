@@ -1,14 +1,18 @@
 # == Synopsis
 # encapsulation of all media files
 class MediaFiles
-  attr_reader :medias, :titles, :duplicate_titles
+  attr_reader :medias, :titles
 
   # == Synopsis
   # directories => Array of String directory pathspecs
   def initialize(directories)
     @medias = find_medias(directories)
     @titles = find_titles(@medias)
-    @duplicate_titles = find_duplicate_titles(@titles)
+  end
+
+  # should be ran after nfo_controller.update
+  def duplicate_titles
+    find_duplicate_titles(@titles)
   end
 
   protected
@@ -17,10 +21,11 @@ class MediaFiles
   # find all the media files in the given set of directories
   def find_medias(directories)
     medias = []
-    directories.each do |dir|
-      Dir.chdir(dir)
-      medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename|
-        Media.new(dir, filename)
+    directories.collect{|d| File.expand_path(d)}.each do |dir|
+      Dir.chdir(dir) do
+        medias += Dir.glob("**/*.{#{AppConfig[:media_extensions].join(',')}}").collect do |filename|
+          Media.new(dir, filename)
+        end
       end
     end
     medias
