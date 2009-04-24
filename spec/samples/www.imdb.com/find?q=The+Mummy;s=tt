@@ -1,0 +1,527 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<title>IMDb Title Search</title>
+<link rel="canonical" href="http://www.imdb.com/find?q=The+Mummy;s=tt" />
+<meta name="title" content="IMDb Title Search">
+<meta name="description" content="IMDb: The biggest, best, most award-winning movie site on the planet.">
+
+<meta name="keywords" content="movies,films,movie database,actors,actresses,directors,hollywood,stars,quotes">
+<link rel="stylesheet" type="text/css" media="screen" href="http://i.media-imdb.com/images/SF98369065113f6e3983fa74f134743472/css2/consumersite.css" />
+<script type="text/javascript" src="http://i.media-imdb.com/images/SFe387224571d8cca2460e2c9a8b0332db/a/js/ads.js"></script>
+<link rel="icon" href="http://i.imdb.com/favicon.ico" />
+<link rel="apple-touch-icon" href="http://i.media-imdb.com/apple-touch-icon.png" />
+
+
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="http://i.media-imdb.com/images/SFf6c483b1e7cf529cb88a10732f37b355/wheel/widgets.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="http://i.media-imdb.com/images/SF7fe9c4d5300e5a512674311f133bda92/wheel/layout.css" />
+
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" media="screen" href="http://i.media-imdb.com/images/SF89a770dc6c9399c865b1dcde50919f2d/wheel/ie.css" />
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="http://i.media-imdb.com/images/SFf4998318a26e5a6e8304e5bbbef6581a/wheel/fixed.css" />
+
+</head>
+<!-- h=iof532 i=2009-04-23 s=legacy(default) t='Fri Apr 24 00:14:47 2009' -->
+
+<body bgcolor="#ffffff" text="#000000" id="styleguide-v2" class="fixed">
+<div id="wrapper">
+
+
+
+<script language="JavaScript" type="text/javascript">ord = ((this.ad_utils) && (this.ad_utils.ord)) ? this.ad_utils.ord : Math.random()*10000000000000000; </script><!-- begin FLOATING1 -->
+<div id="floating1_wrapper">
+<script type="text/javascript"> ad_utils.ad_queue.push({tile:'1',slot:'floating1'});
+</script>
+<iframe src="/images/SF027ed9fafbcdd6b119baa38445732a82/a/ifb/doubleclick/expand.html#imdb2.consumer.main/find;tile=1;sz=1x1,4x1;p=f1;ifb=pf;ord=[CLIENT_SIDE_ORD]?" id="floating1" name="floating1" class="yesScript" width="0" height="0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" onload="ad_utils.resize_iframe(this)"></iframe>
+
+<noscript><a href="http://ad.doubleclick.net/jump/imdb2.consumer.main/find;tile=1;sz=1x1,4x1;p=f1;ifb=pf;ord=790135060292?" target="_blank"><img src="http://ad.doubleclick.net/ad/imdb2.consumer.main/find;tile=1;sz=1x1,4x1;p=f1;ifb=pf;ord=790135060292?"  border="0" alt="advertisement" /></a></noscript>
+
+</div>
+<!-- End FLOATING1 -->
+
+
+
+
+
+<div id="root">
+<layer name="root">
+  
+
+<div id="nb15">
+ <div id="nb15supertab">
+
+
+<!-- begin TOP_AD -->
+<div id="top_ad_wrapper">
+<script type="text/javascript"> ad_utils.ad_queue.push({tile:'2',slot:'top_ad'});
+</script>
+<iframe src="/images/SF027ed9fafbcdd6b119baa38445732a82/a/ifb/doubleclick/expand.html#imdb2.consumer.main/find;tile=2;sz=468x60,728x90,1008x150,9x1;p=t;ord=[CLIENT_SIDE_ORD]?" id="top_ad" name="top_ad" class="yesScript" width="0" height="80" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" onload="ad_utils.resize_iframe(this)"></iframe>
+
+<noscript><a href="http://ad.doubleclick.net/jump/imdb2.consumer.main/find;tile=2;sz=468x60,728x90,1008x150,9x1;p=t;ord=790135060292?" target="_blank"><img src="http://ad.doubleclick.net/ad/imdb2.consumer.main/find;tile=2;sz=468x60,728x90,1008x150,9x1;p=t;ord=790135060292?"  border="0" alt="advertisement" /></a></noscript>
+
+</div>
+<!-- End TOP_AD -->
+
+</div>
+  <div id="nb15home">
+   <a href="/" onClick="(new Image()).src='/rg/nav-home/navbar/images/b.gif?link=/';"><img src="http://i.media-imdb.com/images/nb15/logo2.gif" alt="Home" 
+   title="The Internet Movie Database" border="0" width="177" height="78"></a>
+  </div>
+ <div id="nb15botbg">
+ 
+  <div id="nb15tabs">
+   <a id="nb15nowplaying" href="/nowplaying/" onClick="(new Image()).src='/rg/nav-nowplaying/navbar/images/b.gif?link=/nowplaying/';"><i>Now Playing</i></a>
+   <a id="nb15news" href="/news/" onClick="(new Image()).src='/rg/nav-news/navbar/images/b.gif?link=/news/';"><i>Movie/TV News</i></a>
+   <a id="nb15mm" href="/mymovies/list" onClick="(new Image()).src='/rg/nav-mymovies/navbar/images/b.gif?link=/mymovies/list';"><i>My Movies</i></a>
+   <a id="nb15dvd" href="/sections/dvd/" onClick="(new Image()).src='/rg/nav-video/navbar/images/b.gif?link=/sections/dvd/';"><i>DVD New Releases</i></a>
+   <a id="nb15imdbtv" href="/sections/tv/" onClick="(new Image()).src='/rg/nav-imdbtv/navbar/images/b.gif?link=/sections/tv/';"><i>IMDbTV</i></a>
+   <a id="nb15boards" href="/boards/" onClick="(new Image()).src='/rg/nav-boards/navbar/images/b.gif?link=/boards/';"><i>Message Boards</i></a>
+   <a id="nb15showtimes" href="/showtimes/" onClick="(new Image()).src='/rg/nav-showtimes/navbar/images/b.gif?link=/showtimes/';"><i>Showtimes &amp; Tickets</i></a>
+   <a id="nb15pro" href="http://pro.imdb.com/r/imdb-nav/" onClick="(new Image()).src='/rg/nav-pro/navbar/images/b.gif?link=http://pro.imdb.com/r/imdb-nav/';"><i>IMDbPro</i></a>
+   <a id="nb15resume" href="http://resume.imdb.com/" onClick="(new Image()).src='/rg/nav-resume/navbar/images/b.gif?link=http://resume.imdb.com/';"><i>IMDb Resume</i></a>
+  </div>
+ 
+  <div id="nb15topbg">
+   <div id="nb15iesux">
+    <div id="nb15personal">
+
+     &nbsp;<span><a href="/register/login" onClick="(new Image()).src='/rg/sub-login/navbar/images/b.gif?link=/register/login';">Login</a> | 
+     <a href="/register/?why=personalize" onClick="(new Image()).src='/rg/sub-register/navbar/images/b.gif?link=/register/?why=personalize';">Register</a></span>
+
+    </div>
+   </div>
+  </div>
+  <div id="nb15sub">
+   <div>
+   <a href="/" onClick="(new Image()).src='/rg/sub-home/navbar/images/b.gif?link=/';">Home</a> |
+   
+    <a href="/chart/" onClick="(new Image()).src='/rg/sub-top/navbar/images/b.gif?link=/chart/';">Top&nbsp;Movies</a> |
+    <a href="/sections/gallery/" onClick="(new Image()).src='/rg/sub-gallery/navbar/images/b.gif?link=/sections/gallery/';">Photos</a> |
+    <a href="/indie/" onClick="(new Image()).src='/rg/sub-indie/navbar/images/b.gif?link=/indie/';">Independent&nbsp;Film</a> |
+    <a href="/sections/games/" onClick="(new Image()).src='/rg/sub-gamebase/navbar/images/b.gif?link=/sections/games/';">GameBase</a> |
+    <a href="/Browse/" onClick="(new Image()).src='/rg/sub-browse/navbar/images/b.gif?link=/Browse/';">Browse</a> |
+   
+   <a href="/help/" onClick="(new Image()).src='/rg/sub-help/navbar/images/b.gif?link=/help/';">Help</a>
+   </div>
+  </div>
+  <div id="nb15search"> 
+   <span class=search><a href="/search" onClick="(new Image()).src='/rg/search-img/navbar/images/b.gif?link=/search';">search</a></span>
+   <form method="get" action="/find" name="find">
+    <select name="s">
+     <option value="all">All</option>
+     <option value="tt" selected>Titles</option>
+     <option value="ep">TV Episodes</option>
+     
+      <option>My Movies</option>
+     
+     <option value="nm">Names</option>
+     <option value="co">Companies</option>
+     
+      <option value="kw">Keywords</option>
+     
+     
+     <option value="char">Characters</option>
+     
+      <option>Quotes</option>
+      <option>Bios</option>
+      <option>Plots</option>
+    
+    </select>
+   <input name="q" size="28" value="The Mummy">
+    
+    <input type="image"  id="nb15go_image"  src="http://i.media-imdb.com/images/SF3892fa575b88eeb705320cfdeddd1539/intl/en/go.gif" alt="go" value="go" title="go">
+    
+    
+    <span id="nb15searchlinks">
+    
+     <a href="/search" onClick="(new Image()).src='/rg/search-more/navbar/images/b.gif?link=/search';">more</a> | 
+     <a href="/help/show_leaf?searchtips" onClick="(new Image()).src='/rg/search-tips/navbar/images/b.gif?link=/help/show_leaf?searchtips';">tips</a>
+    
+    </span>
+   </form>
+  </div>
+ </div>
+</div>
+
+
+
+<!-- begin NAVSTRIP -->
+<div id="navstrip_wrapper">
+<script type="text/javascript"> ad_utils.ad_queue.push({tile:'3',slot:'navstrip'});
+</script>
+<iframe src="/images/SF027ed9fafbcdd6b119baa38445732a82/a/ifb/doubleclick/expand.html#imdb2.consumer.main/find;tile=3;sz=1008x40,7x1;p=ns;ord=[CLIENT_SIDE_ORD]?" id="navstrip" name="navstrip" class="yesScript" width="0" height="0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" onload="ad_utils.resize_iframe(this)"></iframe>
+
+<noscript><a href="http://ad.doubleclick.net/jump/imdb2.consumer.main/find;tile=3;sz=1008x40,7x1;p=ns;ord=790135060292?" target="_blank"><img src="http://ad.doubleclick.net/ad/imdb2.consumer.main/find;tile=3;sz=1008x40,7x1;p=ns;ord=790135060292?"  border="0" alt="advertisement" /></a></noscript>
+
+</div>
+<!-- End NAVSTRIP -->
+
+
+<div id="pagecontent">
+
+<table id="outerbody" border="0" width="100%" cellspacing="0" cellpadding="0" class="outer_body">
+ <tr valign="top" align="left">
+   
+   
+   <td width="100%" valign="top" align="left">
+   
+<table border="0" width="100%">
+  <td valign="top">
+    <table width="100%" border=0 cellspacing="0" cellpadding="0">
+      <tr> 
+        <td colspan="2" height="12"> </td>
+      </tr>
+      <tr>
+        <td>
+<style type="text/css">
+ul li {
+          list-style-type: none;
+      }
+</style>
+      
+
+<script language="JavaScript">
+<!--
+function set_cookie(name, value) {
+  var date = new Date();
+  date.setTime(date.getTime()+600000);
+  var cookie = name + "=" + escape(value) +
+    "; path=/" +
+    "; expires=" + date.toGMTString();
+  document.cookie = cookie;
+}
+function set_args(id, fc, fm) {
+  var cookie = id + "/" + fc + "/74/c2M9MXxsbT01MDB8ZmI9Y3x0dD0xfG14PTIwfHFzPVRoZSBNdW1teXxodG1sPTF8c2l0ZT1kZnxxPVRoZSBNdW1teXxwbj0w";
+  if (fm) {
+    cookie = cookie + "/" + fm;
+  }
+  set_cookie("fd", cookie);
+}
+
+//-->
+</script>
+<p style="margin:0 0 0.5em 0;"><b>Media from&nbsp;<a href="/title/tt0120616/" onclick="(new Image()).src='/rg/find-media-title/media_strip/images/b.gif?link=/title/tt0120616/';">The Mummy</a> (1999)</b></p>
+<style type="text/css">
+
+.media_strip_thumbs img {
+    margin-right:0.2em;
+    border:none;
+}
+
+.media_strip_thumbs {
+  overflow: hidden;
+  height: 90px;
+}
+.media_strip_thumb img {
+  margin-right: 0.2em;
+}
+.media_strip_thumb {
+  float: left; 
+  margin-bottom: 50px;
+  text-align: right;
+  font-family: Tahoma,Verdana,sans-serif;
+  font-size: 10pt;
+  color:#333333;
+}
+</style>
+
+<table style="border-collapse:collapse;">
+<tr>
+
+<td width="40%" class="media_strip_header">
+<b>Photos</b>
+<span>(<a href="/rg/photos-title-find/gallery-link/title/tt0120616/mediaindex">see all 98</a> | <a href="/rg/photos-title-find/slideshow-link/media/rm3984890368/tt0120616?slideshow=1">slideshow</a>)</span>
+</td>
+
+<td width="40%" class="media_strip_header">
+
+
+<b>Videos</b>
+
+
+
+<span>(<a href="/rg/videos-title-find/gallery-link/title/tt0120616/videogallery">see all 7</a>)</span>
+
+</td>
+
+</tr>
+<tr>
+
+<td>
+<div class="media_strip_thumbs">
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3984890368/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMjAzNTAwNzM1OF5BMl5BanBnXkFtZTYwNjc1ODAz._V1._CR69,0,312,312_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3853031680/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMzMzMzQ5NzA2N15BMl5BanBnXkFtZTYwNjI5NjM3._V1._CR78,0,319,319_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3819477248/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMTI2OTAyNTE0Nl5BMl5BanBnXkFtZTYwODI5NjM3._V1._CR75,0,319,319_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3802700032/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMjEyNTkxMTgyMV5BMl5BanBnXkFtZTYwMDM5NjM3._V1._CR0,0,321,321_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3769145600/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BNzM4ODA5MDQ2Nl5BMl5BanBnXkFtZTYwMjM5NjM3._V1._CR80,0,315,315_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm4004026624/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMTk5MDkwMTQ0MF5BMl5BanBnXkFtZTYwNDM5NjM3._V1._CR0,0,320,320_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3970472192/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMTg1NTI1NTY4M15BMl5BanBnXkFtZTYwNjM5NjM3._V1._CR0,0,320,320_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3936917760/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BODU1MjgzOTkzM15BMl5BanBnXkFtZTYwODM5NjM3._V1._CR59,0,357,357_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm3903363328/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMTc0ODI4Mzg0OV5BMl5BanBnXkFtZTYwMTQ5NjM3._V1._CR74,0,326,326_SS90_.jpg" border="0"></a></div>
+<div class="media_strip_thumb"><a href="/rg/photos-title-find/summary/media/rm4138244352/tt0120616"><img height="90" width="90" src="http://ia.media-imdb.com/images/M/MV5BMTQyNDA3MDIzNV5BMl5BanBnXkFtZTYwMzQ5NjM3._V1._CR0,0,475,475_SS90_.jpg" border="0"></a></div>
+</div>
+</td>
+
+<td>
+<div class="media_strip_thumbs">
+<div class="media_strip_thumb"><a target="_self" onClick="" href="/rg/videos-title-find/summary/video/screenplay/vi385286425/"><img alt="Brendan Fraser stars as an American serving in the French Foreign Legion who, on an archaeological dig at the ancient city of Hamunaptra accidentally awakens the Mummy." title="Brendan Fraser stars as an American serving in the French Foreign Legion who, on an archaeological dig at the ancient city of Hamunaptra accidentally awakens the Mummy." src="http://ia.media-imdb.com/images/M/MV5BMjA4MTE5MjkyNV5BMl5BanBnXkFtZTcwMzQ1OTc2MQ@@._V1._SX112_SY90_BO120,0,0,0_PIimdb-play-bar2-180,BottomLeft,116,-120_CR116,120,120,90_ZATrailer,37,63,27,83,verdenab,9,255,255,255,1_.jpg" width="120" height="90" title="The Mummy" border="1" /></a></div>
+<div class="media_strip_thumb"><a target="_self" onClick="" href="/rg/videos-title-find/summary/video/hulu/vi1724055577/"><img alt="In ancient Egypt Imhotep and the Pharoah&#39;s sexy mistress kill the Pharoah and suffer the consequences." title="In ancient Egypt Imhotep and the Pharoah&#39;s sexy mistress kill the Pharoah and suffer the consequences." src="http://ia.media-imdb.com/images/M/MV5BMTEwNDcxOTc4NDZeQTJeQWpwZ15BbWU3MDkwOTcwOTE@._V1._SX120_SY90_BO120,0,0,0_PIimdb-play-bar2-180,BottomLeft,120,-120_CR120,120,120,90_ZAClip,37,63,27,83,verdenab,9,255,255,255,1_.jpg" width="120" height="90" title="Imhotep and the Pharoah's Mistress" border="1" /></a></div>
+<div class="media_strip_thumb"><a target="_self" onClick="" href="/rg/videos-title-find/summary/video/hulu/vi1707278361/"><img alt="Rick and Evelyn battle it out with Imhotep. A golden book and a sharp sword are their only weapons." title="Rick and Evelyn battle it out with Imhotep. A golden book and a sharp sword are their only weapons." src="http://ia.media-imdb.com/images/M/MV5BMTkxODMwMjcxNF5BMl5BanBnXkFtZTcwODA5NzA5MQ@@._V1._SX120_SY90_BO120,0,0,0_PIimdb-play-bar2-180,BottomLeft,120,-120_CR120,120,120,90_ZAClip,37,63,27,83,verdenab,9,255,255,255,1_.jpg" width="120" height="90" title="Mummy Battle" border="1" /></a></div>
+</div>
+</td>
+
+</tr>
+</table>
+
+
+
+ <p><b>Popular Titles</b> (Displaying 3 Results)<table><tr> <td valign="top"><a href="/title/tt0120616/" onClick="(new Image()).src='/rg/find-tiny-photo-1/title_popular/images/b.gif?link=/title/tt0120616/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTg4NDEyNTY2NF5BMl5BanBnXkFtZTcwOTI0NDIyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>1.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0120616/" onclick="(new Image()).src='/rg/find-title-1/title_popular/images/b.gif?link=/title/tt0120616/';">The Mummy</a> (1999)     </td></tr><tr> <td valign="top"><a href="/title/tt0209163/" onClick="(new Image()).src='/rg/find-tiny-photo-2/title_popular/images/b.gif?link=/title/tt0209163/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTIxMzk4NDAxN15BMl5BanBnXkFtZTcwMTY4MzMyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>2.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0209163/" onclick="(new Image()).src='/rg/find-title-2/title_popular/images/b.gif?link=/title/tt0209163/';">The Mummy Returns</a> (2001)    <br>&#160;aka <em>"The Mummy 2"</em> - USA <em>(working title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0859163/" onClick="(new Image()).src='/rg/find-tiny-photo-3/title_popular/images/b.gif?link=/title/tt0859163/';"><img src="http://ia.media-imdb.com/images/M/MV5BMjIxMzg1OTAwOV5BMl5BanBnXkFtZTcwMTgwNzEwMg@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>3.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0859163/" onclick="(new Image()).src='/rg/find-title-3/title_popular/images/b.gif?link=/title/tt0859163/';">The Mummy: Tomb of the Dragon Emperor</a> (2008)    <br>&#160;aka <em>"The Mummy 3"</em> - USA <em>(informal title)</em> </td></tr></table> </p> <p><b>Titles (Exact Matches)</b> (Displaying 8 Results)<table><tr> <td valign="top"><a href="/title/tt0023245/" onClick="(new Image()).src='/rg/find-tiny-photo-1/title_exact/images/b.gif?link=/title/tt0023245/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTkxMjYzMzA0OF5BMl5BanBnXkFtZTcwOTM5NTQyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>1.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0023245/" onclick="(new Image()).src='/rg/find-title-1/title_exact/images/b.gif?link=/title/tt0023245/';">The Mummy</a> (1932)     </td></tr><tr> <td valign="top"><a href="/title/tt0053085/" onClick="(new Image()).src='/rg/find-tiny-photo-2/title_exact/images/b.gif?link=/title/tt0053085/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTQwMTgyNDgyOV5BMl5BanBnXkFtZTcwOTYwMDMyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>2.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0053085/" onclick="(new Image()).src='/rg/find-title-2/title_exact/images/b.gif?link=/title/tt0053085/';">The Mummy</a> (1959)    <br>&#160;aka <em>"Terror of the Mummy"</em> - UK <em>(working title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0158011/" onClick="(new Image()).src='/rg/find-tiny-photo-3/title_exact/images/b.gif?link=/title/tt0158011/';"><img src="http://ia.media-imdb.com/images/M/MV5BMjA4MDQxOTcwMl5BMl5BanBnXkFtZTcwNTQ4MzMyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>3.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0158011/" onclick="(new Image()).src='/rg/find-title-3/title_exact/images/b.gif?link=/title/tt0158011/';">Trance</a> (1998)    <br>&#160;aka <em>"The Eternal: Kiss of the Mummy"</em> - USA <em>(video box title)</em><br>&#160;aka <em>"The Mummy"</em> - USA <em>(working title)</em><br>&#160;aka <em>"Michael Almereyda&#x27;s The Mummy"</em> - USA <em>(working title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">4.</td><td valign="top"><a href="/title/tt0409066/" onclick="(new Image()).src='/rg/find-title-4/title_exact/images/b.gif?link=/title/tt0409066/';">The Mummy</a> (1911)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">5.</td><td valign="top"><a href="/title/tt0197710/" onclick="(new Image()).src='/rg/find-title-5/title_exact/images/b.gif?link=/title/tt0197710/';">The Mummy</a> (1912)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">6.</td><td valign="top"><a href="/title/tt0266777/" onclick="(new Image()).src='/rg/find-title-6/title_exact/images/b.gif?link=/title/tt0266777/';">The Mummy</a> (2000) (VG)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">7.</td><td valign="top"><a href="/title/tt1265678/" onclick="(new Image()).src='/rg/find-title-7/title_exact/images/b.gif?link=/title/tt1265678/';">The Mummy</a> (1914)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">8.</td><td valign="top"><a href="/title/tt0842769/" onclick="(new Image()).src='/rg/find-title-8/title_exact/images/b.gif?link=/title/tt0842769/';">The Mummy</a> (1923)     </td></tr></table> </p> <p><b>Titles (Partial Matches)</b> (Displaying 63 Results)<table><tr> <td valign="top"><a href="/title/tt0231138/" onClick="(new Image()).src='/rg/find-tiny-photo-1/title_substring/images/b.gif?link=/title/tt0231138/';"><img src="http://ia.media-imdb.com/images/M/MV5BMzUzMzU5NTIxOF5BMl5BanBnXkFtZTcwMjAxMzgzMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>1.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0231138/" onclick="(new Image()).src='/rg/find-title-1/title_substring/images/b.gif?link=/title/tt0231138/';">Ancient Evil: Scream of the Mummy</a> (1999)    <br>&#160;aka <em>"Bram Stoker&#x27;s Legend of the Mummy 2"</em> - UK </td></tr><tr> <td valign="top"><a href="/title/tt0050717/" onClick="(new Image()).src='/rg/find-tiny-photo-2/title_substring/images/b.gif?link=/title/tt0050717/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTg2MDcwNDM2OF5BMl5BanBnXkFtZTcwODc0NzEyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>2.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0050717/" onclick="(new Image()).src='/rg/find-title-2/title_substring/images/b.gif?link=/title/tt0050717/';">La momia azteca contra el robot humano</a> (1958)    <br>&#160;aka <em>"The Robot vs. the Aztec Mummy"</em> - USA <em>(dubbed version)</em><br>&#160;aka <em>"Aztec Mummy vs. the Human Robot"</em> </td></tr><tr> <td valign="top"><a href="/title/tt0127919/" onClick="(new Image()).src='/rg/find-tiny-photo-3/title_substring/images/b.gif?link=/title/tt0127919/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTg1ODY1NDc0MF5BMl5BanBnXkFtZTcwNDk4NjgxMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>3.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0127919/" onclick="(new Image()).src='/rg/find-title-3/title_substring/images/b.gif?link=/title/tt0127919/';">Tale of the Mummy</a> (1998)    <br>&#160;aka <em>"Russell Mulcahy&#x27;s Tale of the Mummy"</em> - USA <em>(complete title)</em><br>&#160;aka <em>"Talos the Mummy"</em> - USA <em>(working title)</em>, <em>(English title)</em>, UK <em>(video title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0047795/" onClick="(new Image()).src='/rg/find-tiny-photo-4/title_substring/images/b.gif?link=/title/tt0047795/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTI1NzU4NzI3Ml5BMl5BanBnXkFtZTcwOTQ1NjIyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>4.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0047795/" onclick="(new Image()).src='/rg/find-title-4/title_substring/images/b.gif?link=/title/tt0047795/';">Abbott and Costello Meet the Mummy</a> (1955)    <br>&#160;aka <em>"Meet the Mummy"</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">5.</td><td valign="top"><a href="/title/tt0084650/" onclick="(new Image()).src='/rg/find-title-5/title_substring/images/b.gif?link=/title/tt0084650/';">O Segredo da M&#xFA;mia</a> (1982)    <br>&#160;aka <em>"The Secret of the Mummy"</em> </td></tr><tr> <td valign="top"><a href="/title/tt0214529/" onClick="(new Image()).src='/rg/find-tiny-photo-6/title_substring/images/b.gif?link=/title/tt0214529/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTAzMTExNjM0MDJeQTJeQWpwZ15BbWU2MDIzMTg3OQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>6.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0214529/" onclick="(new Image()).src='/rg/find-title-6/title_substring/images/b.gif?link=/title/tt0214529/';">Belph&#xE9;gor - Le fant&#xF4;me du Louvre</a> (2001)    <br>&#160;aka <em>"Belphecor: Curse of the Mummy"</em> - Philippines <em>(English title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0357930/" onClick="(new Image()).src='/rg/find-tiny-photo-7/title_substring/images/b.gif?link=/title/tt0357930/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTI3NjkyNDcyOV5BMl5BanBnXkFtZTcwMjAxMzAzMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>7.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0357930/" onclick="(new Image()).src='/rg/find-title-7/title_substring/images/b.gif?link=/title/tt0357930/';">Mummy an&#x27; the Armadillo</a> (2004)     </td></tr><tr> <td valign="top"><a href="/title/tt0156735/" onClick="(new Image()).src='/rg/find-tiny-photo-8/title_substring/images/b.gif?link=/title/tt0156735/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTYzNDA3ODEzM15BMl5BanBnXkFtZTcwNjAwOTQyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>8.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0156735/" onclick="(new Image()).src='/rg/find-title-8/title_substring/images/b.gif?link=/title/tt0156735/';">Legend of the Mummy</a> (1997)    <br>&#160;aka <em>"Bram Stoker&#x27;s The Mummy"</em> - USA <em>(video title)</em><br>&#160;aka <em>"Bram Stoker&#x27;s Legend of the Mummy"</em> </td></tr><tr> <td valign="top"><a href="/title/tt0281471/" onClick="(new Image()).src='/rg/find-tiny-photo-9/title_substring/images/b.gif?link=/title/tt0281471/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTUzNDE3MjkyN15BMl5BanBnXkFtZTcwNzQzMTgyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>9.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0281471/" onclick="(new Image()).src='/rg/find-title-9/title_substring/images/b.gif?link=/title/tt0281471/';">&#x22;The Mummy: The Animated Series&#x22;</a> (2001) <small>(TV series)</small>    <br>&#160;aka <em>"The Mummy: Secrets of the Medjai"</em> - USA <em>(new title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">10.</td><td valign="top"><a href="/title/tt0212204/" onclick="(new Image()).src='/rg/find-title-10/title_substring/images/b.gif?link=/title/tt0212204/';">Harry Knuckles and the Treasure of the Aztec Mummy</a> (1999) (V)     </td></tr><tr> <td valign="top"><a href="/title/tt0082237/" onClick="(new Image()).src='/rg/find-tiny-photo-11/title_substring/images/b.gif?link=/title/tt0082237/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTY3NzI2OTczMF5BMl5BanBnXkFtZTcwNDkxMjAwMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>11.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0082237/" onclick="(new Image()).src='/rg/find-title-11/title_substring/images/b.gif?link=/title/tt0082237/';">Dawn of the Mummy</a> (1981)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">12.</td><td valign="top"><a href="/title/tt0409221/" onclick="(new Image()).src='/rg/find-title-12/title_substring/images/b.gif?link=/title/tt0409221/';">Revenge of the Mummy: The Ride</a> (2004)    <br>&#160;aka <em>"Revenge of the Mummy"</em> - USA <em>(short title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">13.</td><td valign="top"><a href="/title/tt0347586/" onclick="(new Image()).src='/rg/find-title-13/title_substring/images/b.gif?link=/title/tt0347586/';">Ng goh haak gwai dik siu nin</a> (2002)    <br>&#160;aka <em>"The Mummy, Aged 19"</em> - Hong Kong <em>(English title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0143096/" onClick="(new Image()).src='/rg/find-tiny-photo-14/title_substring/images/b.gif?link=/title/tt0143096/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTA3NjEzMTI1NDReQTJeQWpwZ15BbWU3MDI4ODM3MjE@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>14.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0143096/" onclick="(new Image()).src='/rg/find-title-14/title_substring/images/b.gif?link=/title/tt0143096/';">The All New Adventures of Laurel &#x26; Hardy in &#x27;For Love or Mummy&#x27;</a> (1999)     </td></tr><tr> <td valign="top"><a href="/title/tt0036179/" onClick="(new Image()).src='/rg/find-tiny-photo-15/title_substring/images/b.gif?link=/title/tt0036179/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTMyMjI0NTYzN15BMl5BanBnXkFtZTcwMDM3MzgzMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>15.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0036179/" onclick="(new Image()).src='/rg/find-title-15/title_substring/images/b.gif?link=/title/tt0036179/';">The Mummy Strikes</a> (1943)     </td></tr><tr> <td valign="top"><a href="/title/tt0008854/" onClick="(new Image()).src='/rg/find-tiny-photo-16/title_substring/images/b.gif?link=/title/tt0008854/';"><img src="http://ia.media-imdb.com/images/M/MV5BMjEzNDQ1OTAyMV5BMl5BanBnXkFtZTcwNzg2NzA0MQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>16.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0008854/" onclick="(new Image()).src='/rg/find-title-16/title_substring/images/b.gif?link=/title/tt0008854/';">Die Augen der Mumie Ma</a> (1918)    <br>&#160;aka <em>"Eyes of the Mummy Ma"</em> - USA<br>&#160;aka <em>"The Eyes of the Mummy"</em> </td></tr><tr> <td valign="top"><a href="/title/tt0050672/" onClick="(new Image()).src='/rg/find-tiny-photo-17/title_substring/images/b.gif?link=/title/tt0050672/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTg2MDcwNDM2OF5BMl5BanBnXkFtZTcwODc0NzEyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>17.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0050672/" onclick="(new Image()).src='/rg/find-title-17/title_substring/images/b.gif?link=/title/tt0050672/';">La maldici&#xF3;n de la momia azteca</a> (1957)    <br>&#160;aka <em>"The Curse of the Aztec Mummy"</em> - USA <em>(TV title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0058304/" onClick="(new Image()).src='/rg/find-tiny-photo-18/title_substring/images/b.gif?link=/title/tt0058304/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTYzOTgwNjIwMl5BMl5BanBnXkFtZTcwMDgzOTAwMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>18.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0058304/" onclick="(new Image()).src='/rg/find-title-18/title_substring/images/b.gif?link=/title/tt0058304/';">Las luchadoras contra la momia</a> (1964)    <br>&#160;aka <em>"Wrestling Women vs. the Aztec Mummy"</em> - USA<br>&#160;aka <em>"Rock &#x27;N Roll Wrestling Women vs. the Aztec Mummy"</em> - USA <em>(video title) (recut version)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0208429/" onClick="(new Image()).src='/rg/find-tiny-photo-19/title_substring/images/b.gif?link=/title/tt0208429/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTQxMjc5MDg2M15BMl5BanBnXkFtZTcwNTU3NjMyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>19.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0208429/" onclick="(new Image()).src='/rg/find-title-19/title_substring/images/b.gif?link=/title/tt0208429/';">Santo en la venganza de la momia</a> (1971)    <br>&#160;aka <em>"Santo and the Vengeance of the Mummy"</em> - USA </td></tr><tr> <td valign="top"><a href="/title/tt0107618/" onClick="(new Image()).src='/rg/find-tiny-photo-20/title_substring/images/b.gif?link=/title/tt0107618/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTY2NjQ5MjUxOF5BMl5BanBnXkFtZTcwMjY0MTEzMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>20.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0107618/" onclick="(new Image()).src='/rg/find-title-20/title_substring/images/b.gif?link=/title/tt0107618/';">The Mummy Lives</a> (1993)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">21.</td><td valign="top"><a href="/title/tt0289747/" onclick="(new Image()).src='/rg/find-title-21/title_substring/images/b.gif?link=/title/tt0289747/';">The Mummy Parody</a> (2001) (TV)     </td></tr><tr> <td valign="top"><a href="/title/tt0057862/" onClick="(new Image()).src='/rg/find-tiny-photo-22/title_substring/images/b.gif?link=/title/tt0057862/';"><img src="http://ia.media-imdb.com/images/M/MV5BMjE4NTQxMDg2Nl5BMl5BanBnXkFtZTcwNTc0MTAyMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>22.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0057862/" onclick="(new Image()).src='/rg/find-title-22/title_substring/images/b.gif?link=/title/tt0057862/';">Attack of the Mayan Mummy</a> (1964) (TV)    <br>&#160;aka <em>"The Mummy Strikes"</em> - <em>(English title)</em> <em>(informal title)</em> </td></tr><tr> <td valign="top"><a href="/title/tt0050718/" onClick="(new Image()).src='/rg/find-tiny-photo-23/title_substring/images/b.gif?link=/title/tt0050718/';"><img src="http://ia.media-imdb.com/images/M/MV5BNTQyODU3Mjk0N15BMl5BanBnXkFtZTcwNTE1NjczMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>23.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0050718/" onclick="(new Image()).src='/rg/find-title-23/title_substring/images/b.gif?link=/title/tt0050718/';">La momia azteca</a> (1957)    <br>&#160;aka <em>"The Aztec Mummy"</em><br>&#160;aka <em>"Attack of the Aztec Mummy"</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">24.</td><td valign="top"><a href="/title/tt0070871/" onclick="(new Image()).src='/rg/find-title-24/title_substring/images/b.gif?link=/title/tt0070871/';">La venganza de la momia</a> (1973)    <br>&#160;aka <em>"The Vengeance of the Mummy"</em> </td></tr><tr> <td valign="top"><a href="/title/tt0391355/" onClick="(new Image()).src='/rg/find-tiny-photo-25/title_substring/images/b.gif?link=/title/tt0391355/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTcxNDE5Njc2Nl5BMl5BanBnXkFtZTcwMjE3NjgxMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>25.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0391355/" onclick="(new Image()).src='/rg/find-title-25/title_substring/images/b.gif?link=/title/tt0391355/';">The Mummy Theme Park</a> (2000) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">26.</td><td valign="top"><a href="/title/tt1270479/" onclick="(new Image()).src='/rg/find-title-26/title_substring/images/b.gif?link=/title/tt1270479/';">The Mummy: Tomb of the Dragon Emperor</a> (2008) (VG)     </td></tr><tr> <td valign="top"><a href="/title/tt0497415/" onClick="(new Image()).src='/rg/find-tiny-photo-27/title_substring/images/b.gif?link=/title/tt0497415/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTczMzczMjM3OV5BMl5BanBnXkFtZTcwNDE2NDA0MQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>27.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0497415/" onclick="(new Image()).src='/rg/find-title-27/title_substring/images/b.gif?link=/title/tt0497415/';">The Mummy Who Would Be King</a> (2006) (TV)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">28.</td><td valign="top"><a href="/title/tt0072132/" onclick="(new Image()).src='/rg/find-title-28/title_substring/images/b.gif?link=/title/tt0072132/';">El secreto de la momia egipcia</a> (1973)    <br>&#160;aka <em>"Love Brides of the Blood Mummy"</em> - USA </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">29.</td><td valign="top"><a href="/title/tt0469135/" onclick="(new Image()).src='/rg/find-title-29/title_substring/images/b.gif?link=/title/tt0469135/';">Mil Mascaras vs. the Aztec Mummy</a> (2007)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">30.</td><td valign="top"><a href="/title/tt0236521/" onclick="(new Image()).src='/rg/find-title-30/title_substring/images/b.gif?link=/title/tt0236521/';">Mummy: Tomb of the Pharaoh</a> (1996) (VG)     </td></tr><tr> <td valign="top"><a href="/title/tt1265985/" onClick="(new Image()).src='/rg/find-tiny-photo-31/title_substring/images/b.gif?link=/title/tt1265985/';"><img src="http://ia.media-imdb.com/images/M/MV5BNDkwMjY4NjE0OF5BMl5BanBnXkFtZTcwNTc2MDg4MQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>31.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt1265985/" onclick="(new Image()).src='/rg/find-title-31/title_substring/images/b.gif?link=/title/tt1265985/';">My Mummy</a> (2008) (V)    <br>&#160;aka <em>"My Mummy: The Tomb Is a Drag Without Her"</em> - USA <em>(DVD title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">32.</td><td valign="top"><a href="/title/tt0457484/" onclick="(new Image()).src='/rg/find-title-32/title_substring/images/b.gif?link=/title/tt0457484/';">Sphinx and the Cursed Mummy</a> (2003) (VG)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">33.</td><td valign="top"><a href="/title/tt0437486/" onclick="(new Image()).src='/rg/find-title-33/title_substring/images/b.gif?link=/title/tt0437486/';">Spotlight on Location: The Mummy Returns</a> (2001) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">34.</td><td valign="top"><a href="/title/tt0304434/" onclick="(new Image()).src='/rg/find-title-34/title_substring/images/b.gif?link=/title/tt0304434/';">The Demon and the Mummy</a> (1976)     </td></tr><tr> <td valign="top"><a href="/title/tt0003876/" onClick="(new Image()).src='/rg/find-tiny-photo-35/title_substring/images/b.gif?link=/title/tt0003876/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTc0MTM2ODU5Ml5BMl5BanBnXkFtZTcwOTk3MDUzMQ@@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>35.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0003876/" onclick="(new Image()).src='/rg/find-title-35/title_substring/images/b.gif?link=/title/tt0003876/';">The Egyptian Mummy</a> (1914)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">36.</td><td valign="top"><a href="/title/tt0151440/" onclick="(new Image()).src='/rg/find-title-36/title_substring/images/b.gif?link=/title/tt0151440/';">The Magic Mummy</a> (1933)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">37.</td><td valign="top"><a href="/title/tt0131492/" onclick="(new Image()).src='/rg/find-title-37/title_substring/images/b.gif?link=/title/tt0131492/';">The Mummy and the Curse of the Jackals</a> (1969)    <br>&#160;aka <em>"The Mummy vs. the Were-Jackal"</em> - USA <em>(working title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">38.</td><td valign="top"><a href="/title/tt0301636/" onclick="(new Image()).src='/rg/find-title-38/title_substring/images/b.gif?link=/title/tt0301636/';">The Mummy Returns</a> (2001) (VG)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">39.</td><td valign="top"><a href="/title/tt1273816/" onclick="(new Image()).src='/rg/find-title-39/title_substring/images/b.gif?link=/title/tt1273816/';">The University of Illinois vs. a Mummy</a> (2006) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">40.</td><td valign="top"><a href="/title/tt1414817/" onclick="(new Image()).src='/rg/find-title-40/title_substring/images/b.gif?link=/title/tt1414817/';">Cry of the Mummy</a> (2009)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">41.</td><td valign="top"><a href="/title/tt1311136/" onclick="(new Image()).src='/rg/find-title-41/title_substring/images/b.gif?link=/title/tt1311136/';">Jet Li: Crafting the Emperor Mummy</a> (2008) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">42.</td><td valign="top"><a href="/title/tt0081175/" onclick="(new Image()).src='/rg/find-title-42/title_substring/images/b.gif?link=/title/tt0081175/';">La momia nacional</a> (1981)    <br>&#160;aka <em>"The National Mummy"</em> - <em>(English title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">43.</td><td valign="top"><a href="/title/tt0951220/" onclick="(new Image()).src='/rg/find-title-43/title_substring/images/b.gif?link=/title/tt0951220/';">La momie du roi</a> (1909)    <br>&#160;aka <em>"The Mummy of the King Rameses"</em> - <em>(English title)</em> </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">44.</td><td valign="top"><a href="/title/tt0223727/" onclick="(new Image()).src='/rg/find-title-44/title_substring/images/b.gif?link=/title/tt0223727/';">Mercy, the Mummy Mumbled</a> (1918)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">45.</td><td valign="top"><a href="/title/tt0427565/" onclick="(new Image()).src='/rg/find-title-45/title_substring/images/b.gif?link=/title/tt0427565/';">Mummy: The Inside Story</a> (2004)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">46.</td><td valign="top"><a href="/title/tt1244125/" onclick="(new Image()).src='/rg/find-title-46/title_substring/images/b.gif?link=/title/tt1244125/';">Romance of the Mummy</a> (1911)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">47.</td><td valign="top"><a href="/title/tt1267282/" onclick="(new Image()).src='/rg/find-title-47/title_substring/images/b.gif?link=/title/tt1267282/';">Secrets of the Dinosaur Mummy</a> (2008) (TV)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">48.</td><td valign="top"><a href="/title/tt1343062/" onclick="(new Image()).src='/rg/find-title-48/title_substring/images/b.gif?link=/title/tt1343062/';">Sherlock Holmes: Mystery of the Mummy</a> (2002) (VG)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">49.</td><td valign="top"><a href="/title/tt0382535/" onclick="(new Image()).src='/rg/find-title-49/title_substring/images/b.gif?link=/title/tt0382535/';">The Anasazi Mummy</a> (2002) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">50.</td><td valign="top"><a href="/title/tt1232773/" onclick="(new Image()).src='/rg/find-title-50/title_substring/images/b.gif?link=/title/tt1232773/';">The Dinosaur Mummy</a> (2008) (TV)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">51.</td><td valign="top"><a href="/title/tt0444040/" onclick="(new Image()).src='/rg/find-title-51/title_substring/images/b.gif?link=/title/tt0444040/';">The Egyptian Mummy</a> (1913)     </td></tr><tr> <td valign="top"><a href="/title/tt0939630/" onClick="(new Image()).src='/rg/find-tiny-photo-52/title_substring/images/b.gif?link=/title/tt0939630/';"><img src="http://ia.media-imdb.com/images/M/MV5BMTA4MjU4MjEzMDZeQTJeQWpwZ15BbWU3MDc0NjAyNDE@._V1._SY30_SX23_.jpg" width="23" height="32" border="0"></a>&nbsp;</td><td align="right" valign="top"><img src="/images/b.gif" width="1" height="6"><br>52.</td><td valign="top"><img src="/images/b.gif" width="1" height="6"><br><a href="/title/tt0939630/" onclick="(new Image()).src='/rg/find-title-52/title_substring/images/b.gif?link=/title/tt0939630/';">The Kung Fu Mummy</a> (2005) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">53.</td><td valign="top"><a href="/title/tt0314322/" onclick="(new Image()).src='/rg/find-title-53/title_substring/images/b.gif?link=/title/tt0314322/';">The Live Mummy</a> (1915)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">54.</td><td valign="top"><a href="/title/tt1311141/" onclick="(new Image()).src='/rg/find-title-54/title_substring/images/b.gif?link=/title/tt1311141/';">The Making of &#x27;The Mummy: Tomb of the Dragon Emperor&#x27;</a> (2008) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">55.</td><td valign="top"><a href="/title/tt0809194/" onclick="(new Image()).src='/rg/find-title-55/title_substring/images/b.gif?link=/title/tt0809194/';">The Missing Mummy</a> (1916)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">56.</td><td valign="top"><a href="/title/tt1274298/" onclick="(new Image()).src='/rg/find-title-56/title_substring/images/b.gif?link=/title/tt1274298/';">The Mummy 4: Rise of the Aztec</a> (2010)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">57.</td><td valign="top"><a href="/title/tt1179280/" onclick="(new Image()).src='/rg/find-title-57/title_substring/images/b.gif?link=/title/tt1179280/';">The Mummy 75th Anniversary Tribute</a> (2008) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">58.</td><td valign="top"><a href="/title/tt0195928/" onclick="(new Image()).src='/rg/find-title-58/title_substring/images/b.gif?link=/title/tt0195928/';">The Mummy and the Cowpuncher</a> (1912)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">59.</td><td valign="top"><a href="/title/tt0005786/" onclick="(new Image()).src='/rg/find-title-59/title_substring/images/b.gif?link=/title/tt0005786/';">The Mummy and the Humming Bird</a> (1915)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">60.</td><td valign="top"><a href="/title/tt0781054/" onclick="(new Image()).src='/rg/find-title-60/title_substring/images/b.gif?link=/title/tt0781054/';">The Mummy Returns: Chamber of Doom</a> (2001) (V)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">61.</td><td valign="top"><a href="/title/tt0775392/" onclick="(new Image()).src='/rg/find-title-61/title_substring/images/b.gif?link=/title/tt0775392/';">&#x22;The Mummy Road Show&#x22;</a> (2001) <small>(TV series)</small>     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">62.</td><td valign="top"><a href="/title/tt0477788/" onclick="(new Image()).src='/rg/find-title-62/title_substring/images/b.gif?link=/title/tt0477788/';">The Mystery of the Black Mummy</a> (2003) (TV)     </td></tr><tr> <td valign="top"><img src="/images/b.gif" alt="" width="23" height="1"></td><td align="right" valign="top">63.</td><td valign="top"><a href="/title/tt0006272/" onclick="(new Image()).src='/rg/find-title-63/title_substring/images/b.gif?link=/title/tt0006272/';">When the Mummy Cried for Help</a> (1915)     </td></tr></table> </p>
+<script type="text/javascript">
+var afsStrings_displaying = new Array();
+afsStrings_displaying[1] = "Displaying 1 Result";
+afsStrings_displaying[2] = "Displaying 2 Results";
+afsStrings_displaying[3] = "Displaying 3 Results";
+afsStrings_displaying[4] = "Displaying 4 Results";
+afsStrings_displaying[5] = "Displaying 5 Results";
+var afsStrings = new Array();
+afsStrings["sponsored_links"] = "Sponsored links";
+afsStrings["whats_this"] = "(What&#x27;s this?)";
+afsStrings["query"] = "The Mummy";
+
+function get_afs_div() {
+  return document.getElementById('afs_sponsored_links');
+}
+</script>
+<div id="afs_sponsored_links" name="afs_sponsored_links"></div>
+
+
+
+<!-- sid: n-channel : MIDDLE_CENTER -->
+<script type="text/javascript">
+var parentDiv;
+try { parentDiv = parent.get_afs_div(); } catch (e) { }
+try { var afsStrings = parent.afsStrings,afsStrings_displaying = parent.afsStrings_displaying; 
+ if (parentDiv && afsStrings["query"]) { 
+  google_afs_ad = 'w3'; google_afs_client = 'amazon-imdb'; google_afs_channel = 'n-channel'; google_afs_adsafe = 'high'; 
+  google_afs_query = afsStrings["query"]; 
+  if (afsStrings["country"]) { google_afs_gl = google_afs_hl = afsStrings["country"];}
+ } } catch (e) { }
+function google_afs_request_done(google_ads) {
+ try {
+  if ( !parentDiv || !afsStrings["sponsored_links"] ) return;
+   var s='',n=google_ads.length;
+   if (n == 0) return;
+    s+='<p><b>'+afsStrings["sponsored_links"]+"</b> <a href=\"/help/show_leaf?sponsoredlinks\">"+afsStrings["whats_this"]+"</a> "+afsStrings_displaying[n]+'</p><ul>';
+    for (var x = 0; x < n; x++) {
+     s+='<li><a href="'+google_ads[x].url+'" target="_top" onmouseout="window.status=\'\'" onmouseover="window.status=\'go to '+google_ads[x].visible_url+'\';return true;" style="text-decoration:none"><span style="text-decoration:underline;">'+google_ads[x].line1+'<br></span>';
+     if (google_ads[x].line2) s+='<small style="color:#000000;">'+google_ads[x].line2+'</small><br>';
+     s+='<small style="color:#003399;">'+google_ads[x].visible_url+'</small></a>'; if (x+1<n) { s+="<br><br>";} s+='</li>';
+   }
+   s+="</ul>";
+   parentDiv.innerHTML = s;
+ } catch (e) { }
+ return;
+}
+</script>
+<script language="JavaScript" src="http://www.google.com/afsonline/show_afs_ads.js"></script>
+
+<p>
+<b>Suggestions For Improving Your Results</b>
+<ul>
+
+<li>
+  There may be additional title matches amongst all the alternative
+titles we have for various regions and languages.
+
+  <ul>
+    <li><a href="/find?q=The%20Mummy;s=tt;site=aka">AKA Title Search for "<b>The Mummy</b>"</a>.</li>
+  </ul>
+  <br>
+</li>
+
+<li>
+  If you are searching for a particular episode of a TV Series, you should search for the title of the TV series, not the episode.  Or you can use the following link to search all Episode Titles.
+  <ul>
+    <li><a href="/find?q=The%20Mummy;s=tt;ttype=ep">Episode Title Search for "<b>The Mummy</b>"</a>.</li>
+  </ul>
+  <br>
+</li>
+
+<li>
+  There may be additional matches in special interest areas that are
+only available to users choosing to see them.
+
+  <ul>
+    <li><a href="/find/preferences?_adult=1">Enable</a> adult titles/names in the search.</li>
+  </ul>
+  <br>
+</li>
+
+</ul>
+</p>
+
+<p>
+<b>More Searches For: The Mummy</b>
+
+<ul>
+  <li class="other">
+    
+      <a href="/find?q=The%20Mummy;more=tt;ttype=df">Titles</a>
+      
+      
+      
+        
+        
+      
+    
+    &nbsp;|&nbsp;
+    <a href="/find?s=char;q=The%20Mummy" onClick="(new Image()).src='/rg/GOOGLE_FIND_othersearches/TOP_RHS/images/b.gif?link=/find?s=char;q=The%20Mummy';">Characters</a>
+    
+      &nbsp;&nbsp;|&nbsp;
+      <a href="/SearchPlots?The%20Mummy" onClick="(new Image()).src='/rg/GOOGLE_FIND_othersearches/TOP_RHS/images/b.gif?link=/SearchPlots?The%20Mummy';">Plot&nbsp;Summaries</a>&nbsp;&nbsp;|&nbsp;
+      <a href="/SearchBios?The%20Mummy" onClick="(new Image()).src='/rg/GOOGLE_FIND_othersearches/TOP_RHS/images/b.gif?link=/SearchBios?The%20Mummy';">Biographies</a>&nbsp;&nbsp;|&nbsp;
+      <a href="/SearchQuotes?The%20Mummy" onClick="(new Image()).src='/rg/GOOGLE_FIND_othersearches/TOP_RHS/images/b.gif?link=/SearchQuotes?The%20Mummy';">Quotes</a>&nbsp;&nbsp;|&nbsp;
+      <a href="/SearchAll?The%20Mummy">more&#160;&#187;</a>
+    
+    <br><br>
+  </li>
+</ul>
+</p>
+
+<p>
+<b>Update your</b> <a href="/find/preferences" title="Set your Search Preferences">search preferences</a>.
+</p>
+
+<!-- [Elapsed Time: 0.001096s (cache hit)] -->
+
+</td>
+</tr>
+</table>
+</p>
+
+</td>
+      </tr>
+      <tr>
+        <td>
+          <br style="clear: left"/>
+          <div style="clear: left; width: 450px">
+            
+
+
+
+          </div>
+          <br style="clear: both"/>
+        </td>
+      </tr>
+    </table>
+  </td>
+  <td valign=top>
+    <table>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+
+
+<!-- begin TOP_RHS -->
+<div id="top_rhs_wrapper">
+<script type="text/javascript"> ad_utils.ad_queue.push({tile:'5',slot:'top_rhs'});
+</script>
+<iframe src="/images/SF027ed9fafbcdd6b119baa38445732a82/a/ifb/doubleclick/expand.html#imdb2.consumer.main/find;tile=5;sz=300x250,300x600,160x600,171x600,11x1;p=tr;ord=[CLIENT_SIDE_ORD]?" id="top_rhs" name="top_rhs" class="yesScript" width="0" height="0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" onload="ad_utils.resize_iframe(this)"></iframe>
+
+<noscript><a href="http://ad.doubleclick.net/jump/imdb2.consumer.main/find;tile=5;sz=300x250,300x600,160x600,171x600,11x1;p=tr;ord=790135060292?" target="_blank"><img src="http://ad.doubleclick.net/ad/imdb2.consumer.main/find;tile=5;sz=300x250,300x600,160x600,171x600,11x1;p=tr;ord=790135060292?"  border="0" alt="advertisement" /></a></noscript>
+
+</div>
+<!-- End TOP_RHS -->
+
+</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</table>
+  </td>
+ </tr>
+</table>
+<br style="clear:left;" />
+</div>
+
+<div id="footer" class="ft">
+<hr width="100%" size=1>
+<p class="footer" align="center">
+<a href="/">Home</a>&nbsp;
+  | <a href="/search">Search</A>&nbsp;
+  | <a href="/NowPlaying/">Now Playing</a>&nbsp;
+  | <a href="/News/">News</A>&nbsp;
+  | <a href="/register/?why=mymovies_footer">My Movies</A>&nbsp;
+  | <a href="/Games/">Games</A>&nbsp;
+  | <a href="/boards/">Boards</A>&nbsp;
+| <a href="/help/">Help</a>&nbsp;
+  | <A HREF="/Showtimes">US&nbsp;Movie&nbsp;Showtimes</A>&nbsp;
+| <A HREF="/top_250_films">Top 250</A>&nbsp;
+| <a href="/register/?why=footer">Register</a>&nbsp;
+  | <A HREF="/recommends/">Recommendations</A>&nbsp;
+  | <A HREF="/widgets/">Widgets</A><br>
+  <A HREF="/Charts/">Box&nbsp;Office</A> 
+  | <A HREF="/a2z">Index</A> 
+  | <A HREF="/Sections/Trailers/">Trailers</A> 
+  
+  | <a href="/jobs"><b>Jobs</b></a>&nbsp;
+  | <a href="https://secure.imdb.com/register/subscribe?c=a394d4442664f6f6475627" onClick="(new Image()).src='/rg/PRO_FOOT/FOOTER/images/b.gif?link=https://secure.imdb.com/register/subscribe?c=a394d4442664f6f6475627';">
+    <span style="color:#cc3333"><b>IMDbPro.com&nbsp;-&nbsp;Free&nbsp;Trial</b></span></a> 
+  | <a href="http://resume.imdb.com" onClick="(new Image()).src='/rg/resume-footer/footer/images/b.gif?link=http://resume.imdb.com';"><span style="color:#cc3333"><b>IMDb Resume</b></span></a>
+<br><br>
+<a href="/help/show_article?conditions">Copyright &copy;</a> 1990-2009 
+<a href="/help/">IMDb.com, Inc.</a><br>
+<a href="/help/show_article?conditions">Terms</a> and <a href="/privacy">Privacy Policy</a> under which this service is provided to you.<br>
+An <a href="http://www.amazon.com/exec/obidos/redirect-home/internetmoviedat"><img align="middle" width="86" height="18" border="0" src="http://i.media-imdb.com/images/icons/amazon_logo.gif" alt="Amazon.com"></a> company.&nbsp;
+<a href="/advertising/">Advertise</a> on IMDb.&nbsp;
+<a href="/tiger_redirect?FT_LIC&/licensing/">License</a> our content.
+</p>
+</div>
+
+</layer>
+</div>
+
+
+
+<!-- begin BOTTOM_AD -->
+<div id="bottom_ad_wrapper">
+<script type="text/javascript"> ad_utils.ad_queue.push({tile:'6',slot:'bottom_ad'});
+</script>
+<iframe src="/images/SF027ed9fafbcdd6b119baa38445732a82/a/ifb/doubleclick/expand.html#imdb2.consumer.main/find;tile=6;sz=728x90,2x1;p=b;ord=[CLIENT_SIDE_ORD]?" id="bottom_ad" name="bottom_ad" class="yesScript" width="0" height="0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" onload="ad_utils.resize_iframe(this)"></iframe>
+
+<noscript><a href="http://ad.doubleclick.net/jump/imdb2.consumer.main/find;tile=6;sz=728x90,2x1;p=b;ord=790135060292?" target="_blank"><img src="http://ad.doubleclick.net/ad/imdb2.consumer.main/find;tile=6;sz=728x90,2x1;p=b;ord=790135060292?"  border="0" alt="advertisement" /></a></noscript>
+
+</div>
+<!-- End BOTTOM_AD -->
+
+
+
+
+
+
+
+<!-- sid : 92889 : BOTTOM_SCRIPT --><script language="JavaScript" src="http://ia.imdb.com/media/imdb/01/J/02"></script>
+
+<script language="JavaScript">document.writeln(cb4('<img width="1" height="1" src="http://ad.doubleclick.net/adi/imdb2.consumer.main/;cid=mainpix;sz=1x1;ord=[timestamp]?">'));</script>
+<noscript><img width="1" height="1" src="http://ad.doubleclick.net/adi/imdb2.consumer.main/;cid=mainpix;sz=1x1;ord=1240557287?"></noscript>
+
+
+
+
+<img src="/rd/?q=50403000000030a090f29616f226e276966600000010c6a0412303039303432343c21323837373c293238383930000001037a040379646370000001047&cb=124055728724800" width="1" height="1" alt="" border="0">
+</div> <!-- id="wrapper" -->
+<iframe src="http://images.amazon.com/images/G/01/advertising/associate._V259486457_.html?106-0557287-7241282" width="0" height="0" frameborder="0" style="display:none;"></iframe>
+</body>
+</html>
