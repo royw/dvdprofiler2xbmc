@@ -59,12 +59,11 @@ class Media
     @media_subdirs = File.dirname(media_file)
     @media_path = File.expand_path(File.join(directory, media_file))
 
-    cwd = File.expand_path(Dir.getwd)
-    Dir.chdir(File.dirname(@media_path))
-    @nfo_files = Dir.glob("*.{#{AppConfig[:extensions][:nfo]}}")
-    @image_files = Dir.glob("*.{#{AppConfig[:extensions][:thumbnail]}}")
-    @fanart_files = Dir.glob("*#{AppConfig[:extensions][:fanart]}*}")
-    Dir.chdir(cwd)
+    Dir.chdir(File.dirname(@media_path)) do
+      @nfo_files = Dir.glob("*.{#{AppConfig[:extensions][:nfo]}}")
+      @image_files = Dir.glob("*.{#{AppConfig[:extensions][:thumbnail]}}")
+      @fanart_files = Dir.glob("*#{AppConfig[:extensions][:fanart]}*}")
+    end
 
     components = Media.parse(@media_path)
     unless components.nil?
