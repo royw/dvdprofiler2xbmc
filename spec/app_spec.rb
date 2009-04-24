@@ -13,7 +13,6 @@ describe "App" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].warn { "\nApp Specs" }
   end
 
   after(:all) do

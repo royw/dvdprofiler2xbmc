@@ -14,7 +14,6 @@ describe "ConfigEditor" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].warn { "\nConfigEditor Specs" }
   end
 
   before(:each) do

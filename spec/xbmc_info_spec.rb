@@ -16,7 +16,6 @@ describe "XbmcInfo" do
     AppConfig[:logger] = logger
     AppConfig.load
     File.mkdirs(TMPDIR)
-    AppConfig[:logger].warn { "\nXbmcInfo Specs" }
   end
 
   before(:each) do
@@ -28,40 +27,44 @@ describe "XbmcInfo" do
     Dir.glob(File.join(TMPDIR,'xbmcinfo_*')).each { |filename| File.delete(filename) }
   end
 
-  it "should load from the .nfo file" do
-    @xbmc_info.movie['title'].first.should == 'Die Hard'
-  end
-
-  it "should create a .nfo file" do
-    outfile = Tempfile.new('xbmcinfo_spec_create', TMPDIR)
-    new_xbmc_info = XbmcInfo.new(outfile.path)
-    new_xbmc_info.movie = @xbmc_info.movie
-    new_xbmc_info.save
-    (File.exist?(outfile.path).should be_true) && (File.size(outfile.path).should > 0)
-  end
-
-  it "should overwrite the .nfo file" do
-    outfile = Tempfile.new('xbmcinfo_spec_overwrite', TMPDIR)
-    new_xbmc_info = XbmcInfo.new(outfile.path)
-    new_xbmc_info.movie = @xbmc_info.movie
-    new_xbmc_info.save
-    verify_xbmc_info = XbmcInfo.new(outfile.path)
-    verify_xbmc_info.movie.should == @xbmc_info.movie
-  end
-
-  it "should not overwrite the .nfo file if not changed"
-
-  it "should overwrite the .nfo file when changed"
-
-  it "should be able to convert to xml and then from xml" do
-    hash = nil
-    begin
-      xml = @xbmc_info.to_xml
-      hash = XmlSimple.xml_in(xml)
-    rescue
-      hash = nil
+  describe "File" do
+    it "should load from the .nfo file" do
+      @xbmc_info.movie['title'].first.should == 'Die Hard'
     end
-    hash.should_not be_nil
+
+    it "should create a .nfo file" do
+      outfile = Tempfile.new('xbmcinfo_spec_create', TMPDIR)
+      new_xbmc_info = XbmcInfo.new(outfile.path)
+      new_xbmc_info.movie = @xbmc_info.movie
+      new_xbmc_info.save
+      (File.exist?(outfile.path).should be_true) && (File.size(outfile.path).should > 0)
+    end
+
+    it "should overwrite the .nfo file" do
+      outfile = Tempfile.new('xbmcinfo_spec_overwrite', TMPDIR)
+      new_xbmc_info = XbmcInfo.new(outfile.path)
+      new_xbmc_info.movie = @xbmc_info.movie
+      new_xbmc_info.save
+      verify_xbmc_info = XbmcInfo.new(outfile.path)
+      verify_xbmc_info.movie.should == @xbmc_info.movie
+    end
+
+    it "should not overwrite the .nfo file if not changed"
+
+    it "should overwrite the .nfo file when changed"
+  end
+
+  describe "XML" do
+    it "should be able to convert to xml and then from xml" do
+      hash = nil
+      begin
+        xml = @xbmc_info.to_xml
+        hash = XmlSimple.xml_in(xml)
+      rescue
+        hash = nil
+      end
+      hash.should_not be_nil
+    end
   end
 
 end

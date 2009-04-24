@@ -1793,6 +1793,209 @@ Filled with dazzling special effects, the amazing story of intergalactic warmth 
     </Locks>
   </DVD>
   <DVD>
+    <ProfileTimestamp>2008-12-07T15:35:56.000Z</ProfileTimestamp>
+    <ID>025192063626</ID>
+    <MediaTypes>
+      <DVD>True</DVD>
+      <HDDVD>False</HDDVD>
+      <BluRay>False</BluRay>
+    </MediaTypes>
+    <UPC>025192-063626</UPC>
+    <CollectionNumber>1165</CollectionNumber>
+    <CollectionType>Owned</CollectionType>
+    <Title>The Mummy</Title>
+    <DistTrait>Collector&apos;s Edition: Widescreen</DistTrait>
+    <OriginalTitle/>
+    <CountryOfOrigin>United States</CountryOfOrigin>
+    <ProductionYear>1999</ProductionYear>
+    <Released>1999-09-21</Released>
+    <RunningTime>125</RunningTime>
+    <RatingSystem>Film</RatingSystem>
+    <Rating>PG-13</Rating>
+    <RatingAge>13</RatingAge>
+    <RatingVariant>0</RatingVariant>
+    <RatingDetails>Pervasive Adventure Violence and Some Partial Nudity</RatingDetails>
+    <CaseType>Keep Case</CaseType>
+    <Genres>
+      <Genre>Action</Genre>
+      <Genre>Adventure</Genre>
+    </Genres>
+    <Regions>
+      <Region>1</Region>
+    </Regions>
+    <Format>
+      <FormatAspectRatio>2.35</FormatAspectRatio>
+      <FormatVideoStandard>NTSC</FormatVideoStandard>
+      <FormatLetterBox>True</FormatLetterBox>
+      <FormatPanAndScan>False</FormatPanAndScan>
+      <FormatFullFrame>False</FormatFullFrame>
+      <Format16X9>True</Format16X9>
+      <FormatDualSided>False</FormatDualSided>
+      <FormatDualLayered>True</FormatDualLayered>
+    </Format>
+    <Features>
+      <FeatureSceneAccess>True</FeatureSceneAccess>
+      <FeatureCommentary>True</FeatureCommentary>
+      <FeatureTrailer>True</FeatureTrailer>
+      <FeaturePhotoGallery>False</FeaturePhotoGallery>
+      <FeatureDeletedScenes>True</FeatureDeletedScenes>
+      <FeatureMakingOf>True</FeatureMakingOf>
+      <FeatureProductionNotes>True</FeatureProductionNotes>
+      <FeatureGame>True</FeatureGame>
+      <FeatureDVDROMContent>True</FeatureDVDROMContent>
+      <FeatureMultiAngle>False</FeatureMultiAngle>
+      <FeatureMusicVideos>False</FeatureMusicVideos>
+      <FeatureInterviews>False</FeatureInterviews>
+      <FeatureStoryboardComparisons>False</FeatureStoryboardComparisons>
+      <FeatureOuttakes>False</FeatureOuttakes>
+      <FeatureClosedCaptioned>False</FeatureClosedCaptioned>
+      <FeatureTHXCertified>False</FeatureTHXCertified>
+      <OtherFeatures/>
+    </Features>
+    <Studios>
+      <Studio>Universal Pictures</Studio>
+      <Studio>Alphaville Films</Studio>
+    </Studios>
+    <MediaCompanies>
+      <MediaCompany>Universal Home Video</MediaCompany>
+    </MediaCompanies>
+    <Audio>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>French</AudioContent>
+        <AudioFormat>Dolby Digital Surround</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>Commentary</AudioContent>
+        <AudioFormat>Dolby Digital Stereo</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>Music Only</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+    </Audio>
+    <Subtitles>
+      <Subtitle>English</Subtitle>
+    </Subtitles>
+    <SRP DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$24.98">24.98</SRP>
+    <Actors>
+      <Actor FirstName="Brendan" MiddleName="" LastName="Fraser" BirthYear="0" Role="Rick O&apos;Connell" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rachel" MiddleName="" LastName="Weisz" BirthYear="0" Role="Evelyn" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Hannah" BirthYear="0" Role="Jonathan" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Arnold" MiddleName="" LastName="Vosloo" BirthYear="0" Role="Imhotep" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Kevin" MiddleName="J." LastName="O&apos;Connor" BirthYear="0" Role="Beni" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jonathan" MiddleName="" LastName="Hyde" BirthYear="0" Role="Egyptologist" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Oded" MiddleName="" LastName="Fehr" BirthYear="0" Role="Ardeth Bey" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Erick" MiddleName="" LastName="Avari" BirthYear="0" Role="Curator" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Stephen" MiddleName="" LastName="Dunham" BirthYear="0" Role="Henderson" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Corey" MiddleName="" LastName="Johnson" BirthYear="0" Role="Daniels" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tuc" MiddleName="" LastName="Watkins" BirthYear="0" Role="Burns" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Omid" MiddleName="" LastName="Djalili" BirthYear="0" Role="Warden" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Aharon" MiddleName="" LastName="Ipalé" BirthYear="0" Role="Pharaoh Seti" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Bernard" MiddleName="" LastName="Fox" BirthYear="0" Role="Winston Havlock" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Patricia" MiddleName="" LastName="Velasquez" BirthYear="0" Role="Anck Su Namun" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Carl" MiddleName="" LastName="Chase" BirthYear="0" Role="Hook" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mohammed" MiddleName="" LastName="Afifi" BirthYear="0" Role="Hangman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Abderrahim" MiddleName="" LastName="El Aadili" BirthYear="0" Role="Camel Trader" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jake" MiddleName="" LastName="Arnott" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mason" MiddleName="" LastName="Ball" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Isobel" MiddleName="" LastName="Brook" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="James" MiddleName="Traherne" LastName="Burton" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="" LastName="Chequer" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Porl" MiddleName="" LastName="Smith" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ian" MiddleName="" LastName="Warner" BirthYear="0" Role="Mummy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="George" MiddleName="Lane" LastName="Cooper" BirthYear="0" Role="Arab Assassin at the Boat" CreditedAs="" Voice="False" Uncredited="True"/>
+    </Actors>
+    <Credits>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Writing" CreditSubtype="Screenwriter" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Writing" CreditSubtype="Original Material By" CreditedAs=""/>
+      <Credit FirstName="Lloyd" MiddleName="" LastName="Fonvielle" BirthYear="0" CreditType="Writing" CreditSubtype="Original Material By" CreditedAs=""/>
+      <Credit FirstName="Kevin" MiddleName="" LastName="Jarre" BirthYear="0" CreditType="Writing" CreditSubtype="Original Material By" CreditedAs=""/>
+      <Credit FirstName="James" MiddleName="" LastName="Jacks" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Sean" MiddleName="" LastName="Daniel" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Kevin" MiddleName="" LastName="Jarre" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Adrian" MiddleName="" LastName="Biddle" BirthYear="0" CreditType="Cinematography" CreditSubtype="Director of Photography" CreditedAs=""/>
+      <Credit FirstName="Bob" MiddleName="" LastName="Ducsay" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Kelly" MiddleName="" LastName="Matsumoto" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Jerry" MiddleName="" LastName="Goldsmith" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
+      <Credit FirstName="Leslie" MiddleName="" LastName="Shatz" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Designer" CreditedAs=""/>
+      <Credit FirstName="Leslie" MiddleName="" LastName="Shatz" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Chris" MiddleName="" LastName="Munro" BirthYear="0" CreditType="Sound" CreditSubtype="Production Sound Mixer" CreditedAs=""/>
+      <Credit FirstName="Chris" MiddleName="" LastName="Carpenter" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Rick" MiddleName="" LastName="Kline" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Allan" MiddleName="" LastName="Cameron" BirthYear="0" CreditType="Art" CreditSubtype="Production Designer" CreditedAs=""/>
+      <Credit FirstName="Tony" MiddleName="" LastName="Reading" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Giles" MiddleName="" LastName="Masters" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Clifford" MiddleName="" LastName="Robinson" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Peter" MiddleName="" LastName="Russell" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+    </Credits>
+    <Overview>Deep in the Egyptian desert, a handful of people searching for a long-lost treasure have just unearthed a 3,000 year old legacy of terror. Combining the thrills of a rousing adventure with the suspense of Universal&apos;s legendary 1932 horror classic, &lt;b&gt;&lt;i&gt;THE MUMMY&lt;/b&gt;&lt;/i&gt;, starring &lt;b&gt;Brendan Fraser&lt;/b&gt;, is a true nonstop action epic, filled with dazzling visual effects, top-notch talent and superb storytelling.</Overview>
+    <EasterEggs>From the Main Menu select the &apos;Language&apos; option. When the animation completes the entire score for The Mummy will play!  Whole scores runs about an hour.</EasterEggs>
+    <Discs>
+      <Disc>
+        <DescriptionSideA>Main Feature</DescriptionSideA>
+        <DescriptionSideB/>
+        <DiscIDSideA>C8B002276B514C28</DiscIDSideA>
+        <DiscIDSideB/>
+        <LabelSideA>MUMMY169</LabelSideA>
+        <LabelSideB/>
+        <DualLayeredSideA>True</DualLayeredSideA>
+        <DualLayeredSideB>False</DualLayeredSideB>
+        <DualSided>False</DualSided>
+        <Location/>
+        <Slot/>
+      </Disc>
+    </Discs>
+    <SortTitle>Mummy</SortTitle>
+    <LastEdited>2009-04-10T06:51:59.000Z</LastEdited>
+    <WishPriority>0</WishPriority>
+    <PurchaseInfo>
+      <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
+      <PurchasePlace/>
+      <PurchasePlaceType/>
+      <PurchasePlaceWebsite/>
+    </PurchaseInfo>
+    <Review Film="0" Video="0" Audio="0" Extras="0"/>
+    <Events/>
+    <BoxSet>
+      <Parent>025192829925</Parent>
+      <Contents/>
+    </BoxSet>
+    <LoanInfo>
+      <Loaned>False</Loaned>
+    </LoanInfo>
+    <Notes/>
+    <Tags/>
+    <Locks>
+      <Entire>False</Entire>
+      <Covers>False</Covers>
+      <Title>False</Title>
+      <MediaType>False</MediaType>
+      <Overview>False</Overview>
+      <Regions>False</Regions>
+      <Genres>False</Genres>
+      <SRP>False</SRP>
+      <Studios>False</Studios>
+      <DiscInformation>False</DiscInformation>
+      <Cast>False</Cast>
+      <Crew>False</Crew>
+      <Features>False</Features>
+      <AudioTracks>False</AudioTracks>
+      <Subtitles>False</Subtitles>
+      <EasterEggs>False</EasterEggs>
+      <RunningTime>False</RunningTime>
+      <ReleaseDate>False</ReleaseDate>
+      <ProductionYear>False</ProductionYear>
+      <CaseType>False</CaseType>
+      <VideoFormats>False</VideoFormats>
+      <Rating>False</Rating>
+    </Locks>
+  </DVD>
+  <DVD>
     <ProfileTimestamp>2009-01-28T18:52:20.000Z</ProfileTimestamp>
     <ID>025192137822</ID>
     <MediaTypes>
@@ -5899,6 +6102,448 @@ Access ALL Extended Features from Log Book:
     <Events/>
     <BoxSet>
       <Parent/>
+      <Contents/>
+    </BoxSet>
+    <LoanInfo>
+      <Loaned>False</Loaned>
+    </LoanInfo>
+    <Notes/>
+    <Tags/>
+    <Locks>
+      <Entire>False</Entire>
+      <Covers>False</Covers>
+      <Title>False</Title>
+      <MediaType>False</MediaType>
+      <Overview>False</Overview>
+      <Regions>False</Regions>
+      <Genres>False</Genres>
+      <SRP>True</SRP>
+      <Studios>False</Studios>
+      <DiscInformation>False</DiscInformation>
+      <Cast>False</Cast>
+      <Crew>False</Crew>
+      <Features>False</Features>
+      <AudioTracks>False</AudioTracks>
+      <Subtitles>False</Subtitles>
+      <EasterEggs>False</EasterEggs>
+      <RunningTime>False</RunningTime>
+      <ReleaseDate>False</ReleaseDate>
+      <ProductionYear>False</ProductionYear>
+      <CaseType>False</CaseType>
+      <VideoFormats>False</VideoFormats>
+      <Rating>False</Rating>
+    </Locks>
+  </DVD>
+  <DVD>
+    <ProfileTimestamp>2009-04-09T19:13:26.000Z</ProfileTimestamp>
+    <ID>I4D72C1479DE6625E</ID>
+    <MediaTypes>
+      <DVD>True</DVD>
+      <HDDVD>False</HDDVD>
+      <BluRay>False</BluRay>
+    </MediaTypes>
+    <UPC>Disc ID: 4D72-C147-9DE6-625E</UPC>
+    <CollectionNumber>1167</CollectionNumber>
+    <CollectionType>Owned</CollectionType>
+    <Title>The Scorpion King</Title>
+    <DistTrait>The Franchise Collection</DistTrait>
+    <OriginalTitle/>
+    <CountryOfOrigin>United States</CountryOfOrigin>
+    <ProductionYear>2002</ProductionYear>
+    <Released>2005-11-29</Released>
+    <RunningTime>91</RunningTime>
+    <RatingSystem>Film</RatingSystem>
+    <Rating>PG-13</Rating>
+    <RatingAge>13</RatingAge>
+    <RatingVariant>0</RatingVariant>
+    <RatingDetails>Intense Sequences of Action Violence and Some Sensuality</RatingDetails>
+    <CaseType>Digipak</CaseType>
+    <Genres>
+      <Genre>Action</Genre>
+      <Genre>Adventure</Genre>
+    </Genres>
+    <Regions>
+      <Region>1</Region>
+    </Regions>
+    <Format>
+      <FormatAspectRatio>2.35</FormatAspectRatio>
+      <FormatVideoStandard>NTSC</FormatVideoStandard>
+      <FormatLetterBox>True</FormatLetterBox>
+      <FormatPanAndScan>False</FormatPanAndScan>
+      <FormatFullFrame>False</FormatFullFrame>
+      <Format16X9>True</Format16X9>
+      <FormatDualSided>False</FormatDualSided>
+      <FormatDualLayered>True</FormatDualLayered>
+    </Format>
+    <Features>
+      <FeatureSceneAccess>True</FeatureSceneAccess>
+      <FeatureCommentary>True</FeatureCommentary>
+      <FeatureTrailer>True</FeatureTrailer>
+      <FeaturePhotoGallery>True</FeaturePhotoGallery>
+      <FeatureDeletedScenes>True</FeatureDeletedScenes>
+      <FeatureMakingOf>True</FeatureMakingOf>
+      <FeatureProductionNotes>True</FeatureProductionNotes>
+      <FeatureGame>False</FeatureGame>
+      <FeatureDVDROMContent>True</FeatureDVDROMContent>
+      <FeatureMultiAngle>False</FeatureMultiAngle>
+      <FeatureMusicVideos>True</FeatureMusicVideos>
+      <FeatureInterviews>False</FeatureInterviews>
+      <FeatureStoryboardComparisons>False</FeatureStoryboardComparisons>
+      <FeatureOuttakes>False</FeatureOuttakes>
+      <FeatureClosedCaptioned>False</FeatureClosedCaptioned>
+      <FeatureTHXCertified>False</FeatureTHXCertified>
+      <OtherFeatures>Enhanced Viewing Mode, Outtakes</OtherFeatures>
+    </Features>
+    <Studios>
+      <Studio>Universal Pictures</Studio>
+      <Studio>WWF Entertainment</Studio>
+      <Studio>Alphaville</Studio>
+    </Studios>
+    <MediaCompanies>
+      <MediaCompany>Universal Studios Home Entertainment</MediaCompany>
+    </MediaCompanies>
+    <Audio>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>French</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>Commentary</AudioContent>
+        <AudioFormat>Dolby Digital Surround</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>Commentary</AudioContent>
+        <AudioFormat>Dolby Digital Surround</AudioFormat>
+      </AudioTrack>
+    </Audio>
+    <Subtitles>
+      <Subtitle>English</Subtitle>
+      <Subtitle>Spanish</Subtitle>
+    </Subtitles>
+    <SRP DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</SRP>
+    <Actors>
+      <Actor FirstName="The Rock" MiddleName="" LastName="" BirthYear="0" Role="Mathayus" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Steven" MiddleName="" LastName="Brand" BirthYear="0" Role="Memnon" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michael" MiddleName="Clarke" LastName="Duncan" BirthYear="0" Role="Balthazar" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Kelly" MiddleName="" LastName="Hu" BirthYear="0" Role="The Sorceress" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Bernard" MiddleName="" LastName="Hill" BirthYear="0" Role="Philos" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Grant" MiddleName="" LastName="Heslov" BirthYear="0" Role="Arpid" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="" LastName="Facinelli" BirthYear="0" Role="Takmet" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Ralf" MiddleName="" LastName="Moeller" BirthYear="0" Role="Thorak" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Branscombe" MiddleName="" LastName="Richmond" BirthYear="0" Role="Jesup" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Roger" MiddleName="" LastName="Rees" BirthYear="0" Role="King Pheron" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sherri" MiddleName="" LastName="Howard" BirthYear="0" Role="Queen Isis" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Conrad" MiddleName="" LastName="Roberts" BirthYear="0" Role="Chieftain" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Joseph" MiddleName="" LastName="Ruskin" BirthYear="0" Role="Tribal Leader" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Esteban" MiddleName="" LastName="Cueto" BirthYear="0" Role="Third Akkadian" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Nils" MiddleName="Allen" LastName="Stewart" BirthYear="0" Role="Torturer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Scott" MiddleName="" LastName="Schwartz" BirthYear="0" Role="Torturer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Andre" MiddleName="" LastName="Henschel" BirthYear="0" Role="Memnon Soldier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Mike" MiddleName="" LastName="Hilow" BirthYear="0" Role="Guard at Ant Pit" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Nick" MiddleName="" LastName="Hermz" BirthYear="0" Role="Guard at Ant Pit" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Wesley" MiddleName="" LastName="John" BirthYear="0" Role="Guard at Gomorroh Gate" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Michelle" MiddleName="" LastName="Baney" BirthYear="0" Role="Bazaar Barmaid" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Barry" MiddleName="" LastName="Kramer" BirthYear="0" Role="Sword Merchant" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Marissa" MiddleName="" LastName="McMahon" BirthYear="0" Role="Bird Merchant" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tim" MiddleName="" LastName="Iannello" BirthYear="0" Role="Perfume Merchant" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="K." MiddleName="D." LastName="Aubert" BirthYear="0" Role="Harlot" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sonia" MiddleName="" LastName="Vera" BirthYear="0" Role="Harlot" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Angelica" MiddleName="" LastName="Castro" BirthYear="0" Role="Harlot" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tutu" MiddleName="" LastName="Sweeney" BirthYear="0" Role="Street Urchin" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Yuki" MiddleName="" LastName="Tokuhiro" BirthYear="0" Role="Urchin" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Te&apos; Amir" MiddleName="" LastName="Sweeney" BirthYear="0" Role="Urchin" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Al" MiddleName="" LastName="Leong" BirthYear="0" Role="Asian Training Master" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Woon" MiddleName="Young" LastName="Park" BirthYear="0" Role="Asian Training Fighter" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Marcus" MiddleName="" LastName="Young" BirthYear="0" Role="Asian Training Fighter" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Paul" MiddleName="" LastName="Sloan" BirthYear="0" Role="Soldier" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Talani" MiddleName="" LastName="Rabb" BirthYear="0" Role="Harem Girl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sole" MiddleName="" LastName="Alberti" BirthYear="0" Role="Harem Girl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Cristina" MiddleName="" LastName="Rodriguez" BirthYear="0" Role="Harem Girl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Penelope" MiddleName="" LastName="Jimenez" BirthYear="0" Role="Harem Girl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Sean" MiddleName="" LastName="Michael" BirthYear="0" Role="Boy at Well" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Adoni" MiddleName="" LastName="Maropis" BirthYear="0" Role="Doubting General" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Bernard" MiddleName="" LastName="White" BirthYear="0" Role="Falconmaster" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Amy" MiddleName="" LastName="Hunter" BirthYear="0" Role="Warrior Woman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Diana" MiddleName="" LastName="Lupo" BirthYear="0" Role="Warrior Woman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Heather" MiddleName="" LastName="Burton" BirthYear="0" Role="Warrior Woman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Nikki" MiddleName="" LastName="Flux" BirthYear="0" Role="Warrior Woman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rachel" MiddleName="" LastName="Moore" BirthYear="0" Role="Warrior Woman" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Summer" MiddleName="" LastName="Altice" BirthYear="0" Role="Kai (Warrior Woman)" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Brandon" MiddleName="" LastName="Gonzalez" BirthYear="0" Role="Boy with Dates" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="" LastName="Quartaroli" BirthYear="0" Role="Vision Archer" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Peter" MiddleName="Navy" LastName="Tuiasosopo" BirthYear="0" Role="Night Gate Guard" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Amanda" MiddleName="" LastName="Bentley" BirthYear="0" Role="Courtesan" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Claudia" MiddleName="" LastName="Orellana" BirthYear="0" Role="Coutesan" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Jim" MiddleName="" LastName="Maniaci" BirthYear="0" Role="Palace Guard" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Shant" MiddleName="" LastName="Demirjian" BirthYear="0" Role="Army Leader" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Gus" MiddleName="" LastName="Rethwisch" BirthYear="0" Role="Barbarian Guard" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Richard" MiddleName="" LastName="Cetrone" BirthYear="0" Role="Barbarian Guard" CreditedAs="" Voice="False" Uncredited="False"/>
+    </Actors>
+    <Credits>
+      <Credit FirstName="Chuck" MiddleName="" LastName="Russell" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Writing" CreditSubtype="Screenwriter" CreditedAs=""/>
+      <Credit FirstName="William" MiddleName="" LastName="Osborne" BirthYear="0" CreditType="Writing" CreditSubtype="Screenwriter" CreditedAs=""/>
+      <Credit FirstName="David" MiddleName="" LastName="Hayter" BirthYear="0" CreditType="Writing" CreditSubtype="Screenwriter" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Writing" CreditSubtype="Original Material By" CreditedAs=""/>
+      <Credit FirstName="Jonathan" MiddleName="" LastName="Hales" BirthYear="0" CreditType="Writing" CreditSubtype="Original Material By" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Sean" MiddleName="" LastName="Daniel" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="James" MiddleName="" LastName="Jacks" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Kevin" MiddleName="" LastName="Misher" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Vince" MiddleName="" LastName="McMahon" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="John" MiddleName="R." LastName="Leonetti" BirthYear="0" CreditType="Cinematography" CreditSubtype="Director of Photography" CreditedAs=""/>
+      <Credit FirstName="Michael" MiddleName="" LastName="Tronick" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Greg" MiddleName="" LastName="Parsons" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="John" MiddleName="" LastName="Debney" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
+      <Credit FirstName="Sho" MiddleName="" LastName="Kosugi" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Sully" MiddleName="" LastName="Erna" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Steve" MiddleName="" LastName="Felton" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Jeff" MiddleName="" LastName="Hetrick" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Tom" MiddleName="" LastName="Schmitz" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Jason" MiddleName="" LastName="Popson" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Jack" MiddleName="" LastName="Kilcoyne" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Dave" MiddleName="" LastName="Felton" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Marko" MiddleName="" LastName="Vukcevich" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Robert" MiddleName="" LastName="Anderson, Jr." BirthYear="0" CreditType="Sound" CreditSubtype="Production Sound Mixer" CreditedAs=""/>
+      <Credit FirstName="Steve" MiddleName="" LastName="Maslow" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Gregg" MiddleName="" LastName="Landaker" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Cameron" MiddleName="" LastName="Frankley" BirthYear="0" CreditType="Sound" CreditSubtype="Supervising Sound Editor" CreditedAs=""/>
+      <Credit FirstName="Paul" MiddleName="N.J." LastName="Ottosson" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Designer" CreditedAs=""/>
+      <Credit FirstName="Ed" MiddleName="" LastName="Verreaux" BirthYear="0" CreditType="Art" CreditSubtype="Production Designer" CreditedAs=""/>
+      <Credit FirstName="Greg" MiddleName="" LastName="Papalia" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Doug" MiddleName="" LastName="Meerdink" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+    </Credits>
+    <Overview>Adventure rules! As the spectacular Mummy series explodes into a new realm of breathtaking, non-stop action in &lt;i&gt;The Scorpion King&lt;/i&gt;! Unleashing WWE superstar The Rock as the most feared warrior of the ancient world, &lt;i&gt;The Scorpion King&lt;/i&gt; plunges you into a sweeping tale filled with stunning fight sequences, awe-inspiring battles and pulse-pounding hand-to-hand thrills. It&apos;s the ultimate special effects-powered epic and the must-see-and-see again adventure of the year!</Overview>
+    <EasterEggs/>
+    <Discs>
+      <Disc>
+        <DescriptionSideA>Main Feature</DescriptionSideA>
+        <DescriptionSideB/>
+        <DiscIDSideA>4D72C1479DE6625E</DiscIDSideA>
+        <DiscIDSideB/>
+        <LabelSideA>SCORPION_KING_WIDE</LabelSideA>
+        <LabelSideB/>
+        <DualLayeredSideA>True</DualLayeredSideA>
+        <DualLayeredSideB>False</DualLayeredSideB>
+        <DualSided>False</DualSided>
+        <Location/>
+        <Slot/>
+      </Disc>
+    </Discs>
+    <SortTitle>Scorpion King</SortTitle>
+    <LastEdited>2009-04-10T07:00:42.000Z</LastEdited>
+    <WishPriority>0</WishPriority>
+    <PurchaseInfo>
+      <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
+      <PurchasePlace/>
+      <PurchasePlaceType/>
+      <PurchasePlaceWebsite/>
+      <PurchaseDate>2009-04-10</PurchaseDate>
+    </PurchaseInfo>
+    <Review Film="0" Video="0" Audio="0" Extras="0"/>
+    <Events/>
+    <BoxSet>
+      <Parent>025192829925</Parent>
+      <Contents/>
+    </BoxSet>
+    <LoanInfo>
+      <Loaned>False</Loaned>
+    </LoanInfo>
+    <Notes/>
+    <Tags/>
+    <Locks>
+      <Entire>False</Entire>
+      <Covers>False</Covers>
+      <Title>False</Title>
+      <MediaType>False</MediaType>
+      <Overview>False</Overview>
+      <Regions>False</Regions>
+      <Genres>False</Genres>
+      <SRP>True</SRP>
+      <Studios>False</Studios>
+      <DiscInformation>False</DiscInformation>
+      <Cast>False</Cast>
+      <Crew>False</Crew>
+      <Features>False</Features>
+      <AudioTracks>False</AudioTracks>
+      <Subtitles>False</Subtitles>
+      <EasterEggs>False</EasterEggs>
+      <RunningTime>False</RunningTime>
+      <ReleaseDate>False</ReleaseDate>
+      <ProductionYear>False</ProductionYear>
+      <CaseType>False</CaseType>
+      <VideoFormats>False</VideoFormats>
+      <Rating>False</Rating>
+    </Locks>
+  </DVD>
+  <DVD>
+    <ProfileTimestamp>2009-04-09T19:13:20.000Z</ProfileTimestamp>
+    <ID>IED05D92EF53851FF</ID>
+    <MediaTypes>
+      <DVD>True</DVD>
+      <HDDVD>False</HDDVD>
+      <BluRay>False</BluRay>
+    </MediaTypes>
+    <UPC>Disc ID: ED05-D92E-F538-51FF</UPC>
+    <CollectionNumber>1166</CollectionNumber>
+    <CollectionType>Owned</CollectionType>
+    <Title>The Mummy Returns</Title>
+    <DistTrait>The Franchise Collection</DistTrait>
+    <OriginalTitle/>
+    <CountryOfOrigin>United States</CountryOfOrigin>
+    <ProductionYear>2001</ProductionYear>
+    <Released>2005-11-29</Released>
+    <RunningTime>129</RunningTime>
+    <RatingSystem>Film</RatingSystem>
+    <Rating>PG-13</Rating>
+    <RatingAge>13</RatingAge>
+    <RatingVariant>0</RatingVariant>
+    <RatingDetails>Adventure Action and Violence</RatingDetails>
+    <CaseType>Digipak</CaseType>
+    <Genres>
+      <Genre>Action</Genre>
+      <Genre>Adventure</Genre>
+    </Genres>
+    <Regions>
+      <Region>1</Region>
+    </Regions>
+    <Format>
+      <FormatAspectRatio>2.35</FormatAspectRatio>
+      <FormatVideoStandard>NTSC</FormatVideoStandard>
+      <FormatLetterBox>True</FormatLetterBox>
+      <FormatPanAndScan>False</FormatPanAndScan>
+      <FormatFullFrame>False</FormatFullFrame>
+      <Format16X9>True</Format16X9>
+      <FormatDualSided>False</FormatDualSided>
+      <FormatDualLayered>True</FormatDualLayered>
+    </Format>
+    <Features>
+      <FeatureSceneAccess>True</FeatureSceneAccess>
+      <FeatureCommentary>True</FeatureCommentary>
+      <FeatureTrailer>True</FeatureTrailer>
+      <FeaturePhotoGallery>False</FeaturePhotoGallery>
+      <FeatureDeletedScenes>True</FeatureDeletedScenes>
+      <FeatureMakingOf>True</FeatureMakingOf>
+      <FeatureProductionNotes>True</FeatureProductionNotes>
+      <FeatureGame>True</FeatureGame>
+      <FeatureDVDROMContent>True</FeatureDVDROMContent>
+      <FeatureMultiAngle>False</FeatureMultiAngle>
+      <FeatureMusicVideos>True</FeatureMusicVideos>
+      <FeatureInterviews>False</FeatureInterviews>
+      <FeatureStoryboardComparisons>False</FeatureStoryboardComparisons>
+      <FeatureOuttakes>False</FeatureOuttakes>
+      <FeatureClosedCaptioned>False</FeatureClosedCaptioned>
+      <FeatureTHXCertified>False</FeatureTHXCertified>
+      <OtherFeatures>Outtakes</OtherFeatures>
+    </Features>
+    <Studios>
+      <Studio>Universal Pictures</Studio>
+      <Studio>Alphaville Films</Studio>
+    </Studios>
+    <MediaCompanies>
+      <MediaCompany>Universal Studios Home Entertainment</MediaCompany>
+    </MediaCompanies>
+    <Audio>
+      <AudioTrack>
+        <AudioContent>English</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>French</AudioContent>
+        <AudioFormat>Dolby Digital 5.1</AudioFormat>
+      </AudioTrack>
+      <AudioTrack>
+        <AudioContent>Commentary</AudioContent>
+        <AudioFormat>Dolby Digital Stereo</AudioFormat>
+      </AudioTrack>
+    </Audio>
+    <Subtitles>
+      <Subtitle>English</Subtitle>
+    </Subtitles>
+    <SRP DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</SRP>
+    <Actors>
+      <Actor FirstName="Brendan" MiddleName="" LastName="Fraser" BirthYear="0" Role="Rick O&apos;Connell" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Rachel" MiddleName="" LastName="Weisz" BirthYear="0" Role="Evelyn /  Nefertiri" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="John" MiddleName="" LastName="Hannah" BirthYear="0" Role="Jonathan" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Arnold" MiddleName="" LastName="Vosloo" BirthYear="0" Role="Imhotep" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Oded" MiddleName="" LastName="Fehr" BirthYear="0" Role="Ardeth Bey" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Patricia" MiddleName="" LastName="Velasquez" BirthYear="0" Role="Meela / Anck-Su-Namun" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Freddie" MiddleName="" LastName="Boath" BirthYear="0" Role="Alex" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Alun" MiddleName="" LastName="Armstrong" BirthYear="0" Role="Mr. Hafez" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="The Rock" MiddleName="" LastName="" BirthYear="0" Role="The Scorpion King" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Adewale" MiddleName="" LastName="Akinnuoye-Agbaje" BirthYear="0" Role="Lock-Nah" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Shaun" MiddleName="" LastName="Parkes" BirthYear="0" Role="Izzy" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Bruce" MiddleName="" LastName="Byron" BirthYear="0" Role="Red" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Joe" MiddleName="" LastName="Dixon" BirthYear="0" Role="Jacques" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Tom" MiddleName="" LastName="Fisher" BirthYear="0" Role="Spivey" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Aharon" MiddleName="" LastName="Ipalé" BirthYear="0" Role="Pharaoh" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Quill" MiddleName="" LastName="Roberts" BirthYear="0" Role="Shafek" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Donna" MiddleName="" LastName="Air" BirthYear="0" Role="Show Girl" CreditedAs="" Voice="False" Uncredited="False"/>
+      <Actor FirstName="Trevor" MiddleName="" LastName="Lovell" BirthYear="0" Role="Mountain of Flesh" CreditedAs="" Voice="False" Uncredited="False"/>
+    </Actors>
+    <Credits>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Direction" CreditSubtype="Director" CreditedAs=""/>
+      <Credit FirstName="Stephen" MiddleName="" LastName="Sommers" BirthYear="0" CreditType="Writing" CreditSubtype="Writer" CreditedAs=""/>
+      <Credit FirstName="James" MiddleName="" LastName="Jacks" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Sean" MiddleName="" LastName="Daniel" BirthYear="0" CreditType="Production" CreditSubtype="Producer" CreditedAs=""/>
+      <Credit FirstName="Bob" MiddleName="" LastName="Ducsay" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Don" MiddleName="" LastName="Zepfel" BirthYear="0" CreditType="Production" CreditSubtype="Executive Producer" CreditedAs=""/>
+      <Credit FirstName="Adrian" MiddleName="" LastName="Biddle" BirthYear="0" CreditType="Cinematography" CreditSubtype="Director of Photography" CreditedAs=""/>
+      <Credit FirstName="Bob" MiddleName="" LastName="Ducsay" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Kelly" MiddleName="" LastName="Matsumoto" BirthYear="0" CreditType="Film Editing" CreditSubtype="Film Editor" CreditedAs=""/>
+      <Credit FirstName="Alan" MiddleName="" LastName="Silvestri" BirthYear="0" CreditType="Music" CreditSubtype="Composer" CreditedAs=""/>
+      <Credit FirstName="Glen" MiddleName="" LastName="Ballard" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Ed" MiddleName="" LastName="Kowalczyk" BirthYear="0" CreditType="Music" CreditSubtype="Song Writer" CreditedAs=""/>
+      <Credit FirstName="Leslie" MiddleName="" LastName="Shatz" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Designer" CreditedAs=""/>
+      <Credit FirstName="Leslie" MiddleName="" LastName="Shatz" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Peter" MiddleName="" LastName="Glossop" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="David" MiddleName="" LastName="Parker" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Rick" MiddleName="" LastName="Ash" BirthYear="0" CreditType="Sound" CreditSubtype="Sound Re-Recording Mixer" CreditedAs=""/>
+      <Credit FirstName="Allan" MiddleName="" LastName="Cameron" BirthYear="0" CreditType="Art" CreditSubtype="Production Designer" CreditedAs=""/>
+      <Credit FirstName="Anthony" MiddleName="" LastName="Reading" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+      <Credit FirstName="Giles" MiddleName="" LastName="Masters" BirthYear="0" CreditType="Art" CreditSubtype="Art Director" CreditedAs=""/>
+    </Credits>
+    <Overview>The year&apos;s biggest action-adventure is coming home... with a vengeance! Brendan Fraser and an all-star cast reunite with Stephen Sommers for explosive, non-stop thrills in &quot;the ultimate rollercoaster movie ride!&quot; (&lt;i&gt;Seattle Post Intelligencer&lt;/i&gt;)
+
+An ancient legacy of terror is unleashed when the accursed mummy, Imhotep (Arnold Vosloo), is resurrected – along with a force even more powerful: The Scorpion King (The Rock). Now, as the fate of all mankind hangs in the balance, Rick O&apos;Connell (Fraser) and his wife Evie (Rachel Weisz) embark on a daring, desperate race to save their son – and the world – from unspeakable evil. Supercharged with pulse-pounding action and spectacular special effects that&apos;ll blow you away, &lt;i&gt;The Mummy Returns&lt;/i&gt; is &quot;The best adventure movie of the year!&quot; (&lt;i&gt;MTV Radio&lt;/i&gt;)</Overview>
+    <EasterEggs>There are two exciting features hidden in the depths of Universal Home Video’s Collector’s Edition of &apos;The Mummy Returns.&apos;
+
+From the disc’s main menu, go to the &apos;Bonus Materials&apos; section, where on the second page you will find the menu entry &apos;Egyptology 201.&apos; Select it and then select the entry &apos;An in-depth look at Mummification&apos; in the submenu that appears. On the first text screen of this feature, press the &apos;Right&apos; arrow key on your remote control and the scorpion will be highlighted . Press &apos;Enter&apos; now and you will get to see a 2-minute featurette about a present day mummification.
+
+Another brief hidden feature can be found on the second page of the &apos;Bonus Materials.&apos; Highlight &apos;Menu&apos; at the bottom of the page and then press the &apos;Up&apos; arrow key on your remote control to highlight the glyphs. Pressing &apos;Enter&apos; will bring up the DVD credits for this release.</EasterEggs>
+    <Discs>
+      <Disc>
+        <DescriptionSideA>Main Feature</DescriptionSideA>
+        <DescriptionSideB/>
+        <DiscIDSideA>ED05D92EF53851FF</DiscIDSideA>
+        <DiscIDSideB/>
+        <LabelSideA>MUMMYRETURNS</LabelSideA>
+        <LabelSideB/>
+        <DualLayeredSideA>True</DualLayeredSideA>
+        <DualLayeredSideB>False</DualLayeredSideB>
+        <DualSided>False</DualSided>
+        <Location/>
+        <Slot/>
+      </Disc>
+    </Discs>
+    <SortTitle>Mummy Returns</SortTitle>
+    <LastEdited>2009-04-10T06:58:31.000Z</LastEdited>
+    <WishPriority>0</WishPriority>
+    <PurchaseInfo>
+      <PurchasePrice DenominationType="USD" DenominationDesc="United States (Dollar)" FormattedValue="$0.00">0</PurchasePrice>
+      <PurchasePlace/>
+      <PurchasePlaceType/>
+      <PurchasePlaceWebsite/>
+      <PurchaseDate>2009-04-10</PurchaseDate>
+    </PurchaseInfo>
+    <Review Film="0" Video="0" Audio="0" Extras="0"/>
+    <Events/>
+    <BoxSet>
+      <Parent>025192829925</Parent>
       <Contents/>
     </BoxSet>
     <LoanInfo>
