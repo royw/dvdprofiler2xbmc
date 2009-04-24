@@ -144,14 +144,14 @@ module Dvdprofiler2xbmc
       [
         {
           :names           => %w(--output -o),
-          :argument_arity  => [1,1],
+          :arity           => [1,1],
           :arg_description => 'logfile',
           :opt_description => 'Write log messages to file. Default = no log file',
           :opt_found       => CommandLine::OptionParser::GET_ARGS
         },
         {
           :names           => %w(--output_level -l),
-          :argument_arity  => [1,1],
+          :arity           => [1,1],
           :arg_description => 'level',
           :opt_description => 'Output logging level: DEBUG, INFO, WARN, ERROR. Default = INFO',
           :opt_found       => CommandLine::OptionParser::GET_ARGS
