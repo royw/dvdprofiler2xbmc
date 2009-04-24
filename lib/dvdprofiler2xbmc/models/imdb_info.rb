@@ -1,9 +1,12 @@
 class ImdbInfo
 
+  protected
+  # only instantiate via ImdbInfo.find(...)
   def initialize(profile)
     @profile = profile
   end
 
+  public
   # == Synopsis
   # See ImdbProfile.all for options
   def self.find(options)
@@ -15,6 +18,7 @@ class ImdbInfo
     imdb_info
   end
 
+  protected
   # == Synopsis
   # maps the imdb.movie hash to the info hash
   IMDB_HASH_TO_INFO_MAP = {
@@ -32,6 +36,8 @@ class ImdbInfo
       # 'poster', 'color', 'aspect_ratio', 'languages', 'release_date'
       # 'tiny_poster_url', 'also_known_as'
     }
+
+  public
 
   # == Synopsis
   # maps the imdb.movie hash to the info hash
