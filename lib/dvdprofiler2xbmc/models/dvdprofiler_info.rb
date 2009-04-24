@@ -1,8 +1,12 @@
 class DvdprofilerInfo
 
+  protected
+
   def initialize(profile)
     @profile = profile
   end
+
+  public
 
   # == Synopsis
   # see DvdprofilerProfile.all for options
@@ -101,11 +105,11 @@ class DvdprofilerInfo
   end
 
   def production_years
-    @profile.dvd_hash[:productionyear] rescue []
+    @profile.dvd_hash[:productionyear].collect{|y| y =~ /(\d{4})/ ? $1 : nil}.compact rescue []
   end
 
   def released_years
-    @profile.dvd_hash[:released] rescue []
+    @profile.dvd_hash[:released].collect{|y| y =~ /(\d{4})/ ? $1 : nil}.compact rescue []
   end
 
   def original_titles
