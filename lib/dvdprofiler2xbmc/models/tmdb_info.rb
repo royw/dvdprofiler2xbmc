@@ -1,8 +1,12 @@
 class TmdbInfo
 
+  protected
+
   def initialize(profile)
     @profile = profile
   end
+
+  public
 
   # == Synopsis
   # load data from themovieDb.com
