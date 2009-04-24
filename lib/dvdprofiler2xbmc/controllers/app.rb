@@ -14,6 +14,7 @@ class DvdProfiler2Xbmc
   # protected initializer because it is a Singleton class
   def initialize
     @media_files = nil
+    @duplicate_titles = []
   end
 
   public
@@ -69,6 +70,7 @@ class DvdProfiler2Xbmc
         end
       end
     end
+    @duplicate_titles = @media_files.duplicate_titles
 
     # set file and directory permissions
     AppConfig[:directories].each { |dir| set_permissions(dir) }
@@ -190,9 +192,8 @@ class DvdProfiler2Xbmc
   # duplicate media file report
   def duplicates_report
     buf = []
-    duplicates = @media_files.duplicate_titles
-    unless duplicates.empty?
-      duplicates.each do |title, medias|
+    unless @duplicate_titles.empty?
+      @duplicate_titles.each do |title, medias|
         if medias.length > 1
           buf << title
           medias.each {|media| buf << "  #{media.media_path}"}
