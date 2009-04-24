@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results for="tt0120616" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query searchTerms="tt0120616"/>
+<opensearch:totalResults>1</opensearch:totalResults>
+<moviematches>
+<movie>
+<score>1.0</score>
+<popularity>2</popularity>
+<title>The Mummy</title>
+<alternative_title></alternative_title>
+<type>movie</type>
+<id>564</id>
+<imdb>tt0120616</imdb>
+<url>http://www.themoviedb.org/movie/564</url>
+<short_overview>Dashing legionnaire Rick O&apos;Connell and Beni, his weasel of a companion, stumble upon the hidden ruins of Hamunaptra while in the midst of a battle in 1923, 3,000 years after Imhotep has suffered a fate worse than death mummification, in which his body will remain undead for all eternity as punishment for forbidden love. Some years later, as O&apos;Connell languishes in prison awaiting an almost certain</short_overview>
+<release>1999-05-07</release>
+<poster size="original">http://www.themoviedb.org/image/posters/45/The_Mummy__1999_.png</poster>
+<poster size="thumb">http://www.themoviedb.org/image/posters/45/The_Mummy__1999__thumb.png</poster>
+<poster size="mid">http://www.themoviedb.org/image/posters/45/The_Mummy__1999__mid.png</poster>
+<poster size="cover">http://www.themoviedb.org/image/posters/45/The_Mummy__1999__cover.png</poster>
+<backdrop size="original">http://www.themoviedb.org/image/backdrops/1595/tt0120616.jpg</backdrop>
+<backdrop size="mid">http://www.themoviedb.org/image/backdrops/1595/tt0120616_poster.jpg</backdrop>
+<backdrop size="thumb">http://www.themoviedb.org/image/backdrops/1595/tt0120616_thumb.jpg</backdrop>
+</movie>
+</moviematches>
+</results>
